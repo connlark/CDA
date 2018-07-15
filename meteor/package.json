@@ -1,0 +1,16 @@
+{
+  "name": "meteor",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.42",
+    "bcrypt": "^3.0.0",
+    "coinex.com": "^1.0.2",
+    "cryptocompare": "^0.5.0",
+    "meteor-node-stubs": "^0.3.2",
+    "node-fetch": "^2.1.2",
+    "simpl-schema": "^1.5.0"
+  }
+}
