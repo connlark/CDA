@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Balances } from './balances';
+
 const cc = require('cryptocompare')
 Coinex = require('coinex.com');
 
@@ -31,7 +32,7 @@ Meteor.methods({
                         cc.coinList().then(coinList => {
                             balances = balances.map((balObj) => {
                                 if(coinList.Data[balObj.coin]){
-                                    balObj.ccurl = coinList.Data[balObj.coin].Url;
+                                    balObj.ccurl = 'https://www.cryptocompare.com'+coinList.Data[balObj.coin].Url;
                                     balObj.imgUrl = 'https://www.cryptocompare.com'+coinList.Data[balObj.coin].ImageUrl;
                                     balObj.fullName = coinList.Data[balObj.coin].FullName;
                                 }

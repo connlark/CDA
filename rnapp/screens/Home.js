@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableHighlight } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableHighlight, WebView } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
 import {Avatar} from 'react-native-elements';
@@ -8,33 +8,33 @@ class Home extends Component {
         super(props);
     }
     state = {
-        connected: false
+        connected: false,
+        showingCoins: []
     }
     _keyExtractor = (item, index) => item.coin;
     _renderItem = ({item}) => (
+        <View>
         <View style={styles.itemView}>
             <View style={{flexDirection: 'row', marginTop: 0}}>
                 <View style={{marginTop: 8, marginLeft: 6}}>
                     <Avatar
-                        xlarge
                         rounded
                         source={{uri: item.imgUrl ? item.imgUrl : "https://images-cdn.azureedge.net/azure/in-resources/d7048855-742a-406c-a67d-5c2962e69e5e/Images/ProductImages/Source/Plain%20Gold%20Coin-3gm_1.jpg;width=1000;height=1000;scale=canvas;anchor=bottomcenter"}}
-                        onPress={() => console.log(item.imgUrl)}
-                        activeOpacity={1}
-                       // imageProps={{resizeMode: 'stretch', scale: 1.2}}
+                        onPress={() => this.setState({showingCoins: [item.coin]})}
+                        activeOpacity={0.4}
                     />
                 </View>
                 <View style={{width: '27%', marginTop: 12}}>
                     <Text style={{marginLeft: 10, fontSize: 20}}> {item.coin} </Text>
                 </View>
-                <View style={{width: '16%', marginTop: 12}}>
+                <View style={{width: '16%', marginTop: 7}}>
                     <Text style={{marginLeft: 2, fontSize: 10}}> {item.fullName} </Text>
                 </View>
-                <View style={{marginTop: 14, width:'40%', justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{marginTop: 0, width:'40%', justifyContent: 'center', alignItems: 'center'}}>
                     <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right'}}> {item.USDvalue} </Text>
                 </View>
-
             </View>
+        </View>
         </View>
       );
     _renderHeader = () => {
@@ -65,11 +65,7 @@ class Home extends Component {
     render() {
         const { balances, balancesReady } = this.props;
         
-        if (balancesReady && balances[0]){
-            console.log(balances[0])
-
-
-            
+        if (balancesReady && balances[0]){            
             return (
                 <View style={styles.container}>
                     <FlatList
@@ -86,7 +82,6 @@ class Home extends Component {
                 <Text style={{margin: '40%'}}> loading  </Text>
             </View>
         );
-        
     }
 }
 
