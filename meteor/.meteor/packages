@@ -24,3 +24,4 @@ accounts-password@1.5.1
 aldeed:simple-schema
 aldeed:collection2
 underscore@1.0.10
+percolate:synced-cron

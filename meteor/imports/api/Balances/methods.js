@@ -50,7 +50,8 @@ Meteor.methods({
         balancePromise.then((data) => {
             Balances.insert({
                 userId: userId,
-                balanceData: data
+                balanceData: data,
+                createdAt: new Date
             });
         });//
 
