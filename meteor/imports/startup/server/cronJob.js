@@ -57,8 +57,8 @@ Meteor.startup(() => {
                                     );
                                 }
                                 else { 
-                                    if (!dta.balanceData[0] || isSameBalance(dta.balanceData, balances)){
-                                        console.log('same or corrupt data', dta.balanceData[0]);
+                                    if (!dta.balanceData || isSameBalance(dta.balanceData, balances)){
+                                        console.log('same or corrupt data', dta.balanceData);
                                     }
                                     else {
                                         const divCalc = dividendCalc(dta.balanceData, balances);
