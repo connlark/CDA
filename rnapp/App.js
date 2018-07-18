@@ -38,7 +38,7 @@ setTimeout(() => {
 
 
 
-Meteor.connect('ws://192.168.8.230:3000/websocket');
+Meteor.connect('ws://73.246.190.116:3000/websocket');
 
 
 export default Swiper;

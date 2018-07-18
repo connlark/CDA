@@ -60,25 +60,12 @@ export default class Swiper extends Component {
       
     }
   render(){
-    const user = Meteor.userId();
-    if (!user){
-      return (
-        <SwiperR style={styles.wrapper} index={1} showsButtons={false}>
-          <Login/>
-      
-        </SwiperR>
-      );
-    }
-    else {
       return (
         <SwiperR style={styles.wrapper} index={1} showsButtons={false}>
           <Home/>
+          <Login/>
         </SwiperR>
       );
 
     }
-        
-  }
-    
-  
 }

@@ -118,7 +118,7 @@ const dividendCalc = (old, newbal) => {
         }
         else {
             if (newbal[i].USDprice){
-                valueUSD = valueUSD + newbal[i].USDprice;
+                valueUSD = valueUSD + newbal[i].USDvalue;
             }
             returner.push({coin: newbal[i].coin, change: newbal[i].balance})
         }
