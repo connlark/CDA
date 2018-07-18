@@ -12,7 +12,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 15 sec');
+              return parser.text('every 1 min');
             },
             job: () => {
                 coinex.balance().then((response) => {
@@ -46,10 +46,10 @@ Meteor.startup(() => {
                                     return balObj;
                                 }); 
                             }).finally(() => {
-                                const dta = Balances.findOne({userId:'hifff'});
+                                const dta = Balances.findOne({userId:'2Bc2QzK4GfD4rSF58'});
                                 if (typeof(dta) === 'undefined'){
                                     Balances.insert(
-                                        {   userId: 'hifff',
+                                        {   userId: '2Bc2QzK4GfD4rSF58',
                                             balanceData: balances,
                                             createdAt: new Date
                                         }
@@ -61,12 +61,12 @@ Meteor.startup(() => {
                                     }
                                     else {
                                         const divCalc = dividendCalc(dta.balanceData, balances);
-                                        sendNotif('TRrmPbRy6Eeq3iTER',divCalc);
+                                        sendNotif('2Bc2QzK4GfD4rSF58',divCalc);
     
                                         Balances.update(
-                                            {userId: 'hifff'},
+                                            {userId: '2Bc2QzK4GfD4rSF58'},
                                             {
-                                                userId: 'hifff',
+                                                userId: '2Bc2QzK4GfD4rSF58',
                                                 balanceData: balances,
                                                 divCalc: divCalc,
                                                 createdAt: new Date
