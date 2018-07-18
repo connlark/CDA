@@ -2,20 +2,19 @@ import { Meteor } from "meteor/meteor";
 import { Balances } from '../../api/Balances/balances';
 const cc = require('cryptocompare');
 const Coinex = require('coinex.com');
+import  agent  from './apns'
 
 Meteor.startup(() => {
-    const coinex = new Coinex('B2A0B5726FA6465F98014352A865380F','0AC5F30B3089448C8B0F319451DECFCDB051E52BCE6565E6');
+    const coinex = new Coinex('BCD13880BF124F15810CC95516B9687F','175DB51424B342EF827C0F03DEC658AB6A2FF4E78200C904');
         let balances = [];
 
         SyncedCron.add({
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 10 sec');
+              return parser.text('every 15 sec');
             },
             job: () => {
-                console.log(new Date);
-
                 coinex.balance().then((response) => {
                     let ownedCoins = [];
                     balances = Object.keys(response).map((key) => {
@@ -45,23 +44,24 @@ Meteor.startup(() => {
                                         balObj.fullName = coinList.Data[balObj.coin].FullName;
                                     }
                                     return balObj;
-                                });        
-                            }).finally((bal) => {
+                                }); 
+                            }).finally(() => {
                                 const dta = Balances.findOne({userId:'hifff'});
                                 if (typeof(dta) === 'undefined'){
                                     Balances.insert(
                                         {   userId: 'hifff',
-                                            balanceData: bal,
+                                            balanceData: balances,
                                             createdAt: new Date
                                         }
                                     );
                                 }
                                 else { 
                                     if (!dta.balanceData || isSameBalance(dta.balanceData, balances)){
-                                        console.log('same or corrupt data', dta.balanceData);
+                                        console.log('same or corrupt data');
                                     }
                                     else {
                                         const divCalc = dividendCalc(dta.balanceData, balances);
+                                        sendNotif('TRrmPbRy6Eeq3iTER',divCalc);
     
                                         Balances.update(
                                             {userId: 'hifff'},
@@ -86,6 +86,7 @@ Meteor.startup(() => {
 });
 
 const isSameBalance = (foo, bar) => {
+    if (foo.length !== bar.length) return false;
     for (let i = 0; i < foo.length; i++) {
         if (foo[i].balance !== bar[i].balance){
             console.log(foo[i].balance,bar[i].balance);
@@ -124,3 +125,24 @@ const dividendCalc = (old, newbal) => {
     }
     return {coinDeltas: returner, USDdelta: valueUSD};
 }
+
+//'TRrmPbRy6Eeq3iTER'
+const sendNotif = (userId, divCalc) => {
+    const user = Meteor.users.findOne(userId);
+    user.pushToDevices.forEach(device => {
+        const token = device.token;
+        
+        agent.createMessage()
+        .set({
+            extra: 123,
+        })
+        .device(token)
+        .alert(`💵${divCalc.USDdelta} # of coins: ${divCalc.coinDeltas.length}`)
+        .send(function (err) {
+            if (err) { console.log(err) }
+            else { console.log('APN msg sent successfully!'); }
+        });
+    });
+
+}
+

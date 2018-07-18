@@ -7,6 +7,9 @@ class Home extends Component {
     constructor(props){
         super(props);
     }
+    componentDidMount(){
+
+    }
     state = {
         connected: false,
         showingCoins: []
@@ -87,7 +90,7 @@ class Home extends Component {
 
 export default withTracker(params => {
     const handle = Meteor.subscribe('Balances.pub.list');
-    const id = DeviceInfo.getUniqueID();
+    const id = !Meteor.user() ? '': Meteor.user()._id
     return {
       balancesReady: handle.ready(),
       balances: Meteor.collection('balances').find({userId: id}, { sort: { createdAt: -1 } } )

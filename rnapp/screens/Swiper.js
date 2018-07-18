@@ -7,6 +7,11 @@ import {
 } from 'react-native';
 import SwiperR from 'react-native-swiper';
 import Home from './Home';
+import Login from './Login';
+import MeteorListView from '../node_modules/react-native-meteor/src/components/ComplexListView';
+import Meteor, { withTracker } from 'react-native-meteor';
+
+var PushNotification = require('react-native-push-notification');
 var Spinner = require('react-native-spinkit')
 
 const styles = StyleSheet.create({
@@ -37,6 +42,8 @@ const styles = StyleSheet.create({
   }
 })
 
+
+
 export default class Swiper extends Component {
     constructor(props){
         super(props)
@@ -47,19 +54,31 @@ export default class Swiper extends Component {
             this.setState({loading: false})
         }, 1000);
     }
-  render(){
-        return (
-            <SwiperR style={styles.wrapper} index={3} showsButtons={false}>
-              <View style={styles.slide2}>
-                <Text style={styles.text}>Beautiful</Text>
-              </View>
-              <View style={styles.slide3}>
-                <Text style={styles.text}>And simple</Text>
-              </View>
-              <Home/>
-            </SwiperR>
-          );
+    componentDidMount(){
+      console.log(PushNotification)
+      
+      
     }
+  render(){
+    const user = Meteor.userId();
+    if (!user){
+      return (
+        <SwiperR style={styles.wrapper} index={1} showsButtons={false}>
+          <Login/>
+      
+        </SwiperR>
+      );
+    }
+    else {
+      return (
+        <SwiperR style={styles.wrapper} index={1} showsButtons={false}>
+          <Home/>
+        </SwiperR>
+      );
+
+    }
+        
+  }
     
   
 }
