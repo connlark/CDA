@@ -1434,6 +1434,7 @@
 				PRODUCT_NAME = rnapp;
 				PROVISIONING_PROFILE = "6b4a787c-6dec-429b-b17e-75a674dc441f";
 				PROVISIONING_PROFILE_SPECIFIER = "cda dev";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1467,6 +1468,7 @@
 				PRODUCT_NAME = rnapp;
 				PROVISIONING_PROFILE = "b6c58ef0-0124-4770-b7fc-3372bc3449a3";
 				PROVISIONING_PROFILE_SPECIFIER = "CDA distro";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -4,7 +4,15 @@ import Swiper from './screens/Swiper';
 import PushNotification from 'react-native-push-notification';
 import Meteor, { createContainer } from 'react-native-meteor';
 
-Meteor.connect('ws://192.168.8.230:3000/websocket');
+let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
+//let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
+//let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
+
+if (process.env.NODE_ENV === 'production') {
+  METEOR_URL = 'ws://73.246.190.116:3000/websocket'; // your production server
+}
+
+Meteor.connect(METEOR_URL);
 
 
 const RNApp = (props) => {

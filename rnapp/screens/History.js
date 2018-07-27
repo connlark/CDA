@@ -17,13 +17,17 @@ class History extends Component {
       );
 
     render() {
-        return (
-            <FlatList
-                data={this.props.history}
-                keyExtractor={this._keyExtractor}
-                renderItem={this._renderItem}
-            />
-        );
+        if(this.props.historyReady && this.props.history){
+            return (
+                <FlatList
+                    data={this.props.history.history}
+                    keyExtractor={this._keyExtractor}
+                    renderItem={this._renderItem}
+                />
+            );
+
+        }
+        return <View/>
     }
 }
 
@@ -34,6 +38,6 @@ export default withTracker(params => {
     const id = !Meteor.user() ? '': Meteor.user()._id
     return {
       historyReady: handle.ready(),
-      history: Meteor.collection('balanceHistory').findOne({userId: id}).history
+      history: Meteor.collection('balanceHistory').findOne({userId: id})
     };
   })(History);
