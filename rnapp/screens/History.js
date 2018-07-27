@@ -5,18 +5,18 @@ import Meteor, { withTracker } from 'react-native-meteor';
 class History extends Component {
     constructor(props){
         super(props);
-        console.log(this.props.history)
-
-
     }
     _keyExtractor = (item, index) => item.date;
     _renderItem = ({item}) => (
-        <Text> hi</Text>
+        <View style={{flexDirection: 'row',marginLeft: '7%', marginTop: '10%'}}>
+            <Text>💲{item.divData.USDdelta}💲</Text>
+            <View style={{marginLeft: '6%'}}/>
+            <Text>{item.date.toLocaleDateString()}  @  {item.date.toLocaleTimeString()}</Text>
+            </View>
+        
       );
 
     render() {
-      //  alert()
-      console.log(this.props.history)
         return (
             <FlatList
                 data={this.props.history}
@@ -34,6 +34,6 @@ export default withTracker(params => {
     const id = !Meteor.user() ? '': Meteor.user()._id
     return {
       historyReady: handle.ready(),
-      history: Meteor.collection('balanceHistory').findOne({userId: id})
+      history: Meteor.collection('balanceHistory').findOne({userId: id}).history
     };
   })(History);
