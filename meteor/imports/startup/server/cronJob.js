@@ -152,9 +152,9 @@ const dividendCalc = (old, newbal) => {
             if(delta > 0.00000001){
                 if (newbal[i].USDprice){
                     valueUSD = valueUSD + delta * newbal[i].USDprice;
-                    console.log(delta * newbal[i].USDprice);
-                    console.log(newbal[i].USDprice)
-                    console.log(delta)
+                }
+                else if (newbal[i].coin === 'USDT'){
+                    valueUSD = valueUSD + delta;
                 }
                 returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance})
             }
@@ -162,6 +162,10 @@ const dividendCalc = (old, newbal) => {
         else {
             if (newbal[i].USDprice){
                 valueUSD = valueUSD + newbal[i].USDvalue;
+            }
+            else if (newbal[i].coin === 'USDT'){
+                valueUSD = valueUSD + newbal[i].balance;
+
             }
             returner.push({coin: newbal[i].coin, change: newbal[i].balance})
         }
