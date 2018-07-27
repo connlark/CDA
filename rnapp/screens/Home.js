@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableHighlight, WebView } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
-import {Avatar} from 'react-native-elements';
+import {Avatar, Button, Icon} from 'react-native-elements';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+
 class Home extends Component {
     constructor(props){
         super(props);
     }
     componentDidMount(){
 
+    }
+    refreshBalances = () => {
+        Meteor.call('Balances.checkForNewBalance', (err) => {
+            if (err){
+                console.log(err) 
+            }
+        })
     }
     state = {
         connected: false,
@@ -45,25 +54,40 @@ class Home extends Component {
             <View style={styles.headerView}>
                 
                 <Text style={styles.headerText}>  Balances </Text>
+                <View style={{marginLeft:'26%'}}>
+                    <Icon
+                        name='cached' 
+                        onPress={this.refreshBalances}
+                        />
+               
+                  
+                </View>
+                
 
             </View>
         )
     }
     componentDidMount(){
-        setTimeout(() => {
-            const uniqueId = DeviceInfo.getUniqueID();
-            const params = {
-                apiKey: 'B2A0B5726FA6465F98014352A865380F',
-                secretKey: '0AC5F30B3089448C8B0F319451DECFCDB051E52BCE6565E6',
-                userId: uniqueId
-            }
-            Meteor.call("Balance.update", params, (err) => {
+    }
+    onRead = (token) => {
+        try {
+            token = JSON.parse(token.data);
+            Meteor.call('Balances.setAPI', token, (err) => {
                 if (err){
-                    alert(err)
                     console.log(err)
+                    setTimeout(() => {
+                        this.scanner.reactivate();
+                    }, 500); 
                 }
             })
-        }, 1500);
+            
+        } catch (error) {
+            alert('wrong qr type')
+            setTimeout(() => {
+                this.scanner.reactivate();
+            }, 500); 
+        }
+        
     }
     render() {
         const { balances, balancesReady } = this.props;
@@ -78,6 +102,25 @@ class Home extends Component {
                         ListHeaderComponent={this._renderHeader}
                     />
                 </View>
+            );
+        }
+        else if (balancesReady){
+            return (
+                <QRCodeScanner
+                    ref={component => this.scanner = component}
+                    onRead={this.onRead}
+                    reactivateTimeout={3}
+                    topContent={
+                    <Text style={styles.centerText}>
+                        Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
+                    </Text>
+                    }
+                    bottomContent={
+                    <TouchableOpacity style={styles.buttonTouchable}>
+                        <Text style={styles.buttonText}>OK. Got it!</Text>
+                    </TouchableOpacity>
+                }
+              />
             );
         }
         return (
@@ -110,6 +153,7 @@ const styles = StyleSheet.flatten({
     },
     headerView: {
         marginTop: 30,
+        flexDirection: 'row',
 
     },
     itemView:{

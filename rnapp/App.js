@@ -1,8 +1,16 @@
-import Meteor from 'react-native-meteor';
+import React, { Component } from 'react';
+
 import Swiper from './screens/Swiper';
 import PushNotification from 'react-native-push-notification';
+import Meteor, { createContainer } from 'react-native-meteor';
 
-setTimeout(() => {
+Meteor.connect('ws://192.168.8.230:3000/websocket');
+
+
+const RNApp = (props) => {
+  const { status, user, loggingIn } = props;
+
+  if (user && user.username) {
     PushNotification.configure({
         // (optional) Called when Token is generated (iOS and Android)
         onRegister(data) {
@@ -33,12 +41,20 @@ setTimeout(() => {
           * - if not, you must call PushNotificationsHandler.requestPermissions() later
           */
         requestPermissions: true,
-      });    
-}, 1000);
+      });   
+  }
+  return (<Swiper status={status} user={user}/>)
+};
+
+const MyApp = createContainer(() => {
+              return {
+                status: Meteor.status(),
+                user: Meteor.user(),
+                loggingIn: Meteor.loggingIn(),
+              };
+            }, RNApp);
 
 
 
-Meteor.connect('ws://73.246.190.116:3000/websocket');
 
-
-export default Swiper;
+export default MyApp;

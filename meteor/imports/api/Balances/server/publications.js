@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Balances } from '../balances';
+import { Balances, BalanceHistory } from '../balances';
 
 
 Meteor.publish('Balances.pub.list', () => {
     return Balances.find();
-  });
+});
