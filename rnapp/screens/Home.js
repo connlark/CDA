@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
 import {Avatar, Button, Icon} from 'react-native-elements';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import { IS_X } from '../config/styles';
 
 class Home extends Component {
     constructor(props){
@@ -43,7 +44,10 @@ class Home extends Component {
                     <Text style={{marginLeft: 2, fontSize: 10}}> {item.fullName} </Text>
                 </View>
                 <View style={{marginTop: 0, width:'40%', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right'}}> {item.USDvalue} </Text>
+                    {item.USDvalue ? 
+                        <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right'}}> $ {item.USDvalue} </Text>:
+                        <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right', color: 'red'}}> ⎊ {item.balance}  </Text>
+                    }
                 </View>
             </View>
         </View>
@@ -54,7 +58,7 @@ class Home extends Component {
             <View style={styles.headerView}>
                 
                 <Text style={styles.headerText}>  Balances </Text>
-                <View style={{marginLeft:'26%'}}>
+                <View style={{ marginLeft:'26%'}}>
                     <Icon
                         name='cached' 
                         onPress={this.refreshBalances}
@@ -89,14 +93,31 @@ class Home extends Component {
         }
         
     }
+    sortData = (data) => {
+        data.filter((e) => e.USDvalue)
+        return data.sort( (a,b) => {
+            if (a.USDvalue && b.USDvalue){
+
+                return b.USDvalue-a.USDvalue;
+            }
+            else if (b.USDvalue) {
+                return true;
+            }
+            return false;
+        })
+
+    }
     render() {
         const { balances, balancesReady } = this.props;
         
         if (balancesReady && balances[0]){            
             return (
                 <View style={styles.container}>
+                    <StatusBar
+                       hidden
+                    />
                     <FlatList
-                        data={balances[0].balanceData}
+                        data={this.sortData(balances[0].balanceData)}
                         keyExtractor={this._keyExtractor}
                         renderItem={this._renderItem}
                         ListHeaderComponent={this._renderHeader}
@@ -112,7 +133,7 @@ class Home extends Component {
                     reactivateTimeout={3}
                     topContent={
                     <Text style={styles.centerText}>
-                        Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
+                        Go to <Text style={styles.textBold}>https://www.coinex.com/apikey</Text> on your computer and scan the QR code for an API key.
                     </Text>
                     }
                     bottomContent={

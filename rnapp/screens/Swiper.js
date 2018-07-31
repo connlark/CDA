@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 30,
     fontWeight: 'bold',
+  },
+  loadingView: {
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
 
@@ -53,11 +57,12 @@ export default class Swiper extends Component {
   constructor(props){
       super(props)
       this.state = {
-          loading: true,
+          color: 'blue',
+          colorIndex: 0
       }
       setTimeout(() => {
-          this.setState({loading: false})
-      }, 1000);
+          this.setState({color: 'purple'})
+      }, 1500);
   }
   componentDidMount(){
     console.log(PushNotification)
@@ -68,11 +73,10 @@ export default class Swiper extends Component {
     if (status.connected) {
       if (user !== null && user.username){
         return (
-          <SwiperR style={styles.wrapper} index={1} showsButtons={false}>
+          <SwiperR style={styles.wrapper} index={1} showsButtons={false} showsPagination={false}>
             <Home/>
             <History user={user}/>
-            <Settings user={user}/>
-         
+            <Settings user={user}/>         
           </SwiperR>
         );
       }
@@ -83,8 +87,10 @@ export default class Swiper extends Component {
       );
     }
     return (
-      <SwiperR style={styles.wrapper} index={1} showsButtons={false}>
-         <Spinner size={200} type='Bounce' color='blue'/>
+      <SwiperR index={1} showsButtons={false}>
+         <View style={styles.loadingView}>
+           <Spinner size={200} type='9CubeGrid' color={this.state.color}/>
+         </View>
       </SwiperR>
     );
 
