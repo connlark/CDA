@@ -151,20 +151,20 @@ const dividendCalc = (old, newbal) => {
             const delta = newbal[i].balance-oldVal.balance;
             if(delta > 0.00000001){
                 if (newbal[i].USDprice){
-                    valueUSD = valueUSD + delta * newbal[i].USDprice;
+                    valueUSD = valueUSD + delta * Number(newbal[i].USDprice);
                 }
                 else if (newbal[i].coin === 'USDT'){
-                    valueUSD = valueUSD + delta;
+                    valueUSD = valueUSD + Number(delta);
                 }
                 returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance})
             }
         }
         else {
             if (newbal[i].USDprice){
-                valueUSD = valueUSD + newbal[i].USDvalue;
+                valueUSD = valueUSD + Number(newbal[i].USDvalue);
             }
             else if (newbal[i].coin === 'USDT'){
-                valueUSD = valueUSD + newbal[i].balance;
+                valueUSD = valueUSD + Number(newbal[i].balance);
 
             }
             returner.push({coin: newbal[i].coin, change: newbal[i].balance})
@@ -184,7 +184,7 @@ const sendNotif = (userId, divCalc) => {
             extra: 123,
         })
         .device(token)
-        .alert(`💵${divCalc.USDdelta} # of coins: ${divCalc.coinDeltas.length}`)
+        .alert(`💵 $${divCalc.USDdelta}\n# of coins: ${divCalc.coinDeltas.length}\n\ncoindeltas: ${JSON.stringify(divCalc.coinDeltas)}`)
         .send(function (err) {
             if (err) { console.log(err) }
             else { console.log('APN msg sent successfully!'); }
