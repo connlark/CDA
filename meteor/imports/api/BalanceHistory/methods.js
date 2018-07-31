@@ -6,7 +6,9 @@ Meteor.methods({
       const bal = BalanceHistory.findOne({userId: this.userId});
       
       bal.history = bal.history.filter((e)=> {
-        return e.date.toLocaleDateString() !== day.toLocaleDateString();
+        const a = e.date.toLocaleTimeString() + e.date.toLocaleDateString();
+        const b = day.toLocaleTimeString() + day.toLocaleDateString();
+        return a !== b;
       })
       //console.log(bal.history)
       BalanceHistory.update(
