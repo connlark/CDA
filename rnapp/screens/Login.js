@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Meteor, { withTracker } from 'react-native-meteor';
-
 import {  StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import Meteor, { withTracker, Accounts } from 'react-native-meteor';
+import DropdownAlert from 'react-native-dropdownalert';
+
 const { width } = Dimensions.get('window');
 
 class Login extends Component {
@@ -23,9 +24,9 @@ class Login extends Component {
     }
 
     if (email.length === 0) {
-      this.setState({ error: 'You must enter an email address' });
+      this.dropdown.alertWithType('warn', 'Error', 'You must enter a username');
     } else if (password.length === 0) {
-      this.setState({ error: 'You must enter a password' });
+      this.dropdown.alertWithType('warn', 'Error', 'You must enter a password');
     }
 
     return valid;
@@ -33,26 +34,51 @@ class Login extends Component {
 
   onSignIn = () => {
     const { email, password } = this.state;
-
     if (this.isValid()) {
       Meteor.loginWithPassword(email, password, (error) => {
         if (error) {
-          this.setState({ error: error.reason });
+          this.dropdown.alertWithType('error', 'Error', error.reason);
+        }
+        else {
+          this.dropdown.alertWithType('success', 'Logged In','');
+        }
+      });
+    }
+  }
+
+  onCreateAccount = () => {
+    const { email, password } = this.state;
+
+    if (this.isValid()) {
+      Accounts.createUser({ email, password }, (error) => {
+        if (error) {
+          this.dropdown.alertWithType('error', 'Error', error.reason);
+        } else {
+         /* setTimeout(() => {
+            Meteor.loginWithPassword(email, password, (error) => {
+              if (error) {
+                this.dropdown.alertWithType('error', 'Error', error.reason);
+              }
+              else {
+                this.dropdown.alertWithType('success', 'Logged In','');
+              }
+            });
+          }, 700);*/
         }
       });
     }
   }
 
   render() {
+    
     return (
       <View style={styles.container}>
         <TextInput
           style={styles.input}
           onChangeText={(email) => this.setState({email})}
-          placeholder="Email"
+          placeholder="Username"
           autoCapitalize="none"
           autoCorrect={false}
-          keyboardType="email-address"
         />
 
         <TextInput
@@ -63,14 +89,16 @@ class Login extends Component {
           autoCorrect={false}
           secureTextEntry={true}
         />
-
+        <Text style={styles.error}>{this.state.error}</Text>
         <TouchableOpacity style={styles.button} onPress={this.onSignIn}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={this.onCreateAccount}>
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
+
+        <DropdownAlert ref={ref => this.dropdown = ref} />
       </View>
     );
   }

@@ -44,7 +44,6 @@ export default class App extends Component {
             leftComponent={{ icon: 'eject', color: '#fff', onPress: this.logOut }}
             />
         <SettingsCategoryHeader title={'My Account'} textStyle={(Platform.OS === 'android') ? {color: colors.monza} : null}/>
-
  
         <SettingsSwitch
             title={'Allow Push Notifications'}
@@ -57,7 +56,6 @@ export default class App extends Component {
             value={this.state.allowPushNotifications}
             thumbTintColor={(this.state.allowPushNotifications) ? colors.switchEnabled : colors.switchDisabled}
         />
- 
      
         </ScrollView>
         );

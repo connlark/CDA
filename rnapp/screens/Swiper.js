@@ -12,14 +12,14 @@ import Home from './Home';
 import Login from './Login';
 import Settings from './Settings';
 import History from './History';
-
+import { IS_X } from '../config/styles';
 var PushNotification = require('react-native-push-notification');
 var Spinner = require('react-native-spinkit')
 
 const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
-    marginTop: '30%',
+    marginTop: IS_X ? 50:0,
     alignItems: 'center',
   },
   slide1: {
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   loadingView: {
+    height: '40%',
     justifyContent: 'center',
     alignItems: 'center',
   }

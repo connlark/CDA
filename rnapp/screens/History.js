@@ -1,26 +1,50 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList } from 'react-native';
+import { Text, StyleSheet, View, FlatList,TouchableHighlight } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import Graph from '../components/graph';
+import Swipeout from 'react-native-swipeout';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
+var swipeoutBtns = [
+    {
+      text: 'Button'
+    }
+  ]
 
 class History extends Component {
     constructor(props){
         super(props);
+        this.state = { showAlert: false, selectedData: {date: new Date, divData: {USDdelta: 0, coinDeltas: {} }} };
     }
-    _keyExtractor = (item, index) => Math.random();
+    _keyExtractor = (item, index) => String(Math.random());
     _renderItem = ({item}) => (
-        <View style={{flexDirection: 'row',marginLeft: '7%'}}>
-            <Text>$ {item.divData.USDdelta}</Text>
-            <View style={{marginLeft: '6%'}}/>
-            <Text>{String(item.date.toLocaleDateString())}  @  {String(item.date.toLocaleTimeString())}</Text>
+            <View style={{flex: 1, flexDirection: 'row',marginLeft: '7%'}}>
+                <Text onPress={() => this.handleTouchedHistory(item)}>$ {item.divData.USDdelta} {String(item.date.toLocaleDateString())}  @  {String(item.date.toLocaleTimeString())}</Text>
             </View>
-        
       );
     _renderHeader = () => (
         <Graph/>
     );
+    handleTouchedHistory = (item) => {
+        this.setState({selectedData: item});
+        this.showAlert();
+
+    }
+    showAlert = () => {
+        this.setState({
+          showAlert: true
+        });
+    };
+     
+    hideAlert = () => {
+        this.setState({
+            showAlert: false
+        });
+    };
 
     render() {
+        const { showAlert, selectedData } = this.state;
+
         if(this.props.historyReady && this.props.history){
             return (
                 <View style={{flex:1, height:'100%'}}>
@@ -34,6 +58,30 @@ class History extends Component {
                         contentInset={{ bottom: 30 }}
                         ListHeaderComponent={this._renderHeader}
 
+                    />
+                <AwesomeAlert
+                    show={showAlert}
+                    showProgress={false}
+                    title="Delete This Delta?"
+                    message={`\nDate: ${selectedData.date.toLocaleDateString()}\n\nCoinDeltas: $ ${selectedData.divData.USDdelta}`}
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showCancelButton={true}
+                    showConfirmButton={true}
+                    cancelText="No, cancel"
+                    confirmText="Yes, delete it"
+                    confirmButtonColor="#DD6B55"
+                    onCancelPressed={() => {
+                        this.hideAlert();
+                    }}
+                    onConfirmPressed={() => {
+                        Meteor.call('BalanceHistory.deleteBalanceHistoryDay', selectedData.date, (err) => {
+                            if (err){
+                                console.log(err);
+                            }
+                            this.hideAlert();
+                        });
+                    }}
                     />
                 </View>
             );

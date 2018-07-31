@@ -132,9 +132,9 @@ class Home extends Component {
                     onRead={this.onRead}
                     reactivateTimeout={3}
                     topContent={
-                    <Text style={styles.centerText}>
-                        Go to <Text style={styles.textBold}>https://www.coinex.com/apikey</Text> on your computer and scan the QR code for an API key.
-                    </Text>
+                        <Text style={styles.centerText}>
+                            Go to <Text style={styles.textBold}>https://www.coinex.com/apikey</Text> on your computer and scan the QR code for an API key.
+                        </Text>
                     }
                     bottomContent={
                     <TouchableOpacity style={styles.buttonTouchable}>
