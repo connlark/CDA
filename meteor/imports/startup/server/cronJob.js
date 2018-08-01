@@ -192,7 +192,7 @@ const sendNotif = (userId, divCalc) => {
             extra: 123,
         })
         .device(token)
-        .alert(`💵 $${divCalc.USDdelta}\n# of coins: ${divCalc.coinDeltas.length}\n\ncoindeltas:\n${doParse(divCalc.coinDeltas)}`)
+        .alert(`💵 $${divCalc.USDdelta}\n\ncoindeltas:\n${doParse(divCalc.coinDeltas)}`)
         .send(function (err) {
             if (err) { console.log(err) }
             else { console.log('APN msg sent successfully!'); }
