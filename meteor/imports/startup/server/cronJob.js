@@ -163,12 +163,22 @@ const dividendCalc = (old, newbal) => {
             }
             else if (newbal[i].coin === 'USDT'){
                 valueUSD = valueUSD + Number(newbal[i].balance);
-
             }
             returner.push({coin: newbal[i].coin, delta: newbal[i].balance})
         }
     }
     return {coinDeltas: returner, USDdelta: Number(valueUSD).toFixed(8)};
+}
+
+const doParse = (e) => {
+    let out = '';
+    if (!e){
+        return '';
+    }
+    e.map((o) => {
+        out += o.coin + '~ ' + o.delta +'\n';
+    })
+    return out;
 }
 
 //'TRrmPbRy6Eeq3iTER'
@@ -182,7 +192,7 @@ const sendNotif = (userId, divCalc) => {
             extra: 123,
         })
         .device(token)
-        .alert(`💵 $${divCalc.USDdelta}\n# of coins: ${divCalc.coinDeltas.length}\n\ncoindeltas: ${JSON.stringify(divCalc.coinDeltas)}`)
+        .alert(`💵 $${divCalc.USDdelta}\n# of coins: ${divCalc.coinDeltas.length}\n\ncoindeltas:\n${doParse(divCalc.coinDeltas)}`)
         .send(function (err) {
             if (err) { console.log(err) }
             else { console.log('APN msg sent successfully!'); }
