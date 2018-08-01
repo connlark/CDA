@@ -40,6 +40,7 @@ export default class App extends Component {
  
     <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
         <Header
+            outerContainerStyles={{marginTop: -15}}
             centerComponent={{ text: 'Settings', style: { color: '#fff', fontSize:20 } }}
             leftComponent={{ icon: 'eject', color: '#fff', onPress: this.logOut }}
             />

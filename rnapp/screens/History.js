@@ -4,6 +4,8 @@ import Meteor, { withTracker } from 'react-native-meteor';
 import Graph from '../components/graph';
 import Swipeout from 'react-native-swipeout';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import DropdownAlert from 'react-native-dropdownalert';
+import { IS_X } from '../config/styles';
 
 var swipeoutBtns = [
     {
@@ -14,12 +16,18 @@ var swipeoutBtns = [
 class History extends Component {
     constructor(props){
         super(props);
-        this.state = { showAlert: false, selectedData: {date: new Date, divData: {USDdelta: 0, coinDeltas: {} }} };
+        this.state = { 
+            showAlert: false, 
+            selectedData: {date: new Date, divData: {USDdelta: 0, coinDeltas: [] }},
+            refreshing: false
+        };
     }
     _keyExtractor = (item, index) => String(Math.random());
     _renderItem = ({item}) => (
-            <View style={{flex: 1, flexDirection: 'row',marginLeft: '7%'}}>
-                <Text onPress={() => this.handleTouchedHistory(item)}>$ {item.divData.USDdelta} {String(item.date.toLocaleDateString())}  @  {String(item.date.toLocaleTimeString())}</Text>
+            <View onPress={() => this.handleTouchedHistory(item)} style={{flex: 1, flexDirection: 'row', alignItems: 'center',justifyContent: 'center',}}>
+                <Text style={{marginRight: '10%'}} onPress={() => this.handleTouchedHistory(item)}>$ {Number(item.divData.USDdelta).toFixed(3)} </Text>
+                <Text style={{marginRight: '10%'}} onPress={() => this.handleTouchedHistory(item)}> {String(item.date.toLocaleDateString())} </Text>
+                <Text onPress={() => this.handleTouchedHistory(item)}>  @  {String(item.date.toLocaleTimeString())}</Text>
             </View>
       );
     _renderHeader = () => (
@@ -42,8 +50,34 @@ class History extends Component {
         });
     };
 
+    doParse = (e) => {
+        let out = '';
+        if (!e){
+            return '';
+        }
+        e.map((o) => {
+            out += o.coin + '~ ' + o.delta +'\n';
+        })
+        return out;
+    }
+
+    refreshData = () => {
+        this.setState({refreshing: true});
+
+        Meteor.call('Balances.checkForNewBalance', (err) => {
+            if (err){
+                console.log(err) 
+                this.dropdown.alertWithType('error', 'Error', err.reason);
+            }
+            else {
+                this.dropdown.alertWithType('success', 'Refreshed Sucessfully','☻ ☻ ☻ ☻ ☻ ☻ ☻');
+            }
+            this.setState({refreshing: false})
+        })
+    }
+
     render() {
-        const { showAlert, selectedData } = this.state;
+        const { showAlert, selectedData, refreshing } = this.state;
 
         if(this.props.historyReady && this.props.history){
             return (
@@ -57,13 +91,14 @@ class History extends Component {
                         ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
                         contentInset={{ bottom: 30 }}
                         ListHeaderComponent={this._renderHeader}
-
+                        onRefresh={this.refreshData}
+                        refreshing={refreshing}
                     />
                 <AwesomeAlert
                     show={showAlert}
                     showProgress={false}
                     title="Delete This Delta?"
-                    message={`\nDate: ${selectedData.date.toLocaleDateString()}\n\nCoinDeltas: $ ${selectedData.divData.USDdelta}`}
+                    message={`\nDate: ${selectedData.date.toLocaleDateString()} @ ${selectedData.date.toLocaleTimeString()}\n\nUSD Value: $ ${selectedData.divData.USDdelta}\n\nDeltas: \n${this.doParse(selectedData.divData.coinDeltas)}`}
                     closeOnTouchOutside={true}
                     closeOnHardwareBackPress={false}
                     showCancelButton={true}
@@ -79,10 +114,19 @@ class History extends Component {
                             if (err){
                                 console.log(err);
                             }
-                            this.hideAlert();
+                            else {
+                                this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
+                            }
+                            this.setState({
+                                showAlert: false
+                            });
+                        });
+                        this.setState({
+                            showAlert: false
                         });
                     }}
                     />
+                <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
                 </View>
             );
 
@@ -91,7 +135,12 @@ class History extends Component {
     }
 }
 
-const styles = StyleSheet.flatten({});
+const styles = StyleSheet.flatten({
+    headerView: {
+        marginTop: IS_X ? 80:30,
+        flexDirection: 'row',
+    },
+});
 
 export default withTracker(params => {
     const handle = Meteor.subscribe('BalanceHistory.pub.list');

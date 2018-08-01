@@ -4,6 +4,7 @@ import Meteor, { withTracker } from 'react-native-meteor';
 import { LineChart, YAxis, Grid, XAxis, AreaChart } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
 
+import { IS_X } from '../config/styles';
 class Graph extends Component {
     getData = (history) => {
         const dta = [];
@@ -17,11 +18,13 @@ class Graph extends Component {
     render() {
         const { history } = this.props;
         const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
-        const contentInset = { top: 0, bottom: 20 }
+        const contentInset = { top: 0, bottom: 0 }
 
         return (
-            <View >
-                <View style={{ height: 200, flexDirection: 'row', backgroundColor:'white' }}>
+            <View style={styles.container}>
+                <Text style={styles.headerText}>  Dividends </Text> 
+         
+                <View style={{ height: 200, flexDirection: 'row', backgroundColor:'white', width: '95%', marginLeft: '2.5%' }}>
                     <YAxis
                         data={ history ? this.getData(history.history):data }
                         contentInset={ contentInset }
@@ -34,7 +37,7 @@ class Graph extends Component {
                         formatLabel={ value => `$${value}` }
                     />
                     <AreaChart
-                        style={{ flex: 1, marginLeft: 16 }}
+                        style={{ flex: 1, marginLeft: 3 }}
                         data={ history ? this.getData(history.history):data }
                         curve={ shape.curveCatmullRom }
                         svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
@@ -51,7 +54,16 @@ class Graph extends Component {
     }
 }
 
-const styles = StyleSheet.flatten({});
+const styles = StyleSheet.flatten({
+    headerText: {
+        fontWeight: 'bold',
+        fontSize: 50,
+    },
+    container: {
+        marginTop: IS_X ? 80:30,
+        marginBottom: 15,
+    }
+});
 
 
 export default withTracker(params => {

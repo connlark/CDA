@@ -8,8 +8,6 @@ import  agent  from './apns'
 
 
 Meteor.startup(() => {
-        let balances = [];
-
         SyncedCron.add({
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
@@ -167,7 +165,7 @@ const dividendCalc = (old, newbal) => {
                 valueUSD = valueUSD + Number(newbal[i].balance);
 
             }
-            returner.push({coin: newbal[i].coin, change: newbal[i].balance})
+            returner.push({coin: newbal[i].coin, delta: newbal[i].balance})
         }
     }
     return {coinDeltas: returner, USDdelta: Number(valueUSD).toFixed(8)};

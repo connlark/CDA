@@ -19,7 +19,6 @@ var Spinner = require('react-native-spinkit')
 const styles = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
-    marginTop: IS_X ? 50:0,
     alignItems: 'center',
   },
   slide1: {
@@ -59,8 +58,9 @@ export default class Swiper extends Component {
       super(props)
       this.state = {
           color: 'blue',
-          colorIndex: 0
+          colorIndex: 0,
       }
+
       setTimeout(() => {
           this.setState({color: 'purple'})
       }, 1500);
@@ -74,10 +74,10 @@ export default class Swiper extends Component {
     if (status.connected) {
       if (user !== null && user.username){
         return (
-          <SwiperR style={styles.wrapper} index={1} showsButtons={false} showsPagination={false}>
-            <Home/>
-            <History user={user}/>
-            <Settings user={user}/>         
+          <SwiperR style={styles.wrapper} index={1} showsButtons={false} showsPagination={false} loop={false}>
+            <Settings user={user}/> 
+            <Home/> 
+            <History user={user}/>       
           </SwiperR>
         );
       }

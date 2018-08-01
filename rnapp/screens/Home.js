@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Linking } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
 import {Avatar, Button, Icon} from 'react-native-elements';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import DropdownAlert from 'react-native-dropdownalert';
+
 import { IS_X } from '../config/styles';
 
 class Home extends Component {
     constructor(props){
         super(props);
+        this.state = { 
+            refreshing: false,
+            showUSDValue: false,
+        };
     }
     componentDidMount(){
 
@@ -33,7 +39,10 @@ class Home extends Component {
                     <Avatar
                         rounded
                         source={{uri: item.imgUrl ? item.imgUrl : "https://images-cdn.azureedge.net/azure/in-resources/d7048855-742a-406c-a67d-5c2962e69e5e/Images/ProductImages/Source/Plain%20Gold%20Coin-3gm_1.jpg;width=1000;height=1000;scale=canvas;anchor=bottomcenter"}}
-                        onPress={() => this.setState({showingCoins: [item.coin]})}
+                        onPress={() => {
+                            this.setState({showingCoins: [item.coin]});
+                            Linking.openURL('https://www.cryptocompare.com'+item.ccurl)
+                        }}
                         activeOpacity={0.4}
                     />
                 </View>
@@ -45,8 +54,8 @@ class Home extends Component {
                 </View>
                 <View style={{marginTop: 0, width:'40%', justifyContent: 'center', alignItems: 'center'}}>
                     {item.USDvalue ? 
-                        <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right'}}> $ {item.USDvalue} </Text>:
-                        <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right', color: 'red'}}> ⎊ {item.balance}  </Text>
+                        <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right'}}> {this.state.showUSDValue ? '$ ':'⎊ '} {this.state.showUSDValue ? Number(item.USDvalue).toFixed(3):Number(item.balance).toFixed(4)} </Text>:
+                        <Text adjustsFontSizeToFit={true}  style={{textAlign: 'right', color: 'purple'}}> ⎊ {item.balance}  </Text>
                     }
                 </View>
             </View>
@@ -55,19 +64,8 @@ class Home extends Component {
       );
     _renderHeader = () => {
         return (
-            <View style={styles.headerView}>
-                
-                <Text style={styles.headerText}>  Balances </Text>
-                <View style={{ marginLeft:'26%'}}>
-                    <Icon
-                        name='cached' 
-                        onPress={this.refreshBalances}
-                        />
-               
-                  
-                </View>
-                
-
+            <View style={styles.headerView}> 
+                <Text onPress={() => this.setState({showUSDValue: !this.state.showUSDValue})} style={styles.headerText}>  Balances </Text> 
             </View>
         )
     }
@@ -84,14 +82,12 @@ class Home extends Component {
                     }, 500); 
                 }
             })
-            
         } catch (error) {
             alert('wrong qr type')
             setTimeout(() => {
                 this.scanner.reactivate();
             }, 500); 
         }
-        
     }
     sortData = (data) => {
         data.filter((e) => e.USDvalue)
@@ -104,11 +100,25 @@ class Home extends Component {
                 return true;
             }
             return false;
-        })
+        });
+    }
+    refreshData = () => {
+        this.setState({refreshing: true});
 
+        Meteor.call('Balances.checkForNewBalance', (err) => {
+            if (err){
+                console.log(err) 
+                this.dropdown.alertWithType('error', 'Error', err.reason);
+            }
+            else {
+                this.dropdown.alertWithType('success', 'Refreshed Sucessfully','☻ ☻ ☻ ☻ ☻ ☻ ☻');
+            }
+            this.setState({refreshing: false})
+        })
     }
     render() {
         const { balances, balancesReady } = this.props;
+        const { refreshing } = this.state;
         
         if (balancesReady && balances[0]){            
             return (
@@ -121,7 +131,11 @@ class Home extends Component {
                         keyExtractor={this._keyExtractor}
                         renderItem={this._renderItem}
                         ListHeaderComponent={this._renderHeader}
+                        onRefresh={this.refreshData}
+                        refreshing={refreshing}
+                        extraData={this.state}
                     />
+                    <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
                 </View>
             );
         }
@@ -164,7 +178,6 @@ export default withTracker(params => {
 const styles = StyleSheet.flatten({
     container: {
         flex:1,
-        //alignItems: 'left',
         justifyContent: 'center',
         
     },
@@ -173,9 +186,8 @@ const styles = StyleSheet.flatten({
         fontSize: 50,
     },
     headerView: {
-        marginTop: 30,
         flexDirection: 'row',
-
+        marginTop: IS_X ? 80:30,
     },
     itemView:{
         marginLeft:'5%',
@@ -185,5 +197,8 @@ const styles = StyleSheet.flatten({
         height: 50,
         marginBottom: 10,
         borderRadius: 9,
+        shadowOffset: { width: 5, height: 5 },
+        shadowColor: 'black',
+        shadowOpacity: 0.14
     }
 });

@@ -10,7 +10,6 @@ Meteor.methods({
         const b = day.toLocaleTimeString() + day.toLocaleDateString();
         return a !== b;
       })
-      //console.log(bal.history)
       BalanceHistory.update(
         {userId: this.userId},
         {
@@ -19,9 +18,7 @@ Meteor.methods({
             history: bal.history,
             createdAt: new Date
         }
-      );
-
-      
+      );  
     },
   });
   
