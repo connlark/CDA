@@ -4,10 +4,6 @@
 # Example: Clone a required repository
 
 # Example: Install App Center CLI
-code-push release-react rnapp ios
+npm install -g appcenter-cli
 
-
-
-
-
-yarn --ignore-engines
+#yarn --ignore-engines
