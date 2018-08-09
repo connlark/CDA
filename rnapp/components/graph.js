@@ -22,6 +22,7 @@ class Graph extends Component {
 
         return (
             <View style={styles.container}>
+                <View style={{height: IS_X ? 55:30,}}/>
                 <Text style={styles.headerText}>  Dividends </Text> 
          
                 <View style={{ height: 200, flexDirection: 'row', backgroundColor:'white', width: '95%', marginLeft: '2.5%' }}>
@@ -58,9 +59,10 @@ const styles = StyleSheet.flatten({
     headerText: {
         fontWeight: 'bold',
         fontSize: 50,
+        marginBottom: 10,
     },
     container: {
-        marginTop: IS_X ? 80:30,
+        backgroundColor: 'white',
         marginBottom: 15,
     }
 });

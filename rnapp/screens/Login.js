@@ -40,7 +40,7 @@ class Login extends Component {
           this.dropdown.alertWithType('error', 'Error', error.reason);
         }
         else {
-          this.dropdown.alertWithType('success', 'Logged In','');
+          this.props.navigation.navigate('App');
         }
       });
     }
@@ -50,20 +50,11 @@ class Login extends Component {
     const { email, password } = this.state;
 
     if (this.isValid()) {
-      Accounts.createUser({ email, password }, (error) => {
+      Accounts.createUser({ username: email, password }, (error) => {
         if (error) {
           this.dropdown.alertWithType('error', 'Error', error.reason);
         } else {
-         /* setTimeout(() => {
-            Meteor.loginWithPassword(email, password, (error) => {
-              if (error) {
-                this.dropdown.alertWithType('error', 'Error', error.reason);
-              }
-              else {
-                this.dropdown.alertWithType('success', 'Logged In','');
-              }
-            });
-          }, 700);*/
+            this.onSignIn();
         }
       });
     }

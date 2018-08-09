@@ -11,6 +11,7 @@
     "react-native": "0.56.0",
     "react-native-awesome-alerts": "^1.0.8",
     "react-native-camera": "^1.1.4",
+    "react-native-code-push": "^5.4.1",
     "react-native-device-info": "^0.21.5",
     "react-native-dropdownalert": "^3.5.0",
     "react-native-elements": "^0.19.1",
@@ -23,7 +24,14 @@
     "react-native-svg-charts": "^5.2.0",
     "react-native-swipeout": "^2.3.4",
     "react-native-swiper": "^1.5.13",
-    "react-native-vector-icons": "^4.6.0"
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.11.2",
+    "react-navigation-redux-helpers": "^2.0.5",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-jest": "23.4.0",

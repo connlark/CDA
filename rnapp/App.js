@@ -1,18 +1,40 @@
 import React, { Component } from 'react';
-
-import Swiper from './screens/Swiper';
 import PushNotification from 'react-native-push-notification';
 import Meteor, { createContainer } from 'react-native-meteor';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, connect } from 'react-redux';
+import {addNavigationHelpers} from 'react-navigation';
+import {
+  reduxifyNavigator,
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
+} from 'react-navigation-redux-helpers';
+import {
+  createStackNavigator,
+} from 'react-navigation';
+
+import store from './config/store';
+import Swiper from './screens/Swiper';
+import {AppNavigator} from './config/router';
 
 let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
-
 if (process.env.NODE_ENV === 'production') {
   METEOR_URL = 'ws://73.246.190.116:3000/websocket'; // your production server
 }
 
 Meteor.connect(METEOR_URL);
+
+const App = reduxifyNavigator(AppNavigator, "root");
+
+const mapStateToProps = (state) => ({
+  state: state.nav,
+});
+
+const AppWithNavigation = connect(mapStateToProps)(App);
+
+
 
 
 const RNApp = (props) => {
@@ -23,7 +45,7 @@ const RNApp = (props) => {
         // (optional) Called when Token is generated (iOS and Android)
         onRegister(data) {
           Meteor.call('notifications.set.pushToken', data, err => {
-            if (err) { alert(`notifications.set.pushToken: ${err.reason}`); }
+            if (err) { console.log(`notifications.set.pushToken: ${err.reason}`); }
           });
         },
     
@@ -35,8 +57,8 @@ const RNApp = (props) => {
         // IOS ONLY (optional): default: all - Permissions to register.
         permissions: {
           alert: true,
-          badge: true,
-          sound: true,
+          badge: false,
+          sound: false,
         },
     
         // Should the initial notification be popped automatically
@@ -51,18 +73,13 @@ const RNApp = (props) => {
         requestPermissions: true,
       });   
   }
-  return (<Swiper status={status} user={user}/>)
+  return  <Provider store={store}>
+            <AppWithNavigation
+            />
+          </Provider>
 };
 
-const MyApp = createContainer(() => {
-              return {
-                status: Meteor.status(),
-                user: Meteor.user(),
-                loggingIn: Meteor.loggingIn(),
-              };
-            }, RNApp);
 
 
 
-
-export default MyApp;
+export default RNApp;

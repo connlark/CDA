@@ -8,6 +8,7 @@ import {
   ScrollView
 } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
+import { IS_X } from '../config/styles';
 
 import {
     SettingsDividerShort, 
@@ -31,7 +32,12 @@ export default class App extends Component {
   }
   logOut = () => {
     Meteor.logout((err) => {
-        alert(err)
+        if (err){
+            alert(JSON.stringify(err));
+        }
+        else {
+            this.props.navigation.navigate('Auth');
+        }
     })
   } 
   render() {
@@ -40,9 +46,9 @@ export default class App extends Component {
  
     <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
         <Header
-            outerContainerStyles={{marginTop: -15}}
+            outerContainerStyles={{marginTop: -15, height: IS_X ? 97:70}}
             centerComponent={{ text: 'Settings', style: { color: '#fff', fontSize:20 } }}
-            leftComponent={{ icon: 'eject', color: '#fff', onPress: this.logOut }}
+            leftComponent={{ icon: 'eject', color: '#fff', onPress: this.logOut, underlayColor: 'transparent' }}
             />
         <SettingsCategoryHeader title={'My Account'} textStyle={(Platform.OS === 'android') ? {color: colors.monza} : null}/>
  
@@ -62,7 +68,6 @@ export default class App extends Component {
         );
     }
     
- 
 }
  
 const colors = {

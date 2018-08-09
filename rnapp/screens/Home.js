@@ -187,7 +187,7 @@ const styles = StyleSheet.flatten({
     },
     headerView: {
         flexDirection: 'row',
-        marginTop: IS_X ? 80:30,
+        marginTop: IS_X ? 55:30,
     },
     itemView:{
         marginLeft:'5%',

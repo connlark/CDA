@@ -18,6 +18,7 @@ class History extends Component {
         super(props);
         this.state = { 
             showAlert: false, 
+            showProgress: false, 
             selectedData: {date: new Date, divData: {USDdelta: 0, coinDeltas: [] }},
             refreshing: false
         };
@@ -77,7 +78,7 @@ class History extends Component {
     }
 
     render() {
-        const { showAlert, selectedData, refreshing } = this.state;
+        const { showProgress, showAlert, selectedData, refreshing } = this.state;
 
         if(this.props.historyReady && this.props.history){
             return (
@@ -94,37 +95,37 @@ class History extends Component {
                         onRefresh={this.refreshData}
                         refreshing={refreshing}
                     />
-                <AwesomeAlert
-                    show={showAlert}
-                    showProgress={false}
-                    title="Delete This Delta?"
-                    message={`\nDate: ${selectedData.date.toLocaleDateString()} @ ${selectedData.date.toLocaleTimeString()}\n\nUSD Value: $ ${selectedData.divData.USDdelta}\n\nDeltas: \n${this.doParse(selectedData.divData.coinDeltas)}`}
-                    closeOnTouchOutside={true}
-                    closeOnHardwareBackPress={false}
-                    showCancelButton={true}
-                    showConfirmButton={true}
-                    cancelText="No, cancel"
-                    confirmText="Yes, delete it"
-                    confirmButtonColor="#DD6B55"
-                    onCancelPressed={() => {
-                        this.hideAlert();
-                    }}
-                    onConfirmPressed={() => {
-                        Meteor.call('BalanceHistory.deleteBalanceHistoryDay', selectedData.date, (err) => {
-                            if (err){
-                                console.log(err);
-                            }
-                            else {
-                                this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
-                            }
-                            this.setState({
-                                showAlert: false
+                    <AwesomeAlert
+                        show={showAlert}
+                        showProgress={showProgress}
+                        title="Delete This Delta?"
+                        message={`\nDate: ${selectedData.date.toLocaleDateString()} @ ${selectedData.date.toLocaleTimeString()}\n\nUSD Value: $ ${selectedData.divData.USDdelta}\n\nDeltas: \n${this.doParse(selectedData.divData.coinDeltas)}`}
+                        closeOnTouchOutside={true}
+                        closeOnHardwareBackPress={false}
+                        showCancelButton={true}
+                        showConfirmButton={true}
+                        cancelText="No, cancel"
+                        confirmText="Yes, delete it"
+                        confirmButtonColor="#DD6B55"
+                        onCancelPressed={() => {
+                            this.hideAlert();
+                        }}
+                        onConfirmPressed={() => {
+                            this.setState({showProgress: true});
+                            Meteor.call('BalanceHistory.deleteBalanceHistoryDay', selectedData.date, (err) => {
+                                if (err){
+                                    console.log(err);
+                                }
+                                else {
+                                    this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
+                                }
+                                this.setState({showProgress: false});
                             });
-                        });
-                        this.setState({
-                            showAlert: false
-                        });
-                    }}
+                            this.hideAlert();
+                        }}
+                        onDismiss={() => {
+                            this.hideAlert();
+                        }}
                     />
                 <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
                 </View>
@@ -137,7 +138,7 @@ class History extends Component {
 
 const styles = StyleSheet.flatten({
     headerView: {
-        marginTop: IS_X ? 80:30,
+        marginTop: IS_X ? 30:30,
         flexDirection: 'row',
     },
 });

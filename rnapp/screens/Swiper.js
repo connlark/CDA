@@ -12,6 +12,8 @@ import Home from './Home';
 import Login from './Login';
 import Settings from './Settings';
 import History from './History';
+import Stats from './Stats';
+
 import { IS_X } from '../config/styles';
 var PushNotification = require('react-native-push-notification');
 var Spinner = require('react-native-spinkit')
@@ -69,22 +71,21 @@ export default class Swiper extends Component {
     console.log(PushNotification)
   }
   render(){
-    const { user, status } = this.props;
+    const status = Meteor.status().connected;
+    const user = Meteor.user();
 
     if (status.connected) {
       if (user !== null && user.username){
         return (
-          <SwiperR style={styles.wrapper} index={1} showsButtons={false} showsPagination={false} loop={false}>
-            <Settings user={user}/> 
+     
             <Home/> 
-            <History user={user}/>       
-          </SwiperR>
+        
         );
       }
       return (
-        <SwiperR style={styles.wrapper} index={0} showsButtons={false}>
+        
           <Login/>
-        </SwiperR>
+      
       );
     }
     return (
