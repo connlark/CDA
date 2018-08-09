@@ -28,6 +28,10 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>codepush.azurewebsites.net</key>
+			<dict/>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -74,5 +78,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CodePushDeploymentKey</key>
+	<string>awpiBImr9WzOgPX2GGoSYZtoecPQHkAgjdYHX</string>
 </dict>
 </plist>

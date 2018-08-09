@@ -12,11 +12,12 @@ import {
 import {
   createStackNavigator,
 } from 'react-navigation';
+import codePush from "react-native-code-push";
 
 import store from './config/store';
 import Swiper from './screens/Swiper';
 import {AppNavigator} from './config/router';
-
+import { recieveNotification } from './Actions/notificationLogic'
 let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
@@ -36,9 +37,14 @@ const AppWithNavigation = connect(mapStateToProps)(App);
 
 
 
-
 const RNApp = (props) => {
   const { status, user, loggingIn } = props;
+  PushNotification.localNotificationSchedule({
+    //... You can use all the options from localNotifications
+    message: "My Notification Message", // (required)
+    date: new Date(Date.now() + (4 * 1000)) // in 60 secs
+  });
+  
 
   if (user && user.username) {
     PushNotification.configure({
@@ -51,7 +57,8 @@ const RNApp = (props) => {
     
         // (required) Called when a remote or local notification is opened or received
         onNotification(notification) {
-          alert(`onNotification ${React.Platform.OS}`);
+          alert('ss')
+          store.dispatch(recieveNotification(notification))
         },
     
         // IOS ONLY (optional): default: all - Permissions to register.
@@ -80,6 +87,7 @@ const RNApp = (props) => {
 };
 
 
+let codePushOptions = { updateDialog: true, checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
 
 
-export default RNApp;
+export default codePush(codePushOptions)(RNApp);

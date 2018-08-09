@@ -6,7 +6,6 @@ import Swipeout from 'react-native-swipeout';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import DropdownAlert from 'react-native-dropdownalert';
 import { IS_X } from '../config/styles';
-import { TestScheduler } from 'rx';
 
 var swipeoutBtns = [
     {
@@ -23,9 +22,8 @@ class Stats extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(newProps){
-        if (!this.props.history !== newProps.history){
+        if (newProps.historyReady && newProps.history && !this.props.history !== newProps.history){
             this.findNumbers(newProps.history.history);
-
         }
         
     }

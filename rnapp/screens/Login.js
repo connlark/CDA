@@ -52,7 +52,7 @@ class Login extends Component {
     if (this.isValid()) {
       Accounts.createUser({ username: email, password }, (error) => {
         if (error) {
-          this.dropdown.alertWithType('error', 'Error', error.reason);
+          this.dropdown.alertWithType('error', 'Error', JSON.stringify(error));
         } else {
             this.onSignIn();
         }
