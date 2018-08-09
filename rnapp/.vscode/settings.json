@@ -1,0 +1,11 @@
+{
+    "git.ignoreLimitWarning": true,
+    "git.autofetch": true,
+    "git.autorefresh": true,
+    "git.promptToSaveFilesBeforeCommit": true,
+    "git.showInlineOpenFileAction": true,
+    "npm.packageManager": "yarn",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.decorations.badges": false,
+    "explorer.sortOrder": "modified"
+}
