@@ -16,6 +16,9 @@
 #import <React/RCTRootView.h>
 #import <React/RCTPushNotificationManager.h>
 
+@import AppCenterPush;
+@import AppCenterReactNativeShared;
+
 @implementation AppDelegate
 
 
@@ -27,6 +30,7 @@
 // Required for the register event.
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+  [MSPush didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
   [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 // Required for the notification event. You must call the completion handler after handling the remote notification.
@@ -38,6 +42,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 // Required for the registrationError event.
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
+  [MSPush didFailToRegisterForRemoteNotificationsWithError:error];
   [RCTPushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
 }
 // Required for the localNotification event.
