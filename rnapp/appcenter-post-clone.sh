@@ -6,4 +6,4 @@
 # Example: Install App Center CLI
 npm install -g appcenter-cli
 
-#yarn --ignore-engines
+yarn --ignore-engines
