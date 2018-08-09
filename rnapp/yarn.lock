@@ -635,12 +635,6 @@ appcenter-link-scripts@1.7.1:
     which "^1.2.11"
     xcode "^1.0.0"
 
-appcenter-push@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/appcenter-push/-/appcenter-push-1.7.1.tgz#ac44dd3db7b00063ec0af24134c2d2a71f411347"
-  dependencies:
-    appcenter "1.7.1"
-
 appcenter@1.7.1, appcenter@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-1.7.1.tgz#76a4e801d5172c318423bc439b61a5dfdabc0afd"

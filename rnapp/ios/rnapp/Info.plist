@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AppCenterAppDelegateForwarderEnabled</key>
-	<string>0</string>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
