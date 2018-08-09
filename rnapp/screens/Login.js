@@ -82,7 +82,7 @@ class Login extends Component {
         />
         <Text style={styles.error}>{this.state.error}</Text>
         <TouchableOpacity style={styles.button} onPress={this.onSignIn}>
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Text style={styles.buttonText}>Sign In WHY</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={this.onCreateAccount}>
