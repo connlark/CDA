@@ -39,14 +39,8 @@ const AppWithNavigation = connect(mapStateToProps)(App);
 
 const RNApp = (props) => {
   const { status, user, loggingIn } = props;
-  PushNotification.localNotificationSchedule({
-    //... You can use all the options from localNotifications
-    message: "My Notification Message", // (required)
-    date: new Date(Date.now() + (4 * 1000)) // in 60 secs
-  });
-  
 
-  if (user && user.username) {
+  //if (user && user.username) {
     PushNotification.configure({
         // (optional) Called when Token is generated (iOS and Android)
         onRegister(data) {
@@ -79,7 +73,7 @@ const RNApp = (props) => {
           */
         requestPermissions: true,
       });   
-  }
+  //}
   return  <Provider store={store}>
             <AppWithNavigation
             />

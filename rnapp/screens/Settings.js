@@ -19,6 +19,7 @@ import {
     SettingsPicker
 } from 'react-native-settings-components';
 import { Header } from 'react-native-elements';
+import Analytics from 'appcenter-analytics';
 
 export default class App extends Component {
  
@@ -36,6 +37,7 @@ export default class App extends Component {
             alert(JSON.stringify(err));
         }
         else {
+            Analytics.trackEvent('Logged Out');
             this.props.navigation.navigate('Auth');
         }
     })

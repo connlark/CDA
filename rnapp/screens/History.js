@@ -5,6 +5,8 @@ import Graph from '../components/graph';
 import Swipeout from 'react-native-swipeout';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import DropdownAlert from 'react-native-dropdownalert';
+import Analytics from 'appcenter-analytics';
+
 import { IS_X } from '../config/styles';
 
 var swipeoutBtns = [
@@ -63,6 +65,7 @@ class History extends Component {
     }
 
     refreshData = () => {
+        Analytics.trackEvent('Refreshing Data');
         this.setState({refreshing: true});
 
         Meteor.call('Balances.checkForNewBalance', (err) => {

@@ -24,5 +24,4 @@ Meteor.methods({
         const user = Meteor.user();
         doTheDirty(user.profile[0].token,user._id);
     },
-});
-  
+  });
