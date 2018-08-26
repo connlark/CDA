@@ -11,7 +11,7 @@ import Stats from '../screens/Stats';
 import Login from '../screens/Login';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
-const AuthStack = createStackNavigator({ Login });
+const AuthStack = createStackNavigator({ Login }, {headerMode: 'none'});
 
 
 
