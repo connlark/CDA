@@ -19,6 +19,7 @@
     "react-native-dropdownalert": "^3.5.0",
     "react-native-elements": "^0.19.1",
     "react-native-meteor": "^1.4.0",
+    "react-native-pulse": "^1.0.6",
     "react-native-push-notification": "^3.0.2",
     "react-native-qrcode-scanner": "^1.0.1",
     "react-native-settings-components": "^0.0.1",

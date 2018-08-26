@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NativeModules } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import Meteor, { createContainer } from 'react-native-meteor';
 import { createStore, applyMiddleware } from 'redux';
@@ -14,13 +15,19 @@ import {
 } from 'react-navigation';
 import codePush from "react-native-code-push";
 
-import store from './config/store';
-import Swiper from './screens/Swiper';
-import {AppNavigator} from './config/router';
-import { recieveNotification } from './Actions/notificationLogic'
+import store from './app/config/store';
+import {AppNavigator} from './app/config/router';
+import { recieveNotification } from './app/Actions/notificationLogic'
 let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
+
+if (__DEV__) {
+  process.env.REACT_NAV_LOGGING = false
+  NativeModules.DevSettings.setIsDebuggingRemotely(true);
+  NativeModules.DevSettings.setHotLoadingEnabled(true)
+}
+
 if (process.env.NODE_ENV === 'production') {
   METEOR_URL = 'ws://73.246.190.116:3000/websocket'; // your production server
 }
@@ -84,4 +91,4 @@ const RNApp = (props) => {
 let codePushOptions = { updateDialog: true, checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
 
 
-export default codePush(codePushOptions)(RNApp);
+export default codePush(RNApp);

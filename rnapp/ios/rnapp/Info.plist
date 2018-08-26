@@ -23,9 +23,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>9</string>
 	<key>CodePushDeploymentKey</key>
 	<string>awpiBImr9WzOgPX2GGoSYZtoecPQHkAgjdYHX</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -43,10 +45,24 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>does not use</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>NONE</string>
+	<key>NSBluetoothPeripheralUsageDescription </key>
+	<string>does not use </string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Does not use calender</string>
 	<key>NSCameraUsageDescription</key>
 	<string>For scanning QR codes</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>does not use</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>does not use</string>
+	<key>NSMotionUsageDescription</key>
+	<string>does not use</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>does not use</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

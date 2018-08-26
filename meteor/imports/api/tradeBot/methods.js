@@ -1,5 +1,5 @@
-import { Meteor } from 'meteor/meteor';
-import { Balances } from './balances';
+/*import { Meteor } from 'meteor/meteor';
+//import { Balances } from './balances';
 import { doTheDirty } from '../../startup/server/cronJob';
 const cc = require('cryptocompare')
 Coinex = require('coinex.com');
@@ -24,4 +24,4 @@ Meteor.methods({
         const user = Meteor.user();
         doTheDirty(user.profile[0].token,user._id);
     },
-  });
+  });*/ 
