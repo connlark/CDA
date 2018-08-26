@@ -5,7 +5,7 @@ import DeviceInfo from 'react-native-device-info';
 import {Avatar, Button, Icon} from 'react-native-elements';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import DropdownAlert from 'react-native-dropdownalert';
-
+import Loading from '../components/loading'
 import { IS_X } from '../config/styles';
 
 class Home extends Component {
@@ -160,8 +160,9 @@ class Home extends Component {
         }
         return (
             <View>
-                <Text style={{margin: '40%'}}> loading  </Text>
+                <Loading/>
             </View>
+            
         );
     }
 }

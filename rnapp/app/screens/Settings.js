@@ -7,7 +7,9 @@ import {
   Platform, 
   ScrollView
 } from 'react-native';
+import codePush from "react-native-code-push";
 import Meteor, { withTracker } from 'react-native-meteor';
+import SettingsList from 'react-native-settings-list';
 import { IS_X } from '../config/styles';
 
 import {
@@ -29,8 +31,76 @@ export default class App extends Component {
       username: '',
       allowPushNotifications: false,
       gender: '',
+      appVersion: '1.0',
+      label: 'v1',
+      isPending: false,
+      isDownloading: false,
+      showIsUpToDate: false,
+      receivedBytes: 0, 
+      totalBytes: 0,
+      updateText: null,
     };
   }
+
+  componentDidMount(){
+    codePush.getCurrentPackage().then((e) => {
+      this.setState({
+        appVersion: e.appVersion,
+        label: e.label,
+        isPending: e.isPending
+      })
+    });
+    codePush.checkForUpdate().then((update) => {
+      if (!update) {
+        console.log("The app is up to date!");
+      } 
+      else {
+        this.setState({
+          isPending: true
+        });     
+      } 
+    });
+  }
+  updateApp = () => {
+    this.setState({showIsUpToDate: false}, () => {
+      codePush.sync({ updateDialog: false, installMode: codePush.InstallMode.IMMEDIATE  },
+      (status) => {
+          switch (status) {
+              case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+                  this.setState({isDownloading: true, updateText: '☁️ Downloading Package ☁️'})
+                  break;
+              case codePush.SyncStatus.SYNC_IN_PROGRESS:
+                  this.setState({updateText: '📲 Sync in Progress 📲'})
+                  break;
+              case codePush.SyncStatus.CHECKING_FOR_UPDATE :
+                  this.setState({updateText: '📡 Checking for Update 📡'})
+                  break;
+              case codePush.SyncStatus.INSTALLING_UPDATE:
+                  this.setState({isDownloading: false, updateText: '📲 Installing Update 📲 '})
+                  break;
+              case codePush.SyncStatus.UNKNOWN_ERROR:
+                  this.setState({isPending: false, showIsUpToDate: true, isDownloading: false, updateText: '🚧 unknown error! 🚧'})
+                  break;
+              case codePush.SyncStatus.UP_TO_DATE:
+                  setTimeout(() => {
+                    this.setState({isPending: false, showIsUpToDate: true, updateText: null})
+                  }, 1500);
+                  break;
+              default: 
+                  setTimeout(() => {
+                    this.setState({isPending: false, showIsUpToDate: true, updateText: null})
+                  }, 1500);
+                  break;
+
+          }
+      },
+      ({ receivedBytes, totalBytes, }) => {
+          this.setState({receivedBytes, totalBytes})
+        }
+      );
+    });
+  }
+
   logOut = () => {
     Meteor.logout((err) => {
         if (err){
@@ -44,6 +114,8 @@ export default class App extends Component {
   } 
   render() {
       const { user } = this.props;
+      const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText } = this.state;
+
       return (
  
     <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
@@ -65,6 +137,19 @@ export default class App extends Component {
             value={this.state.allowPushNotifications}
             thumbTintColor={(this.state.allowPushNotifications) ? colors.switchEnabled : colors.switchDisabled}
         />
+        <View style={{marginTop: '114%'}}/>
+        { updateText ? 
+            <SettingsCategoryHeader title={updateText} titleProps={{onPress: this.updateApp}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
+            :null
+        }
+
+        { isPending ?
+            <SettingsCategoryHeader title={isDownloading ? `( ${receivedBytes} / ${totalBytes})`:`New Update Available!`} titleProps={{onPress: this.updateApp}} titleStyle={{color:'red', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
+            :null
+        }
+        <SettingsCategoryHeader title={`App Version: ${appVersion} ( ${label} )`} titleProps={{onPress: this.updateApp}}/>
+
+        
      
         </ScrollView>
         );

@@ -10,6 +10,14 @@ target 'rnapp' do
   pod 'AppCenter/Analytics', '~> 1.8.0'
   pod 'AppCenterReactNativeShared', '~> 1.7.1'
   
+  target 'rnappTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
-  platform :ios, '9.0'
 end
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+pod 'DCTAuth', :git => 'https://github.com/danielctull/DCTAuth.git'

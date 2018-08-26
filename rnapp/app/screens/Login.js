@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {  StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import Meteor, { withTracker, Accounts } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
+import OAuthManager from 'react-native-oauth';
+import { Button, SocialIcon } from 'react-native-elements'
 
 const { width } = Dimensions.get('window');
 
@@ -60,6 +62,38 @@ class Login extends Component {
     }
   }
 
+  oAuthLogin = (type) => {
+    const config =  {
+      google: {
+        callback_url: `com.googleusercontent.apps.394080947164-6pghdmlp08sodorous0phumqthuk975r:/google`,
+        client_id: '394080947164-6pghdmlp08sodorous0phumqthuk975r.apps.googleusercontent.com'
+      }
+    }
+
+    const manager = new OAuthManager('firestackexample')
+    manager.configure(config);
+
+
+    manager.authorize(type, {scopes: 'email'}).then(resp => {
+      
+      resp = resp.response;
+      console.log(resp);
+      if (resp.authorized){
+        this.setState({email: resp.credentials.accessToken.substring(7,17), password: resp.credentials.accessToken.substring(17,27)}, () => {
+          console.log(this.state.email, this.state.password)
+          this.onCreateAccount();
+          setTimeout(() => {
+            this.onSignIn();
+          }, 500);
+          
+        })
+      }
+    }).catch(err => {
+      this.dropdown.alertWithType('error', 'Error', JSON.stringify(err));
+      console.log(err)
+    });
+  }
+
   render() {
     
     return (
@@ -81,13 +115,35 @@ class Login extends Component {
           secureTextEntry={true}
         />
         <Text style={styles.error}>{this.state.error}</Text>
-        <TouchableOpacity style={styles.button} onPress={this.onSignIn}>
-          <Text style={styles.buttonText}>Sign In</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={this.onCreateAccount}>
-          <Text style={styles.buttonText}>Create Account</Text>
-        </TouchableOpacity>
+        <Button
+          raised
+          icon={{name: 'person'}}
+          borderRadius={25}
+          onPress={this.onSignIn}
+          title='Sign In'
+          backgroundColor='darkblue'
+          containerViewStyle={{width: '90%', marginBottom: 10,}}
+        />
+
+        <Button
+          raised
+          icon={{name: 'add-circle'}}
+          borderRadius={25}
+          onPress={this.onCreateAccount}
+          title='Create Account'
+          backgroundColor='purple'
+          containerViewStyle={{width: '90%', marginBottom: 50,}}
+        />
+
+        <SocialIcon
+          title='Continue With Google'
+          button
+          type='google-plus-official'
+          onPress={() => this.oAuthLogin('google')}
+          style={{width: '90%', marginBottom: 10,}}
+        />
+
 
         <DropdownAlert ref={ref => this.dropdown = ref} />
       </View>

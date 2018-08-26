@@ -3,12 +3,44 @@ import { Text, StyleSheet, View } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import { LineChart, YAxis, Grid, XAxis, AreaChart } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
+import moment from 'moment';
 
 import { IS_X } from '../config/styles';
 class Graph extends Component {
-    getData = (history) => {
-        const dta = [];
+    consolodateData = (history) => {
+        let newdta = [];
         history.map((e) => {
+            if (newdta.length > 0){
+                if (moment(e.date).isSame(moment(newdta[newdta.length-1].date), 'd')){
+                    newdta[newdta.length-1].divData.USDdelta = Number(newdta[newdta.length-1].divData.USDdelta) + Number(e.divData.USDdelta);
+                    newdta[newdta.length-1].divData.coinDeltas.map((foo) => {
+                        e.divData.coinDeltas.map((coin) => {
+                            if (foo.coin === coin.coin){
+                                console.log(coin)
+                                foo.delta = Number(coin.delta) + Number(foo.delta);
+                                console.log(newdta[newdta.length-1].divData.coinDeltas)
+                            }
+                        });
+                        
+                    })
+                }
+                else {
+                    newdta.push(e)
+                }
+            }
+            else {
+                newdta.push(e)
+            }
+        })
+
+        console.log(newdta)
+
+        return newdta;
+    }
+    getData = (history) => {
+        const newhistory = this.consolodateData(history)
+        const dta = [];
+        newhistory.map((e) => {
             if (e.divData.USDdelta !== 'NaN' && Number(e.divData.USDdelta) > 0.01 ) {
                 dta.push(Number(e.divData.USDdelta));
             }

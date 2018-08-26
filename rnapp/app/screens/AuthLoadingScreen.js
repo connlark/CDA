@@ -27,7 +27,7 @@ class AuthLoadingScreen extends Component {
     else if (nextProps.loggingIn){
         this.setState({loadingText: '⚡ logging in ⚡'});
     }
-    else if (nextProps.meteorUser && nextProps.postsReady){
+    else if (nextProps.meteorUser){
         this.props.navigation.navigate('App');
     }
   }

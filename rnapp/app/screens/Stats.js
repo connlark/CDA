@@ -6,7 +6,7 @@ import Swipeout from 'react-native-swipeout';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import DropdownAlert from 'react-native-dropdownalert';
 import { IS_X } from '../config/styles';
-
+import Loading from '../components/loading'
 var swipeoutBtns = [
     {
       text: 'Button'
@@ -37,7 +37,7 @@ class Stats extends Component {
                 this.dropdown.alertWithType('error', 'Error', err.reason);
             }
             else {
-                this.dropdown.alertWithType('success', 'Refreshed Sucessfully','☻ ☻ ☻ ☻ ☻ ☻ ☻');
+                this.dropdown.alertWithType('success', 'Refreshed Sucessfully','☻');
             }
             this.setState({refreshing: false})
         })
@@ -52,7 +52,7 @@ class Stats extends Component {
         let lastHourUSD = 0.0;
         let totalUSD = 0.0;
         const m = data.filter((e) => this.sameDay(e.date, new Date));
-        m.map((e) => {
+        m.map( (e) => {
             lastHourUSD += Number(e.divData.USDdelta)
         });
         data.map( (e) => {
@@ -76,7 +76,11 @@ class Stats extends Component {
             );
 
         }
-        return <View/>
+        return (
+            <View>
+                <Loading/>
+            </View>
+        );
     }
 }
 
