@@ -42,6 +42,8 @@
 		816442EBAE734DD2A428FBED /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBE4FAFA9E94511BB9D9E41 /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		87AAE1C220FF06F700910330 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87AAE1BF20FF06DB00910330 /* libRCTPushNotification.a */; };
+		87CDAA3E21371EBB00156A0F /* rnappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA3D21371EBB00156A0F /* rnappUITests.swift */; };
+		87CDAA9621371F6500156A0F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA9521371F6500156A0F /* SnapshotHelper.swift */; };
 		8E449959228B4DE5868B877C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2F35D3EC7E24BB7AACAF3F7 /* Zocial.ttf */; };
 		937A249E9BF24E328BED8799 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3967388BA3E941719E1B0694 /* Foundation.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -433,6 +435,13 @@
 			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
 			remoteInfo = "RCTPushNotification-tvOS";
 		};
+		87CDAA4021371EBB00156A0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = rnapp;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -491,6 +500,10 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		87AAE1B920FF06DA00910330 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		87AAE1C320FF107000910330 /* rnapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = rnapp.entitlements; path = rnapp/rnapp.entitlements; sourceTree = "<group>"; };
+		87CDAA3B21371EBB00156A0F /* rnappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rnappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		87CDAA3D21371EBB00156A0F /* rnappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rnappUITests.swift; sourceTree = "<group>"; };
+		87CDAA3F21371EBB00156A0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87CDAA9521371F6500156A0F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		8C065DE9412D44A097D7333F /* libRNCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCamera.a; sourceTree = "<group>"; };
 		8C6B9718269EDE475F5226D4 /* Pods_rnappTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rnappTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB884459D2DA32C43B63EB2 /* Pods-rnappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnappTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rnappTests/Pods-rnappTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -554,6 +567,13 @@
 				E24BC58051084C70BA0DD3B2 /* libAppCenterReactNativeCrashes.a in Frameworks */,
 				6B70D865A0F54BCCB52C2AFE /* libOAuthManager.a in Frameworks */,
 				6204F5D1F89C4E3B9B23DA3B /* Pods_rnapp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87CDAA3821371EBB00156A0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +772,7 @@
 				13B07FAE1A68108700A75B9A /* rnapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* rnappTests */,
+				87CDAA3C21371EBB00156A0F /* rnappUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				ACE621844BDE4F7D86F03AA9 /* Resources */,
@@ -769,6 +790,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* rnapp.app */,
 				00E356EE1AD99517003FC87E /* rnappTests.xctest */,
+				87CDAA3B21371EBB00156A0F /* rnappUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -893,6 +915,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		87CDAA3C21371EBB00156A0F /* rnappUITests */ = {
+			isa = PBXGroup;
+			children = (
+				87CDAA3D21371EBB00156A0F /* rnappUITests.swift */,
+				87CDAA9521371F6500156A0F /* SnapshotHelper.swift */,
+				87CDAA3F21371EBB00156A0F /* Info.plist */,
+			);
+			path = rnappUITests;
+			sourceTree = "<group>";
+		};
 		ACE621844BDE4F7D86F03AA9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,12 +1005,31 @@
 			productReference = 13B07F961A680F5B00A75B9A /* rnapp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		87CDAA3A21371EBB00156A0F /* rnappUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 87CDAA7A21371EBB00156A0F /* Build configuration list for PBXNativeTarget "rnappUITests" */;
+			buildPhases = (
+				87CDAA3721371EBB00156A0F /* Sources */,
+				87CDAA3821371EBB00156A0F /* Frameworks */,
+				87CDAA3921371EBB00156A0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				87CDAA4121371EBB00156A0F /* PBXTargetDependency */,
+			);
+			name = rnappUITests;
+			productName = rnappUITests;
+			productReference = 87CDAA3B21371EBB00156A0F /* rnappUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -1002,6 +1053,12 @@
 								enabled = 1;
 							};
 						};
+					};
+					87CDAA3A21371EBB00156A0F = {
+						CreatedOnToolsVersion = 9.4.1;
+						DevelopmentTeam = 24MA2Z46AJ;
+						ProvisioningStyle = Manual;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 				};
 			};
@@ -1118,6 +1175,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* rnapp */,
 				00E356ED1AD99517003FC87E /* rnappTests */,
+				87CDAA3A21371EBB00156A0F /* rnappUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1532,6 +1590,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		87CDAA3921371EBB00156A0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1623,6 +1688,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		87CDAA3721371EBB00156A0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87CDAA3E21371EBB00156A0F /* rnappUITests.swift in Sources */,
+				87CDAA9621371F6500156A0F /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1630,6 +1704,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* rnapp */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		87CDAA4121371EBB00156A0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* rnapp */;
+			targetProxy = 87CDAA4021371EBB00156A0F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1892,6 +1971,87 @@
 			};
 			name = Release;
 		};
+		87CDAA4221371EBB00156A0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 24MA2Z46AJ;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = rnappUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = rnapp;
+			};
+			name = Debug;
+		};
+		87CDAA4321371EBB00156A0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 24MA2Z46AJ;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = rnappUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = rnapp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1918,6 +2078,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87CDAA7A21371EBB00156A0F /* Build configuration list for PBXNativeTarget "rnappUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87CDAA4221371EBB00156A0F /* Debug */,
+				87CDAA4321371EBB00156A0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

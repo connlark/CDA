@@ -66,6 +66,16 @@
                ReferencedContainer = "container:rnapp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "87CDAA3A21371EBB00156A0F"
+               BuildableName = "rnappUITests.xctest"
+               BlueprintName = "rnappUITests"
+               ReferencedContainer = "container:rnapp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
