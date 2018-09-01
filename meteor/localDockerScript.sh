@@ -47,11 +47,12 @@ RUN apk add --update build-base python
 RUN mkdir -p /usr/app
 COPY . /usr/app
 RUN cd /usr/app/programs/server && npm install --production
+RUN cd /usr/app/programs/server && npm install --save bcrypt
 WORKDIR /usr/app
 ENV PORT=3000
 ENV MONGO_URL=mongodb://connorlarkin:PR7-DUq-h88-LAo@cryptocluster-shard-00-00-vm6wk.mongodb.net:27017,cryptocluster-shard-00-01-vm6wk.mongodb.net:27017,cryptocluster-shard-00-02-vm6wk.mongodb.net:27017/test?ssl=true&replicaSet=CryptoCluster-shard-0&authSource=admin
 ENV ROOT_URL=http://$APP_DOMAIN:$APP_PORT/
-CMD [ "meteor npm install --save bcrypt;","npm", "start" ]
+CMD [ "npm", "start" ]
 EXPOSE 3000
 EOF
 
