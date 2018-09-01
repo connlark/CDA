@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>CoinEx Tracker</string>
+	<string>Coin Tracker</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,7 +47,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>11</string>
 	<key>CodePushDeploymentKey</key>
 	<string>awpiBImr9WzOgPX2GGoSYZtoecPQHkAgjdYHX</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

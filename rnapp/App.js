@@ -18,7 +18,7 @@ import codePush from "react-native-code-push";
 import store from './app/config/store';
 import {AppNavigator} from './app/config/router';
 import { recieveNotification } from './app/Actions/notificationLogic'
-let METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket';
+let METEOR_URL = 'ws://73.246.190.116:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
 
@@ -29,7 +29,7 @@ if (__DEV__) {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket'; // your production server
+  METEOR_URL = 'ws://73.246.190.116:3000/websocket'; // your production server
 }
 
 Meteor.connect(METEOR_URL);
