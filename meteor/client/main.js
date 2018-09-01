@@ -19,7 +19,7 @@ Template.hello.events({
     // increment the counter when button is clicked
     const extraData = {requesterID: "frf", wj: 3}
     const thing = { sendToUserId: 'WrwPpj4gz8TjxH4wY' , message: 'hi', type: 'friendrequest', extraData: extraData }
-    Meteor.call('notifications.send.APNMsg', thing);
+    Meteor.call('notifications.send.APNMsg.TOALL');
     instance.counter.set(instance.counter.get() + 1);
   },
 });

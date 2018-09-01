@@ -77,7 +77,7 @@ class Stats extends Component {
 
         }
         return (
-            <View>
+            <View style={styles.loading}>
                 <Loading/>
             </View>
         );
@@ -93,6 +93,11 @@ const styles = StyleSheet.flatten({
         fontWeight: 'bold',
         fontSize: 40,
         marginBottom: 25
+    },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
 });

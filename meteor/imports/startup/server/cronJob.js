@@ -185,7 +185,8 @@ const doParse = (e) => {
 const sendNotif = (userId, divCalc) => {
     const user = Meteor.users.findOne(userId);
     if (!user.pushToDevices || user.pushToDevices.length === 0) return;
-    user.pushToDevices.forEach(device => {
+
+    user.pushToDevices.map((device) => {
         const token = device.token;
         
         agent.createMessage()
@@ -199,6 +200,5 @@ const sendNotif = (userId, divCalc) => {
             else { console.log('APN msg sent successfully!'); }
         });
     });
-
 }
 

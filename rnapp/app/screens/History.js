@@ -6,6 +6,7 @@ import Swipeout from 'react-native-swipeout';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import DropdownAlert from 'react-native-dropdownalert';
 import Analytics from 'appcenter-analytics';
+import Loading from '../components/loading'
 
 import { IS_X } from '../config/styles';
 
@@ -135,7 +136,11 @@ class History extends Component {
             );
 
         }
-        return <View/>
+        return (
+            <View style={styles.loading}>
+                <Loading/>
+            </View>
+        )
     }
 }
 
@@ -144,7 +149,13 @@ const styles = StyleSheet.flatten({
         marginTop: IS_X ? 30:30,
         flexDirection: 'row',
     },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });
+
 
 export default withTracker(params => {
     const handle = Meteor.subscribe('BalanceHistory.pub.list');

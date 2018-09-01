@@ -9,7 +9,7 @@ import Grid from 'react-native-grid-component';
 
 import Loading from '../components/loading'
 import { IS_X } from '../config/styles';
-const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#d3d3d3","https://www.cryptocompare.com/media/33842920/dash.png":"#186799","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"ble","https://www.cryptocompare.com/media/27010814/bcy.jpg":"ble","https://www.cryptocompare.com/media/12318137/hsr.png":"ble","https://www.cryptocompare.com/media/34477813/card.png":"ble","https://www.cryptocompare.com/media/34477783/olt.jpg":"ble","https://www.cryptocompare.com/media/351360/zec.png":"ble","https://www.cryptocompare.com/media/19684/doge.png":"ble"}');
+const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#d3d3d3","https://www.cryptocompare.com/media/33842920/dash.png":"#186799","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"#a993ce","https://www.cryptocompare.com/media/27010814/bcy.jpg":"#fe7dbc","https://www.cryptocompare.com/media/12318137/hsr.png":"#b2a8d9","https://www.cryptocompare.com/media/34477813/card.png":"#20329d","https://www.cryptocompare.com/media/34477783/olt.jpg":"#bff0f5","https://www.cryptocompare.com/media/351360/zec.png":"#8e773b","https://www.cryptocompare.com/media/19684/doge.png":"#eed67c"}');
 class AltHome extends Component {
     constructor(props){
         super(props);
@@ -175,6 +175,9 @@ class AltHome extends Component {
                         extraData={this.state}
                     />*/}
                     <Grid
+                        refreshing={refreshing}
+                        refreshControl={this.refreshData}
+                        renderHeader={this._renderHeader}
                         style={styles.list}
                         renderItem={this._renderGridItem}
                         renderPlaceholder={this._renderPlaceholder}
@@ -205,7 +208,7 @@ class AltHome extends Component {
             );
         }
         return (
-            <View>
+            <View style={styles.loading}>
                 <Loading/>
             </View>
             
@@ -255,5 +258,10 @@ const styles = StyleSheet.flatten({
     },
     list: {
         flex: 1
-    }
+    },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });

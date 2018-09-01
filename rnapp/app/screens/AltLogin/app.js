@@ -135,6 +135,7 @@ export class LoginAnimation extends Component {
       }
     }).catch(err => {
       this.dropdown.alertWithType('error', 'Error', JSON.stringify(err));
+      this.setState({isLoading:false});
       console.log(err)
     });
   }
