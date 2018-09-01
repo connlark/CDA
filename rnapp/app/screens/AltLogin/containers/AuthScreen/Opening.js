@@ -1,15 +1,28 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, StatusBar } from 'react-native'
 import { Text, View } from 'react-native-animatable'
+import { Button, SocialIcon } from 'react-native-elements'
 
 import CustomButton from '../../components/CustomButton'
 import metrics from '../../config/metrics'
-
+import Loading from '../../../../components/loading'
 export default class Opening extends Component {
 
   render () {
+    if(this.props.isLoading){
+      return (
+        <View style={styles.container}>
+        <View>
+          <Loading/>
+        </View>
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
+      <StatusBar
+       hidden
+      />
         <View animation={'zoomIn'} delay={600} duration={400}>
           <CustomButton
             text={'Create Account'}
@@ -20,7 +33,7 @@ export default class Opening extends Component {
         </View>
         <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
           <View style={styles.separatorLine} />
-          <Text style={styles.separatorOr}>{'Or'}</Text>
+          <Text style={styles.separatorOr}>{'🆚'}</Text>
           <View style={styles.separatorLine} />
         </View>
         <View animation={'zoomIn'} delay={800} duration={400}>
@@ -30,6 +43,21 @@ export default class Opening extends Component {
             buttonStyle={styles.signInButton}
             textStyle={styles.signInButtonText}
           />
+        </View>
+        <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
+          <View style={styles.separatorLine} />
+          <Text style={styles.separatorOr}>{'🆚'}</Text>
+          <View style={styles.separatorLine} />
+        </View>
+        <View animation={'zoomIn'} delay={800} duration={400}>
+      
+          <SocialIcon
+            title='Continue With Google'
+            button
+            type='google-plus-official'
+            onPress={this.props.onGoogleSignInPress}
+            style={{ marginBottom: 10, borderRadius:9, height: 52,}}
+        />
         </View>
       </View>
     )

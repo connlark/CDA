@@ -91,7 +91,6 @@ export default class App extends Component {
                     this.setState({isPending: false, showIsUpToDate: true, updateText: null})
                   }, 1500);
                   break;
-
           }
       },
       ({ receivedBytes, totalBytes, }) => {

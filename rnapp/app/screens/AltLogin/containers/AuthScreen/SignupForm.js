@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, StatusBar } from 'react-native'
 import { Text, View } from 'react-native-animatable'
 
 import CustomButton from '../../components/CustomButton'
@@ -7,7 +7,6 @@ import CustomTextInput from '../../components/CustomTextInput'
 import metrics from '../../config/metrics'
 
 export default class SignupForm extends Component {
-
   state = {
     email: '',
     password: '',
@@ -30,18 +29,10 @@ export default class SignupForm extends Component {
     const isValid = email !== '' && password !== '' && fullName !== ''
     return (
       <View style={styles.container}>
+        <StatusBar
+        hidden
+        />
         <View style={styles.form} ref={(ref) => this.formRef = ref}>
-          <CustomTextInput
-            ref={(ref) => this.mobileInputRef = ref}
-            placeholder={'Full name'}
-            editable={!isLoading}
-            returnKeyType={'next'}
-            blurOnSubmit={false}
-            withRef={true}
-            onSubmitEditing={() => this.emailInputRef.focus()}
-            onChangeText={(value) => this.setState({ fullName: value })}
-            isEnabled={!isLoading}
-          />
           <CustomTextInput
             ref={(ref) => this.emailInputRef = ref}
             placeholder={'Email'}

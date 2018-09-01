@@ -4781,6 +4781,12 @@ react-native-elements@^0.19.1:
     opencollective "^1.0.3"
     prop-types "^15.5.8"
 
+react-native-grid-component@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-grid-component/-/react-native-grid-component-1.1.0.tgz#4d6e14cd6f6c0b016b0a67c79d07de64f2c25e1e"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-meteor@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/react-native-meteor/-/react-native-meteor-1.4.0.tgz#d7ffff9ce8c6057725c3a3d72ca65746544e6618"

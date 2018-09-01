@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, StatusBar } from 'react-native'
 import { Text, View } from 'react-native-animatable'
 
 import CustomButton from '../../components/CustomButton'
@@ -30,6 +30,9 @@ export default class LoginForm extends Component {
     const isValid = email !== '' && password !== ''
     return (
       <View style={styles.container}>
+        <StatusBar
+        hidden
+        />
         <View style={styles.form} ref={(ref) => { this.formRef = ref }}>
           <CustomTextInput
             name={'email'}
@@ -64,7 +67,7 @@ export default class LoginForm extends Component {
               isLoading={isLoading}
               buttonStyle={styles.loginButton}
               textStyle={styles.loginButtonText}
-              text={'Log In'}
+              text={'🚀 Log In 🚀'}
             />
           </View>
           <Text

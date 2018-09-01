@@ -94,6 +94,8 @@ export default class AuthScreen extends Component {
           <Opening
             onCreateAccountPress={() => this._setVisibleForm('SIGNUP')}
             onSignInPress={() => this._setVisibleForm('LOGIN')}
+            onGoogleSignInPress={this.props.onGoogleSignInPress}
+            isLoading={isLoading}
           />
         )}
         <KeyboardAvoidingView

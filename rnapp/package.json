@@ -20,6 +20,7 @@
     "react-native-device-info": "^0.21.5",
     "react-native-dropdownalert": "^3.5.0",
     "react-native-elements": "^0.19.1",
+    "react-native-grid-component": "^1.1.0",
     "react-native-meteor": "^1.4.0",
     "react-native-oauth": "^2.1.18",
     "react-native-pulse": "^1.0.6",
