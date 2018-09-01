@@ -9,7 +9,7 @@ import Grid from 'react-native-grid-component';
 
 import Loading from '../components/loading'
 import { IS_X } from '../config/styles';
-const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#04d5c3","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"ble","https://www.cryptocompare.com/media/20646/eth_logo.png":"ble","https://www.cryptocompare.com/media/33842920/dash.png":"ble","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"ble","https://www.cryptocompare.com/media/1383652/eos_1.png":"ble","https://www.cryptocompare.com/media/1383858/neo.jpg":"ble","https://www.cryptocompare.com/media/33752295/etc_new.png":"ble","https://images-cdn.azureedge.net/azure/in-resources/d7048855-742a-406c-a67d…d%20Coin-3gm_1.jpg;width=1000;height=1000;scale=canvas;anchor=bottomcenter":"ble","https://www.cryptocompare.com/media/20084/btm.png":"ble","https://www.cryptocompare.com/media/27010814/bcy.jpg":"ble","https://www.cryptocompare.com/media/12318137/hsr.png":"ble","https://www.cryptocompare.com/media/34477813/card.png":"ble","https://www.cryptocompare.com/media/34477783/olt.jpg":"ble","https://www.cryptocompare.com/media/351360/zec.png":"ble","https://www.cryptocompare.com/media/19684/doge.png":"ble"}');
+const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#d3d3d3","https://www.cryptocompare.com/media/33842920/dash.png":"#186799","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"ble","https://www.cryptocompare.com/media/27010814/bcy.jpg":"ble","https://www.cryptocompare.com/media/12318137/hsr.png":"ble","https://www.cryptocompare.com/media/34477813/card.png":"ble","https://www.cryptocompare.com/media/34477783/olt.jpg":"ble","https://www.cryptocompare.com/media/351360/zec.png":"ble","https://www.cryptocompare.com/media/19684/doge.png":"ble"}');
 class AltHome extends Component {
     constructor(props){
         super(props);
@@ -123,7 +123,7 @@ class AltHome extends Component {
         })
     }
     _renderGridItem = (item, i) => {
-        const imageUrl = item.imgUrl ? item.imgUrl : "https://images-cdn.azureedge.net/azure/in-resources/d7048855-742a-406c-a67d-5c2962e69e5e/Images/ProductImages/Source/Plain%20Gold%20Coin-3gm_1.jpg;width=1000;height=1000;scale=canvas;anchor=bottomcenter";
+        const imageUrl = item.imgUrl ? item.imgUrl : 'https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg';
         //console.log(JSON.stringify(this.state.backgColors))
         //this.state.backgColors[imageUrl] = 'ble';
         //this.setState({ backgColors: this.state.backgColors });
@@ -132,25 +132,25 @@ class AltHome extends Component {
         console.log(item)
         return (
         <View style={[{ backgroundColor: color ? color:'white', alignItems: 'center', borderRadius: 9 }, styles.item]} key={i}>
-            <View style={{marginTop: 12}}>
+            <View style={{marginTop: 12, marginBottom: 5}}>
                 <Text style={{fontSize: 14}}> {name} </Text>
             </View>
             <Avatar
                 rounded
                 large
                 title={item.fullName}
-                source={{uri: item.imgUrl ? item.imgUrl : "https://images-cdn.azureedge.net/azure/in-resources/d7048855-742a-406c-a67d-5c2962e69e5e/Images/ProductImages/Source/Plain%20Gold%20Coin-3gm_1.jpg;width=1000;height=1000;scale=canvas;anchor=bottomcenter"}}
+                source={{uri: imageUrl}}
                 onPress={() => {
                     this.setState({showingCoins: [item.coin]});
                     Linking.openURL('https://www.cryptocompare.com'+item.ccurl)
                 }}
                 activeOpacity={0.4}
             />
-            <View style={{marginTop: 15}}>
-                <Text style={{fontSize: 12}}> 💲 {item.USDvalue} </Text>
-            </View>
             <View style={{marginTop: 5}}>
                 <Text style={{fontSize: 10}}> ⏣ {item.balance} </Text>
+            </View>
+            <View style={{marginTop: 5}}>
+                <Text style={{fontSize: 15}}> 💲{item.USDvalue} </Text>
             </View>
         </View>
       );
@@ -174,7 +174,6 @@ class AltHome extends Component {
                         refreshing={refreshing}
                         extraData={this.state}
                     />*/}
-                    {this._renderHeader()}
                     <Grid
                         style={styles.list}
                         renderItem={this._renderGridItem}
