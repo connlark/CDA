@@ -106,7 +106,6 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs, hack) =
                     ownedCoins.push(o.name)
                 }    
             });
-            console.log(balances)
 
             let dta = Balances.findOne({userId: userId});
             let hackdata = [];
@@ -115,11 +114,9 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs, hack) =
                 for (let index = 0; index < dta.balanceData.length; index++) {
                     const element = dta.balanceData[index];
                     const curr = balances.filter((e) => e.coin === element.coin);
-                    console.log(curr)
                     if (curr[0] && element.coin === curr[0].coin){
                         hasChanged.push(element.coin);
                         if (hack){
-                            console.log('fdfjwi')
                             dta.balanceData[index].balance = curr[0].balance;
                         }
                         else {
@@ -179,7 +176,7 @@ const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcDivs) =>
                         }
                         else {
                             const divCalc = dividendCalc(dta.balanceData, balances);
-                            if (!shouldNOTCalcDivs){
+                            if (!shouldNOTCalcDivs && divCalc.coinDeltas.length !== 0){
                                 sendNotif(userId,divCalc);
                             }
                             
@@ -231,7 +228,7 @@ const isSameBalance = (foo, bar) => {
     if (foo.length !== bar.length) return false;
     for (let i = 0; i < foo.length; i++) {
         if (foo[i].balance !== bar[i].balance){
-            console.log(foo[i].balance,bar[i].balance);
+            console.log(foo.coin+' baL:'+foo[i].balance,bar[i].balance);
             return false;
         }
     }

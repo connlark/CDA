@@ -13,7 +13,7 @@ Meteor.methods({
             user.profile = [];
         }
 
-        console.log(token);
+        console.log('API TOKEN SETTING', token);
         const userId = this.userId;
         if (!userId || typeof(token) === 'undefined') {
             return;
@@ -41,7 +41,7 @@ Meteor.methods({
     'Balances.setTRXAddress' (address){
         const user = Meteor.user();
         let oldTRXAddress = null;
-        console.log(address);
+        console.log('SET TRX', address);
         const userId = this.userId;
         if (!userId || typeof(address) === 'undefined') {
             return;
