@@ -43,7 +43,6 @@ const mapStateToProps = (state) => ({
 const AppWithNavigation = connect(mapStateToProps)(App);
 
 
-
 const RNApp = (props) => {
   const { status, user, loggingIn } = props;
 
