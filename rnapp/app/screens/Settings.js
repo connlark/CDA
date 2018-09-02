@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import codePush from "react-native-code-push";
 import Meteor, { withTracker } from 'react-native-meteor';
+import DropdownAlert from 'react-native-dropdownalert';
 import SettingsList from 'react-native-settings-list';
 import { IS_X } from '../config/styles';
 
@@ -23,8 +24,7 @@ import {
 import { Header } from 'react-native-elements';
 import Analytics from 'appcenter-analytics';
 
-export default class App extends Component {
- 
+class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,10 +39,12 @@ export default class App extends Component {
       receivedBytes: 0, 
       totalBytes: 0,
       updateText: null,
+      TRXAddress: '...'
     };
   }
 
   componentDidMount(){
+    const { user } = this.props;
     codePush.getCurrentPackage().then((e) => {
       this.setState({
         appVersion: e.appVersion,
@@ -60,7 +62,26 @@ export default class App extends Component {
         });     
       } 
     });
+
+    if (user){
+        this.getTRXAddress(user.profile);
+    }
   }
+
+  getTRXAddress = (profile) => {
+      profile.map((e) => {
+          if (typeof e.TRXAddress !== 'undefined'){
+              this.setState({TRXAddress: e.TRXAddress})
+          }
+      })
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.meteorUser !== this.props.meteorUser){
+        this.getTRXAddress(nextProps.meteorUser.profile)
+    }
+  }
+
   updateApp = () => {
     this.setState({showIsUpToDate: false}, () => {
       codePush.sync({ updateDialog: false, installMode: codePush.InstallMode.IMMEDIATE  },
@@ -113,48 +134,81 @@ export default class App extends Component {
   } 
   render() {
       const { user } = this.props;
-      const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText } = this.state;
-
+      const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress } = this.state;
       return (
- 
-    <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
-        <Header
-            outerContainerStyles={{marginTop: -15, height: IS_X ? 97:70}}
-            centerComponent={{ text: 'Settings', style: { color: '#fff', fontSize:20 } }}
-            leftComponent={{ icon: 'eject', color: '#fff', onPress: this.logOut, underlayColor: 'transparent' }}
+        <View style={{flex: 1}}>
+        <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
+            <Header
+                outerContainerStyles={{marginTop: -15, height: IS_X ? 97:70}}
+                centerComponent={{ text: 'Settings', style: { color: '#fff', fontSize:20 } }}
+                leftComponent={{ icon: 'eject', color: '#fff', onPress: this.logOut, underlayColor: 'transparent' }}
+                />
+            <SettingsCategoryHeader title={'My Account'} textStyle={(Platform.OS === 'android') ? {color: colors.monza} : null}/>
+    
+            <SettingsSwitch
+                title={'Allow Push Notifications'}
+                onSaveValue={(value) => {
+                    console.log('allow push notifications:', value);
+                    this.setState({
+                        allowPushNotifications: value
+                    });
+                }}
+                value={this.state.allowPushNotifications}
+                thumbTintColor={(this.state.allowPushNotifications) ? colors.switchEnabled : colors.switchDisabled}
             />
-        <SettingsCategoryHeader title={'My Account'} textStyle={(Platform.OS === 'android') ? {color: colors.monza} : null}/>
- 
-        <SettingsSwitch
-            title={'Allow Push Notifications'}
-            onSaveValue={(value) => {
-                console.log('allow push notifications:', value);
-                this.setState({
-                    allowPushNotifications: value
-                });
-            }}
-            value={this.state.allowPushNotifications}
-            thumbTintColor={(this.state.allowPushNotifications) ? colors.switchEnabled : colors.switchDisabled}
-        />
-        <View style={{marginTop: '114%'}}/>
-        { updateText ? 
-            <SettingsCategoryHeader title={updateText} titleProps={{onPress: this.updateApp}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
-            :null
-        }
+            <View style={{marginTop: 10}}/>
+            <SettingsEditText
+                title="TRX Address"
+                dialogDescription={'Enter your username.'}
+                valuePlaceholder="..."
+                negativeButtonTitle={'Cancel'}
+                positiveButtonTitle={'Save'}
+                onSaveValue={(value) => {
+                    console.log('addy:', value);
+                    if (value.length !== 34){
+                        this.dropdown.alertWithType('error', 'TRX Add Address Error','Please enter a valid TRX address!');
+                        return
+                    }
+                    Meteor.call('Balances.setTRXAddress', value, (err) => {
+                        if (err){
+                            console.log(err) 
+                            this.setState({TRXAddress: value});
+                            
+                        }
+                    })
+                }}
+                value={TRXAddress}
+                dialogAndroidProps={{
+                    widgetColor: colors.monza,
+                    positiveColor: colors.monza,
+                    negativeColor: colors.monza,
+                }}
+            />
+            <View style={{marginTop: '114%'}}/>
+            { updateText ? 
+                <SettingsCategoryHeader title={updateText} titleProps={{onPress: this.updateApp}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
+                :null
+            }
 
-        { isPending ?
-            <SettingsCategoryHeader title={isDownloading ? `( ${receivedBytes} / ${totalBytes})`:`New Update Available!`} titleProps={{onPress: this.updateApp}} titleStyle={{color:'red', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
-            :null
-        }
-        <SettingsCategoryHeader title={`App Version: ${appVersion} ( ${label} )`} titleProps={{onPress: this.updateApp}}/>
-
+            { isPending ?
+                <SettingsCategoryHeader title={isDownloading ? `( ${receivedBytes} / ${totalBytes})`:`New Update Available!`} titleProps={{onPress: this.updateApp}} titleStyle={{color:'red', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
+                :null
+            }
+            <SettingsCategoryHeader title={`App Version: ${appVersion} ( ${label} )`} titleProps={{onPress: this.updateApp}}/>
         
-     
-        </ScrollView>
+            </ScrollView>
+        <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
+        </View>
         );
     }
     
 }
+
+export default withTracker(params => {
+    return {
+      user: Meteor.user()
+    };
+})(Settings);
  
 const colors = {
   iosSettingsBackground: 'rgb(235,235,241)',

@@ -52,33 +52,36 @@ class Graph extends Component {
         const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
         const contentInset = { top: 0, bottom: 0 }
 
+    
         return (
             <View style={styles.container}>
                 <View style={{height: IS_X ? 55:30,}}/>
                 <Text style={styles.headerText}>  Dividends </Text> 
-         
-                <View style={{ height: 200, flexDirection: 'row', backgroundColor:'white', width: '95%', marginLeft: '2.5%' }}>
-                    <YAxis
-                        data={ history ? this.getData(history.history):data }
-                        contentInset={ contentInset }
-                        svg={{
-                            fill: 'grey',
-                            fontSize: 10,
-                        }}
-                        numberOfTicks={ 3 }
-                        spacingOuter={0.05}
-                        formatLabel={ value => `$${value}` }
-                    />
-                    <AreaChart
-                        style={{ flex: 1, marginLeft: 3 }}
-                        data={ history ? this.getData(history.history):data }
-                        curve={ shape.curveCatmullRom }
-                        svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
-                        contentInset={ contentInset }
-                    >
-                        <Grid/>
-                    </AreaChart>
-                </View>
+                { history && history.history.length > 1 ?
+                    <View style={{ height: 200, flexDirection: 'row', backgroundColor:'white', width: '95%', marginLeft: '2.5%' }}>
+                        <YAxis
+                            data={ history ? this.getData(history.history):data }
+                            contentInset={ contentInset }
+                            svg={{
+                                fill: 'grey',
+                                fontSize: 10,
+                            }}
+                            numberOfTicks={ 3 }
+                            spacingOuter={0.05}
+                            formatLabel={ value => `$${value}` }
+                        />
+                        <AreaChart
+                            style={{ flex: 1, marginLeft: 3 }}
+                            data={ history ? this.getData(history.history):data }
+                            curve={ shape.curveCatmullRom }
+                            svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
+                            contentInset={ contentInset }
+                        >
+                            <Grid/>
+                        </AreaChart>
+                    </View>:null
+                }
+                
             
                 
             </View>

@@ -17,13 +17,19 @@ class Stats extends Component {
     constructor(props){
         super(props);
         this.state = { 
-            stats: {lastHourUSD: 0, totalUSD: 0}
+            stats: {lastHourUSD: 0, totalUSD: 0, netWorth: 0}
         };
     }
 
-    UNSAFE_componentWillReceiveProps(newProps){
+    componentWillReceiveProps(newProps){
         if (newProps.historyReady && newProps.history && !this.props.history !== newProps.history){
-            this.findNumbers(newProps.history.history);
+            if (newProps.balances){
+                this.findNumbers(newProps.history.history, newProps.balances.balanceData);
+            }
+            else {
+                this.findNumbers(newProps.history.history);
+            }
+            
         }
         
     }
@@ -48,9 +54,10 @@ class Stats extends Component {
         return OneDay > new Date;
     }
 
-    findNumbers = ( data ) => {
+    findNumbers = ( data, balances ) => {
         let lastHourUSD = 0.0;
         let totalUSD = 0.0;
+        let netWorth = 0.0;
         const m = data.filter((e) => this.sameDay(e.date, new Date));
         m.map( (e) => {
             lastHourUSD += Number(e.divData.USDdelta)
@@ -58,18 +65,26 @@ class Stats extends Component {
         data.map( (e) => {
             totalUSD +=  Number(e.divData.USDdelta)
         });
-        this.setState({stats: {lastHourUSD, totalUSD}});
+        if (balances){
+            balances.map((e) => {
+                if (e.USDvalue){
+                    netWorth += Number(e.USDvalue)
+                } 
+            });
+        }
+        this.setState({stats: {lastHourUSD, totalUSD, netWorth}});
     }
 
     render() {
-        const { lastHourUSD, totalUSD } = this.state.stats;
+        const { lastHourUSD, totalUSD, netWorth } = this.state.stats;
 
         if(this.props.historyReady && this.props.history){
             return (
                 <ScrollView style={{flex:1}} contentContainerStyle={{alignItems: 'center'}}>
                     <View style={{marginTop: '70%', alignItems: 'center'}}>
                         <Text style={styles.text}>Last 24h: $ {lastHourUSD.toFixed(2)} </Text>
-                        <Text style={styles.text}>Total: $ {totalUSD.toFixed(2)} </Text>
+                        <Text style={styles.text}>Total Divs: $ {totalUSD.toFixed(2)} </Text>
+                        <Text style={styles.textSmall}>Net Worth: $ {netWorth.toFixed(2)} </Text>
                     </View>
                    
                 </ScrollView>
@@ -91,8 +106,13 @@ const styles = StyleSheet.flatten({
     },
     text: {
         fontWeight: 'bold',
-        fontSize: 40,
+        fontSize: 27,
         marginBottom: 25
+    },
+    textSmall: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        marginTop: 50
     },
     loading: {
         flex: 1,
@@ -104,9 +124,11 @@ const styles = StyleSheet.flatten({
 
 export default withTracker(params => {
     const handle = Meteor.subscribe('BalanceHistory.pub.list');
+    const balHandle = Meteor.subscribe('Balances.pub.list');
     const id = !Meteor.user() ? '': Meteor.user()._id
     return {
       historyReady: handle.ready(),
-      history: Meteor.collection('balanceHistory').findOne({userId: id})
+      history: Meteor.collection('balanceHistory').findOne({userId: id}),
+      balances: Meteor.collection('balances').findOne({userId: id})
     };
   })(Stats);

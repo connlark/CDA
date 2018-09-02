@@ -1,6 +1,8 @@
 import { Meteor } from "meteor/meteor";
+
 import { Balances } from '../../api/Balances/balances';
 import { BalanceHistory } from '../../api/BalanceHistory/balanceHistory';
+import { getTRXBalances } from '../../../lib/tronscanapi';
 
 const cc = require('cryptocompare');
 const Coinex = require('coinex.com');
@@ -19,10 +21,27 @@ Meteor.startup(() => {
                 for (let index = 0; index < users.length; index++) {
                     const user = users[index];
                     if(user.profile && user.profile[0] && user.profile[0].token){
-                        doTheDirty(user.profile[0].token, user._id)
+                        if (user.profile.some(e => typeof(e.TRXAddress) !== 'undefined')) {
+                            user.profile.map((ob) => {
+                                if (typeof(ob.TRXAddress) !== 'undefined'){
+                                    doTheDirty(user.profile[0].token, user._id, ob.TRXAddress)
+                                }
+                            });
+                        }
+                        else {
+                            doTheDirty(user.profile[0].token, user._id)
+                        }
+                    }
+                    else {
+                        if (user.profile.some(e => typeof(e.TRXAddress) !== 'undefined')) {
+                            user.profile.map((ob) => {
+                                if (typeof(ob.TRXAddress) !== 'undefined'){
+                                    doTheDirtyONLYTRX(user._id, ob.TRXAddress)
+                                }
+                            });
+                        }
                     }
                 }
-                
                 return 1;
             }
         });
@@ -30,7 +49,15 @@ Meteor.startup(() => {
         SyncedCron.start();
 });
 
-export const doTheDirty = (apiToken, userId) => {
+export const doTheDirty = (apiToken, userId, TRXAddress) => {
+    if (!apiToken && TRXAddress){
+        doTheDirtyONLYTRX(userId, TRXAddress);
+        return;
+    }
+    else if (!apiToken){
+        return;
+    }
+
     const coinex = new Coinex(apiToken.apiKey, apiToken.secretKey);
 
     coinex.balance().then((response) => {
@@ -42,10 +69,83 @@ export const doTheDirty = (apiToken, userId) => {
                 return {coin: key, balance: availableBalance};
             }
             return 'null';
-        })
+        });
         balances = balances.filter((obj) => (obj != 'null'));
+        
+        findCoinBalanceInfo(ownedCoins,balances, userId);
+        if (TRXAddress){
+            doTheDirtyONLYTRX(userId, TRXAddress, false, true);
+        }
+         
+    })
+    .catch(err => console.error(err.code, err.message)); 
+}
 
-        cc.priceMulti(ownedCoins, 'USD')
+export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs, hack) => {
+    let ownedCoins = [];
+    let balances = [];
+    if (TRXAddress){
+        getTRXBalances(TRXAddress).then((e) => {
+            e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED');
+            e.map((o) => {
+                if (balances.some(e => e.coin === o.name)) {
+                    for (let index = 0; index < balances.length; index++) {
+                        const element = balances[index];
+                        if (element.coin === o.name){
+                            if (hack){
+                                balances[index].balance = o.balance;
+                            }
+                            else {
+                                balances[index].balance += o.balance;
+                            }
+                        }
+                    }
+                }
+                else {
+                    balances.push({coin: o.name, balance: o.balance});
+                    ownedCoins.push(o.name)
+                }    
+            });
+            console.log(balances)
+
+            let dta = Balances.findOne({userId: userId});
+            let hackdata = [];
+            let hasChanged = [];
+            if (typeof(dta) !== 'undefined'){
+                for (let index = 0; index < dta.balanceData.length; index++) {
+                    const element = dta.balanceData[index];
+                    const curr = balances.filter((e) => e.coin === element.coin);
+                    console.log(curr)
+                    if (curr[0] && element.coin === curr[0].coin){
+                        hasChanged.push(element.coin);
+                        if (hack){
+                            console.log('fdfjwi')
+                            dta.balanceData[index].balance = curr[0].balance;
+                        }
+                        else {
+                            dta.balanceData[index].balance += curr[0].balance;
+                        }
+                    }
+                }
+                if (hack && hasChanged.length !== balances.length){
+                    balances.map((m) => {
+                        if (hasChanged.indexOf(m.coin) < 0){
+                            dta.balanceData.push(m)
+                        }
+                    });
+                }
+            }
+            else {
+                hackdata = balances;
+            }
+
+            findCoinBalanceInfo(ownedCoins, dta ? dta.balanceData:hackdata, userId, shouldNOTCalcDivs);
+        });
+    }
+}
+
+const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
+    cc.priceMulti(ownedCoins, 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
                     if (prices[balObj.coin]){
@@ -64,7 +164,7 @@ export const doTheDirty = (apiToken, userId) => {
                         return balObj;
                     }); 
                 }).finally(() => {
-                    const dta = Balances.findOne({userId: userId});
+                    let dta = Balances.findOne({userId: userId});
                     if (typeof(dta) === 'undefined'){
                         Balances.insert(
                             {   userId: userId,
@@ -79,12 +179,14 @@ export const doTheDirty = (apiToken, userId) => {
                         }
                         else {
                             const divCalc = dividendCalc(dta.balanceData, balances);
-                            sendNotif(userId,divCalc);
-
+                            if (!shouldNOTCalcDivs){
+                                sendNotif(userId,divCalc);
+                            }
+                            
                             const user = Meteor.users.findOne(userId);
-                            const balHistory = BalanceHistory.findOne({userId: user._id});
-
-                            if (balHistory){
+                            const balHistory = BalanceHistory.findOne({userId: userId});
+                            if (balHistory && divCalc.coinDeltas.length !== 0){
+                                if (shouldNOTCalcDivs) return;
                                 balHistory.history.push({date: new Date, divData: divCalc})
                                 BalanceHistory.update(
                                     {userId: userId},
@@ -97,6 +199,7 @@ export const doTheDirty = (apiToken, userId) => {
 
                             }
                             else {
+                                if (shouldNOTCalcDivs || divCalc.coinDeltas.length === 0) return;
                                 const history = [];
                                 history.push({date: new Date, divData: divCalc});
                                 BalanceHistory.insert(
@@ -122,8 +225,6 @@ export const doTheDirty = (apiToken, userId) => {
                 });
             })
             .catch(console.error);
-    })
-    .catch(err => console.error(err.code, err.message)); 
 }
 
 const isSameBalance = (foo, bar) => {

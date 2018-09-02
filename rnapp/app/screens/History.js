@@ -34,9 +34,11 @@ class History extends Component {
                 <Text onPress={() => this.handleTouchedHistory(item)}>  @  {String(item.date.toLocaleTimeString())}</Text>
             </View>
       );
-    _renderHeader = () => (
-        <Graph/>
-    );
+    _renderHeader = () => {
+        return (
+                <Graph/>
+                );
+    }
     handleTouchedHistory = (item) => {
         this.setState({selectedData: item});
         this.showAlert();
