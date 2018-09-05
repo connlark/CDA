@@ -6,11 +6,6 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import {addNavigationHelpers} from 'react-navigation';
 import {
-  reduxifyNavigator,
-  createReactNavigationReduxMiddleware,
-  createNavigationReducer,
-} from 'react-navigation-redux-helpers';
-import {
   createStackNavigator,
 } from 'react-navigation';
 import codePush from "react-native-code-push";
@@ -18,9 +13,10 @@ import codePush from "react-native-code-push";
 import store from './app/config/store';
 import {AppNavigator} from './app/config/router';
 import { recieveNotification } from './app/Actions/notificationLogic'
-let METEOR_URL = 'ws://localhost:3000/websocket';
+//let METEOR_URL = 'ws://localhost:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
+let METEOR_URL = 'ws://73.246.190.116:3000/websocket';
 
 if (__DEV__) {
   process.env.REACT_NAV_LOGGING = false
@@ -30,18 +26,12 @@ if (__DEV__) {
 
 if (process.env.NODE_ENV === 'production') {
   METEOR_URL = 'ws://73.246.190.116:3000/websocket'; // your production server
+  console = {};
+  console.log = () => {};
+  console.error = () => {};
 }
 
 Meteor.connect(METEOR_URL);
-
-const App = reduxifyNavigator(AppNavigator, "root");
-
-const mapStateToProps = (state) => ({
-  state: state.nav,
-});
-
-const AppWithNavigation = connect(mapStateToProps)(App);
-
 
 const RNApp = (props) => {
   const { status, user, loggingIn } = props;
@@ -81,7 +71,7 @@ const RNApp = (props) => {
       });   
   //}
   return  <Provider store={store}>
-            <AppWithNavigation
+            <AppNavigator
             />
           </Provider>
 };
