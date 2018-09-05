@@ -26,9 +26,6 @@ if (__DEV__) {
 
 if (process.env.NODE_ENV === 'production') {
   METEOR_URL = 'ws://73.246.190.116:3000/websocket'; // your production server
-  console = {};
-  console.log = () => {};
-  console.error = () => {};
 }
 
 Meteor.connect(METEOR_URL);

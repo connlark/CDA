@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Linking } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
-import {Avatar, Button, Icon} from 'react-native-elements';
+import {Avatar, Header, Icon} from 'react-native-elements';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import DropdownAlert from 'react-native-dropdownalert';
 import Grid from 'react-native-grid-component';
+import ReactNativeHaptic from 'react-native-haptic';
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
@@ -20,11 +21,10 @@ class AltHome extends Component {
         this.state = { 
             refreshing: false,
             showUSDValue: false,
-            cryptoObj: {}
+            cryptoObj: {},
+            showWebView: false
         };
-    }
 
-    componentWillMount(){
         console.log('ws')
         const { cryptoObj } = this.state;
         console.log(ws)
@@ -33,7 +33,7 @@ class AltHome extends Component {
         ws.onopen = () => {
             // connection opened
             console.log("I openend the connection without troubles!");
-
+            ReactNativeHaptic.generate('notificationSuccess')
             // First step is to try subscribe to the proper channel
 
             let payload = {
@@ -69,8 +69,13 @@ class AltHome extends Component {
                     this.setState({cryptoObj: newObj});
                 } 
             }
-        }       
-    
+        } 
+    }
+
+    componentWillUnmount(){
+        ReactNativeHaptic.generate('notificationWarning')
+        ws = null;
+
     }
 
     refreshBalances = () => {
@@ -103,11 +108,16 @@ class AltHome extends Component {
                     console.log(err)
                     setTimeout(() => {
                         this.scanner.reactivate();
-                    }, 500); 
+                    }, 500);
+                    ReactNativeHaptic.generate('notificationError'); 
+                    return;
                 }
+                ReactNativeHaptic.generate('notificationSuccess');
+                
             })
         } catch (error) {
             alert('wrong qr type')
+            ReactNativeHaptic.generate('notificationError'); 
             setTimeout(() => {
                 this.scanner.reactivate();
             }, 500); 
@@ -172,8 +182,12 @@ class AltHome extends Component {
                 title={item.fullName}
                 source={{uri: imageUrl}}
                 onPress={() => {
-                    this.setState({showingCoins: [item.coin]});
-                    Linking.openURL('https://www.cryptocompare.com'+item.ccurl)
+                    this.setState({selectedCoinObj: {
+                        url:'https://www.cryptocompare.com'+item.ccurl,
+                        name: item.fullName
+                    }}, () => {
+                        this.setState({showWebView: true});
+                    });
                 }}
                 activeOpacity={0.4}
             />
@@ -188,9 +202,40 @@ class AltHome extends Component {
     }
     render() {
         const { balances, balancesReady } = this.props;
-        const { refreshing } = this.state;
+        const { refreshing, showWebView, selectedCoinObj } = this.state;
         
-        if (balancesReady && balances[0]){            
+        if(showWebView){ 
+            const { url, name } = selectedCoinObj;
+
+            return (
+                <View style={{flex: 1}}>
+                    <Header
+                        leftComponent={{ icon: 'arrow-back', underlayColor: 'trasparent', color: '#fff', onPress: () => this.setState({showWebView: false}) }}
+                        centerComponent={{ text: name, style: { color: '#fff' } }}
+                    />
+                    <WebView
+                        startInLoadingState
+                        javaScriptEnabled={false}
+                        source={{uri: url}}
+                        style={{marginTop: -1}}
+                        renderError={() => {
+                            this.setState({showWebView: false});
+                            ReactNativeHaptic.generate('notificationError')
+                            Alert.alert(
+                                'Webpage Loading Error'
+                              );
+                        }}
+                        renderLoading={() => (
+                            <View style={styles.loading}>
+                                <Loading color={'#476DC5'} />
+                            </View>
+
+                        )}
+                    />
+                </View>
+            )
+        }
+        else if (balancesReady && balances[0]){            
             return (
                 <View style={styles.container}>
                     <StatusBar

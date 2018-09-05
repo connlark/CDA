@@ -6,23 +6,23 @@ import * as shape from 'd3-shape'
 import moment from 'moment';
 
 import { IS_X } from '../config/styles';
-class Graph extends Component {
+export default class Graph extends Component {
     consolodateData = (history) => {
         let newdta = [];
         history.map((e) => {
             if (newdta.length > 0){
                 if (moment(e.date).isSame(moment(newdta[newdta.length-1].date), 'd')){
-                    newdta[newdta.length-1].divData.USDdelta = Number(newdta[newdta.length-1].divData.USDdelta) + Number(e.divData.USDdelta);
+                  /*  newdta[newdta.length-1].divData.USDdelta = Number(newdta[newdta.length-1].divData.USDdelta) + Number(e.divData.USDdelta);
                     newdta[newdta.length-1].divData.coinDeltas.map((foo) => {
                         e.divData.coinDeltas.map((coin) => {
                             if (foo.coin === coin.coin){
                                 console.log(coin)
                                 foo.delta = Number(coin.delta) + Number(foo.delta);
-                                console.log(newdta[newdta.length-1].divData.coinDeltas)
                             }
                         });
                         
-                    })
+                    })*/
+
                 }
                 else {
                     newdta.push(e)
@@ -32,8 +32,6 @@ class Graph extends Component {
                 newdta.push(e)
             }
         })
-
-        console.log(newdta)
 
         return newdta;
     }
@@ -102,12 +100,3 @@ const styles = StyleSheet.flatten({
     }
 });
 
-
-export default withTracker(params => {
-    const handle = Meteor.subscribe('BalanceHistory.pub.list');
-    const id = !Meteor.user() ? '': Meteor.user()._id
-    return {
-      historyReady: handle.ready(),
-      history: Meteor.collection('balanceHistory').findOne({userId: id})
-    };
-  })(Graph);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { KeyboardAvoidingView, LayoutAnimation, Platform, StyleSheet, UIManager } from 'react-native'
 import { Image, View } from 'react-native-animatable'
+import ReactNativeHaptic from 'react-native-haptic';
 
 import imgLogo from '../../images/logo.png'
 import metrics from '../../config/metrics'
@@ -64,6 +65,7 @@ export default class AuthScreen extends Component {
   }
 
   _setVisibleForm = async (visibleForm) => {
+    ReactNativeHaptic.generate('selection');
     // 1. Hide the current form (if any)
     if (this.state.visibleForm && this.formRef && this.formRef.hideForm) {
       await this.formRef.hideForm()

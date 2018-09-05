@@ -3,6 +3,7 @@ import { View, StatusBar } from 'react-native-animatable';
 import Meteor, { Accounts } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
 import OAuthManager from 'react-native-oauth';
+import ReactNativeHaptic from 'react-native-haptic';
 
 import AuthScreen from './containers/AuthScreen'
 import HomeScreen from './containers/HomeScreen'
@@ -36,8 +37,10 @@ export class LoginAnimation extends Component {
 
     if (email.length === 0) {
       this.dropdown.alertWithType('warn', 'Error', 'You must enter a username');
+      ReactNativeHaptic.generate('notificationWarning');
     } else if (password.length === 0) {
       this.dropdown.alertWithType('warn', 'Error', 'You must enter a password');
+      ReactNativeHaptic.generate('notificationWarning');
     }
     if (!valid){
       this.setState({ isLoading: false });
@@ -52,9 +55,11 @@ export class LoginAnimation extends Component {
       Meteor.loginWithPassword(email, password, (error) => {
         if (error) {
           this.dropdown.alertWithType('error', 'Error', error.reason);
+          ReactNativeHaptic.generate('notificationError');
           this.setState({ isLoading: false });
         }
         else {
+          ReactNativeHaptic.generate('notificationSuccess');
           this.setState({_mounted: false})
           this.props.navigation.navigate('App');
         }

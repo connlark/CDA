@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, FlatList,TouchableHighlight, ScrollView } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
+import Grid from 'react-native-grid-component';
+
 import Graph from '../components/graph';
 import Swipeout from 'react-native-swipeout';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -17,7 +19,7 @@ class Stats extends Component {
     constructor(props){
         super(props);
         this.state = { 
-            stats: {lastHourUSD: 0, totalUSD: 0, netWorth: 0}
+            stats: {lastHourUSD: 0, totalUSD: 0, netWorth: 0},
         };
     }
 

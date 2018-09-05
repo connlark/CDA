@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-oauth')
     compile project(':react-native-push-notification')
     compile project(':appcenter-crashes')
