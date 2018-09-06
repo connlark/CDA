@@ -62,7 +62,7 @@ export default class Graph extends Component {
                             data={ history ? this.getData(history.history.slice()):data }
                             contentInset={ contentInset }
                             svg={{
-                                fill: '#45b3e0',
+                                fill: '#bd8c7d',
                                 fontSize: 10,
                             }}
                             scale={d3Scale.scaleLinear}
@@ -72,12 +72,13 @@ export default class Graph extends Component {
                             animate={true}
                             showGrid={false}
                         />
+                        
                         <AreaChart
                             style={{ flex: 1, marginLeft: 3, borderRadius: 9 }}
                             data={ history ? this.getData(history.history):data }
                             curve={ shape.curveBasisOpen }
                             scale={d3Scale.scaleLinear}
-                            svg={{ fill: '#45b3e0' }}
+                            svg={{ fill: '#d1bfa7'}}
                             contentInset={ contentInset }
                             start={0}
                             yMin={0}
@@ -87,11 +88,9 @@ export default class Graph extends Component {
                         >
                             <Grid/>
                         </AreaChart>
+                        
                     </View>:null
                 }
-                
-            
-                
             </View>
 
         );

@@ -79,11 +79,11 @@ class History extends Component {
         }
         
         return (
-            <TouchableOpacity style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(item)}>
-                <View style={{marginTop: 12, marginBottom: 5}}>
+            <TouchableOpacity style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(item)}>
+                <View style={{marginBottom: 10}}>
                     <Text style={{fontSize: 14}}> {moment(item.date).format("MMM Do YY")} </Text>
                 </View>
-                <View style={{flexDirection: 'row', marginLeft: 15, marginRight: 15}}>
+                <View style={{flexDirection: 'row', marginLeft: 15, marginRight: 15, marginBottom: 7}}>
                     
                     { item.divData.coinDeltas.map((e) => (
                         <Avatar
@@ -91,7 +91,7 @@ class History extends Component {
                             source={{uri: e.uri}}
                             onPress={() => console.log("Works!")}
                             activeOpacity={0.7}
-                            containerStyle={{flex: 4, backgroundColor: 'transparent'}}
+                            containerStyle={{flex: 1, backgroundColor: 'transparent'}}
                             overlayContainerStyle={{backgroundColor: 'transparent'}}
                             rounded
                     />
@@ -101,7 +101,7 @@ class History extends Component {
                 </View>
                 
                 
-                <View style={{marginTop: 5}}>
+                <View style={{marginTop: 5, marginBottom: 5}}>
                     <Text style={{fontSize: 16}}> 💰 {Number(item.divData.USDdelta).toFixed(2)} </Text>
                 </View>
         </TouchableOpacity>
@@ -200,13 +200,16 @@ class History extends Component {
                         <Graph
                             history={history}
                         />
-                        <Grid
-                            style={styles.list}
-                            renderItem={this._renderItem}
-                            renderPlaceholder={this._renderPlaceholder}
-                            data={history.history.slice().reverse()}
-                            itemsPerRow={Platform.isPad ? 4:3}
-                        />
+                        <View style={{padding: 10, marginTop: -20}}>
+                            <Grid
+                                style={styles.list}
+                                renderItem={this._renderItem}
+                                renderPlaceholder={this._renderPlaceholder}
+                                data={history.history.slice().reverse()}
+                                itemsPerRow={Platform.isPad ? 4:3}
+                            />  
+                        </View>
+                        
                     </ScrollView>
                     <AwesomeAlert
                             show={showAlert}
@@ -268,7 +271,7 @@ const styles = StyleSheet.flatten({
     item: {
         flex: 1,
         height: 120,
-        margin: 5,
+        //margin: 7,
         backgroundColor: '#f6f5f3',
         shadowOffset:{  width: 2.5,  height: 2.5,  },
         shadowColor: 'grey',

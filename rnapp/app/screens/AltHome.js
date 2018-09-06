@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert, Platform } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert, Platform,ScrollView } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
 import {Avatar, Header, Icon} from 'react-native-elements';
@@ -12,7 +12,7 @@ import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
 import { IS_X } from '../config/styles';
 
-const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#d3d3d3","https://www.cryptocompare.com/media/33842920/dash.png":"#186799","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"#a993ce","https://www.cryptocompare.com/media/27010814/bcy.jpg":"#fe7dbc","https://www.cryptocompare.com/media/12318137/hsr.png":"#b2a8d9","https://www.cryptocompare.com/media/34477813/card.png":"#20329d","https://www.cryptocompare.com/media/34477783/olt.jpg":"#bff0f5","https://www.cryptocompare.com/media/351360/zec.png":"#8e773b","https://www.cryptocompare.com/media/19684/doge.png":"#eed67c","https://www.cryptocompare.com/media/34477805/trx.jpg":"#fd1a1a"}');
+const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#d3d3d3","https://www.cryptocompare.com/media/33842920/dash.png":"#186799","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"#a993ce","https://www.cryptocompare.com/media/27010814/bcy.jpg":"#fe7dbc","https://www.cryptocompare.com/media/12318137/hsr.png":"#b2a8d9","https://www.cryptocompare.com/media/34477813/card.png":"#20329d","https://www.cryptocompare.com/media/34477783/olt.jpg":"#bff0f5","https://www.cryptocompare.com/media/351360/zec.png":"#8e773b","https://www.cryptocompare.com/media/19684/doge.png":"#eed67c","https://www.cryptocompare.com/media/34477805/trx.jpg":"#fd1a1a","https://pbs.twimg.com/profile_images/1013352125361819648/z2fvUNDq_400x400.jpg":"#cbca06"}');
 let ws;
 
 class AltHome extends Component {
@@ -152,16 +152,30 @@ class AltHome extends Component {
     }
 
     _renderGridItem = (item, i) => {
-        const imageUrl = item.imgUrl ? item.imgUrl : 'https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg';
+        let imageUrl = item.imgUrl ? item.imgUrl : 'https://frontiersinblog.files.wordpress.com/2018/04/frontiers-in-blockchain-logo.jpg';
         //console.log(JSON.stringify(this.state.backgColors))
         //this.state.backgColors[imageUrl] = 'ble';
         //this.setState({ backgColors: this.state.backgColors });
-        const color = backgColors[imageUrl];
+        let color = backgColors[imageUrl] ? backgColors[imageUrl] :'#f6f5f3';
         const name = item.fullName ? item.fullName : item.coin;
         let bal = 0;
-        let namer = '';
+        var namer;
+
+        switch (item.coin) {
+            case 'SEED':
+                imageUrl = 'https://pbs.twimg.com/profile_images/1013352125361819648/z2fvUNDq_400x400.jpg';
+                color = '#ffb347'
+                break;
+            case 'WHC':
+                imageUrl = 'https://file.coinex.com/2018-08-01/72F1DF3618A64383AE6AEA8B6D4DBF3E.png';
+                break;
+            default:
+                break;
+        }
+
+
         if (name.indexOf('(') > 0){
-            namer = name.substring(0,name.indexOf('('));
+            namer = name.substring(0,name.indexOf('(')-1);
         }
         else {
             namer = name;
@@ -181,7 +195,7 @@ class AltHome extends Component {
         
         return (
         <View style={[{ backgroundColor: color ? color:'white', alignItems: 'center', borderRadius: 9 }, styles.item]} key={i}>
-            <View style={{marginTop: 10, marginBottom: 5}}>
+            <View style={{marginTop: 10, marginBottom: 10}}>
                 <Text adjustsFontSizeToFit style={{fontSize: 12}} numberOfLines={1}> {namer} </Text>
             </View>
             <Avatar
@@ -198,12 +212,14 @@ class AltHome extends Component {
                     });
                 }}
                 activeOpacity={0.4}
+                containerStyle={{ backgroundColor: 'transparent'}}
+                overlayContainerStyle={{backgroundColor: 'transparent'}}
             />
-            <View adjustsFontSizeToFit numberOfLines={1} style={{marginTop: 10}}>
-                <Text style={{fontSize: 10}}> {numberWithCommas(Number(item.balance).toFixed(3))} {item.coin}</Text>
+            <View style={{marginTop: 10}}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 10}}> {numberWithCommas(Number(item.balance).toFixed(item.coin === 'BTC' ? 7:3))} {item.coin}</Text>
             </View>
-            <View adjustsFontSizeToFit numberOfLines={1} style={{marginTop: 6}}>
-                <Text style={{fontSize: 14}}> 💲 {bal !== 0 ? numberWithCommas(bal.toFixed(3)):numberWithCommas(String(Number(item.USDvalue).toFixed(2)))} </Text>
+            <View style={{marginTop: 6, marginBottom: 100}}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}> 💲{bal !== 0 ? numberWithCommas(bal.toFixed(3)):numberWithCommas(String(Number(item.USDvalue).toFixed(2)))} </Text>
             </View>
         </View>
       );
@@ -245,7 +261,7 @@ class AltHome extends Component {
         }
         else if (balancesReady && balances[0]){            
             return (
-                <View style={styles.container}>
+                <ScrollView style={styles.container}>
                     <StatusBar
                        hidden
                     />
@@ -258,17 +274,20 @@ class AltHome extends Component {
                         refreshing={refreshing}
                         extraData={this.state}
                     />*/}
-                    <Grid
-                        renderHeader={this._renderHeader}
-                        style={styles.list}
-                        renderItem={this._renderGridItem}
-                        renderPlaceholder={this._renderPlaceholder}
-                        data={this.sortData(balances[0].balanceData)}
-                        itemsPerRow={Platform.isPad ? 4:3}
-                        itemHasChanged={(d1, d2) => true}
-                    />
+                    {this._renderHeader()}
+                    <View style={{flex:1,margin: 10}}>
+                        <Grid
+                            style={styles.list}
+                            renderItem={this._renderGridItem}
+                            renderPlaceholder={this._renderPlaceholder}
+                            data={this.sortData(balances[0].balanceData)}
+                            itemsPerRow={Platform.isPad ? 4:3}
+                            itemHasChanged={(d1, d2) => true}
+                        />
+                    </View>
+                   
                     <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
-                </View>
+                </ScrollView>
             );
         }
         else if (balancesReady){
@@ -336,7 +355,7 @@ const styles = StyleSheet.flatten({
     },
     item: {
         flex: 1,
-        height: 160,
+        height: 170,
         margin: 5,
         shadowOffset:{  width: 2.5,  height: 2.5,  },
         shadowColor: 'grey',
