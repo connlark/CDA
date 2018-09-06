@@ -10,7 +10,6 @@ target 'rnapp' do
   pod 'AppCenter/Analytics', '~> 1.8.0'
   pod 'AppCenterReactNativeShared', '~> 1.7.1'
   
-  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 
   target 'rnappTests' do
     inherit! :search_paths

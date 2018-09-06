@@ -68,7 +68,7 @@ const RNApp = (props) => {
       });   
   //}
   return  <Provider store={store}>
-            <AppNavigator
+            <AppNavigator persistenceKey={"NavigationState"} 
             />
           </Provider>
 };

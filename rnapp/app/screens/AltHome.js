@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert, Platform } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
 import {Avatar, Header, Icon} from 'react-native-elements';
@@ -159,27 +159,35 @@ class AltHome extends Component {
         const color = backgColors[imageUrl];
         const name = item.fullName ? item.fullName : item.coin;
         let bal = 0;
-        
-            if (this.state.cryptoObj[`${item.coin}USDT`]){
-                bal = Number(item.balance) * Number(this.state.cryptoObj[`${item.coin}USDT`])
-            }
-            else if (this.state.cryptoObj[`${item.coin}BCH`]){
-                bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`${item.coin}BCH`])
-            }
-            else if (item.coin === 'SEED' && this.state.cryptoObj[`TRXBCH`]){
-                bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`TRXBCH`])
-            }
-        
+        let namer = '';
+        if (name.indexOf('(') > 0){
+            namer = name.substring(0,name.indexOf('('));
+        }
+        else {
+            namer = name;
+        }
+
+
+        if (this.state.cryptoObj[`${item.coin}USDT`]){
+            bal = Number(item.balance) * Number(this.state.cryptoObj[`${item.coin}USDT`])
+        }
+        else if (this.state.cryptoObj[`${item.coin}BCH`]){
+            bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`${item.coin}BCH`])
+        }
+        else if (item.coin === 'SEED' && this.state.cryptoObj[`TRXBCH`]){
+            bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`TRXBCH`])
+        }
+    
         
         return (
         <View style={[{ backgroundColor: color ? color:'white', alignItems: 'center', borderRadius: 9 }, styles.item]} key={i}>
-            <View style={{marginTop: 12, marginBottom: 5}}>
-                <Text style={{fontSize: 14}}> {name} </Text>
+            <View style={{marginTop: 10, marginBottom: 5}}>
+                <Text adjustsFontSizeToFit style={{fontSize: 12}} numberOfLines={1}> {namer} </Text>
             </View>
             <Avatar
                 rounded
                 large
-                title={item.fullName}
+                //title={String(item.fullName).substring(0,2)}
                 source={{uri: imageUrl}}
                 onPress={() => {
                     this.setState({selectedCoinObj: {
@@ -191,11 +199,11 @@ class AltHome extends Component {
                 }}
                 activeOpacity={0.4}
             />
-            <View style={{marginTop: 5}}>
-                <Text style={{fontSize: 10}}> ⏣ {item.balance} </Text>
+            <View adjustsFontSizeToFit numberOfLines={1} style={{marginTop: 10}}>
+                <Text style={{fontSize: 10}}> {numberWithCommas(Number(item.balance).toFixed(3))} {item.coin}</Text>
             </View>
-            <View style={{marginTop: 5}}>
-                <Text style={{fontSize: 15}}> 💲{bal !== 0 ? numberWithCommas(bal.toFixed(5)):numberWithCommas(String(Number(item.USDvalue).toFixed(2)))} </Text>
+            <View adjustsFontSizeToFit numberOfLines={1} style={{marginTop: 6}}>
+                <Text style={{fontSize: 14}}> 💲 {bal !== 0 ? numberWithCommas(bal.toFixed(3)):numberWithCommas(String(Number(item.USDvalue).toFixed(2)))} </Text>
             </View>
         </View>
       );
@@ -256,7 +264,7 @@ class AltHome extends Component {
                         renderItem={this._renderGridItem}
                         renderPlaceholder={this._renderPlaceholder}
                         data={this.sortData(balances[0].balanceData)}
-                        itemsPerRow={2}
+                        itemsPerRow={Platform.isPad ? 4:3}
                         itemHasChanged={(d1, d2) => true}
                     />
                     <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
@@ -329,7 +337,10 @@ const styles = StyleSheet.flatten({
     item: {
         flex: 1,
         height: 160,
-        margin: 1
+        margin: 5,
+        shadowOffset:{  width: 2.5,  height: 2.5,  },
+        shadowColor: 'grey',
+        shadowOpacity: 0.3,
     },
     list: {
         flex: 1
