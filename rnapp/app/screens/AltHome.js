@@ -218,7 +218,7 @@ class AltHome extends Component {
             <View style={{marginTop: 10}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 10}}> {numberWithCommas(Number(item.balance).toFixed(item.coin === 'BTC' ? 7:3))} {item.coin}</Text>
             </View>
-            <View style={{marginTop: 6, marginBottom: 100}}>
+            <View style={{marginTop: 10, marginBottom: 100}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}> 💲{bal !== 0 ? numberWithCommas(bal.toFixed(3)):numberWithCommas(String(Number(item.USDvalue).toFixed(2)))} </Text>
             </View>
         </View>
@@ -275,7 +275,7 @@ class AltHome extends Component {
                         extraData={this.state}
                     />*/}
                     {this._renderHeader()}
-                    <View style={{flex:1,margin: 10}}>
+                    <View style={{flex:1,margin: IS_X ? 15:10}}>
                         <Grid
                             style={styles.list}
                             renderItem={this._renderGridItem}
