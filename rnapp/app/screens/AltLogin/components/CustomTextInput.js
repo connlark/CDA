@@ -21,6 +21,9 @@ export default class AuthTextInput extends Component {
       <View style={styles.container}>
         <View style={[styles.textInputWrapper, { borderColor }]}>
           <TextInput
+            accessible={true}
+            accessibilityLabel={this.props.accesttsibilityLabel+'ww'}
+            testID={this.props.testttID}
             ref={(ref) => this.textInputRef = ref}
             autoCapitalize={'none'}
             autoCorrect={false}
@@ -31,7 +34,7 @@ export default class AuthTextInput extends Component {
             selectionColor={'white'}
             onFocus={() => this.setState({ isFocused: true })}
             onBlur={() => this.setState({ isFocused: false })}
-            {...otherProps}
+            onChangeText={this.props.onChangeText}
           />
         </View>
       </View>

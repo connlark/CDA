@@ -357,9 +357,14 @@ const styles = StyleSheet.flatten({
         flex: 1,
         height: 170,
         margin: 5,
-        shadowOffset:{  width: 2.5,  height: 2.5,  },
+        shadowOffset:{  width: 1,  height: 2.5,  },
+        elevation:4,
+    //shadowOffset: { width: 2, height: 5 },
         shadowColor: 'grey',
-        shadowOpacity: 0.3,
+        shadowOpacity: 0.5,
+        shadowRadius: 2.5,
+
+
     },
     list: {
         flex: 1

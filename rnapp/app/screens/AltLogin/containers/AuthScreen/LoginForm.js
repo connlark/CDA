@@ -35,6 +35,8 @@ export default class LoginForm extends Component {
         />
         <View style={styles.form} ref={(ref) => { this.formRef = ref }}>
           <CustomTextInput
+            accesttsibilityLabel={"53252345234513324"}
+            testttID="345325235"
             name={'email'}
             ref={(ref) => this.emailInputRef = ref}
             placeholder={'Email'}
@@ -48,6 +50,9 @@ export default class LoginForm extends Component {
             isEnabled={!isLoading}
           />
           <CustomTextInput
+            accessible={true}
+            accessibilityLabel={"21234122355431"}
+            testID="152351234324"
             name={'password'}
             ref={(ref) => this.passwordInputRef = ref}
             placeholder={'Password'}
@@ -62,6 +67,9 @@ export default class LoginForm extends Component {
         <View style={styles.footer}>
           <View ref={(ref) => this.buttonRef = ref} animation={'bounceIn'} duration={600} delay={400}>
             <CustomButton
+              accessible={true}
+              accessibfilityLabel={"login-button"}
+              testcID="logdin-button"
               onPress={() => onLoginPress(email, password)}
               isEnabled={isValid}
               isLoading={isLoading}

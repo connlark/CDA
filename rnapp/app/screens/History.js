@@ -283,7 +283,7 @@ const styles = StyleSheet.flatten({
 });
 
 
-export default withTracker(params => {
+const APP =  withTracker(params => {
     const handle = Meteor.subscribe('BalanceHistory.pub.list');
     const id = !Meteor.user() ? '': Meteor.user()._id
     console.log(id)
@@ -292,3 +292,6 @@ export default withTracker(params => {
       history: Object.freeze(Meteor.collection('balanceHistory').findOne({userId: id}))
     };
   })(History);
+
+
+  export default APP;

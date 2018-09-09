@@ -38,6 +38,9 @@ export default class Opening extends Component {
         </View>
         <View animation={'zoomIn'} delay={800} duration={400}>
           <CustomButton
+            accessible={true}
+            accessibilityLabel={"login"}
+            testID="23135thisisit"
             text={'Sign In'}
             onPress={this.props.onSignInPress}
             buttonStyle={styles.signInButton}

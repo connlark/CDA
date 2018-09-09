@@ -4,9 +4,9 @@
  devices([
    #"iPhone 8",
    #"iPhone 8 Plus",
-   "iPhone SE",
+   #"iPhone SE",
    #"iPhone X",
-   #"iPad Pro (12.9-inch)",
+   "iPad Pro (12.9-inch)",
    #"iPad Pro (9.7-inch)",
  ])
 
@@ -15,7 +15,7 @@
  ])
 
 # The name of the scheme which contains the UI Tests
-# scheme("SchemeName")
+scheme("FASTLANE SCREENSHOT")
 
 # Where should the resulting screenshots be stored?
 output_directory("./screenshots")
@@ -28,6 +28,6 @@ clear_previous_screenshots(true)
 
 # For more information about all available options run
 # fastlane action snapshot
-
+clean(true)
 
 #fastlane screenshots

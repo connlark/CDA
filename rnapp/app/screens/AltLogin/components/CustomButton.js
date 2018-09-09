@@ -4,12 +4,12 @@ import { View } from 'react-native-animatable'
 
 import TouchableView from './TouchableView'
 
-const CustomButton = ({ onPress, isEnabled, isLoading, text, buttonStyle, textStyle, ...otherProps }) => {
+const CustomButton = ({ testcID, accessibfilityLabel, onPress, isEnabled, isLoading, text, buttonStyle, textStyle, ...otherProps }) => {
   //const onButtonPress = isEnabled && !isLoading ? onPress : () => null
 
   return (
-    <View {...otherProps}>
-      <TouchableView onPress={onPress} style={[styles.button, buttonStyle]}>
+    <View  {...otherProps}>
+      <TouchableView accessible={true} accessibilityLabel={"logdin-dddbutton"} testID={"logdin-button"} onPress={onPress} style={[styles.button, buttonStyle]}>
         {(isLoading) && <ActivityIndicator style={styles.spinner} color={'grey'} />}
         {(!isLoading) && <Text style={[styles.text, textStyle]}>{text}</Text>}
       </TouchableView>
