@@ -136,7 +136,7 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs, hack) =
                 hackdata = balances;
             }
 
-            findCoinBalanceInfo(ownedCoins, dta ? dta.balanceData:hackdata, userId, shouldNOTCalcDivs);
+            //findCoinBalanceInfo(ownedCoins, dta ? dta.balanceData:hackdata, userId, shouldNOTCalcDivs);
         });
     }
 }
@@ -228,7 +228,7 @@ const isSameBalance = (foo, bar) => {
     if (foo.length !== bar.length) return false;
     for (let i = 0; i < foo.length; i++) {
         if (foo[i].balance !== bar[i].balance){
-            console.log(foo.coin+' baL:'+foo[i].balance,bar[i].balance);
+            console.log(foo[i].coin+' baL:'+foo[i].balance,bar[i].balance);
             return false;
         }
     }

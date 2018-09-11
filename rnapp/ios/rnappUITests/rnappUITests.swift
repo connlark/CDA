@@ -36,7 +36,7 @@ class rnappUITests: XCTestCase {
       doLogin()
       let app = XCUIApplication()
       app.otherElements["Home"].tap()
-
+      sleep(2)
       snapshot("Home")
     }
   
@@ -47,7 +47,7 @@ class rnappUITests: XCTestCase {
     doLogin()
     let app = XCUIApplication()
     app.otherElements["Settings"].tap()
-    
+    sleep(2)
     snapshot("Settings")
   }
   
@@ -58,6 +58,7 @@ class rnappUITests: XCTestCase {
     doLogin()
     let app = XCUIApplication()
     app.otherElements["History"].tap()
+    sleep(2)
     snapshot("History")
   }
   
@@ -77,15 +78,26 @@ class rnappUITests: XCTestCase {
   }
   
   func doLogin(){
-    sleep(1)
+    
+    sleep(5)
     let app = XCUIApplication()
     let allowBtn = app.buttons["Allow"]
     if allowBtn.exists {
       allowBtn.tap()
     }
+    sleep(2)
+    if allowBtn.exists {
+      allowBtn.tap()
+    }
     
-    sleep(1)
-    if (app.otherElements["login"].exists){
+    let loginButtonContainer = app.descendants(matching: .any).containing(.button, identifier: "login").element(boundBy: 0) // second upgrade button-containing element
+    
+    print(login)
+    
+
+    
+    
+    if (loginButtonContainer.exists){
       let button = app.buttons.matching(identifier: "23135thisisit").element(boundBy: 0)
      // button.tap()
       app.otherElements["23135thisisit"].tap()
