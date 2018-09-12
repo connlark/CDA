@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert, Platform,ScrollView } from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert, Platform,ScrollView, AppState } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
 import {Avatar, Header, Icon} from 'react-native-elements';
@@ -7,10 +7,12 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import DropdownAlert from 'react-native-dropdownalert';
 import Grid from 'react-native-grid-component';
 import ReactNativeHaptic from 'react-native-haptic';
+import * as Animatable from 'react-native-animatable';
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
 import { IS_X } from '../config/styles';
+import { storeItem, retrieveItem } from '../lib';
 
 const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#d3d3d3","https://www.cryptocompare.com/media/33842920/dash.png":"#186799","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"#a993ce","https://www.cryptocompare.com/media/27010814/bcy.jpg":"#fe7dbc","https://www.cryptocompare.com/media/12318137/hsr.png":"#b2a8d9","https://www.cryptocompare.com/media/34477813/card.png":"#20329d","https://www.cryptocompare.com/media/34477783/olt.jpg":"#bff0f5","https://www.cryptocompare.com/media/351360/zec.png":"#8e773b","https://www.cryptocompare.com/media/19684/doge.png":"#eed67c","https://www.cryptocompare.com/media/34477805/trx.jpg":"#fd1a1a","https://pbs.twimg.com/profile_images/1013352125361819648/z2fvUNDq_400x400.jpg":"#cbca06"}');
 let ws;
@@ -22,11 +24,41 @@ class AltHome extends Component {
             refreshing: false,
             showUSDValue: false,
             cryptoObj: {},
-            showWebView: false
+            showWebView: false,
+            appState: AppState.currentState,
+            connected: false,
+            showingCoins: []
         };
 
         console.log('ws')
         const { cryptoObj } = this.state;
+        this.setUpWS();
+    }
+
+    componentWillUnmount(){
+        AppState.removeEventListener('change', this._handleAppStateChange);
+        ws = null;
+    }
+
+    _handleAppStateChange = (nextAppState) => {
+        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+          console.log('App has come to the foreground!')
+        
+          this.setUpWS();
+        }
+        ws = null;
+        this.setState({appState: nextAppState});
+    }
+
+    refreshBalances = () => {
+        Meteor.call('Balances.checkForNewBalance', (err) => {
+            if (err){
+                console.log(err) 
+            }
+        })
+    }
+
+    setUpWS = () => {
         console.log(ws)
         ws = new WebSocket('wss://socket.coinex.com/');
 
@@ -72,23 +104,6 @@ class AltHome extends Component {
         } 
     }
 
-    componentWillUnmount(){
-        ReactNativeHaptic.generate('notificationWarning')
-        ws = null;
-
-    }
-
-    refreshBalances = () => {
-        Meteor.call('Balances.checkForNewBalance', (err) => {
-            if (err){
-                console.log(err) 
-            }
-        })
-    }
-    state = {
-        connected: false,
-        showingCoins: []
-    }
     _keyExtractor = (item, index) => item.coin;
 
     _renderHeader = () => {
@@ -99,6 +114,15 @@ class AltHome extends Component {
         )
     }
     componentDidMount(){
+        AppState.addEventListener('change', this._handleAppStateChange);
+        retrieveItem('notificationsPushToken').then((data) => {
+            if (data && data.token){
+              Meteor.call('notifications.set.pushToken', data, err => {
+                //if (err) { alert(`notifications.set.pushToken: ${err.reason}`); }
+                this.props.navigation.navigate('App')
+              });
+            }
+          });
     }
     onRead = (token) => {
         try {
@@ -150,6 +174,8 @@ class AltHome extends Component {
             this.setState({refreshing: false})
         })
     }
+    bounce = () => this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+  handleViewRef = ref => this.view = ref;
 
     _renderGridItem = (item, i) => {
         let imageUrl = item.imgUrl ? item.imgUrl : 'https://frontiersinblog.files.wordpress.com/2018/04/frontiers-in-blockchain-logo.jpg';

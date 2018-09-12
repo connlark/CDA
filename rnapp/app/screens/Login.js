@@ -5,6 +5,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 import OAuthManager from 'react-native-oauth';
 import { Button, SocialIcon } from 'react-native-elements'
 
+import { storeItem, retrieveItem } from '../lib';
 const { width } = Dimensions.get('window');
 
 class Login extends Component {
@@ -42,6 +43,14 @@ class Login extends Component {
           this.dropdown.alertWithType('error', 'Error', error.reason);
         }
         else {
+          retrieveItem('notificationsPushToken').then((data) => {
+            if (data && data.token){
+              Meteor.call('notifications.set.pushToken', data, err => {
+                //if (err) { alert(`notifications.set.pushToken: ${err.reason}`); }
+                this.props.navigation.navigate('App')
+              });
+            }
+          });
           this.props.navigation.navigate('App');
         }
       });

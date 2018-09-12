@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Platform, FlatList,TouchableOpacity, ScrollView } from 'react-native';
+import { Text, StyleSheet, View, Platform, RefreshControl,TouchableOpacity, ScrollView } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import Graph from '../components/graph';
 import ReactNativeHaptic from 'react-native-haptic';
@@ -10,6 +10,7 @@ import Loading from '../components/loading'
 import Grid from 'react-native-grid-component';
 import { Avatar } from 'react-native-elements';
 import moment from 'moment';
+import { withNavigation } from 'react-navigation';
 
 import { IS_X } from '../config/styles';
 
@@ -152,7 +153,7 @@ class History extends Component {
         return out;
     }
 
-    refreshData = () => {
+    _onRefresh = () => {
         Analytics.trackEvent('Refreshing Data');
         this.setState({refreshing: true});
 
@@ -184,7 +185,15 @@ class History extends Component {
         if(historyReady && history && revHistory){
             return (
                 <View style={{flex:1}}>
-                    <ScrollView style={{flex:1, height:'100%'}}>
+                    <ScrollView style={{flex:1, height:'100%'}} 
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={refreshing}
+                                onRefresh={this._onRefresh}
+                            />
+                        }
+                    
+                    >
                         {/*<FlatList
                             stickyHeaderIndices={[0]}
                             removeClippedSubviews={false}
@@ -291,7 +300,7 @@ const APP =  withTracker(params => {
       historyReady: handle.ready(),
       history: Object.freeze(Meteor.collection('balanceHistory').findOne({userId: id}))
     };
-  })(History);
+  })(withNavigation(History));
 
 
   export default APP;

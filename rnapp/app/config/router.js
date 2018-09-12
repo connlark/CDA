@@ -1,8 +1,10 @@
 
 import React from 'react';
-
+import { StyleSheet } from 'react-native';
+import ReactNativeHaptic from 'react-native-haptic';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createSwitchNavigator, createStackNavigator} from 'react-navigation';
+import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 
 import Home from '../screens/Home';
 import HistoryScreen from '../lib/historyHoc';
@@ -12,18 +14,38 @@ import AltHome from '../screens/AltHome';
 import AltLogin from '../screens/AltLogin/app';
 import Login from '../screens/Login';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
+import DivInfo from '../screens/DivInfo';
 
 const AuthStack = createStackNavigator({ AltLogin }, {headerMode: 'none'});
 
 
+const HomeStack = createStackNavigator({
+  Homde: AltHome,
+  Details: DivInfo,
+});
 
-const AppStack = createBottomTabNavigator(
+const Stack = createStackNavigator({ DivInfo }, {headerMode: 'none'});
+
+
+const AppTabs = createMaterialBottomTabNavigator(
     {
       Home: AltHome,
       History: HistoryScreen,
       Settings: Settings,
     },
     {
+      shifting: true,
+      barStyle: {
+        backgroundColor: '#f8f7f9',
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderStyle: 'solid',
+        borderColor: '#d0cfd0',
+        borderTopLeftRadius: 9,
+        borderTopRightRadius: 9
+      },
+      routes: [
+        { key: 'Home', routeName: 'Home' }, { key: 'History', routeName: 'History' }, { key: 'Settings', routeName: 'Settings' },
+      ],
       navigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, tintColor }) => {
           const { routeName } = navigation.state;
@@ -44,16 +66,23 @@ const AppStack = createBottomTabNavigator(
         header: null,
       }),
       tabBarOptions: {
-        activeTintColor: 'tomato',
+        activeTintColor: '#f0edf6',
+        inactiveTintColor: '#3e2465',
+        labelStyle: {
+          fontSize: 12,
+        },
         inactiveTintColor: 'gray',
+          barStyle: { backgroundColor: 'blue' },
+
       },
     }
-  );
+);
+
 
   export const AppNavigator =  createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
-      App: AppStack,
+      App: AppTabs,
       Auth: AuthStack,
     },
     {
