@@ -1842,7 +1842,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00373DA4AB43AEA5374C99FA /* Pods-rnapp.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = rnapp/rnapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1886,7 +1886,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4E10BA59ECB0D7042564296 /* Pods-rnapp.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = rnapp/rnapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;

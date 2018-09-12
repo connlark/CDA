@@ -174,8 +174,6 @@ class AltHome extends Component {
             this.setState({refreshing: false})
         })
     }
-    bounce = () => this.view.bounce(800).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
-  handleViewRef = ref => this.view = ref;
 
     _renderGridItem = (item, i) => {
         let imageUrl = item.imgUrl ? item.imgUrl : 'https://frontiersinblog.files.wordpress.com/2018/04/frontiers-in-blockchain-logo.jpg';

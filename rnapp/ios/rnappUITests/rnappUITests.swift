@@ -91,9 +91,6 @@ class rnappUITests: XCTestCase {
     }
     
     let loginButtonContainer = app.descendants(matching: .any).containing(.button, identifier: "login").element(boundBy: 0) // second upgrade button-containing element
-    
-    print(login)
-    
 
     
     
