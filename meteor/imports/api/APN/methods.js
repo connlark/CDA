@@ -14,22 +14,36 @@ Meteor.methods({
       $addToSet: { pushToDevices: { token, os } },
     });
   },
-  'notifications.send.APNMsg'({sendToUserId}) {
+  'notifications.send.APNMsg'({sendToUserId, message, type, extraData}) {
+    check(arguments[0], {
+      sendToUserId: String,
+      message: String,
+      type: String,
+      extraData: Object
+    });
+
     const user = Meteor.users.findOne(sendToUserId);
-    user.pushToDevices.map((device) => {
-      const token = device.token;
-      
-      agent.createMessage()
-        .set({
-          extra: 123,
-        })
-        .device(token)
-        .alert('This is an alert')
-        .send(function (err) {
-          if (err) { throw new Meteor.Error(SEND_APN_MSG, err.message); }
-          else { console.log('APN msg sent successfully!'); }
-        });
-    })
+    if(typeof(user.pushToDevices) === 'undefined') return;
+    //if(user.isMuted) return;
+
+    Meteor.defer(() => {
+      user.pushToDevices.forEach(device => {
+        const token = device.token;
+  
+        agent.createMessage()
+          .set({
+              type: type,
+              extraData: JSON.stringify(extraData),
+              _id: Random.id()
+          })
+          .device(token)
+          .alert(message)
+          .send(function (err) {
+            if (err) { throw new Meteor.Error(SEND_APN_MSG, err.message); }
+            else { console.log('APN msg sent successfully!'); }
+          });
+      });
+    });
   },
   'notifications.send.APNMsg.TOALL'() {
     const users = Meteor.users.find();

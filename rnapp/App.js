@@ -16,7 +16,7 @@ import { storeItem, retrieveItem } from './app/lib';
 //let METEOR_URL = 'ws://localhost:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
-let METEOR_URL = 'ws://73.246.190.116:3000/websocket';
+let METEOR_URL = 'ws://localhost:3000/websocket';
 
 if (__DEV__) {
   process.env.REACT_NAV_LOGGING = false

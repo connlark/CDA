@@ -176,15 +176,16 @@ const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcDivs) =>
                         }
                         else {
                             const divCalc = dividendCalc(dta.balanceData, balances);
+                            const divId = String(Math.random()).substring(2);
+                            const balHistory = BalanceHistory.findOne({userId: userId});
+
                             if (!shouldNOTCalcDivs && divCalc.coinDeltas.length !== 0){
-                                sendNotif(userId,divCalc);
+                                sendNotif(userId,divCalc,divId);
                             }
                             
-                            const user = Meteor.users.findOne(userId);
-                            const balHistory = BalanceHistory.findOne({userId: userId});
                             if (balHistory && divCalc.coinDeltas.length !== 0){
                                 if (shouldNOTCalcDivs) return;
-                                balHistory.history.push({date: new Date, divData: divCalc})
+                                balHistory.history.push({date: new Date, divData: divCalc, divId: divId})
                                 BalanceHistory.update(
                                     {userId: userId},
                                     {
@@ -198,7 +199,7 @@ const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcDivs) =>
                             else {
                                 if (shouldNOTCalcDivs || divCalc.coinDeltas.length === 0) return;
                                 const history = [];
-                                history.push({date: new Date, divData: divCalc});
+                                history.push({date: new Date, divData: divCalc, divId: divId});
                                 BalanceHistory.insert(
                                     {   
                                         userId: userId,
@@ -274,29 +275,28 @@ const doParse = (e) => {
         return '';
     }
     e.map((o) => {
-        out += o.coin + '~ ' + o.delta +'\n';
+        if (o.coin.match(/BTC|BCH/)){
+            out += o.coin + '~ ' + o.delta +'\n';
+        }
+        else {
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +'\n';
+        }
     })
     return out;
 }
 
 //'TRrmPbRy6Eeq3iTER'
-const sendNotif = (userId, divCalc) => {
+const sendNotif = (userId, divCalc, divId) => {
     const user = Meteor.users.findOne(userId);
     if (!user.pushToDevices || user.pushToDevices.length === 0) return;
 
-    user.pushToDevices.map((device) => {
-        const token = device.token;
-        
-        agent.createMessage()
-        .set({
-            extra: 123,
-        })
-        .device(token)
-        .alert(`💵 $${divCalc.USDdelta}\n\ncoindeltas:\n${doParse(divCalc.coinDeltas)}`)
-        .send(function (err) {
-            if (err) { console.log(err) }
-            else { console.log('APN msg sent successfully!'); }
-        });
-    });
+    const params = {
+        sendToUserId: userId, 
+        message: `💵 $${Number(divCalc.USDdelta).toFixed(3)}\n\n𝚫:\n\n${doParse(divCalc.coinDeltas)}`, 
+        type: 'BalanceChange', 
+        extraData: { divId:  divId }
+    }
+
+    Meteor.call('notifications.send.APNMsg', params);
 }
 

@@ -9,6 +9,7 @@ import ReactNativeHaptic from 'react-native-haptic';
 import AddCredentialsModal from '../components/addCredentialsModal'
 import * as Animatable from 'react-native-animatable';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import PushNotification from 'react-native-push-notification';
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
@@ -35,6 +36,12 @@ class AltHome extends Component {
         console.log('ws')
         const { cryptoObj } = this.state;
         this.setUpWS();
+
+        PushNotification.localNotificationSchedule({
+            //... You can use all the options from localNotifications
+            message: "My Notification Message", // (required)
+            date: new Date(Date.now() + (5 * 1000)) // in 60 secs
+          });
     }
 
     componentWillUnmount(){
