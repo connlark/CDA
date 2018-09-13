@@ -11,6 +11,7 @@ import Grid from 'react-native-grid-component';
 import { Avatar } from 'react-native-elements';
 import moment from 'moment';
 import { withNavigation } from 'react-navigation';
+import { Card } from 'react-native-material-ui';
 
 import { IS_X } from '../config/styles';
 
@@ -182,7 +183,7 @@ class History extends Component {
         console.log(this.state.history)
         let graphistory = history;
         
-        if(historyReady && history && revHistory){
+        if(historyReady && history && history.history.length > 0 && revHistory){
             return (
                 <View style={{flex:1}}>
                     <ScrollView style={{flex:1, height:'100%'}} 
@@ -259,6 +260,18 @@ class History extends Component {
             );
 
         }
+        else if (historyReady){
+            return (
+                <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
+                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.handleTouchedHistory(item)}>
+                        <View style={{marginBottom: 10}}>
+                            <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                
+            )
+        }
         return (
             <View style={styles.loading}>
                 <Loading/>
@@ -280,6 +293,14 @@ const styles = StyleSheet.flatten({
     item: {
         flex: 1,
         height: 120,
+        //margin: 7,
+        backgroundColor: '#f6f5f3',
+        shadowOffset:{  width: 2.5,  height: 2.5,  },
+        shadowColor: 'grey',
+        shadowOpacity: 0.3,
+      },
+      alertItem: {
+        flex: 1,
         //margin: 7,
         backgroundColor: '#f6f5f3',
         shadowOffset:{  width: 2.5,  height: 2.5,  },

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, WebView, StatusBar,Alert, Platform,ScrollView, AppState } from 'react-native';
+import { Text, StyleSheet, View, TouchableHighlight, TouchableOpacity, WebView, StatusBar,Alert, Platform,ScrollView, AppState, Modal } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
 import {Avatar, Header, Icon} from 'react-native-elements';
-import QRCodeScanner from 'react-native-qrcode-scanner';
 import DropdownAlert from 'react-native-dropdownalert';
 import Grid from 'react-native-grid-component';
 import ReactNativeHaptic from 'react-native-haptic';
+import AddCredentialsModal from '../components/addCredentialsModal'
 import * as Animatable from 'react-native-animatable';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
@@ -27,7 +28,8 @@ class AltHome extends Component {
             showWebView: false,
             appState: AppState.currentState,
             connected: false,
-            showingCoins: []
+            showingCoins: [],
+            modalVisible: false
         };
 
         console.log('ws')
@@ -59,6 +61,7 @@ class AltHome extends Component {
     }
 
     setUpWS = () => {
+        if (ws && ws.readyState !== ws.CLOSED) return;
         console.log(ws)
         ws = new WebSocket('wss://socket.coinex.com/');
 
@@ -73,14 +76,15 @@ class AltHome extends Component {
                 "params": [],
                 "id": parseInt(Math.random()*10000)                
             }
-              setTimeout(() => {
-                  console.log(this.state.cryptoObj)
-              }, 1500);
-              setTimeout(() => {
-                console.log(this.state.cryptoObj)
-            }, 7500);
             let subscribe_command = JSON.stringify(payload)
-            ws.send(subscribe_command); // send a message
+            if (ws){
+                ws.send(subscribe_command); // send a message
+            }
+            else {
+                setTimeout(() => {
+                    this.setUpWS()
+                }, 600);
+            }
         };
 
         ws.onmessage = (e) => {
@@ -248,6 +252,17 @@ class AltHome extends Component {
         </View>
       );
     }
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
+
+    closeModal = () => {
+        setState({
+            modalVisible: false
+        });
+    }
+
     render() {
         const { balances, balancesReady } = this.props;
         const { refreshing, showWebView, selectedCoinObj } = this.state;
@@ -316,21 +331,16 @@ class AltHome extends Component {
         }
         else if (balancesReady){
             return (
-                <QRCodeScanner
-                    ref={component => this.scanner = component}
-                    onRead={this.onRead}
-                    reactivateTimeout={3}
-                    topContent={
-                        <Text style={styles.centerText}>
-                            Go to <Text style={styles.textBold}>https://www.coinex.com/apikey</Text> on your computer and scan the QR code for an API key.
-                        </Text>
-                    }
-                    bottomContent={
-                    <TouchableOpacity style={styles.buttonTouchable}>
-                        <Text style={styles.buttonText}>OK. Got it!</Text>
+                <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
+                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.mymodal.setModalVisible( true)}>
+                        <View style={{marginBottom: 10}}>
+                            <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
+                        </View>
                     </TouchableOpacity>
-                }
-              />
+                    <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
+                </View>
+
+            
             );
         }
         return (
@@ -398,4 +408,12 @@ const styles = StyleSheet.flatten({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    alertItem: {
+        flex: 1,
+        //margin: 7,
+        backgroundColor: '#f6f5f3',
+        shadowOffset:{  width: 2.5,  height: 2.5,  },
+        shadowColor: 'grey',
+        shadowOpacity: 0.3,
+      },
 });

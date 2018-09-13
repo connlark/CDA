@@ -12,6 +12,7 @@ import Meteor, { withTracker } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
 import SettingsList from 'react-native-settings-list';
 import { IS_X } from '../config/styles';
+import AddCredentialsModal from '../components/addCredentialsModal'
 
 import {
     SettingsDividerShort, 
@@ -136,7 +137,7 @@ class Settings extends Component {
       const { user } = this.props;
       const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress } = this.state;
       return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, height: '100%'}}>
         <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
             <Header
                 outerContainerStyles={{marginTop: -15, height: IS_X ? 97:70}}
@@ -184,7 +185,9 @@ class Settings extends Component {
                     negativeColor: colors.monza,
                 }}
             />
-            <View style={{marginTop: '114%'}}/>
+            <SettingsCategoryHeader title={'Edit CoinEx API & TRX Wallet'} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400'}}/>
+
+            <View style={{marginTop: '10%'}}/>
             { updateText ? 
                 <SettingsCategoryHeader title={updateText} titleProps={{onPress: this.updateApp}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
                 :null
@@ -195,9 +198,10 @@ class Settings extends Component {
                 :null
             }
             <SettingsCategoryHeader title={`App Version: ${appVersion} ( ${label} )`} titleProps={{onPress: this.updateApp}}/>
-        
+            <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
+
             </ScrollView>
-        <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
+            <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
         </View>
         );
     }

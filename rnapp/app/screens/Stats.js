@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList,TouchableHighlight, ScrollView } from 'react-native';
+import { Text, StyleSheet, View, FlatList,TouchableOpacity, ScrollView } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import Grid from 'react-native-grid-component';
 
@@ -79,8 +79,8 @@ class Stats extends Component {
 
     render() {
         const { lastHourUSD, totalUSD, netWorth } = this.state.stats;
-
-        if(this.props.historyReady && this.props.history){
+        const { historyReady, history } = this.props;
+        if(historyReady && history &&  history.history.length > 0){
             return (
                 <ScrollView style={{flex:1}} contentContainerStyle={{alignItems: 'center'}}>
                     <View style={{marginTop: '70%', alignItems: 'center'}}>
@@ -92,6 +92,18 @@ class Stats extends Component {
                 </ScrollView>
             );
 
+        }
+        else if (historyReady){
+            return (
+                <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
+                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.handleTouchedHistory(item)}>
+                        <View style={{marginBottom: 10}}>
+                            <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                
+            )
         }
         return (
             <View style={styles.loading}>
@@ -121,6 +133,14 @@ const styles = StyleSheet.flatten({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    alertItem: {
+        flex: 1,
+        //margin: 7,
+        backgroundColor: '#f6f5f3',
+        shadowOffset:{  width: 2.5,  height: 2.5,  },
+        shadowColor: 'grey',
+        shadowOpacity: 0.3,
+      },
 
 });
 
