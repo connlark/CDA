@@ -39,7 +39,8 @@ class DivInfo extends Component {
             refreshing: false,
             prevHistory: {},
             history: {},
-            revHistory:[]
+            revHistory:[],
+            switched: []
         };
     }
 
@@ -48,10 +49,26 @@ class DivInfo extends Component {
       // Reset any parts of state that are tied to that user.
       // In this simple example, that's just the email.
       if (props.history && props.history.history && props.history !== state.prevHistory) {
-          const hi = consolodateData(props.history.history.slice())
+        let thisOne = null;
+
+        const hi = consolodateData(props.history.history.slice());
+          const item = props.navigation.state.params.item;
+          console.log(item, hi)
+          if (item && hi){
+          hi.map((e) => {
+            if (moment(item.date).isSame(moment(e.date), 'd')){
+                thisOne = e;
+            }
+          })
+        }
+
+        if (!thisOne){
+            props.navigation.goBack();
+        }
         return {
           prevHistory: props.history,
-          history: {history: hi}
+          history: {history: hi},
+          selectedCoin: thisOne
         };
       }
       
@@ -87,7 +104,7 @@ class DivInfo extends Component {
                     element.uri = 'https://file.coinex.com/2018-08-01/72F1DF3618A64383AE6AEA8B6D4DBF3E.png';
                     break;
                 default:
-                    element.uri = `https://www.livecoinwatch.com/images/icons64/${element.coin.toLowerCase()}.png`;
+                   // element.uri = `https://www.livecoinwatch.com/images/icons64/${element.coin.toLowerCase()}.png`;
                     break;
             }
             
@@ -127,6 +144,8 @@ class DivInfo extends Component {
     _renderPlaceholder = i => <View style={styles.item} key={i} />;
     
     _renderHeader = () => {
+        const { switched } = this.state;
+        console.log(switched)
         const historyclone = this.props.history;
         
         
@@ -134,6 +153,7 @@ class DivInfo extends Component {
         return (
                 <Graph
                     history={historyclone}
+                    switched={switched}
                 />
                 );
     }
@@ -175,7 +195,8 @@ class DivInfo extends Component {
         Meteor.call('Balances.checkForNewBalance', (err) => {
             if (err){
                 console.log(err) 
-                this.dropdown.alertWithType('error', 'Error', err.reason);
+                const { dropdown } = this;
+                dropdown.alertWithType('error', 'Error', err.reason);
             }
             else {
                 this.dropdown.alertWithType('success', 'Refreshed Sucessfully','☻ ☻ ☻ ☻ ☻ ☻ ☻');
@@ -184,7 +205,33 @@ class DivInfo extends Component {
         })
     }
 
+    deleteDelta = (delta) => {
+       // console.log(delta)
+        const item = this.props.navigation.state.params.item;
+        console.log('item',item.date)
+
+        delta.date = item.date
+
+        Meteor.call('BalanceHistory.deleteBalanceHistoryDay', delta, (err) => {
+            if (err){
+                console.log(err);
+                this.dropdown.alertWithType('error', 'Deletion Error',err.reason);
+                ReactNativeHaptic.generate('notificationError');
+            }
+            else {
+                ReactNativeHaptic.generate('notificationSuccess');
+                this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
+            }
+            this.setState({showProgress: false});
+        });
+    }
+
     renderRow  = ({ item }) => {
+        let  thisSwitched = [];
+        thisSwitched.push(this.state.switched);
+        if (!thisSwitched){
+            thisSwitched = [];
+        }
       const { coin, valueUSD, delta } = item;
       const USDdelta = valueUSD ? valueUSD:0
       let formattedDelta = null;
@@ -202,38 +249,53 @@ class DivInfo extends Component {
         <ListItem
           roundAvatar
           title={item.coin}
-          subtitle={`Δ: ${numberWithCommas(String(formattedDelta), shouldNOTFix)}\tΔUSD: ${numberWithCommas(String(USDdelta))}`}
+          subtitle={`Δ: ${numberWithCommas(String(formattedDelta), shouldNOTFix)}   ΔUSD: ${numberWithCommas(String(USDdelta))}`}
           avatar={{uri:item.uri}}
+          //switchButton={true}
+          hideChevron={true}
+          badge={{ onPress: () => this.deleteDelta(item), value: '❌', textStyle: { color: 'white' }, containerStyle: { backgroundColor: 'white', marginRight: 10 } }}
+          //switched={this.state.switched.indexOf(item.coin) === -1}
+          onSwitch={() => {
+              var index = this.state.switched.indexOf(item.coin);
+
+                if (index > -1) {
+                    const arr = []
+                    this.state.switched.map((e) => {
+                        if (e !== item.coin){
+                            arr.push(e)
+                        }
+                    });
+                    arr.filter(item => item !== item.coin)
+
+                    this.setState({switched: arr})
+                    return;
+                }
+                const arr = []
+                this.state.switched.map((e) => arr.push(e));
+
+                arr.push(item.coin);
+
+              this.setState({switched: arr});
+          }}
         />
       )
     }
 
-    
+    callThing = (value,valueUSD,coin) => {
+        if (this.dropdown){
+            this.dropdown.alertWithType('info',`Selected Coin ${coin}`,`Amount: ${value}\nUSD: ${valueUSD}`);                              
+        }
+    }
 
     render() {
-        const { history, revHistory } = this.state;
+        const { history, revHistory, switched, selectedCoin } = this.state;
         const { historyReady, navigation } = this.props; 
-        let thishistory = Object.freeze(history);
-        const graphHistory = Object.freeze(history);
-        const item = this.props.navigation.state.params.item;
-        let selected = null;
-        if (item){
-          const thisone = item.date.toLocaleDateString + item.toLocaleTimeString;
-          history.history.map((e) => {
-            if (item === e){
-              selected = e;
-            }
-          })
-          console.log(this.props.navigation.state.params)
-        }
-        console.log(this.props.navigation.state.params)
-
 
 
         const { showProgress, showAlert, selectedData, refreshing } = this.state;
         let graphistory = history;
         
-        if(historyReady && history && history.history.length > 0 && revHistory && selected){
+        if(historyReady && selectedCoin){
             return (
                 <View style={{flex:1}}>
                     <ScrollView style={{flex:1, height:'100%'}} 
@@ -246,14 +308,16 @@ class DivInfo extends Component {
                     
                     >
                     <View style={{height: IS_X ? 55:30,}}/>
-                    <Text style={styles.headerText}>  {moment(selected.date).format("MMM Do")} </Text> 
+                    <Text style={styles.headerText}>  {moment(selectedCoin.date).format("MMM Do")} </Text> 
                     <Graph
-                      coinDeltas={selected.divData.coinDeltas}
-                      dropdown={({coin, value, valueUSD}) => this.dropdown.alertWithType('info',`Selected Coin ${coin}`,`Amount: ${value}\nUSD: ${valueUSD}`)}
+                      coinDeltas={selectedCoin.divData.coinDeltas}
+                      dropdown={this.callThing}
+                      switched={switched ? switched:[]}
                     />
                     <List>
                       <FlatList
-                        data={selected.divData.coinDeltas}
+                        data={selectedCoin.divData.coinDeltas}
+                        extraData={switched}
                         renderItem={this.renderRow}
                         keyExtractor={item => item.coin}
                       />
@@ -299,7 +363,7 @@ class DivInfo extends Component {
             );
 
         }
-        else if (historyReady){
+        /*else if (historyReady){
             return (
                 <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
                     <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => true}>
@@ -310,7 +374,7 @@ class DivInfo extends Component {
                 </View>
                 
             )
-        }
+        }*/
         return (
             <View style={styles.loading}>
                 <Loading/>

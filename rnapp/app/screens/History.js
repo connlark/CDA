@@ -117,7 +117,7 @@ class History extends Component {
         );
     }
    
-    _renderPlaceholder = i => <View style={styles.item} key={i} />;
+    _renderPlaceholder = i => <View style={[styles.item, {backgroundColor: 'transparent'}]} key={i} />;
     
     _renderHeader = () => {
         const historyclone = this.props.history;
@@ -191,7 +191,7 @@ class History extends Component {
         console.log(this.state.history)
         let graphistory = history;
         
-        if(historyReady && history && history.history.length > 0 && revHistory){
+        if(historyReady && history && history.history && history.history.length > 0 && revHistory){
             return (
                 <View style={{flex:1}}>
                     <ScrollView style={{flex:1, height:'100%'}} 

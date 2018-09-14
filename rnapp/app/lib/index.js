@@ -44,6 +44,7 @@ export async function retrieveItem(key) {
         if (newdta.length > 0){
             if (moment(e.date).isSame(moment(newdta[newdta.length-1].date), 'd')){
                 newdta[newdta.length-1].divData.USDdelta = Number(newdta[newdta.length-1].divData.USDdelta) + Number(e.divData.USDdelta);
+                console.log(newdta[newdta.length-1])
                 newdta[newdta.length-1].divData.coinDeltas.slice().map((foo) => {
                     e.divData.coinDeltas.slice().map((coin) => {
                         if (foo.coin === coin.coin){

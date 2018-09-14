@@ -22,7 +22,7 @@ export default class Graph extends Component {
         return dta;
     }
     render() {
-        const { coinDeltas, dropdown } = this.props;
+        const { coinDeltas, dropdown, switched } = this.props;
         let data = [ ]
         const contentInset = {  }
 
@@ -30,18 +30,17 @@ export default class Graph extends Component {
         
         coinDeltas.map((e) => {
             const valueUSDd = e.valueUSD ? e.valueUSD:0;
-            data.push({value: e.delta, coin: e.coin, valueUSD: valueUSDd});
-            console.log(e)
+            console.log('it',switched)
+            if (switched && switched.indexOf(e.coin) === -1){
+                data.push({value: e.delta, coin: e.coin, valueUSD: valueUSDd});
+            }
         });
-
-       // console.log(data)
-
-
+        console.log('hiefie',coinDeltas)
         const pieData = data.filter(value => value.value > 0).map((value, index) => ({
             value: value.value,
             svg: {
                 fill: randomColor(),
-                onPress: () => dropdown(value),
+                onPressIn: () => dropdown(value.value, value.valueUSD, value.coin)
             },
             key: `pie-${index}`,
             valueUSD: value.valueUSD,
@@ -79,13 +78,12 @@ export default class Graph extends Component {
                 <PieChart
                  //   style={ { marginTop: 200 } }
                     style={{ flex: 1, marginBottom: dimensions.height*0.025,marginTop: dimensions.height*0.02, borderRadius: 9 }}
-                    valueAccessor={({ item }) => item.value}
+                   // valueAccessor={({ item }) => item.value}
                     data={ pieData }
+                    animate={true}
                     spacing={0}
-                    >
-                    <Labels/>
-                </PieChart>
-            
+                    />
+           
             </View>
                 
            {/* <View style={styles.container}>

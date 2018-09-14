@@ -95,7 +95,7 @@ PushNotification.configure({
 const RNApp = (props) => {
   const { status, user, loggingIn } = props;
   return  <Provider store={store}>
-            <AppNavigator //persistenceKey={"NEWNavigationState"} 
+            <AppNavigator persistenceKey={"HELLO"} 
             />
           </Provider>
 };
