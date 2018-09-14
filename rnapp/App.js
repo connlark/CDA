@@ -12,11 +12,17 @@ import codePush from "react-native-code-push";
 import store from './app/config/store';
 import {AppNavigator} from './app/config/router';
 import { recieveNotification } from './app/Actions/notificationLogic'
+import { recieveData } from './app/Actions/meteorData';
+
 import { storeItem, retrieveItem } from './app/lib';
 //let METEOR_URL = 'ws://localhost:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://jbum.meteorapp.com/websocket';
 let METEOR_URL = 'ws://localhost:3000/websocket';
+
+const ADDED = 'ddp/added';
+const CHANGED  = 'ddp/changed';
+const REMOVED = 'ddp/removed';
 
 if (__DEV__) {
   process.env.REACT_NAV_LOGGING = false
@@ -30,6 +36,17 @@ if (process.env.NODE_ENV === 'production') {
 
 Meteor.connect(METEOR_URL);
 
+Meteor.ddp.on('added', (payload) => {
+  store.dispatch(recieveData({type: ADDED, payload }));
+});
+
+Meteor.ddp.on('changed', (payload) => {
+  store.dispatch(recieveData({type: CHANGED, payload }));
+});
+
+Meteor.ddp.on('removed', (payload) => {
+  store.dispatch(recieveData({type: REMOVED, payload }));
+});
 
 PushNotification.configure({
   // (optional) Called when Token is generated (iOS and Android)
@@ -78,7 +95,7 @@ PushNotification.configure({
 const RNApp = (props) => {
   const { status, user, loggingIn } = props;
   return  <Provider store={store}>
-            <AppNavigator persistenceKey={"NavigationState"} 
+            <AppNavigator //persistenceKey={"NEWNavigationState"} 
             />
           </Provider>
 };

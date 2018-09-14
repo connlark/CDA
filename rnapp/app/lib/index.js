@@ -1,9 +1,14 @@
 import Dimensions from 'Dimensions';
-
+import { AsyncStorage } from 'react-native';
 let dimen = Dimensions.get('window');
-export const IS_X =  (dimen.height === 812 || dimen.width === 812);
+import moment from 'moment';
 
-export  const numberWithCommas = (x) => {
+export const IS_X =  (dimen.height === 812 || dimen.width === 812);
+export const dimensions = dimen;
+
+export  const numberWithCommas = (x, shouldNOTFix = false) => {
+
+    x = !shouldNOTFix ? String(Number(x).toFixed(2)):x;
     if (typeof x !== 'string') return;
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -31,4 +36,51 @@ export async function retrieveItem(key) {
       console.log(error.message);
     }
     return
+  }
+
+ export const consolodateData = (history) => {
+    let newdta = [];
+    history.slice().map((e) => {
+        if (newdta.length > 0){
+            if (moment(e.date).isSame(moment(newdta[newdta.length-1].date), 'd')){
+                newdta[newdta.length-1].divData.USDdelta = Number(newdta[newdta.length-1].divData.USDdelta) + Number(e.divData.USDdelta);
+                newdta[newdta.length-1].divData.coinDeltas.slice().map((foo) => {
+                    e.divData.coinDeltas.slice().map((coin) => {
+                        if (foo.coin === coin.coin){
+                           // console.log(coin)
+                            foo.delta = Number(coin.delta) + Number(foo.delta);
+  
+                            if (foo.valueUSD && coin.valueUSD){
+                              foo.valueUSD = Number(coin.valueUSD) + Number(foo.valueUSD);
+                            }
+                        }
+                    });
+                    
+                });
+  
+                e.divData.coinDeltas.slice().map((coin) => {
+                  let hasIt = false;
+                  newdta[newdta.length-1].divData.coinDeltas.map((foo) => {
+                      if (foo.coin === coin.coin){
+                          hasIt = true
+                      }
+                  })
+  
+                  if (!hasIt){
+                      newdta[newdta.length-1].divData.coinDeltas.push(coin)
+  
+                  }
+                });
+  
+            }
+            else {
+                newdta.push(e)
+            }
+        }
+        else {
+            newdta.push(e)
+        }
+    })
+  
+    return newdta;
   }

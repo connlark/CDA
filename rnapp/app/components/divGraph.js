@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
-import { LineChart, YAxis, Grid, XAxis, AreaChart } from 'react-native-svg-charts'
+import { PieChart, YAxis, Grid, XAxis, AreaChart } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
 import * as d3Scale from 'd3-scale';
 import moment from 'moment';
@@ -22,15 +22,73 @@ export default class Graph extends Component {
         return dta;
     }
     render() {
-        const { history } = this.props;
-        const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
+        const { coinDeltas, dropdown } = this.props;
+        let data = [ ]
         const contentInset = {  }
 
-    
+        const randomColor = () => ('#' + (Math.random() * 0xFFFFFF << 0).toString(16) + '000000').slice(0, 7)
+        
+        coinDeltas.map((e) => {
+            const valueUSDd = e.valueUSD ? e.valueUSD:0;
+            data.push({value: e.delta, coin: e.coin, valueUSD: valueUSDd});
+            console.log(e)
+        });
+
+       // console.log(data)
+
+
+        const pieData = data.filter(value => value.value > 0).map((value, index) => ({
+            value: value.value,
+            svg: {
+                fill: randomColor(),
+                onPress: () => dropdown(value),
+            },
+            key: `pie-${index}`,
+            valueUSD: value.valueUSD,
+            coin: value.coin
+
+        }));
+
+        console.log(pieData)
+
+        const Labels = ({ slices, height, width }) => {
+            return slices.map((slice, index) => {
+                const { labelCentroid, pieCentroid, data } = slice;
+
+                return (
+                    <Text
+                        key={index}
+                        x={pieCentroid[ 0 ]}
+                        y={pieCentroid[ 1 ]}
+                        fill={'black'}
+                        textAnchor={'middle'}
+                        alignmentBaseline={'middle'}
+                        fontSize={24}
+                        stroke={'black'}
+                        strokeWidth={0.2}
+                    >
+                        {data.value}
+                    </Text>
+                )
+            })
+        }
+        
         return (
             <View style={{flex: 1, alignItems: 'center', marginTop:5}}>
+            <View style={{ width: dimensions.width*0.9, height: dimensions.height*0.35, flexDirection: 'row', backgroundColor:'white', margin: '2.5%', borderRadius: 9 }}>
+                <PieChart
+                 //   style={ { marginTop: 200 } }
+                    style={{ flex: 1, marginBottom: dimensions.height*0.025,marginTop: dimensions.height*0.02, borderRadius: 9 }}
+                    valueAccessor={({ item }) => item.value}
+                    data={ pieData }
+                    spacing={0}
+                    >
+                    <Labels/>
+                </PieChart>
+            
+            </View>
                 
-            <View style={styles.container}>
+           {/* <View style={styles.container}>
                 { history && history.history.length > 1 ?
                     <View style={{ height: dimensions.height*0.35, flexDirection: 'row', backgroundColor:'white',  margin: '2.5%', borderRadius: 9 }}>
                         <YAxis
@@ -67,7 +125,7 @@ export default class Graph extends Component {
                         
                     </View>:null
                 }
-            </View>
+            </View>*/}
             </View>
 
         );

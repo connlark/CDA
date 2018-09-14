@@ -36,12 +36,11 @@ class AltHome extends Component {
         console.log('ws')
         const { cryptoObj } = this.state;
         this.setUpWS();
-
-        PushNotification.localNotificationSchedule({
+        /*PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
             message: "My Notification Message", // (required)
             date: new Date(Date.now() + (5 * 1000)) // in 60 secs
-          });
+          });*/
     }
 
     componentWillUnmount(){
@@ -135,29 +134,7 @@ class AltHome extends Component {
             }
           });
     }
-    onRead = (token) => {
-        try {
-            token = JSON.parse(token.data);
-            Meteor.call('Balances.setAPI', token, (err) => {
-                if (err){
-                    console.log(err)
-                    setTimeout(() => {
-                        this.scanner.reactivate();
-                    }, 500);
-                    ReactNativeHaptic.generate('notificationError'); 
-                    return;
-                }
-                ReactNativeHaptic.generate('notificationSuccess');
-                
-            })
-        } catch (error) {
-            alert('wrong qr type')
-            ReactNativeHaptic.generate('notificationError'); 
-            setTimeout(() => {
-                this.scanner.reactivate();
-            }, 500); 
-        }
-    }
+
     sortData = (data) => {
         data = data.filter((e) => typeof e.USDvalue !== 'undefined')
         return data.sort( (a,b) => {
@@ -251,7 +228,7 @@ class AltHome extends Component {
                 overlayContainerStyle={{backgroundColor: 'transparent'}}
             />
             <View style={{marginTop: 10}}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 10}}> {numberWithCommas(Number(item.balance).toFixed(item.coin === 'BTC' ? 7:3))} {item.coin}</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 10}}> {numberWithCommas(Number(item.balance).toFixed(item.coin === 'BTC' ? 7:3), true)} {item.coin}</Text>
             </View>
             <View style={{marginTop: 10, marginBottom: 100}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}> 💲{bal !== 0 ? numberWithCommas(bal.toFixed(3)):numberWithCommas(String(Number(item.USDvalue).toFixed(2)))} </Text>

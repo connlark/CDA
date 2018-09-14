@@ -253,7 +253,7 @@ const dividendCalc = (old, newbal) => {
                 else if (newbal[i].coin === 'USDT'){
                     valueUSD = valueUSD + Number(delta);
                 }
-                returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance})
+                returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance, valueUSD})
             }
         }
         else {

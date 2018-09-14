@@ -19,12 +19,11 @@ import DivInfo from '../screens/DivInfo';
 const AuthStack = createStackNavigator({ AltLogin }, {headerMode: 'none'});
 
 
-const HomeStack = createStackNavigator({
-  Homde: AltHome,
+const HistoryStack = createStackNavigator({
+  History: HistoryScreen,
   Details: DivInfo,
-});
+}, { headerMode: 'none'});
 
-const Stack = createStackNavigator({ DivInfo }, {headerMode: 'none'});
 
 
 const AppTabs = createMaterialBottomTabNavigator(
@@ -77,12 +76,13 @@ const AppTabs = createMaterialBottomTabNavigator(
       },
     }
 );
+const Stack = createStackNavigator({ AppTabs: AppTabs, Details: DivInfo }, {headerMode: 'none'});
 
 
   export const AppNavigator =  createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
-      App: AppTabs,
+      App: Stack,
       Auth: AuthStack,
     },
     {

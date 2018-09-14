@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Random } from 'meteor/random'
 import agent from '../../startup/server/apns'
 const SET_PUSH_TOKEN = 'notifications.set.pushToken';
 const SEND_APN_MSG = 'notifications.send.APNMsg';

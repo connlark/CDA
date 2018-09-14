@@ -1,7 +1,7 @@
 import { RECIEVE_NOTIFICATION, REMOVE_NOTIFICATION } from '../Actions/notificationLogic';
 
 const initialState = {
-    pendingNotifications: []
+    pendingNotifications: [],
 };
 
 export default notification = (state = initialState, action) => {

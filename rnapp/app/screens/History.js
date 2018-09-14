@@ -14,6 +14,7 @@ import { withNavigation } from 'react-navigation';
 import { Card } from 'react-native-material-ui';
 
 import { IS_X } from '../config/styles';
+import { consolodateData, numberWithCommas } from '../lib'
 
 var swipeoutBtns = [
     {
@@ -39,10 +40,11 @@ class History extends Component {
         // Any time the current user changes,
         // Reset any parts of state that are tied to that user.
         // In this simple example, that's just the email.
-        if (props.history && props.history !== state.prevHistory) {
+        if (props.history && props.history.history && props.history !== state.prevHistory) {
+            const hi = consolodateData(props.history.history.slice())
           return {
             prevHistory: props.history,
-            history: props.history,
+            history: {history: hi}
           };
         }
         
@@ -64,8 +66,12 @@ class History extends Component {
     }*/
 
     _renderItem = (item, i) => {
+        //item.divData.coinDeltas.sort((a,b) => Number(b.USDdelta) - Number(a.USDdelta))
+        const coinPixArr = item.divData.coinDeltas.slice(0,5)
+
         for (let index = 0; index < item.divData.coinDeltas.length; index++) {
             const element = item.divData.coinDeltas[index];
+            
             switch (element.coin) {
                 case 'SEED':
                     element.uri = 'https://pbs.twimg.com/profile_images/1013352125361819648/z2fvUNDq_400x400.jpg';
@@ -81,13 +87,13 @@ class History extends Component {
         }
         
         return (
-            <TouchableOpacity style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(item)}>
+            <TouchableOpacity style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(this.state.history.history.find((e) => e.date === item.date))}>
                 <View style={{marginBottom: 10}}>
                     <Text style={{fontSize: 14}}> {moment(item.date).format("MMM Do YY")} </Text>
                 </View>
                 <View style={{flexDirection: 'row', marginLeft: 15, marginRight: 15, marginBottom: 7}}>
                     
-                    { item.divData.coinDeltas.map((e) => (
+                    { coinPixArr.map((e) => (
                         <Avatar
                             size="medium"
                             source={{uri: e.uri}}
@@ -104,7 +110,7 @@ class History extends Component {
                 
                 
                 <View style={{marginTop: 5, marginBottom: 5}}>
-                    <Text style={{fontSize: 16}}> 💰 {Number(item.divData.USDdelta).toFixed(2)} </Text>
+                    <Text style={{fontSize: 16}}> 💰 {numberWithCommas(item.divData.USDdelta)} </Text>
                 </View>
         </TouchableOpacity>
 
@@ -125,8 +131,10 @@ class History extends Component {
                 );
     }
     handleTouchedHistory = (item) => {
-        this.setState({selectedData: item});
-        this.showAlert();
+        /*this.setState({selectedData: item});
+        this.showAlert();*/
+        console.log(item)
+        this.props.navigation.navigate('Details', {item})
 
     }
     showAlert = () => {
@@ -195,22 +203,13 @@ class History extends Component {
                         }
                     
                     >
-                        {/*<FlatList
-                            stickyHeaderIndices={[0]}
-                            removeClippedSubviews={false}
-                            data={this.props.history.history}
-                            keyExtractor={this._keyExtractor}
-                            renderItem={this._renderItem}
-                            ItemSeparatorComponent={() => <View style={{ margin: 10 }} />}
-                            contentInset={{ bottom: 30 }}
-                            ListHeaderComponent={this._renderHeader}
-                            onRefresh={this.refreshData}
-                            refreshing={refreshing}
-                        />*/}
+                    <View style={{height: IS_X ? 55:30,}}/>
+                    <Text style={styles.headerText}>  Dividends </Text> 
+                        
                         <Graph
                             history={history}
                         />
-                        <View style={{padding: 10, marginTop: -20}}>
+                        <View style={{padding: 10}}>
                             <Grid
                                 style={styles.list}
                                 renderItem={this._renderItem}
@@ -294,7 +293,7 @@ const styles = StyleSheet.flatten({
         flex: 1,
         height: 120,
         //margin: 7,
-        backgroundColor: '#f6f5f3',
+        backgroundColor: 'white',
         shadowOffset:{  width: 2.5,  height: 2.5,  },
         shadowColor: 'grey',
         shadowOpacity: 0.3,
@@ -308,8 +307,13 @@ const styles = StyleSheet.flatten({
         shadowOpacity: 0.3,
       },
     list: {
-        flex: 1
-    }
+        flex: 1,
+        
+    },
+    headerText: {
+        fontWeight: 'bold',
+        fontSize: 50,
+    },
 });
 
 

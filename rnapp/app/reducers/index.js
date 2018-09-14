@@ -1,22 +1,14 @@
 import React from 'react';
 
-import {
-    reduxifyNavigator,
-    createReactNavigationReduxMiddleware,
-    createNavigationReducer,
-} from 'react-navigation-redux-helpers';
-
 
 import { combineReducers } from 'redux';
 import notifications from './notification';
-import {AppNavigator} from '../config/router'
+import meteorData from './meteorData';
 
 
-
-const navReducer = createNavigationReducer(AppNavigator);
 
 
 export default combineReducers({
-    nav: navReducer,
+    meteorData,
     notifications,
 });
