@@ -13,6 +13,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 import SettingsList from 'react-native-settings-list';
 import { IS_X } from '../config/styles';
 import AddCredentialsModal from '../components/addCredentialsModal'
+import {connect, createProvider} from 'react-redux'
 
 import {
     SettingsDividerShort, 
@@ -69,7 +70,39 @@ class Settings extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    // Any time the current user changes,
+    // Reset any parts of state that are tied to that user.
+    // In this simple example, that's just the email.
+    const users = props.users;
+    let user = users[Object.keys(users)[0]];
+    let TRX = null;
+    let CoinEx = null;
+    console.log(users[Object.keys(users)[0]])
+
+    if (users && user){
+        user.profile.map((e) => {
+            if (typeof e.TRXAddress !== 'undefined'){
+                TRX = e.TRXAddress;
+            }
+            if (typeof e.token !== 'undefined'){
+                CoinEx = e.token;
+            }
+        });
+        console.log(TRX)
+
+        return {
+            TRXAddress: TRX,
+            CoinExKeys: CoinEx
+        };
+    }
+
+    
+    return null;
+    }
+
   getTRXAddress = (profile) => {
+      if (!profile) return;
       profile.map((e) => {
           if (typeof e.TRXAddress !== 'undefined'){
               this.setState({TRXAddress: e.TRXAddress})
@@ -134,8 +167,14 @@ class Settings extends Component {
     })
   } 
   render() {
-      const { user } = this.props;
-      const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress } = this.state;
+      const { users } = this.props;
+      const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys } = this.state;
+      console.log(users)
+      let user = {profile: null};
+      if (users && users[0]){
+        user = users[0]
+        console.log(this.getTRXAddress(user.profile))
+      }
       return (
         <View style={{flex: 1, height: '100%'}}>
         <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
@@ -158,36 +197,14 @@ class Settings extends Component {
                 thumbTintColor={(this.state.allowPushNotifications) ? colors.switchEnabled : colors.switchDisabled}
             />
             <View style={{marginTop: 10}}/>
-            <SettingsEditText
-                title="TRX Address"
-                dialogDescription={'Enter your username.'}
-                valuePlaceholder="..."
-                negativeButtonTitle={'Cancel'}
-                positiveButtonTitle={'Save'}
-                onSaveValue={(value) => {
-                    console.log('addy:', value);
-                    if (value.length !== 34){
-                        this.dropdown.alertWithType('error', 'TRX Add Address Error','Please enter a valid TRX address!');
-                        return
-                    }
-                    Meteor.call('Balances.setTRXAddress', value, (err) => {
-                        if (err){
-                            console.log(err) 
-                            this.setState({TRXAddress: value});
-                            
-                        }
-                    })
-                }}
-                value={TRXAddress}
-                dialogAndroidProps={{
-                    widgetColor: colors.monza,
-                    positiveColor: colors.monza,
-                    negativeColor: colors.monza,
-                }}
-            />
-            <SettingsCategoryHeader title={'Edit CoinEx API & TRX Wallet'} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400'}}/>
+            {TRXAddress && <SettingsCategoryHeader title={`TRX Wallet: ${TRXAddress}`} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} subTitletitleStyle={{color:'black', fontFamily: 'Avenir', fontSize: 12, fontWeight: '400'}}/>}
+            {CoinExKeys && <SettingsCategoryHeader title={`CoinEx Api Key: ${CoinExKeys.apiKey}`} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'black', fontFamily: 'Avenir', fontSize: 12, fontWeight: '400'}}/>}
 
-            <View style={{marginTop: '10%'}}/>
+            
+            
+            <View style={{marginTop: '80%'}}/>
+            <SettingsCategoryHeader title={'Edit CoinEx API & TRX Wallet'} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'indigo', fontSize: 14, fontWeight: '400'}}/>
+
             { updateText ? 
                 <SettingsCategoryHeader title={updateText} titleProps={{onPress: this.updateApp}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
                 :null
@@ -208,11 +225,22 @@ class Settings extends Component {
     
 }
 
+function mapStateToProps(state, ownProps) {
+    if (state.meteorData.users){
+        return { users: state.meteorData.users, user: state.meteorData.users[0] }
+    }
+    else {
+        return { users: {}, user: {profile: null} }
+
+    }
+  }
+const connetedSettings = connect(mapStateToProps)(Settings)
+
 export default withTracker(params => {
     return {
-      user: Meteor.user()
+      //user: Meteor.user()
     };
-})(Settings);
+})(connetedSettings);
  
 const colors = {
   iosSettingsBackground: 'rgb(235,235,241)',

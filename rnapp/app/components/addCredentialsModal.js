@@ -60,7 +60,8 @@ export default class componentName extends Component {
                 this._confettiView.stopConfetti();
         }
     }
-    readFromClipboard = async () => {   
+    readFromClipboard = async () => { 
+        if (!this.state.modalVisible) return;  
         const clipboardContent = await Clipboard.getString();  
         if (clipboardContent.length === 34){
             Alert.alert('TRX Address Detected', 'Would you like to use this address for your account?', [

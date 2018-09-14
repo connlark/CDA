@@ -19,6 +19,9 @@ export default class Graph extends Component {
                 dta.push(Number(e.divData.USDdelta));
             }
         });
+
+        console.log(dta)
+
         return dta;
     }
     render() {
@@ -31,7 +34,7 @@ export default class Graph extends Component {
             <View style={{flex: 1, alignItems: 'center', marginTop:5}}>
                 
             <View style={styles.container}>
-                { history && history.history.length > 1 ?
+                { history && this.getData(history.history.slice()).length > 4 ?
                     <View style={{ height: dimensions.height*0.35, flexDirection: 'row', backgroundColor:'white',  margin: '2.5%', borderRadius: 9 }}>
                         <YAxis
                             
