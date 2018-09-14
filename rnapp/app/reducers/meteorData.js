@@ -8,6 +8,7 @@ const CHANGED  = 'ddp/changed';
 const REMOVED = 'ddp/removed';
 
 
+const initialState = {
 };
 
 export function doSomething(action) {
