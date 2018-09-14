@@ -15,7 +15,6 @@ export function recieveData(action) {
                 return;
                 retrieveItem('userID').then((userID) => {
                     theID = userID;
-                    console.log(userID)
                     if (userID){
                       if (fields.userId !== userID){
                         return;

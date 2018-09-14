@@ -52,7 +52,6 @@ export default reducer = (state = initialState, action) => {
           if (collection === 'users' && id){
             retrieveItem('userID').then((userID) => {
               if (!userID || (userID !== id)){
-                console.log('IDDDDD', id)
                 storeItem('userID', id)
               }
             });    
@@ -91,7 +90,6 @@ export default reducer = (state = initialState, action) => {
         };
       case REMOVED:
         if (!state[collection]) return state;
-        console.log(state[collection], Object.keys(state[collection])[id])
         if ( Object.keys(state[collection])[id] && state[collection][id]) {
           return {
             ...state,

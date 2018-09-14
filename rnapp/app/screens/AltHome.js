@@ -68,7 +68,6 @@ class AltHome extends Component {
 
     setUpWS = () => {
         if (ws && ws.readyState !== ws.CLOSED) return;
-        console.log(ws)
         ws = new WebSocket('wss://socket.coinex.com/');
 
         ws.onopen = () => {
@@ -165,9 +164,7 @@ class AltHome extends Component {
 
     _renderGridItem = (item, i) => {
         let imageUrl = item.imgUrl ? item.imgUrl : 'https://frontiersinblog.files.wordpress.com/2018/04/frontiers-in-blockchain-logo.jpg';
-        //console.log(JSON.stringify(this.state.backgColors))
-        //this.state.backgColors[imageUrl] = 'ble';
-        //this.setState({ backgColors: this.state.backgColors });
+
         let color = backgColors[imageUrl] ? backgColors[imageUrl] :'#f6f5f3';
         const name = item.fullName ? item.fullName : item.coin;
         let bal = 0;

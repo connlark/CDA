@@ -53,7 +53,6 @@ class DivInfo extends Component {
 
         const hi = consolodateData(props.history.history.slice());
           const item = props.navigation.state.params.item;
-          console.log(item, hi)
           if (item && hi){
           hi.map((e) => {
             if (moment(item.date).isSame(moment(e.date), 'd')){
@@ -64,7 +63,9 @@ class DivInfo extends Component {
 
         if (!thisOne){
             props.navigation.goBack();
+            return null;
         }
+        thisOne.divData.coinDeltas.sort((a,b) => b.valueUSD - a.valueUSD)
         return {
           prevHistory: props.history,
           history: {history: hi},
@@ -145,7 +146,6 @@ class DivInfo extends Component {
     
     _renderHeader = () => {
         const { switched } = this.state;
-        console.log(switched)
         const historyclone = this.props.history;
         
         
@@ -424,7 +424,6 @@ const styles = StyleSheet.flatten({
 const APP =  withTracker(params => {
     const handle = Meteor.subscribe('BalanceHistory.pub.list');
     const id = !Meteor.user() ? '': Meteor.user()._id
-    console.log(id)
     return {
       historyReady: handle.ready(),
       history: Object.freeze(Meteor.collection('balanceHistory').findOne({userId: id}))

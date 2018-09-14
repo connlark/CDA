@@ -87,7 +87,7 @@ class History extends Component {
         }
         
         return (
-            <TouchableOpacity style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(this.state.history.history.find((e) => e.date === item.date))}>
+            <TouchableOpacity key={i} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(this.state.history.history.find((e) => e.date === item.date))}>
                 <View style={{marginBottom: 10}}>
                     <Text style={{fontSize: 14}}> {moment(item.date).format("MMM Do YY")} </Text>
                 </View>
@@ -95,6 +95,7 @@ class History extends Component {
                     
                     { coinPixArr.map((e) => (
                         <Avatar
+                            key={e.coin}
                             size="medium"
                             source={{uri: e.uri}}
                             onPress={() => console.log("Works!")}
@@ -131,11 +132,7 @@ class History extends Component {
                 );
     }
     handleTouchedHistory = (item) => {
-        /*this.setState({selectedData: item});
-        this.showAlert();*/
-        console.log(item)
         this.props.navigation.navigate('Details', {item})
-
     }
     showAlert = () => {
         ReactNativeHaptic.generate('selection');
@@ -188,7 +185,6 @@ class History extends Component {
         
 
         const { showProgress, showAlert, selectedData, refreshing } = this.state;
-        console.log(this.state.history)
         let graphistory = history;
         
         if(historyReady && history && history.history && history.history.length > 0 && revHistory){
@@ -320,7 +316,6 @@ const styles = StyleSheet.flatten({
 const APP =  withTracker(params => {
     const handle = Meteor.subscribe('BalanceHistory.pub.list');
     const id = !Meteor.user() ? '': Meteor.user()._id
-    console.log(id)
     return {
       historyReady: handle.ready(),
       history: Object.freeze(Meteor.collection('balanceHistory').findOne({userId: id}))

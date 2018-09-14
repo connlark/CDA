@@ -73,7 +73,6 @@ export default class AuthScreen extends Component {
     // 2. Configure a spring animation for the next step
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
     // 3. Set the new visible form
-    console.log(visibleForm)
     this.setState({ visibleForm })
   }
 

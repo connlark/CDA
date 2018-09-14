@@ -7,6 +7,8 @@ Accounts.onCreateUser(function onCreateUser(options, user) {
   user._id = Random.id(); // Need to add the `random` package
   // Use the user ID we generated
   user.profile = [];
+  user.isAccountSetupComplete = false;
+
   user.pushToDevices = [];
   
   return user;

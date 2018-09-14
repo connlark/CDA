@@ -78,7 +78,6 @@ class Settings extends Component {
     let user = users[Object.keys(users)[0]];
     let TRX = null;
     let CoinEx = null;
-    console.log(users[Object.keys(users)[0]])
 
     if (users && user){
         user.profile.map((e) => {
@@ -169,11 +168,9 @@ class Settings extends Component {
   render() {
       const { users } = this.props;
       const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys } = this.state;
-      console.log(users)
       let user = {profile: null};
       if (users && users[0]){
         user = users[0]
-        console.log(this.getTRXAddress(user.profile))
       }
       return (
         <View style={{flex: 1, height: '100%'}}>

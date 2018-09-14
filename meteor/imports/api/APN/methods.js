@@ -65,4 +65,13 @@ Meteor.methods({
       });
     });
   },
+  'notifications.remove.pushToken'() {
+    const userId = this.userId;
+    if (!userId) {
+      return;
+    }
+    Meteor.users.update(userId, {
+        $set: { pushToDevices: [] },
+    });
+  },
 });

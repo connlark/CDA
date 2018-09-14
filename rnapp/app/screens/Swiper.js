@@ -62,14 +62,8 @@ export default class Swiper extends Component {
           color: 'blue',
           colorIndex: 0,
       }
+  }
 
-      setTimeout(() => {
-          this.setState({color: 'purple'})
-      }, 1500);
-  }
-  componentDidMount(){
-    console.log(PushNotification)
-  }
   render(){
     const status = Meteor.status().connected;
     const user = Meteor.user();

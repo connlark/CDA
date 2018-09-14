@@ -20,8 +20,6 @@ export default class Graph extends Component {
             }
         });
 
-        console.log(dta)
-
         return dta;
     }
     render() {

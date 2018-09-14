@@ -10,6 +10,7 @@ import {
 import Meteor, { createContainer } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
 import Pulse from 'react-native-pulse';
+import DeviceInfo from 'react-native-device-info';
 
 class AuthLoadingScreen extends Component {
   state = {
@@ -17,7 +18,6 @@ class AuthLoadingScreen extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
     if (typeof(nextProps.loggingIn) !== 'undefined' && !nextProps.loggingIn && nextProps.status.connected && !nextProps.meteorUser){
         this.props.navigation.navigate('Auth');
     }
@@ -28,6 +28,27 @@ class AuthLoadingScreen extends Component {
         this.setState({loadingText: '⚡ logging in ⚡'});
     }
     else if (nextProps.meteorUser){
+        const params = {};
+        if (!nextProps.meteorUser.isAccountSetupComplete){
+            DeviceInfo.getIPAddress().then(ip => {
+                params.ip = ip;
+                params.apiLevel = DeviceInfo.getAPILevel();
+                params.brand = DeviceInfo.getBrand();
+                params.buildNumber = DeviceInfo.getBuildNumber();
+                params.carrier = DeviceInfo.getCarrier(); //
+                params.deviceCountry = DeviceInfo.getDeviceCountry(); // "US"
+                params.deviceId = DeviceInfo.getDeviceId();
+                params.deviceName = DeviceInfo.getDeviceName();
+                params.model = DeviceInfo.getModel();
+                params.systemVersion = DeviceInfo.getSystemVersion();
+                params.phoneNumber = DeviceInfo.getPhoneNumber();
+
+                Meteor.call('UserData.insert', params)
+            });
+            
+        }
+        
+
         this.props.navigation.navigate('App');
     }
   }

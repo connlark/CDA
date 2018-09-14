@@ -30,25 +30,22 @@ export default class Graph extends Component {
         
         coinDeltas.map((e) => {
             const valueUSDd = e.valueUSD ? e.valueUSD:0;
-            console.log('it',switched)
             if (switched && switched.indexOf(e.coin) === -1){
                 data.push({value: e.delta, coin: e.coin, valueUSD: valueUSDd});
             }
         });
-        console.log('hiefie',coinDeltas)
         const pieData = data.filter(value => value.value > 0).map((value, index) => ({
-            value: value.value,
+            value: value.valueUSD,
             svg: {
                 fill: randomColor(),
                 onPressIn: () => dropdown(value.value, value.valueUSD, value.coin)
             },
             key: `pie-${index}`,
+            delta: value.value,
             valueUSD: value.valueUSD,
             coin: value.coin
 
         }));
-
-        console.log(pieData)
 
         const Labels = ({ slices, height, width }) => {
             return slices.map((slice, index) => {
