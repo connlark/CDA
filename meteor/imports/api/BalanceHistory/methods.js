@@ -17,10 +17,10 @@ Meteor.methods({
               newBalHistory.push(obj);
             }
             else {
-              if (!obj.USDdelta){
-                obj.USDdelta = 1
+              if (!obj.valueUSD){
+                obj.valueUSD = 1
               }
-              newMonies -= Number(obj.USDdelta)
+              newMonies -= Number(obj.valueUSD)
             }
           });
           newCoinDeltas.push(newBalHistory);
