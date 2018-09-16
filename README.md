@@ -1,7 +1,6 @@
-![Build status](https://build.appcenter.ms/v0.1/apps/9f06e61c-f59d-4d9e-a647-f7d39a8a2a30/branches/master/badge)
-![MIT](https://img.shields.io/badge/meteor-1.9.2-red.svg)
+![MIT](https://img.shields.io/badge/Meteor-1.9.2-red.svg)
 ![npm version](https://img.shields.io/badge/React%20Native-0.57-blue.svg)
-![node (scoped)](https://img.shields.io/node/v/@stdlib/stdlib.svg)
+![Build status](https://build.appcenter.ms/v0.1/apps/9f06e61c-f59d-4d9e-a647-f7d39a8a2a30/branches/master/badge)
 # CDA
 
 
