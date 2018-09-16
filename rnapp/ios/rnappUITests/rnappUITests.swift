@@ -35,10 +35,33 @@ class rnappUITests: XCTestCase {
       sleep(2)
       doLogin()
       let app = XCUIApplication()
-      app.otherElements["Home"].tap()
+      let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "Home").element(boundBy: 0) // second upgrade button-containing element
+      meohjjme.tap()
+      
       sleep(2)
       snapshot("Home")
     }
+  
+  func testDIV() {
+    // Use recording to get started writing UI tests.
+    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    sleep(2)
+    
+    doLogin()
+    let app = XCUIApplication()
+   
+    let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "History").element(boundBy: 0) // second upgrade button-containing element
+        meohjjme.tap()
+    sleep(7)
+    
+    sleep(9)
+    let meohme = app.descendants(matching: .staticText).containing(.staticText, identifier: "TTESTME").element(boundBy: 0)
+    
+    meohme.tap()
+
+    sleep(9)
+    snapshot("DIV")
+  }
   
   func testSettings() {
     // Use recording to get started writing UI tests.
@@ -46,7 +69,9 @@ class rnappUITests: XCTestCase {
     sleep(2)
     doLogin()
     let app = XCUIApplication()
-    app.otherElements["Settings"].tap()
+    let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "Settings").element(boundBy: 0) // second upgrade button-containing element
+    meohjjme.tap()
+    
     sleep(2)
     snapshot("Settings")
   }
@@ -57,7 +82,8 @@ class rnappUITests: XCTestCase {
     sleep(2)
     doLogin()
     let app = XCUIApplication()
-    app.otherElements["History"].tap()
+    let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "History").element(boundBy: 0) // second upgrade button-containing element
+    meohjjme.tap()
     sleep(2)
     snapshot("History")
   }
@@ -70,8 +96,13 @@ class rnappUITests: XCTestCase {
     let app = XCUIApplication()
   
     //app.otherElements["sfe"].tap()
-    app.otherElements["History"].tap()
-    let meohme = app.descendants(matching: .other).element(boundBy: 4)
+   // app.otherElements["Home History Settings"].tap()
+    let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "History").element(boundBy: 0) // second upgrade button-containing element
+
+    meohjjme.tap()
+    sleep(8)
+    let meohme = app.descendants(matching: .staticText).containing(.staticText, identifier: "TTESTME").element(boundBy: 0)
+
     meohme.swipeLeft()
     sleep(2)
     snapshot("Totals")
@@ -89,8 +120,13 @@ class rnappUITests: XCTestCase {
     if allowBtn.exists {
       allowBtn.tap()
     }
+  
+    print(app.otherElements.debugDescription)
+    sleep(8)
     
-    let loginButtonContainer = app.descendants(matching: .any).containing(.button, identifier: "login").element(boundBy: 0) // second upgrade button-containing element
+    
+    
+    let loginButtonContainer = app.descendants(matching: .other).containing(.other, identifier: "23135thisisit").element(boundBy: 0) // second upgrade button-containing element
 
     
     
@@ -113,7 +149,7 @@ class rnappUITests: XCTestCase {
       let meohmy = app.descendants(matching: .key).element(boundBy: 1)
  
       upgradeButtonContainer.doubleTap()
-       UIPasteboard.general.string = "dev"
+       UIPasteboard.general.string = "seed"
       app.menuItems.element(boundBy: 0).tap()
      
      // upgradeButtonContainer.typeText("dev")

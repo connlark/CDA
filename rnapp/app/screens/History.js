@@ -87,7 +87,7 @@ class History extends Component {
         }
         
         return (
-            <TouchableOpacity key={i} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(this.state.history.history.find((e) => e.date === item.date))}>
+            <TouchableOpacity accessible={true} testID={'TEST_ID_HISTORY'} accessibilityLabel={'TEST_ID_HISTORY_ACLBL'} key={i} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(this.state.history.history.find((e) => e.date === item.date))}>
                 <View style={{marginBottom: 10}}>
                     <Text style={{fontSize: 14}}> {moment(item.date).format("MMM Do YY")} </Text>
                 </View>
@@ -175,6 +175,11 @@ class History extends Component {
         })
     }
 
+    handleDebugTouch = () => {
+        const thisone = this.state.history.history[this.state.history.history.length-1];
+        this.handleTouchedHistory(thisone)
+    }
+
     
 
     render() {
@@ -200,13 +205,16 @@ class History extends Component {
                     
                     >
                     <View style={{height: IS_X ? 55:30,}}/>
-                    <Text style={styles.headerText}>  Dividends </Text> 
+                    <Text accessible={true} testID={'TTESTME'} accessibilityLabel={'TEST_ffACLBdddL'} onPress={this.handleDebugTouch} style={styles.headerText} >  Dividends </Text> 
                         
                         <Graph
                             history={history}
                         />
                         <View style={{padding: 10}}>
                             <Grid
+                                accessible={true} 
+                                testID={'TEST_ID_HISddTORY'}
+                                accessibilityLabel={'TEST_ID_HISTORY_ACLBdddL'}
                                 style={styles.list}
                                 renderItem={this._renderItem}
                                 renderPlaceholder={this._renderPlaceholder}

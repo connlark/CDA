@@ -5,32 +5,54 @@ import { Random } from 'meteor/random'
 import {Balances} from '../../api/Balances/balances';
 import {BalanceHistory} from '../../api/BalanceHistory/balanceHistory';
 import  agent  from './apns'
-
+import {findCoinBalanceInfo} from './cronJob'
 const SEND_APN_MSG = 'notifications.send.APNMsg';
 
 Meteor.startup(()=> {
-    const user = Meteor.users.findOne({username: 'seed'});
+    const cc = require('cryptocompare')
+ 
+// Usage:
+    cc.coinList().then(coinList => {
+        const coinDatas = coinList.Data//.sort((a,b) => Number(b.SortOrder)-Number(a.SortOrder) ).splice(0,200);
+        const coinTickerListER = Object.keys(coinDatas);
+        let coinTickerList = [];
+        coinTickerListER.map((key) => {
+            if (Number(coinDatas[key].SortOrder) < 50){
+                coinTickerList.push(key)
+            }
+        })
+        
+        console.log(coinTickerList)
+        coinTickerList = ['BTC', 'ETH','EOS','LTC','USDT','CET','XMR', 'ADA', 'TRX','VET','NANO','CDY','DASH','DOGE']
+        const divNumber = [3,8,6,3,5,12,9]
+    
 
-    if (!user){
-        Accounts.createUser({
-            username: 'seed',
-            password: 'seed',
-        });
+        const user = Meteor.users.findOne({username: 'seed'});
+
+        if (!user){
+            Accounts.createUser({
+                username: 'seed',
+                password: 'seed',
+            });
 
             const coins = ['BCH', 'BTC', 'USDT', 'CET', 'ETH', 'NANO', 'LTC', 'NEO', 'ETC', 'EOS']
             let history = [];
 
-        
 
-            for (let index = 0; index < 20; index++) {
+
+            for (let index = 0; index < 90; index++) {
                 let coinDeltas = [];
                 let divData = {};
-                coins.map((coin) => {
+                const numberOfDeltas = Random.choice(divNumber);
+                for (let index = 0; index < numberOfDeltas; index++) {
+                    const coin = Random.choice(coinTickerList);
                     const delta = Math.floor(Math.random() * 1000) + 1;
                     const valueUSD = Math.floor(Math.random() * 1000) + 1;
 
                     coinDeltas.push({coin, delta, valueUSD});
-                });
+                    
+                }
+
                 divData.USDdelta = Math.floor(Math.random() * 1000) + 1;
                 divData.coinDeltas = coinDeltas;
 
@@ -55,36 +77,21 @@ Meteor.startup(()=> {
             );
 
             let balances = [];
-
-            coins.map((coin) => {
+            const balanceTickers = [];
+            for (let index = 0; index < coinTickerList.length; index++) {
+                const coin = coinTickerList[index];
+                balanceTickers.push(coin);
                 balances.push({
                     coin,
                     balance: Math.floor(Math.random() * 1000) + 1,
-                    USDprice: Math.floor(Math.random() * 1000) + 1,
-                    USDvalue: Math.floor(Math.random() * 1000) + 1,
-                    ccurl: '',
-                    imgUrl: '',
-                    fullName: ''
-                })
-            });
+                });   
+            }
+            console.log(balanceTickers)
+            findCoinBalanceInfo(balanceTickers,balances,userId)
 
-            Meteor.setTimeout(() => {
-                Balances.insert({
-                        userId: userId,
-                        balanceData: balances,
-                        createdAt: new Date
-                    }
-                );
+        }
+    });
 
-            }, 5000)
-            
-            
-
-
-
-
-
-    }
 
 
     /*user.pushToDevices.forEach(device => {

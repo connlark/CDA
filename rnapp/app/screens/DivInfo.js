@@ -237,7 +237,7 @@ class DivInfo extends Component {
       let formattedDelta = null;
       let shouldNOTFix = false;
 
-      if (coin.match(/BTC|BCH/)){
+      if (coin.match(/BTC|BCH|ETH/)){
         formattedDelta = Number(delta).toFixed(7);
         shouldNOTFix = true;
       }

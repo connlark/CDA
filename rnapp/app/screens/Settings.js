@@ -199,7 +199,7 @@ class Settings extends Component {
 
             
             
-            <View style={{marginTop: '80%'}}/>
+            <View style={{marginTop: '90%'}}/>
             <SettingsCategoryHeader title={'Edit CoinEx API & TRX Wallet'} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'indigo', fontSize: 14, fontWeight: '400'}}/>
 
             { updateText ? 

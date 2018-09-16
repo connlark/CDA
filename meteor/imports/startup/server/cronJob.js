@@ -141,7 +141,7 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs, hack) =
     }
 }
 
-const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
+export const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
     cc.priceMulti(ownedCoins, 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
@@ -276,10 +276,10 @@ const doParse = (e) => {
     }
     e.map((o) => {
         if (o.coin.match(/BTC|BCH/)){
-            out += o.coin + '~ ' + o.delta +'\n';
+            out += o.coin + ' ~ ' + o.delta +`\t💲 ${valueUSD}\n`;
         }
         else {
-            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +'\n';
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${valueUSD}\n`;
         }
     })
     return out;

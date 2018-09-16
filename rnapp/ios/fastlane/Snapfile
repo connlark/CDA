@@ -19,6 +19,9 @@ scheme("FASTLANE SCREENSHOTS")
 configuration("Release")
 workspace("rnapp.xcworkspace")
 
+erase_simulator(true)
+reinstall_app(true)
+
 # Where should the resulting screenshots be stored?
 output_directory("./screenshots")
 
@@ -31,4 +34,4 @@ clean(true)
 # For more information about all available options run
 # fastlane action snapshot
 
-#fastlane screenshots
+#fastlane screenshots. bundle exec fastlane screenshots

@@ -60,7 +60,7 @@ const AppTabs = createMaterialBottomTabNavigator(
 
           // You can return any component that you like here! We usually use an
           // icon component from react-native-vector-icons
-          return <Ionicons name={iconName} size={25} color={tintColor} />;
+          return <Ionicons accessible={true} testID={'TEST_ID_Hfuck'} accessibilityLabel={'TEST_ID_fuck'}  name={iconName} size={25} color={tintColor} />;
         },
         header: null,
       }),
