@@ -7,7 +7,7 @@ As Kanye West said:
 > the present is our past.
 
 
-<img src="https://raw.githubusercontent.com/connorlarkin1/CDA/master/rnapp/ios/screenshots/en-US/iPhone%20X-Home.png" width="20%">.
-<img src="https://raw.githubusercontent.com/connorlarkin1/CDA/master/rnapp/ios/screenshots/en-US/iPhone%20X-History.png" width="20%">.
-<img src="https://raw.githubusercontent.com/connorlarkin1/CDA/master/rnapp/ios/screenshots/en-US/iPhone%20X-DIV.png" width="20%">.
-<img src="https://github.com/connorlarkin1/CDA/blob/master/rnapp/ios/screenshots/en-US/iPhone%20X-Settings.png" width="20%">.
+<img src="https://raw.githubusercontent.com/connorlarkin1/CDA/master/rnapp/ios/screenshots/en-US/iPhone%20X-Home_framed.png" width="20%">.
+<img src="https://raw.githubusercontent.com/connorlarkin1/CDA/master/rnapp/ios/screenshots/en-US/iPhone%20X-History_framed.png" width="20%">.
+<img src="https://raw.githubusercontent.com/connorlarkin1/CDA/master/rnapp/ios/screenshots/en-US/iPhone%20X-DIV_framed.png" width="20%">.
+<img src="https://github.com/connorlarkin1/CDA/blob/master/rnapp/ios/screenshots/en-US/iPhone%20X-Settings_framed.png" width="20%">.
