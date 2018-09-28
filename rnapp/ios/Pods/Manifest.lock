@@ -1,17 +1,17 @@
 PODS:
-  - AppCenter/Analytics (1.8.0):
+  - AppCenter/Analytics (1.9.0):
     - AppCenter/Core
-  - AppCenter/Core (1.8.0)
-  - AppCenter/Crashes (1.8.0):
+  - AppCenter/Core (1.9.0)
+  - AppCenter/Crashes (1.9.0):
     - AppCenter/Core
-  - AppCenterReactNativeShared (1.7.1):
-    - AppCenter/Core (= 1.8.0)
+  - AppCenterReactNativeShared (1.8.1):
+    - AppCenter/Core (= 1.9.0)
   - DCTAuth (3.0)
 
 DEPENDENCIES:
-  - AppCenter/Analytics (~> 1.8.0)
-  - AppCenter/Crashes (~> 1.8.0)
-  - AppCenterReactNativeShared (~> 1.7.1)
+  - AppCenter/Analytics (~> 1.9.0)
+  - AppCenter/Crashes (~> 1.9.0)
+  - AppCenterReactNativeShared (~> 1.8.1)
   - DCTAuth (from `https://github.com/danielctull/DCTAuth.git`)
 
 SPEC REPOS:
@@ -29,10 +29,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/danielctull/DCTAuth.git
 
 SPEC CHECKSUMS:
-  AppCenter: 7e7b42e94b70294d1de3d747f164f0c1668a28e1
-  AppCenterReactNativeShared: 713c4b8da168d517297061d4168f7e2f4d2df9c5
+  AppCenter: 3cf7b9387549e9703dab068793e404013e8c0cc1
+  AppCenterReactNativeShared: 3d804f256b964e040d902d1a215d7866fedae55d
   DCTAuth: 8add154decd00335d62917828896bba790ce47fd
 
-PODFILE CHECKSUM: cb707f545e30febdb0f77de6f0d126a81777fc0b
+PODFILE CHECKSUM: e3710e9bd8961f8c82e71bb2ab2063036c40c80f
 
 COCOAPODS: 1.5.3
