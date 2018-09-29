@@ -13,7 +13,7 @@ export default class AuthTextInput extends Component {
   focus = () => this.textInputRef.focus()
 
   render () {
-    const { isEnabled, ...otherProps } = this.props
+    const { isEnabled,placeholder, ...otherProps } = this.props
     const { isFocused } = this.state
     const color = isEnabled ? 'white' : 'rgba(255,255,255,0.4)'
     const borderColor = isFocused ? 'white' : 'rgba(255,255,255,0.4)'
@@ -35,6 +35,7 @@ export default class AuthTextInput extends Component {
             onFocus={() => this.setState({ isFocused: true })}
             onBlur={() => this.setState({ isFocused: false })}
             onChangeText={this.props.onChangeText}
+            placeholder={placeholder}
           />
         </View>
       </View>

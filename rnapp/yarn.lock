@@ -5734,13 +5734,13 @@ react-native-awesome-alerts@1.1.1:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-camera@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.2.0.tgz#fa93b39726d15bdbb02fac06f4a23957b0be403a"
-  integrity sha512-LGYvSRtnjV43X75vaHM8KYXvMzIcFav1DsOXY4S6WLBZcyg9SD9MPE/etVCup+33BlNcE8yqd3r/cM4aCH0PcA==
+react-native-camera@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.3.0.tgz#b4d8bea052ab4bd43f58576dac03def7a5ea416e"
+  integrity sha512-f4Nev0dvJmWQPbXLYu4BF17agLWS6iQ+vanPlWkEaa4MAjbClD/YrQaR8w9vY+C472crSp3kRGHJXIQzSwgMpw==
   dependencies:
-    lodash "^4.17.4"
-    prop-types "^15.5.10"
+    lodash "^4.17.10"
+    prop-types "^15.6.2"
 
 react-native-code-push@5.4.2:
   version "5.4.2"
@@ -5759,10 +5759,10 @@ react-native-confetti@^0.1.0:
   resolved "https://registry.yarnpkg.com/react-native-confetti/-/react-native-confetti-0.1.0.tgz#9ec93c07f845de5ebeaed700043fd5218792b6f1"
   integrity sha512-+cXJvnPXKc0i/eTQcuzcjrlfIxmn/xFw4UyuVKQOWNK6BfWABvO6Ms6Zp6ivF1E8Vxt2vJkzJlNyoBvMh9FxKA==
 
-react-native-device-info@0.22.5:
-  version "0.22.5"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.22.5.tgz#9b1882cbb030f2926cff77336e7cd2e87edf52bf"
-  integrity sha512-Pe+7eoWOR/TmZxWLaa8rmEmqRckyvPnniDXjiKxaUSk5oUCCtHjFajVYSVkWoJGPwd4xQYjrhx1gr/tcvjSEwQ==
+react-native-device-info@0.22.6:
+  version "0.22.6"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.22.6.tgz#32a674b0484d31214fdcfbbb0e677621e83ba69d"
+  integrity sha512-/w87PmHPvT5MY3HwzdVEWyFg/ib91lY6TlYJGNnNPaXNXY60ShB8HI+GXKyq4KAtbUc/WhRM1RQ8/WKJOal+UQ==
 
 react-native-dialogs@^0.0.21:
   version "0.0.21"
@@ -5960,10 +5960,10 @@ react-native-svg-charts@^5.2.0:
     d3-shape "^1.0.6"
     prop-types "^15.6.0"
 
-react-native-svg@^6.5.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-6.5.0.tgz#a4ebdd16a3395ef8db7aaa38fc9938814b2a728f"
-  integrity sha512-VVKaBWaJ8+GiuAVhhhOfYvckuLqkD48FbdxnbVKpic28mfrYK6AB0U/4NWmJgjQr/mfyHIKa2sqIdMfOQd/97w==
+react-native-svg@7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-7.0.3.tgz#1ced56f4f6e96ad95374d66706390f51fa86bea7"
+  integrity sha512-fIMgoum2YWY1mBM93G+vYIj7l0te4v4XmndxAfq7A6GZPYrNNM0rysg+bsGMCFiYQQbjeoqzqQkY3jWqZgY7UQ==
   dependencies:
     color "^2.0.1"
     lodash "^4.16.6"
@@ -6004,10 +6004,19 @@ react-native-textinput-effects@^0.4.2:
   resolved "https://registry.yarnpkg.com/react-native-textinput-effects/-/react-native-textinput-effects-0.4.2.tgz#05336a8ed9e4992397fc5de714692d774eb91b07"
   integrity sha1-BTNqjtnkmSOX/F3nFGktd065Gwc=
 
-react-native-vector-icons@^4.5.0, react-native-vector-icons@^4.6.0:
+react-native-vector-icons@^4.5.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-4.6.0.tgz#e4014311ffa6de397d914ffc31b7097a874cc8d5"
   integrity sha512-rpfhfPiXCK2PX1nrNhdxSMrEGB/Gw/SvKoPM0G2wAkSoqynnes19K0VYI+Up7DqR1rFIpE4hP2erpT1tNx2tfg==
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.5.10"
+    yargs "^8.0.2"
+
+react-native-vector-icons@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-5.0.0.tgz#d0bd6fdda01159db409810718dd04904951a98f5"
+  integrity sha512-3ZmLGhQFk5QeHuttx0tOpghXhpVMGwXzb3pVaW/M8Qj0qkcg7koVyZmoR9vABQuxFC6KbM3l6/WLYZPh2aGfuQ==
   dependencies:
     lodash "^4.0.0"
     prop-types "^15.5.10"

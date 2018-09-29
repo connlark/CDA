@@ -33,7 +33,6 @@
 		4C8C74821BFF4BEF99B2C9B5 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA872EF5754D472986AEC27E /* SimpleLineIcons.ttf */; };
 		55A8FDA0014A453BB5247B5A /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5008E4CE34F45378AC92961 /* libReactNativePermissions.a */; };
 		57058E69FB204950B8DAFC8F /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C065DE9412D44A097D7333F /* libRNCamera.a */; };
-		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6204F5D1F89C4E3B9B23DA3B /* Pods_rnapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5245587AD11688E10C37988D /* Pods_rnapp.framework */; };
 		67E62749EF6B4054AE186BD3 /* libAppCenterReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A738A158A87C4E108C76B618 /* libAppCenterReactNative.a */; };
 		6B70D865A0F54BCCB52C2AFE /* libOAuthManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BC79E97D9E47079EC2D047 /* libOAuthManager.a */; };
@@ -45,6 +44,7 @@
 		87CDAA3E21371EBB00156A0F /* rnappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA3D21371EBB00156A0F /* rnappUITests.swift */; };
 		87CDAA9621371F6500156A0F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA9521371F6500156A0F /* SnapshotHelper.swift */; };
 		87CE4475213FA4DC0005EE8C /* libReactNativeHaptic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CE4474213FA4B00005EE8C /* libReactNativeHaptic.a */; };
+		87EF8225215F06D8000ED1DF /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		8E449959228B4DE5868B877C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2F35D3EC7E24BB7AACAF3F7 /* Zocial.ttf */; };
 		937A249E9BF24E328BED8799 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3967388BA3E941719E1B0694 /* Foundation.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -552,9 +552,8 @@
 				87CE4475213FA4DC0005EE8C /* libReactNativeHaptic.a in Frameworks */,
 				87AAE1C220FF06F700910330 /* libRCTPushNotification.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
-				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
+				87EF8225215F06D8000ED1DF /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
-				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
@@ -1049,7 +1048,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -1062,6 +1061,9 @@
 						DevelopmentTeam = 24MA2Z46AJ;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.AutoFillCredentialProvider = {
+								enabled = 0;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -1842,7 +1844,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00373DA4AB43AEA5374C99FA /* Pods-rnapp.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = CURRENT;
 				CODE_SIGN_ENTITLEMENTS = rnapp/rnapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1886,7 +1888,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4E10BA59ECB0D7042564296 /* Pods-rnapp.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = CURRENT;
 				CODE_SIGN_ENTITLEMENTS = rnapp/rnapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;

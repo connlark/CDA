@@ -39,7 +39,7 @@ export default class LoginForm extends Component {
             testttID="345325235"
             name={'email'}
             ref={(ref) => this.emailInputRef = ref}
-            placeholder={'Email'}
+            placeholder={'Username'}
             keyboardType={'email-address'}
             editable={!isLoading}
             returnKeyType={'next'}

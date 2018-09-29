@@ -35,7 +35,7 @@ export default class SignupForm extends Component {
         <View style={styles.form} ref={(ref) => this.formRef = ref}>
           <CustomTextInput
             ref={(ref) => this.emailInputRef = ref}
-            placeholder={'Email'}
+            placeholder={'Username'}
             keyboardType={'email-address'}
             editable={!isLoading}
             returnKeyType={'next'}
