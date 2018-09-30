@@ -1,0 +1,9 @@
+{
+    "device_frame_version": "latest",
+    "default": {
+      "show_complete_frame": false,
+      "stack_title": false,
+      "padding": 50
+    },
+    "data": []
+  }
