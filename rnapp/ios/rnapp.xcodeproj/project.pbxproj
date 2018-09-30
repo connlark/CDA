@@ -40,6 +40,9 @@
 		7C6248163DA94BE3BE0E5987 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F50AC097B5E4FA291B99C01 /* FontAwesome.ttf */; };
 		816442EBAE734DD2A428FBED /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBE4FAFA9E94511BB9D9E41 /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		873654342160AC2E0052958D /* Peso.png in Resources */ = {isa = PBXBuildFile; fileRef = 873653FC2160AC2E0052958D /* Peso.png */; };
+		873654352160AC2E0052958D /* Peso.png in Resources */ = {isa = PBXBuildFile; fileRef = 873653FC2160AC2E0052958D /* Peso.png */; };
+		873654362160AC2E0052958D /* Peso.png in Resources */ = {isa = PBXBuildFile; fileRef = 873653FC2160AC2E0052958D /* Peso.png */; };
 		87AAE1C220FF06F700910330 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87AAE1BF20FF06DB00910330 /* libRCTPushNotification.a */; };
 		87CDAA3E21371EBB00156A0F /* rnappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA3D21371EBB00156A0F /* rnappUITests.swift */; };
 		87CDAA9621371F6500156A0F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA9521371F6500156A0F /* SnapshotHelper.swift */; };
@@ -506,6 +509,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D8D2713862A450F8F6F4317 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		873653FC2160AC2E0052958D /* Peso.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Peso.png; sourceTree = "<group>"; };
 		87AAE1B920FF06DA00910330 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		87AAE1C320FF107000910330 /* rnapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = rnapp.entitlements; path = rnapp/rnapp.entitlements; sourceTree = "<group>"; };
 		87CDAA3B21371EBB00156A0F /* rnappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rnappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -678,6 +682,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				873653FC2160AC2E0052958D /* Peso.png */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = rnapp;
@@ -1598,6 +1603,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				873654352160AC2E0052958D /* Peso.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1617,6 +1623,7 @@
 				EF226137906E4A399C3303AF /* MaterialIcons.ttf in Resources */,
 				36D5B41486B24E558B7C37CC /* Octicons.ttf in Resources */,
 				4C8C74821BFF4BEF99B2C9B5 /* SimpleLineIcons.ttf in Resources */,
+				873654342160AC2E0052958D /* Peso.png in Resources */,
 				8E449959228B4DE5868B877C /* Zocial.ttf in Resources */,
 				DA7B2645A1A743CD8B492044 /* AppCenter-Config.plist in Resources */,
 			);
@@ -1626,6 +1633,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				873654362160AC2E0052958D /* Peso.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
