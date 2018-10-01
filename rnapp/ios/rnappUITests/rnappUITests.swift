@@ -149,7 +149,7 @@ class rnappUITests: XCTestCase {
       let meohmy = app.descendants(matching: .key).element(boundBy: 1)
  
       upgradeButtonContainer.doubleTap()
-       UIPasteboard.general.string = "dev"
+       UIPasteboard.general.string = "seed"
       app.menuItems.element(boundBy: 0).tap()
      
      // upgradeButtonContainer.typeText("dev")

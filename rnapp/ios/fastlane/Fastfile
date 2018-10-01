@@ -11,7 +11,7 @@
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
+update_fastlane
 
 default_platform(:ios)
 
@@ -19,7 +19,7 @@ platform :ios do
   desc "Generate new localized screenshots"
   lane :screenshots do
     capture_screenshots(workspace: "rnapp.xcworkspace", scheme: "FASTLANE SCREENSHOTS", number_of_retries: 3)
-    frame_screenshots(white: false)
+    # frame_screenshots(white: false)
     upload_to_app_store(skip_binary_upload: true, skip_metadata: false)
   end
 end
