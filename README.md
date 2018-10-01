@@ -11,7 +11,9 @@ Perfect for those that don't want to manually check their balances and asset his
 Current assets/exchanges supported:
 
 • CoinEx Exchange&nbsp;
+
 • TRX Wallet (includes all TRON tokens and TRX)&nbsp;
+
 • More added soon™! 
 
 
