@@ -13,16 +13,34 @@ Meteor.methods({
             user.profile = [];
         }
 
-        console.log('API TOKEN SETTING', token);
-        const userId = this.userId;
-        if (!userId || typeof(token) === 'undefined') {
-            return;
-        }
-        user.profile.push({token: token})
-        Meteor.users.update(
-            { _id: user._id }, { $set: {profile: user.profile}}
-          );
-        doTheDirty(user.profile[0].token,user._id);
+        const coinex = new Coinex(token.apiKey, token.secretKey);
+
+        coinex.balance().then((response) => {
+            const userId = this.userId;
+            if (!userId || typeof(token) === 'undefined') {
+                return;
+            }
+
+            if (user.profile.token){
+                user.profile.token = token;
+            }
+            else {
+                user.profile.push({token: token});
+            }
+            console.log('API TOKEN ADDED', token);
+
+            Meteor.users.update(
+                { _id: user._id }, { $set: {profile: user.profile}}
+            );
+            doTheDirty(user.profile[0].token,user._id);
+        })
+        .catch(err => {
+            const { code, message } = err;
+            if (code === 23){
+                throw new Meteor.Error(`Please add ${message.substring(3,message.indexOf(' '))} to the usable IP address field on coinex.com/apikey`);
+            }
+            throw new Meteor.Error(`Could not add API key. Reason: ${message}`)
+        });
     },
     'Balances.checkForNewBalance' (token){
         const user = Meteor.user();

@@ -100,6 +100,7 @@ export default class componentName extends Component {
                 setTimeout(() => {
                     this.scanner.reactivate();
                 }, 500);
+                this.dropdown.alertWithType('error', err.reason,'');
                 ReactNativeHaptic.generate('notificationError'); 
                 return;
             }
@@ -108,7 +109,6 @@ export default class componentName extends Component {
                 ReactNativeHaptic.generate('notificationSuccess');
                 this.toggleConfetti(true);
             }
-            
         })
     }
 
