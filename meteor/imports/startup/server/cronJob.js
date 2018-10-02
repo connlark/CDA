@@ -257,13 +257,16 @@ const dividendCalc = (old, newbal) => {
             }
         }
         else {
+            const deltaUSD = 0;
             if (newbal[i].USDprice){
                 valueUSD = valueUSD + Number(newbal[i].USDvalue);
+                deltaUSD = Number(newbal[i].USDvalue);
             }
             else if (newbal[i].coin === 'USDT'){
                 valueUSD = valueUSD + Number(newbal[i].balance);
+                deltaUSD = Number(newbal[i].balance);
             }
-            returner.push({coin: newbal[i].coin, delta: newbal[i].balance})
+            returner.push({coin: newbal[i].coin, delta: newbal[i].balance, deltaUSD})
         }
     }
     return {coinDeltas: returner, USDdelta: Number(valueUSD).toFixed(8)};
@@ -275,11 +278,11 @@ const doParse = (e) => {
         return '';
     }
     e.map((o) => {
-        if (o.coin.match(/BTC|BCH/)){
-            out += o.coin + ' ~ ' + o.delta +`\t💲 ${valueUSD}\n`;
+        if (o.coin.match(/BTC|BCH|ETH/)){
+            out += o.coin + ' ~ ' + o.delta +`\t💲 ${o.deltaUSD}\n`;
         }
         else {
-            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${valueUSD}\n`;
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${o.deltaUSD}\n`;
         }
     })
     return out;
