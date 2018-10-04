@@ -15,7 +15,7 @@ import { recieveNotification } from './app/Actions/notificationLogic'
 import { recieveData } from './app/Actions/meteorData';
 
 import { storeItem, retrieveItem } from './app/lib';
-let METEOR_URL = 'ws://35.193.141.128:3000/websocket';
+let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket';
 //let METEOR_URL = 'ws://localhost:3000/websocket';
@@ -32,7 +32,7 @@ if (__DEV__) {
 
 if (process.env.NODE_ENV === 'production') {
   //METEOR_URL = 'ws://73.246.190.116:3000/websocket'; 
-  METEOR_URL = 'ws://35.193.141.128:3000/websocket'
+  METEOR_URL = 'ws://104.154.43.177:3000/websocket'
 }
 
 Meteor.connect(METEOR_URL);

@@ -265,9 +265,15 @@ export default class componentName extends Component {
                                 marginBottom: '-10%'
                             }}
                             topContent={
+                                <>
                                 <Text style={styles.centerText}>
                                     Go to <Text style={styles.textBold}>https://www.coinex.com/apikey</Text> on your computer and scan the QR code for an API key.
                                 </Text>
+                                <View style={{marginTop: 10}}/>
+                                <Text style={styles.centerTextRed}>
+                                    NOTE: You must add <Text style={styles.textBoldRed}>104.154.43.177</Text> to your IP White List
+                                </Text>
+                                </>
                             }
                             bottomContent={null}
                     />
@@ -402,6 +408,15 @@ const styles = StyleSheet.create({
     centerText: {
         fontWeight: 'bold',
         fontSize: 12,
+    },
+    centerText: {
+        fontWeight: 'bold',
+        fontSize: 12,
+    },
+    centerTextRed: {
+        fontWeight: 'bold',
+        fontSize: 12,
+        color: 'red'
     },
     inactiveDot: {
       backgroundColor: '#ededed'
