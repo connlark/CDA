@@ -94,7 +94,7 @@ export default class componentName extends Component {
     }
 
     setCoinExAPI = (token) => {
-        Meteor.call('Balances.setAPI', token, (err) => {
+        Meteor.call('Balances.setAPI', token, (err, resp) => {
             if (err){
                 console.log(err)
                 setTimeout(() => {
