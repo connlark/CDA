@@ -14,7 +14,7 @@ Meteor.methods({
         }
 
         const coinex = new Coinex(token.apiKey, token.secretKey);
-
+        let error = null;
         coinex.balance().then((response) => {
             if (!response) throw new Meteor.Error('COINEX API ERROR',`Could not add API key.`);
             const userId = this.userId;
@@ -35,12 +35,16 @@ Meteor.methods({
             );
             doTheDirty(user.profile[0].token,user._id);
         }).catch(err => {
-            const { code, message } = err;
+            error = err;
+        });
+        if (error){
+            const { code, message } = error;
+
             if (code === 23){
                 throw new Meteor.Error('COINEX API ERROR',`Please add ${message.substring(3,message.indexOf(' '))} to the usable IP address field on coinex.com/apikey`);
             }
-            throw new Meteor.Error('COINEX API ERROR',`Could not add API key. Reason: ${message}`)
-        });
+            throw new Meteor.Error(`COINEX API ERROR ${code}`,`Could not add API key. Reason: ${message}`)
+        }
     },
     'Balances.checkForNewBalance' (token){
         const user = Meteor.user();
