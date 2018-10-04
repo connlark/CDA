@@ -98,7 +98,9 @@ export default class componentName extends Component {
             if (err){
                 console.log(err)
                 setTimeout(() => {
-                    this.scanner.reactivate();
+                    if (this.scanner){
+                        this.scanner.reactivate();
+                    }
                 }, 500);
                 this.dropdown.alertWithType('error', err.reason,'');
                 ReactNativeHaptic.generate('notificationError'); 
