@@ -196,7 +196,6 @@ class Settings extends Component {
             <View style={{marginTop: 10}}/>
             {TRXAddress && <SettingsCategoryHeader title={`TRX Wallet: ${TRXAddress}`} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} subTitletitleStyle={{color:'black', fontFamily: 'Avenir', fontSize: 12, fontWeight: '400'}}/>}
             {CoinExKeys && <SettingsCategoryHeader title={`CoinEx Api Key: ${CoinExKeys.apiKey}`} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'black', fontFamily: 'Avenir', fontSize: 12, fontWeight: '400'}}/>}
-            <SettingsCategoryHeader title={`CoinEx Api Key: ${this.props.connected}`} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'black', fontFamily: 'Avenir', fontSize: 12, fontWeight: '400'}}/>
             
             
             <View style={{marginTop: '90%'}}/>
