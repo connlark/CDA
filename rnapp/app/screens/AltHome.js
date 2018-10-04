@@ -258,6 +258,7 @@ class AltHome extends Component {
                         centerComponent={{ text: name, style: { color: '#fff' } }}
                     />
                     <WebView
+                        useWebKit={true}
                         startInLoadingState
                         javaScriptEnabled={false}
                         source={{uri: url}}
