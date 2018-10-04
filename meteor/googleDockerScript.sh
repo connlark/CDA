@@ -46,10 +46,10 @@ RUN apk add --update build-base python
 # Create app directory
 RUN mkdir -p /usr/app
 COPY . /usr/app
-RUN cd /usr/app/programs/server && meteor npm install --production
-RUN cd /usr/app/programs/server && meteor npm install --save bcrypt
-RUN cd /usr/app/programs/server && meteor npm install --save simpl-schema apnagent cryptocompare coinex.com moment node-fetch
-RUN cd /usr/app/programs/server && meteor npm install --save @babel/runtime@latest
+RUN cd /usr/app/programs/server && npm install --production
+RUN cd /usr/app/programs/server && npm install --save bcrypt
+RUN cd /usr/app/programs/server && npm install --save simpl-schema apnagent cryptocompare coinex.com moment node-fetch
+RUN cd /usr/app/programs/server && npm install --save @babel/runtime@latest
 WORKDIR /usr/app
 ENV PORT=3000
 ENV MONGO_URL=mongodb://connorlarkin:PR7-DUq-h88-LAo@cryptocluster-shard-00-00-vm6wk.mongodb.net:27017,cryptocluster-shard-00-01-vm6wk.mongodb.net:27017,cryptocluster-shard-00-02-vm6wk.mongodb.net:27017/test?ssl=true&replicaSet=CryptoCluster-shard-0&authSource=admin
