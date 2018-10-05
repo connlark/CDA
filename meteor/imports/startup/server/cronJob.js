@@ -246,25 +246,29 @@ const dividendCalc = (old, newbal) => {
         });
         if (oldVal){
             const delta = newbal[i].balance-oldVal.balance;
+            const deltaUSD = 0;
+
             if(delta > 0.00000001){
                 if (newbal[i].USDprice){
                     valueUSD = valueUSD + delta * Number(newbal[i].USDprice);
+                    deltaUSD += Number(newbal[i].USDvalue);
                 }
                 else if (newbal[i].coin === 'USDT'){
                     valueUSD = valueUSD + Number(delta);
+                    deltaUSD += Number(delta);
                 }
-                returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance, valueUSD})
+                returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance, deltaUSD})
             }
         }
         else {
             const deltaUSD = 0;
             if (newbal[i].USDprice){
                 valueUSD = valueUSD + Number(newbal[i].USDvalue);
-                deltaUSD = Number(newbal[i].USDvalue);
+                deltaUSD += Number(newbal[i].USDvalue);
             }
             else if (newbal[i].coin === 'USDT'){
                 valueUSD = valueUSD + Number(newbal[i].balance);
-                deltaUSD = Number(newbal[i].balance);
+                deltaUSD += Number(newbal[i].balance);
             }
             returner.push({coin: newbal[i].coin, delta: newbal[i].balance, deltaUSD})
         }
