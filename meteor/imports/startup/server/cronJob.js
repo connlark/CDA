@@ -246,7 +246,7 @@ const dividendCalc = (old, newbal) => {
         });
         if (oldVal){
             const delta = newbal[i].balance-oldVal.balance;
-            const deltaUSD = 0;
+            let deltaUSD = 0;
 
             if(delta > 0.00000001){
                 if (newbal[i].USDprice){
@@ -261,7 +261,7 @@ const dividendCalc = (old, newbal) => {
             }
         }
         else {
-            const deltaUSD = 0;
+            let deltaUSD = 0;
             if (newbal[i].USDprice){
                 valueUSD = valueUSD + Number(newbal[i].USDvalue);
                 deltaUSD += Number(newbal[i].USDvalue);
