@@ -23,7 +23,7 @@ accounts-password@1.5.1
 aldeed:simple-schema
 aldeed:collection2
 underscore@1.0.10
-percolate:synced-cron
 reactive-dict@1.2.1
 http
 check
+littledata:synced-cron
