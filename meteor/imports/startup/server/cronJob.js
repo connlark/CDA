@@ -14,7 +14,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 15 min');
+              return parser.text('every 5 min');
             },
             job: () => {
                 const users = Meteor.users.find({}).fetch();
