@@ -13,6 +13,8 @@
     "appcenter-analytics": "1.8.1",
     "appcenter-crashes": "1.8.1",
     "babel-core": "7.0.0-bridge.0",
+    "coinlist": "^3.1.1",
+    "cryptocurrency-icons": "^0.8.0",
     "d3-scale": "^2.1.2",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
@@ -61,7 +63,7 @@
   "devDependencies": {
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
-    "metro-react-native-babel-preset": "^0.47.0",
+    "metro-react-native-babel-preset": "0.47.0",
     "react-test-renderer": "16.5.2"
   },
   "jest": {

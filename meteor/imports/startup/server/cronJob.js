@@ -283,10 +283,10 @@ const doParse = (e) => {
     }
     e.map((o) => {
         if (o.coin.match(/BTC|BCH|ETH/)){
-            out += o.coin + ' ~ ' + o.delta +`\t💲 ${o.deltaUSD}\n`;
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(8) +`\t💲 ${Number(o.deltaUSD).toFixed(3)}\n`;
         }
         else {
-            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${o.deltaUSD}\n`;
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${Number(o.deltaUSD).toFixed(3)}\n`;
         }
     })
     return out;

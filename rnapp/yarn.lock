@@ -1929,6 +1929,11 @@ code-push@2.0.6:
     superagent-proxy "^1.0.3"
     yazl "^2.4.1"
 
+coinlist@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/coinlist/-/coinlist-3.1.1.tgz#4de9b401ec74bdf9a86d4c7d2d7e7a2e883e0e8e"
+  integrity sha512-If8gEhRNPaUXx60wAyCWHUNkaiB86ZGf7H61JnJTSulM0ijA3C9+3MPJ+Jgoq63eFqW4IXeCONrHQJHQgvOtbA==
+
 collection-visit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/collection-visit/-/collection-visit-1.0.0.tgz#4bc0373c164bc3291b4d368c829cf1a80a59dca0"
@@ -2142,6 +2147,11 @@ crypto-js@^3.1.6:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.8.tgz#715f070bf6014f2ae992a98b3929258b713f08d5"
   integrity sha1-cV8HC/YBTyrpkqmLOSkli3E/CNU=
+
+cryptocurrency-icons@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/cryptocurrency-icons/-/cryptocurrency-icons-0.8.0.tgz#2e173d0e96949db370d2e299bce6371699b54e0b"
+  integrity sha512-rXOspPbPoVXlpP9XKOcV0MsVlrvmIt2K19tRUKB/mHzOUdGY6Wb1L4MIB7DyqZE80tLfU7cIkFRU6853cYV2iw==
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.4"
@@ -4618,7 +4628,7 @@ metro-react-native-babel-preset@0.45.6:
     metro-babel7-plugin-react-transform "0.45.6"
     react-transform-hmr "^1.0.4"
 
-metro-react-native-babel-preset@^0.47.0:
+metro-react-native-babel-preset@0.47.0:
   version "0.47.0"
   resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.47.0.tgz#684e1dd875898f7a660bb9edb0125b4942a853c9"
   integrity sha512-CttOU/mLn6+VEPCDtb99y1b3hBiIjOg8CZkd9xYkF2WK3WT0ejUbA9jyRY8PE3uHK9ZftUeRAuu7tezGHAqqNQ==

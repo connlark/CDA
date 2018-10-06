@@ -11,12 +11,13 @@ import * as Animatable from 'react-native-animatable';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import PushNotification from 'react-native-push-notification';
 
+
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
 import { IS_X } from '../config/styles';
 import { storeItem, retrieveItem } from '../lib';
 
-const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#63f85a","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#d3d3d3","https://www.cryptocompare.com/media/33842920/dash.png":"#186799","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"#a993ce","https://www.cryptocompare.com/media/27010814/bcy.jpg":"#fe7dbc","https://www.cryptocompare.com/media/12318137/hsr.png":"#b2a8d9","https://www.cryptocompare.com/media/34477813/card.png":"#20329d","https://www.cryptocompare.com/media/34477783/olt.jpg":"#bff0f5","https://www.cryptocompare.com/media/351360/zec.png":"#8e773b","https://www.cryptocompare.com/media/19684/doge.png":"#eed67c","https://www.cryptocompare.com/media/34477805/trx.jpg":"#fd1a1a","https://pbs.twimg.com/profile_images/1013352125361819648/z2fvUNDq_400x400.jpg":"#cbca06"}');
+const backgColors = JSON.parse('{"https://www.cryptocompare.com/media/30002253/coinex.png":"#9bfefb","https://www.cryptocompare.com/media/19633/btc.png":"#febe5a","https://www.cryptocompare.com/media/1383919/12-bitcoin-cash-square-crop-small-grn.png":"#C4E0A6","https://www.cryptocompare.com/media/1383672/usdt.png":"#57dfb4","https://www.cryptocompare.com/media/34477776/xrp.png":"#cbcdcf","https://www.cryptocompare.com/media/20646/eth_logo.png":"#B9C5F5","https://www.cryptocompare.com/media/33842920/dash.png":"#7DC3F2","https://www.cryptocompare.com/media/19782/litecoin-logo.png":"#d3d3d3","https://www.cryptocompare.com/media/1383652/eos_1.png":"#d3d3d3","https://www.cryptocompare.com/media/1383858/neo.jpg":"#ddfbaf","https://www.cryptocompare.com/media/33752295/etc_new.png":"#cef3ce","https://banner2.kisspng.com/20180330/wgw/kisspng-bitcoin-cryptocurrency-monero-initial-coin-offerin-bitcoin-5abdfe6b87dad3.2673609815224008755565.jpg":"#ca9658","https://www.cryptocompare.com/media/20084/btm.png":"#a993ce","https://www.cryptocompare.com/media/27010814/bcy.jpg":"#fe7dbc","https://www.cryptocompare.com/media/12318137/hsr.png":"#b2a8d9","https://www.cryptocompare.com/media/34477813/card.png":"#20329d","https://www.cryptocompare.com/media/34477783/olt.jpg":"#bff0f5","https://www.cryptocompare.com/media/351360/zec.png":"#8e773b","https://www.cryptocompare.com/media/19684/doge.png":"#eed67c","https://www.cryptocompare.com/media/34477805/trx.jpg":"#fd1a1a","https://pbs.twimg.com/profile_images/1013352125361819648/z2fvUNDq_400x400.jpg":"#cbca06"}');
 let ws;
 
 class AltHome extends Component {
@@ -30,10 +31,10 @@ class AltHome extends Component {
             appState: AppState.currentState,
             connected: false,
             showingCoins: [],
-            modalVisible: false
+            modalVisible: false,
+            loadingTimePassed: false
         };
 
-        console.log('ws')
         const { cryptoObj } = this.state;
         this.setUpWS();
         /*PushNotification.localNotificationSchedule({
@@ -41,11 +42,13 @@ class AltHome extends Component {
             message: "My Notification Message", // (required)
             date: new Date(Date.now() + (5 * 1000)) // in 60 secs
           });*/
+
+          
+        setTimeout(() => {this.setState({loadingTimePassed: true})}, 1000)
     }
 
     componentWillUnmount(){
         AppState.removeEventListener('change', this._handleAppStateChange);
-        ws = null;
     }
 
     _handleAppStateChange = (nextAppState) => {
@@ -54,7 +57,6 @@ class AltHome extends Component {
         
           this.setUpWS();
         }
-        ws = null;
         this.setState({appState: nextAppState});
     }
 
@@ -164,7 +166,7 @@ class AltHome extends Component {
 
     _renderGridItem = (item, i) => {
         let imageUrl = item.imgUrl ? item.imgUrl : 'https://frontiersinblog.files.wordpress.com/2018/04/frontiers-in-blockchain-logo.jpg';
-
+        let imagePNG = null;
         let color = backgColors[imageUrl] ? backgColors[imageUrl] :'#f6f5f3';
         const name = item.fullName ? item.fullName : item.coin;
         let bal = 0;
@@ -177,6 +179,36 @@ class AltHome extends Component {
                 break;
             case 'WHC':
                 imageUrl = 'https://file.coinex.com/2018-08-01/72F1DF3618A64383AE6AEA8B6D4DBF3E.png';
+                break;
+            case 'BTC':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/btc.png')
+                break;
+            case 'BCH':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/bch.png')
+                break;
+            case 'USDT':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/usdt.png')
+                break;
+            case 'ETH':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/eth.png')
+                break;
+            case 'XRP':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/xrp.png')
+                break;
+            case 'NEO':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/neo.png')
+                break;
+            case 'HSR':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/hsr.png')
+                break;
+            case 'EOS':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/eos.png')
+                break;
+            case 'LTC':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/ltc.png')
+                break;
+            case 'DASH':
+                imagePNG = require('../../node_modules/cryptocurrency-icons/128/color/dash.png')
                 break;
             default:
                 break;
@@ -207,23 +239,45 @@ class AltHome extends Component {
             <View style={{marginTop: 10, marginBottom: 10}}>
                 <Text adjustsFontSizeToFit style={{fontSize: 12}} numberOfLines={1}> {namer} </Text>
             </View>
-            <Avatar
-                rounded
-                large
-                //title={String(item.fullName).substring(0,2)}
-                source={{uri: imageUrl}}
+            { imagePNG ? 
+                    <Avatar
+                    rounded
+                    large
+                    //title={String(item.fullName).substring(0,2)}
+                    source={imagePNG}
+                //source={require('../../node_modules/cryptocurrency-icons/128/color/btc.png')} 
                 onPress={() => {
-                    this.setState({selectedCoinObj: {
-                        url:'https://www.cryptocompare.com'+item.ccurl,
-                        name: item.fullName
-                    }}, () => {
-                        this.setState({showWebView: true});
-                    });
-                }}
-                activeOpacity={0.4}
-                containerStyle={{ backgroundColor: 'transparent'}}
-                overlayContainerStyle={{backgroundColor: 'transparent'}}
-            />
+                        this.setState({selectedCoinObj: {
+                            url:'https://www.cryptocompare.com'+item.ccurl,
+                            name: item.fullName
+                        }}, () => {
+                            this.setState({showWebView: true});
+                        });
+                    }}
+                    activeOpacity={0.4}
+                    containerStyle={{ backgroundColor: 'transparent'}}
+                    overlayContainerStyle={{backgroundColor: 'transparent'}}
+                />
+            :
+                <Avatar
+                    rounded
+                    large
+                    //title={String(item.fullName).substring(0,2)}
+                    source={{uri: imageUrl, cache: 'default'}}
+                    onPress={() => {
+                        this.setState({selectedCoinObj: {
+                            url:'https://www.cryptocompare.com'+item.ccurl,
+                            name: item.fullName
+                        }}, () => {
+                            this.setState({showWebView: true});
+                        });
+                    }}
+                    activeOpacity={0.4}
+                    containerStyle={{ backgroundColor: 'transparent'}}
+                    overlayContainerStyle={{backgroundColor: 'transparent'}}
+                />
+            }
+            
             <View style={{marginTop: 10}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 10}}> {numberWithCommas(Number(item.balance).toFixed(item.coin === 'BTC' ? 7:3), true)} {item.coin}</Text>
             </View>
@@ -246,7 +300,7 @@ class AltHome extends Component {
 
     render() {
         const { balances, balancesReady } = this.props;
-        const { refreshing, showWebView, selectedCoinObj } = this.state;
+        const { refreshing, showWebView, selectedCoinObj, loadingTimePassed } = this.state;
         
         if(showWebView){ 
             const { url, name } = selectedCoinObj;
@@ -311,7 +365,7 @@ class AltHome extends Component {
                 </ScrollView>
             );
         }
-        else if (balancesReady){
+        else if (balancesReady && !loadingTimePassed){
             return (
                 <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
                     <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.mymodal.setModalVisible( true)}>

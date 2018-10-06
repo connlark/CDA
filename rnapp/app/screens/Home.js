@@ -7,7 +7,6 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import DropdownAlert from 'react-native-dropdownalert';
 import Loading from '../components/loading'
 import { IS_X } from '../config/styles';
-
 class Home extends Component {
     constructor(props){
         super(props);
