@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Balances } from './balances';
+import { Balances, TRXBalances } from './balances';
 import { doTheDirty, doTheDirtyONLYTRX } from '../../startup/server/cronJob';
 import { getTRXBalances } from '../../../lib/tronscanapi';
 
@@ -60,43 +60,12 @@ Meteor.methods({
             { _id: user._id }, { $set: {profile: user.profile}}
         );
         if (oldTRXAddress){
-            removeTRXBalances(address, user._id).then(() => {
-                doTheDirtyONLYTRX(user._id, address, true);
-            });
+            TRXBalances.remove({userId: userId})
+            doTheDirtyONLYTRX(user._id, address, true);
         }
         else {
             doTheDirtyONLYTRX(user._id, address, true);
         }
     },
 });
-
-const removeTRXBalances = (address, userId) => {
-    return new Promise((resolve, reject) => {
-        getTRXBalances(address).then((bally) => {
-            bally = bally.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED');
-
-            let dta = Balances.findOne({userId: userId});
-            if (typeof(dta) !== 'undefined'){
-                for (let index = 0; index < dta.balanceData.length; index++) {
-                    const element = dta.balanceData[index];
-                    const curr = bally.filter((e) => e.coin === element.coin);
-                    if (curr[0] && element.name === curr[0].coin){
-                        dta.balanceData[index].balance -= curr[0].balance;
-                    }
-                }
-                Balances.update(
-                    {userId: userId},
-                    {
-                        userId: userId,
-                        balanceData: dta.balanceData,
-                        divCalc: dta.divCalc,
-                        createdAt: new Date
-                    }
-                );
-            }
-            resolve(true);
-        })
-    });
-};
-
   

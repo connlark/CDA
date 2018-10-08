@@ -137,6 +137,7 @@ class AltHome extends Component {
     }
 
     sortData = (data) => {
+        if (!data) return;
         data = data.filter((e) => typeof e.USDvalue !== 'undefined')
         return data.sort( (a,b) => {
             if (a.USDvalue && b.USDvalue){
@@ -300,7 +301,7 @@ class AltHome extends Component {
 
     render() {
         const { balances, balancesReady } = this.props;
-        const { refreshing, showWebView, selectedCoinObj, loadingTimePassed } = this.state;
+        const { refreshing, showWebView, selectedCoinObj } = this.state;
         
         if(showWebView){ 
             const { url, name } = selectedCoinObj;
@@ -365,10 +366,10 @@ class AltHome extends Component {
                 </ScrollView>
             );
         }
-        else if (balancesReady && !loadingTimePassed){
+        else if (balancesReady){
             return (
                 <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
-                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.mymodal.setModalVisible( true)}>
+                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.props.navigation.navigate('Settings')}>
                         <View style={{marginBottom: 10}}>
                             <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
                         </View>

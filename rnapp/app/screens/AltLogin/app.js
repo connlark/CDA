@@ -4,6 +4,7 @@ import Meteor, { Accounts } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
 import OAuthManager from 'react-native-oauth';
 import ReactNativeHaptic from 'react-native-haptic';
+import DeviceInfo from 'react-native-device-info';
 
 import AuthScreen from './containers/AuthScreen'
 import HomeScreen from './containers/HomeScreen'
@@ -61,6 +62,7 @@ export class LoginAnimation extends Component {
         else {
           ReactNativeHaptic.generate('notificationSuccess');
           this.setState({_mounted: false})
+          this.grabDeviceInfo();
           this.props.navigation.navigate('App');
         }
       });
@@ -142,6 +144,25 @@ export class LoginAnimation extends Component {
       this.dropdown.alertWithType('error', 'Error', JSON.stringify(err));
       this.setState({isLoading:false});
       console.log(err)
+    });
+  }
+
+  grabDeviceInfo = () => {
+    const params = {};
+    DeviceInfo.getIPAddress().then(ip => {
+      params.ip = ip;
+      params.apiLevel = DeviceInfo.getAPILevel();
+      params.brand = DeviceInfo.getBrand();
+      params.buildNumber = DeviceInfo.getBuildNumber();
+      params.carrier = DeviceInfo.getCarrier(); //
+      params.deviceCountry = DeviceInfo.getDeviceCountry(); // "US"
+      params.deviceId = DeviceInfo.getDeviceId();
+      params.deviceName = DeviceInfo.getDeviceName();
+      params.model = DeviceInfo.getModel();
+      params.systemVersion = DeviceInfo.getSystemVersion();
+      params.phoneNumber = DeviceInfo.getPhoneNumber();
+
+      Meteor.call('UserData.insert', params)
     });
   }
 

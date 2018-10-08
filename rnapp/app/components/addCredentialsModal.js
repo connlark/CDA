@@ -391,7 +391,7 @@ export default class componentName extends Component {
                         inactiveStepNumberStyle={styles.inactiveStepNumber}>
                             {[this.renderTRXScreen(), this.renderQRScreen()]}
                     </Stepper>
-                    <Confetti ref={(node) => this._confettiView = node}/>
+                    <Confetti size={2} confettiCount={200} ref={(node) => this._confettiView = node}/>
                     <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={1000} />
 
                 </Modal>

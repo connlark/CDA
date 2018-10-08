@@ -120,13 +120,18 @@ Meteor.startup(()=> {
             {username:'dev',password:'dev' },
         ];
         _.each(users, (user) => {
+            const profile = [];
+            profile.push({token: {apiKey: 'E5EE9D7370C54C10B0F4588697CF28B1', secretKey: 'E37845B6D3764558AC2562B7EA3C482217386CC20C66825F'}})
+            profile.push({TRXAddress: 'THnpUyyvzpFpGGk4fTDXtTj2K7svJx8kfn'})
+
             Accounts.createUser({
                 username: user.username,
-                password: user.password,
-                profile: {
-                    balanceHistory: []
-                }
+                password: user.password,                
             });
+
+            Meteor.users.update(
+                { username: user.username }, { $set: {profile: profile}}
+            );
         });  
     }
 })

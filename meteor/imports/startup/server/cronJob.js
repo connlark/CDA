@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 
-import { Balances } from '../../api/Balances/balances';
+import { Balances, TRXBalances, CoinExBalances } from '../../api/Balances/balances';
 import { BalanceHistory } from '../../api/BalanceHistory/balanceHistory';
 import { getTRXBalances } from '../../../lib/tronscanapi';
 
@@ -41,6 +41,7 @@ Meteor.startup(() => {
                             });
                         }
                     }
+                    mergeBalances(user._id)
                 }
                 return 1;
             }
@@ -74,71 +75,116 @@ export const doTheDirty = (apiToken, userId, TRXAddress) => {
         
         findCoinBalanceInfo(ownedCoins,balances, userId);
         if (TRXAddress){
-            doTheDirtyONLYTRX(userId, TRXAddress, false, true);
+            doTheDirtyONLYTRX(userId, TRXAddress, false);
         }
          
     })
     .catch(err => console.error(err.code, err.message)); 
 }
 
-export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs, hack) => {
+export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
     let ownedCoins = [];
     let balances = [];
+
     if (TRXAddress){
         getTRXBalances(TRXAddress).then((e) => {
             e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED');
             e.map((o) => {
-                if (balances.some(e => e.coin === o.name)) {
-                    for (let index = 0; index < balances.length; index++) {
-                        const element = balances[index];
-                        if (element.coin === o.name){
-                            if (hack){
-                                balances[index].balance = o.balance;
-                            }
-                            else {
-                                balances[index].balance += o.balance;
-                            }
-                        }
-                    }
-                }
-                else {
                     balances.push({coin: o.name, balance: o.balance});
                     ownedCoins.push(o.name)
                 }    
-            });
+            );
 
-            let dta = Balances.findOne({userId: userId});
-            let hackdata = [];
-            let hasChanged = [];
-            if (typeof(dta) !== 'undefined'){
-                for (let index = 0; index < dta.balanceData.length; index++) {
-                    const element = dta.balanceData[index];
-                    const curr = balances.filter((e) => e.coin === element.coin);
-                    if (curr[0] && element.coin === curr[0].coin){
-                        hasChanged.push(element.coin);
-                        if (hack){
-                            dta.balanceData[index].balance = curr[0].balance;
-                        }
-                        else {
-                            dta.balanceData[index].balance += curr[0].balance;
-                        }
-                    }
-                }
-                if (hack && hasChanged.length !== balances.length){
-                    balances.map((m) => {
-                        if (hasChanged.indexOf(m.coin) < 0){
-                            dta.balanceData.push(m)
-                        }
-                    });
-                }
-            }
-            else {
-                hackdata = balances;
-            }
-
-            //findCoinBalanceInfo(ownedCoins, dta ? dta.balanceData:hackdata, userId, shouldNOTCalcDivs);
+            findCoinBalanceInfoTRX(ownedCoins, balances, userId, shouldNOTCalcDivs);
         });
     }
+}
+
+export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
+    cc.priceMulti(ownedCoins, 'USD')
+            .then(prices => {
+                balances = balances.map((balObj) => {
+                    if (prices[balObj.coin]){
+                        balObj.USDprice = prices[balObj.coin].USD;
+                        balObj.USDvalue = parseFloat(prices[balObj.coin].USD * balObj.balance).toFixed(4);
+                    }
+                    return balObj;
+                });
+                cc.coinList().then(coinList => {
+                    balances = balances.map((balObj) => {
+                        if(coinList.Data[balObj.coin]){
+                            balObj.ccurl = coinList.Data[balObj.coin].Url;
+                            balObj.imgUrl = 'https://www.cryptocompare.com'+coinList.Data[balObj.coin].ImageUrl;
+                            balObj.fullName = coinList.Data[balObj.coin].FullName;
+                        }
+                        return balObj;
+                    }); 
+                }).finally(() => {
+                    let dta = TRXBalances.findOne({userId: userId});
+                    if (typeof(dta) === 'undefined'){
+
+                        TRXBalances.insert(
+                            {   userId: userId,
+                                balanceData: balances,
+                                createdAt: new Date
+                            }
+                        );
+                        mergeBalances(userId)
+                    }
+                    else { 
+                        if (!dta.balanceData || isSameBalance(dta.balanceData, balances)){
+                            console.log('same or corrupt data');
+                        }
+                        else {
+                            const divCalc = dividendCalc(dta.balanceData, balances);
+                            const divId = String(Math.random()).substring(2);
+                            const balHistory = BalanceHistory.findOne({userId: userId});
+
+                            if (!shouldNOTCalcDivs && divCalc.coinDeltas.length !== 0){
+                                sendNotif(userId,divCalc,divId);
+                            }
+
+                            TRXBalances.update(
+                                {userId: userId},
+                                {
+                                    userId: userId,
+                                    balanceData: balances,
+                                    divCalc: divCalc,
+                                    createdAt: new Date
+                                }
+                            );
+                            mergeBalances(userId)
+                            
+                            if (balHistory && divCalc.coinDeltas.length !== 0){
+                                if (shouldNOTCalcDivs) return;
+                                balHistory.history.push({date: new Date, divData: divCalc, divId: divId})
+                                BalanceHistory.update(
+                                    {userId: userId},
+                                    {
+                                        userId: userId,
+                                        history: balHistory.history,
+                                        createdAt: new Date
+                                    }
+                                );
+
+                            }
+                            else {
+                                if (shouldNOTCalcDivs || divCalc.coinDeltas.length === 0) return;
+                                const history = [];
+                                history.push({date: new Date, divData: divCalc, divId: divId});
+                                BalanceHistory.insert(
+                                    {   
+                                        userId: userId,
+                                        history: history,
+                                        createdAt: new Date
+                                    }
+                                );
+                            }
+                        }
+                    } 
+                });
+            })
+            .catch(console.error);
 }
 
 export const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
@@ -161,14 +207,15 @@ export const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcD
                         return balObj;
                     }); 
                 }).finally(() => {
-                    let dta = Balances.findOne({userId: userId});
+                    let dta = CoinExBalances.findOne({userId: userId});
                     if (typeof(dta) === 'undefined'){
-                        Balances.insert(
+                        CoinExBalances.insert(
                             {   userId: userId,
                                 balanceData: balances,
                                 createdAt: new Date
                             }
                         );
+                        mergeBalances(userId);
                     }
                     else { 
                         if (!dta.balanceData || isSameBalance(dta.balanceData, balances)){
@@ -209,7 +256,7 @@ export const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcD
                                 );
                             }
 
-                            Balances.update(
+                            CoinExBalances.update(
                                 {userId: userId},
                                 {
                                     userId: userId,
@@ -218,11 +265,107 @@ export const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcD
                                     createdAt: new Date
                                 }
                             );
+                            mergeBalances(userId);
                         }
                     } 
                 });
             })
             .catch(console.error);
+}
+
+const mergeBalances = (userId) => {
+    let dtaTRX = TRXBalances.findOne({userId: userId});
+    let dtaCX = CoinExBalances.findOne({userId: userId});
+    let currBal = Balances.findOne({userId: userId});
+    let theMerged = [];
+
+    if (dtaTRX && dtaCX) {
+        theMerged = dtaCX.balanceData;
+        dtaTRX.balanceData.map((item) => {
+            let isDup = false;
+            theMerged.map((other) => {
+                if (item.coin === other.coin){
+                    isDup = true;
+                    other.balance += item.balance;
+                    other.USDvalue = Number(item.USDvalue) + Number(other.USDvalue)
+                }
+            });
+            if (!isDup){
+                theMerged.push(item)
+            }
+        });
+
+        if (currBal){
+            Balances.update(
+                {userId: userId},
+                {
+                    userId: userId,
+                    balanceData: theMerged,
+                    createdAt: new Date
+                }
+            );
+            console.log('UPDATE BALANCES BOTH')
+
+            return;
+        }
+        console.log('ADDING BALANCES BOTH')
+        Balances.insert(
+            {userId: userId},
+            {
+                userId: userId,
+                balanceData: theMerged,
+                createdAt: new Date
+            }
+        );
+    }
+    else if (dtaTRX){
+        if (currBal){
+            Balances.update(
+                {userId: userId},
+                {
+                    userId: userId,
+                    balanceData: dtaTRX.balanceData,
+                    createdAt: new Date
+                }
+            );
+            console.log('UPDATE BALANCES JUST TRX')
+
+            return;
+        }
+        console.log('ADDING BALANCES JUST TRX')
+        Balances.insert(
+            {userId: userId},
+            {
+                userId: userId,
+                balanceData: dtaTRX.balanceData,
+                createdAt: new Date
+            }
+        );
+    }
+    else if (dtaCX){
+        if (currBal){
+            Balances.update(
+                {userId: userId},
+                {
+                    userId: userId,
+                    balanceData: dtaCX.balanceData,
+                    createdAt: new Date
+                }
+            );
+            console.log('UPDATE BALANCES JUST COINEX')
+
+            return;
+        }
+        console.log('ADDING BALANCES JUST COINEX')
+        Balances.insert(
+            {userId: userId},
+            {
+                userId: userId,
+                balanceData: dtaCX.balanceData,
+                createdAt: new Date
+            }
+        );
+    }
 }
 
 const isSameBalance = (foo, bar) => {
@@ -239,6 +382,7 @@ const isSameBalance = (foo, bar) => {
 const dividendCalc = (old, newbal) => {
     const returner = [];
     let valueUSD = 0;
+    let shouldChange = false;
 
     for (let i = 0; i < newbal.length; i++) {
         const oldVal = old.find((element) => {
@@ -259,9 +403,14 @@ const dividendCalc = (old, newbal) => {
                 }
                 returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance, deltaUSD})
             }
+            if(delta < 0){
+                shouldChange = true;
+            }
         }
         else {
             let deltaUSD = 0;
+            const delta = newbal[i].balance;
+
             if (newbal[i].USDprice){
                 valueUSD = valueUSD + Number(newbal[i].USDvalue);
                 deltaUSD += delta * Number(newbal[i].USDprice);
@@ -273,7 +422,7 @@ const dividendCalc = (old, newbal) => {
             returner.push({coin: newbal[i].coin, delta: newbal[i].balance, deltaUSD})
         }
     }
-    return {coinDeltas: returner, USDdelta: Number(valueUSD).toFixed(8)};
+    return {coinDeltas: returner, USDdelta: Number(valueUSD).toFixed(8), shouldChange};
 }
 
 const doParse = (e) => {
