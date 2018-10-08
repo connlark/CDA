@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules } from 'react-native';
+import { NativeModules, Text } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import Meteor, { createContainer } from 'react-native-meteor';
 import { createStore, applyMiddleware } from 'redux';
@@ -15,6 +15,9 @@ import { recieveNotification } from './app/Actions/notificationLogic'
 import { recieveData } from './app/Actions/meteorData';
 
 import { storeItem, retrieveItem } from './app/lib';
+
+if (Text.defaultProps == null) Text.defaultProps = {};
+Text.defaultProps.allowFontScaling = false;
 let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket';
