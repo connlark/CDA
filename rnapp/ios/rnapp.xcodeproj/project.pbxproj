@@ -27,6 +27,7 @@
 		209B07A1B247459C867C6053 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2738EE30AECF4C30A72417BF /* Ionicons.ttf */; };
 		2DDF8F93D7AC479D96995AF4 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E499E03BAA4D6884E619C3 /* libRNVectorIcons.a */; };
 		324B30E2906249D19F5BC371 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29E8A6CDCDA04EBBABE443FA /* MaterialCommunityIcons.ttf */; };
+		35DF1C8D54EF4E738386EA63 /* libRNRate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BCDF2FFEC6147858D5FABF7 /* libRNRate.a */; };
 		36D5B41486B24E558B7C37CC /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F5317D2972340FBBDBF3E77 /* Octicons.ttf */; };
 		39A042A539ED435981980BC3 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 398C1A0F9D804493863E59DE /* libRNSpinkit.a */; };
 		3A9D61A7F8204D11B5575B3B /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9C690DDC5EE4A2382253306 /* Feather.ttf */; };
@@ -355,6 +356,13 @@
 			remoteGlobalIDString = D91353961DA7849100AABC96;
 			remoteInfo = OAuthManager;
 		};
+		878E3F83216C697A00ECF3D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 008D13BA8767479FB2786F3C /* RNRate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNRate;
+		};
 		87A30DA0211C342C00C69AAE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 35D46A23A85F4E4F83A03B14 /* CodePush.xcodeproj */;
@@ -464,6 +472,7 @@
 
 /* Begin PBXFileReference section */
 		00373DA4AB43AEA5374C99FA /* Pods-rnapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rnapp/Pods-rnapp.debug.xcconfig"; sourceTree = "<group>"; };
+		008D13BA8767479FB2786F3C /* RNRate.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRate.xcodeproj; path = "../node_modules/react-native-rate/ios/RNRate.xcodeproj"; sourceTree = "<group>"; };
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
@@ -494,6 +503,7 @@
 		2738EE30AECF4C30A72417BF /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		29C324D452A641F392F0A312 /* AppCenter-Config.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "rnapp/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		29E8A6CDCDA04EBBABE443FA /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		2BCDF2FFEC6147858D5FABF7 /* libRNRate.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRate.a; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5317D2972340FBBDBF3E77 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		335258C707273EA3021206D3 /* Pods-rnappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnappTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-rnappTests/Pods-rnappTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -580,6 +590,7 @@
 				E24BC58051084C70BA0DD3B2 /* libAppCenterReactNativeCrashes.a in Frameworks */,
 				6B70D865A0F54BCCB52C2AFE /* libOAuthManager.a in Frameworks */,
 				6204F5D1F89C4E3B9B23DA3B /* Pods_rnapp.framework in Frameworks */,
+				35DF1C8D54EF4E738386EA63 /* libRNRate.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,6 +779,7 @@
 				B3E640FFFB7D44CAB167113D /* AppCenterReactNativeAnalytics.xcodeproj */,
 				16237605AA5F42FEA63F346E /* AppCenterReactNativeCrashes.xcodeproj */,
 				39752642D04D457DB3091933 /* OAuthManager.xcodeproj */,
+				008D13BA8767479FB2786F3C /* RNRate.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -843,6 +855,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		878E3F80216C697A00ECF3D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				878E3F84216C697A00ECF3D7 /* libRNRate.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		87A30D9C211C342C00C69AAE /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -891,6 +911,7 @@
 				028BBD132E284EA0AD647769 /* libAppCenterReactNativeAnalytics.a */,
 				9A6B6004F8EE4F22B071AD24 /* libAppCenterReactNativeCrashes.a */,
 				57BC79E97D9E47079EC2D047 /* libOAuthManager.a */,
+				2BCDF2FFEC6147858D5FABF7 /* libRNRate.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1052,7 +1073,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 940;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -1187,6 +1208,10 @@
 				{
 					ProductGroup = 87AAE1A420FF020900910330 /* Products */;
 					ProjectRef = 23AD8692B6F3408185ADE1AD /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 878E3F80216C697A00ECF3D7 /* Products */;
+					ProjectRef = 008D13BA8767479FB2786F3C /* RNRate.xcodeproj */;
 				},
 				{
 					ProductGroup = 87AAE1A820FF020900910330 /* Products */;
@@ -1498,6 +1523,13 @@
 			remoteRef = 8733C0472132703B00422C39 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		878E3F84216C697A00ECF3D7 /* libRNRate.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNRate.a;
+			remoteRef = 878E3F83216C697A00ECF3D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		87A30DA1211C342C00C69AAE /* libCodePush.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1790,12 +1822,14 @@
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
+					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1830,12 +1864,14 @@
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
+					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1875,6 +1911,7 @@
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
+					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 				);
 				INFOPLIST_FILE = rnapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1918,6 +1955,7 @@
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
+					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 				);
 				INFOPLIST_FILE = rnapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2040,6 +2078,10 @@
 				INFOPLIST_FILE = rnappUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";
@@ -2081,6 +2123,10 @@
 				INFOPLIST_FILE = rnappUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";

@@ -1,9 +1,11 @@
 import Dimensions from 'Dimensions';
 import { AsyncStorage } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+
 let dimen = Dimensions.get('window');
 import moment from 'moment';
 
-export const IS_X =  (dimen.height === 812 || dimen.width === 812);
+export const IS_X =  DeviceInfo.hasNotch();
 export const dimensions = dimen;
 
 export  const numberWithCommas = (x, shouldNOTFix = false) => {

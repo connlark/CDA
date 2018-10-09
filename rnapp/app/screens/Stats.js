@@ -96,7 +96,7 @@ class Stats extends Component {
         else if (historyReady){
             return (
                 <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
-                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.handleTouchedHistory(item)}>
+                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => true}>
                         <View style={{marginBottom: 10}}>
                             <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
                         </View>

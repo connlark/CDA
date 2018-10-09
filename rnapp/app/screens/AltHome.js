@@ -335,7 +335,7 @@ class AltHome extends Component {
                 </View>
             )
         }
-        else if (balancesReady && balances[0]){            
+        else if (balancesReady && balances[0] && balances[0].balanceData && balances[0].balanceData.length > 0){            
             return (
                 <ScrollView style={styles.container}>
                     <StatusBar
@@ -359,6 +359,7 @@ class AltHome extends Component {
                             data={this.sortData(balances[0].balanceData)}
                             itemsPerRow={Platform.isPad ? 4:3}
                             itemHasChanged={(d1, d2) => true}
+                            removeClippedSubviews={false}
                         />
                     </View>
                    

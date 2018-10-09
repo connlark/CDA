@@ -50,8 +50,8 @@ class DivInfo extends Component {
       // In this simple example, that's just the email.
       if (props.history && props.history.history && props.history !== state.prevHistory) {
         let thisOne = null;
-
-        const hi = consolodateData(props.history.history.slice());
+        const slices = props.history.history.slice();
+        const hi = consolodateData(slices);
           const item = props.navigation.state.params.item;
           if (item && hi){
           hi.map((e) => {

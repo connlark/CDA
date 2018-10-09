@@ -8,6 +8,8 @@ import {
   createStackNavigator,
 } from 'react-navigation';
 import codePush from "react-native-code-push";
+import Analytics from 'appcenter-analytics';
+import DeviceInfo from 'react-native-device-info';
 
 import store from './app/config/store';
 import {AppNavigator} from './app/config/router';
@@ -18,10 +20,10 @@ import { storeItem, retrieveItem } from './app/lib';
 
 if (Text.defaultProps == null) Text.defaultProps = {};
 Text.defaultProps.allowFontScaling = false;
-//let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
+let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket';
-let METEOR_URL = 'ws://localhost:3000/websocket';
+//let METEOR_URL = 'ws://localhost:3000/websocket';
 
 const ADDED = 'ddp/added';
 const CHANGED  = 'ddp/changed';
@@ -31,6 +33,13 @@ if (__DEV__) {
   process.env.REACT_NAV_LOGGING = false
   NativeModules.DevSettings.setIsDebuggingRemotely(true);
   NativeModules.DevSettings.setHotLoadingEnabled(true)
+  Analytics.setEnabled(false);
+}
+else if (DeviceInfo.isEmulator()){
+  Analytics.setEnabled(false);
+}
+else {
+  Analytics.setEnabled(true);
 }
 
 if (process.env.NODE_ENV === 'production') {

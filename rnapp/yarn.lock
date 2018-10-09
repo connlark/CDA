@@ -5769,10 +5769,10 @@ react-native-confetti@^0.1.0:
   resolved "https://registry.yarnpkg.com/react-native-confetti/-/react-native-confetti-0.1.0.tgz#9ec93c07f845de5ebeaed700043fd5218792b6f1"
   integrity sha512-+cXJvnPXKc0i/eTQcuzcjrlfIxmn/xFw4UyuVKQOWNK6BfWABvO6Ms6Zp6ivF1E8Vxt2vJkzJlNyoBvMh9FxKA==
 
-react-native-device-info@0.22.6:
-  version "0.22.6"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.22.6.tgz#32a674b0484d31214fdcfbbb0e677621e83ba69d"
-  integrity sha512-/w87PmHPvT5MY3HwzdVEWyFg/ib91lY6TlYJGNnNPaXNXY60ShB8HI+GXKyq4KAtbUc/WhRM1RQ8/WKJOal+UQ==
+react-native-device-info@0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.24.0.tgz#a6c2a8977229e1b94435e30469fa6af21a68f3ea"
+  integrity sha512-ab04CWcBeVJCAnjgYV2s1LscAypqJJxnt40EPdrQYe8J+nspUb9fNOPC+bfrJe3u8HKZuJ5dZmMAv29ANpl1Dw==
 
 react-native-dialogs@^0.0.21:
   version "0.0.21"
@@ -5921,6 +5921,11 @@ react-native-qrcode-scanner@1.1.0:
   dependencies:
     prop-types "^15.5.10"
     react-native-permissions "^1.1.1"
+
+react-native-rate@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-rate/-/react-native-rate-1.1.2.tgz#11c8a70de261da706311698270467fde5cf8a26b"
+  integrity sha512-anJhUcNKdWHUOgdgj26H4AHaymkM+4ilh7pTpT6BdZL9LIRRjS/L4WTdRiXDMFBw9GAvLJYE4/25lWn6AHUn4Q==
 
 react-native-safe-area-view@0.11.0:
   version "0.11.0"

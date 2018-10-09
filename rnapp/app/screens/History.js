@@ -87,7 +87,7 @@ class History extends Component {
         }
         
         return (
-            <TouchableOpacity accessible={true} testID={'TEST_ID_HISTORY'} accessibilityLabel={'TEST_ID_HISTORY_ACLBL'} key={i} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(this.state.history.history.find((e) => e.date === item.date))}>
+            <TouchableOpacity accessible={true} testID={'TEST_ID_HISTORY'} accessibilityLabel={'TEST_ID_HISTORY_ACLBL'} key={i} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, margin: 6 }, styles.item]} key={i} onPress={() => this.handleTouchedHistory(this.state.history.history.slice().find((e) => e.date === item.date))}>
                 <View style={{marginBottom: 10}}>
                     <Text style={{fontSize: 14}}> {moment(item.date).format("MMM Do YY")} </Text>
                 </View>
@@ -266,7 +266,7 @@ class History extends Component {
         else if (historyReady){
             return (
                 <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
-                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => true}>
+                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.props.navigation.navigate('Settings')}>
                         <View style={{marginBottom: 10}}>
                             <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
                         </View>

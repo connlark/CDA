@@ -401,7 +401,7 @@ const dividendCalc = (old, newbal) => {
                     valueUSD = valueUSD + Number(delta);
                     deltaUSD += Number(delta);
                 }
-                returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance, deltaUSD})
+                returner.push({coin: newbal[i].coin, delta: newbal[i].balance-oldVal.balance, valueUSD: deltaUSD})
             }
             if(delta < 0){
                 shouldChange = true;
@@ -419,7 +419,7 @@ const dividendCalc = (old, newbal) => {
                 valueUSD = valueUSD + Number(newbal[i].balance);
                 deltaUSD += Number(newbal[i].balance);
             }
-            returner.push({coin: newbal[i].coin, delta: newbal[i].balance, deltaUSD})
+            returner.push({coin: newbal[i].coin, delta: newbal[i].balance, valueUSD: deltaUSD})
         }
     }
     return {coinDeltas: returner, USDdelta: Number(valueUSD).toFixed(8), shouldChange};
@@ -432,10 +432,10 @@ const doParse = (e) => {
     }
     e.map((o) => {
         if (o.coin.match(/BTC|BCH|ETH/)){
-            out += o.coin + ' ~ ' + Number(o.delta).toFixed(8) +`\t💲 ${Number(o.deltaUSD).toFixed(3)}\n`;
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(8) +`\t💲 ${Number(o.valueUSD).toFixed(3)}\n`;
         }
         else {
-            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${Number(o.deltaUSD).toFixed(3)}\n`;
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${Number(o.valueUSD).toFixed(3)}\n`;
         }
     })
     return out;
