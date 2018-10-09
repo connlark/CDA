@@ -41,7 +41,6 @@ Meteor.startup(() => {
                             });
                         }
                     }
-                    mergeBalances(user._id)
                 }
                 return 1;
             }
@@ -274,29 +273,43 @@ export const findCoinBalanceInfo = (ownedCoins, balances, userId, shouldNOTCalcD
 }
 
 const mergeBalances = (userId) => {
-    let dtaTRX = TRXBalances.findOne({userId: userId});
-    let dtaCX = CoinExBalances.findOne({userId: userId});
-    let currBal = Balances.findOne({userId: userId});
-    let theMerged = [];
+    Meteor.setTimeout(() => {
+        let dtaTRX = TRXBalances.findOne({userId: userId});
+        let dtaCX = CoinExBalances.findOne({userId: userId});
+        let currBal = Balances.findOne({userId: userId});
+        let theMerged = [];
 
-    if (dtaTRX && dtaCX) {
-        theMerged = dtaCX.balanceData;
-        dtaTRX.balanceData.map((item) => {
-            let isDup = false;
-            theMerged.map((other) => {
-                if (item.coin === other.coin){
-                    isDup = true;
-                    other.balance += item.balance;
-                    other.USDvalue = Number(item.USDvalue) + Number(other.USDvalue)
+        if (dtaTRX && dtaCX) {
+            theMerged = dtaCX.balanceData;
+            dtaTRX.balanceData.map((item) => {
+                let isDup = false;
+                theMerged.map((other) => {
+                    if (item.coin === other.coin){
+                        isDup = true;
+                        other.balance += item.balance;
+                        other.USDvalue = Number(item.USDvalue) + Number(other.USDvalue)
+                    }
+                });
+                if (!isDup){
+                    theMerged.push(item)
                 }
             });
-            if (!isDup){
-                theMerged.push(item)
-            }
-        });
 
-        if (currBal){
-            Balances.update(
+            if (currBal){
+                Balances.update(
+                    {userId: userId},
+                    {
+                        userId: userId,
+                        balanceData: theMerged,
+                        createdAt: new Date
+                    }
+                );
+                console.log('UPDATE BALANCES BOTH')
+
+                return;
+            }
+            console.log('ADDING BALANCES BOTH')
+            Balances.insert(
                 {userId: userId},
                 {
                     userId: userId,
@@ -304,23 +317,23 @@ const mergeBalances = (userId) => {
                     createdAt: new Date
                 }
             );
-            console.log('UPDATE BALANCES BOTH')
-
-            return;
         }
-        console.log('ADDING BALANCES BOTH')
-        Balances.insert(
-            {userId: userId},
-            {
-                userId: userId,
-                balanceData: theMerged,
-                createdAt: new Date
+        else if (dtaTRX){
+            if (currBal){
+                Balances.update(
+                    {userId: userId},
+                    {
+                        userId: userId,
+                        balanceData: dtaTRX.balanceData,
+                        createdAt: new Date
+                    }
+                );
+                console.log('UPDATE BALANCES JUST TRX')
+
+                return;
             }
-        );
-    }
-    else if (dtaTRX){
-        if (currBal){
-            Balances.update(
+            console.log('ADDING BALANCES JUST TRX')
+            Balances.insert(
                 {userId: userId},
                 {
                     userId: userId,
@@ -328,23 +341,23 @@ const mergeBalances = (userId) => {
                     createdAt: new Date
                 }
             );
-            console.log('UPDATE BALANCES JUST TRX')
-
-            return;
         }
-        console.log('ADDING BALANCES JUST TRX')
-        Balances.insert(
-            {userId: userId},
-            {
-                userId: userId,
-                balanceData: dtaTRX.balanceData,
-                createdAt: new Date
+        else if (dtaCX){
+            if (currBal){
+                Balances.update(
+                    {userId: userId},
+                    {
+                        userId: userId,
+                        balanceData: dtaCX.balanceData,
+                        createdAt: new Date
+                    }
+                );
+                console.log('UPDATE BALANCES JUST COINEX')
+
+                return;
             }
-        );
-    }
-    else if (dtaCX){
-        if (currBal){
-            Balances.update(
+            console.log('ADDING BALANCES JUST COINEX')
+            Balances.insert(
                 {userId: userId},
                 {
                     userId: userId,
@@ -352,20 +365,9 @@ const mergeBalances = (userId) => {
                     createdAt: new Date
                 }
             );
-            console.log('UPDATE BALANCES JUST COINEX')
-
-            return;
         }
-        console.log('ADDING BALANCES JUST COINEX')
-        Balances.insert(
-            {userId: userId},
-            {
-                userId: userId,
-                balanceData: dtaCX.balanceData,
-                createdAt: new Date
-            }
-        );
-    }
+    }, 2000)
+    
 }
 
 const isSameBalance = (foo, bar) => {
