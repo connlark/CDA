@@ -258,7 +258,7 @@ class Settings extends Component {
     rateApp = () => {
             let options = {
                 AppleAppID:"1424173972",
-                GooglePackageName:"com.mywebsite.myapp",
+                GooglePackageName:"com.connorlarkin.cda",
                 AmazonPackageName:"com.mywebsite.myapp",
                 OtherAndroidURL:"http://www.randomappstore.com/app/47172391",
                 preferredAndroidMarket: AndroidMarket.Google,

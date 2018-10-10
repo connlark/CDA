@@ -145,13 +145,16 @@ class Login extends Component {
           containerViewStyle={{width: '90%', marginBottom: 50,}}
         />
 
-        <SocialIcon
-          title='Continue With Google'
-          button
-          type='google-plus-official'
-          onPress={() => this.oAuthLogin('google')}
-          style={{width: '90%', marginBottom: 10,}}
-        />
+        { Platform.OS !== 'android' ?
+          <SocialIcon
+            title='Continue With Google'
+            button
+            type='google-plus-official'
+            onPress={() => this.oAuthLogin('google')}
+            style={{width: '90%', marginBottom: 10,}}
+          />:null
+        
+        }
 
 
         <DropdownAlert ref={ref => this.dropdown = ref} />

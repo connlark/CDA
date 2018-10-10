@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Modal, Alert, Linking, Clipboard, AppState } from 'react-native';
+import { View, Text, StyleSheet, Modal, Alert, Linking, Clipboard, AppState, Platform } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Stepper from 'react-native-js-stepper'
 import NavigationBar from 'react-native-navbar';
@@ -66,12 +66,12 @@ export default class componentName extends Component {
         if (clipboardContent.length === 34){
             Alert.alert('TRX Address Detected', 'Would you like to use this address for your account?', [
                 { text: 'cancel', onPress: () => true },
-                { text: 'set', onPress: () => { this.setTRX(clipboardContent); ReactNativeHaptic.generate('notificationSuccess'); }},
+                { text: 'set', onPress: () => { this.setTRX(clipboardContent); if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess'); }},
             ]);
 
 
             this.setState({TRXaddress: clipboardContent}, () => {
-                ReactNativeHaptic.generate('notificationSuccess');
+                if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
             });
         } 
     }
@@ -85,7 +85,7 @@ export default class componentName extends Component {
             else {
                 this.setState({TRXAddress: address}, () => {
                     this.dropdown.alertWithType('success', 'TRX Address Added!','');
-                    ReactNativeHaptic.generate('notificationSuccess');
+                    if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                     this.toggleConfetti(true);
                 });
             }
@@ -103,12 +103,12 @@ export default class componentName extends Component {
                     }
                 }, 500);
                 this.dropdown.alertWithType('error', err.reason,'');
-                ReactNativeHaptic.generate('notificationError'); 
+                if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError'); 
                 return;
             }
             else {
                 this.dropdown.alertWithType('success', 'CoinEx API Data Added!','');
-                ReactNativeHaptic.generate('notificationSuccess');
+                if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                 this.toggleConfetti(true);
             }
         })
@@ -120,7 +120,7 @@ export default class componentName extends Component {
             this.setCoinExAPI(token);
         } catch (error) {
             this.dropdown.alertWithType('error', 'TRX Add Address Error','wrong qr type');
-            ReactNativeHaptic.generate('notificationError'); 
+            if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError'); 
             setTimeout(() => {
                 this.scanner.reactivate();
             }, 500); 
@@ -132,7 +132,7 @@ export default class componentName extends Component {
         try {
             if (TRXADDY.length !== 34){
                 this.dropdown.alertWithType('error', 'TRX Add Address Error','Please enter a valid TRX address!');
-                ReactNativeHaptic.generate('notificationError'); 
+                if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError'); 
                 setTimeout(() => {
                     this.TRXscanner.reactivate();
                 }, 500); 
@@ -141,7 +141,7 @@ export default class componentName extends Component {
             this.setTRX(TRXADDY)
         } catch (error) {
             this.dropdown.alertWithType('error', 'TRX Add Address Error','wrong qr type');
-            ReactNativeHaptic.generate('notificationError'); 
+            if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError'); 
             setTimeout(() => {
                 this.TRXscanner.reactivate();
             }, 500); 
@@ -153,7 +153,7 @@ export default class componentName extends Component {
 
         if ( TRXaddress.length !== 34){
             this.dropdown.alertWithType('error', 'TRX Add Address Error','Please enter a valid TRX address!');
-            ReactNativeHaptic.generate('notificationError'); 
+            if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError'); 
             return
         }
 
@@ -165,7 +165,7 @@ export default class componentName extends Component {
 
         if ( apiKey.length === 0 || secretKey.length === 0){
             this.dropdown.alertWithType('error', 'CoinEx Add API Data Error','Please both your API key and secret key!');
-            ReactNativeHaptic.generate('notificationError'); 
+            if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError'); 
             return
         }
         this.setCoinExAPI({apiKey, secretKey});
@@ -192,7 +192,7 @@ export default class componentName extends Component {
                                     borderRadius: 9
                                 }}
                                 topContent={
-                                    <View style={{}}>
+                                    <View style={{zIndex: 100}}>
                                         <Text onPress={() => Linking.openURL('https://tronscan.org/#/account')} style={styles.centerText}>
                                             Go to tronscan.org and click the button 'show QR code' located next to your address (left click on desktop)
                                         </Text>
@@ -410,15 +410,18 @@ const styles = StyleSheet.create({
     centerText: {
         fontWeight: 'bold',
         fontSize: 12,
+        zIndex: 100
     },
     centerText: {
         fontWeight: 'bold',
         fontSize: 12,
+        zIndex: 100
     },
     centerTextRed: {
         fontWeight: 'bold',
         fontSize: 12,
-        color: 'red'
+        color: 'red',
+        zIndex: 100
     },
     inactiveDot: {
       backgroundColor: '#ededed'

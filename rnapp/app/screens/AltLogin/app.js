@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, StatusBar, Platform } from 'react-native-animatable';
+import { Platform } from 'react-native'
+import { View, StatusBar } from 'react-native-animatable';
 import Meteor, { Accounts } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
 import OAuthManager from 'react-native-oauth';
@@ -118,12 +119,27 @@ export class LoginAnimation extends Component {
   oAuthLogin = (type) => {
     this.setState({isLoading:true});
 
-    const config =  {
-      google: {
-        callback_url: `com.googleusercontent.apps.394080947164-6pghdmlp08sodorous0phumqthuk975r:/google`,
-        client_id: '394080947164-6pghdmlp08sodorous0phumqthuk975r.apps.googleusercontent.com'
+    let config = null;
+
+    if (Platform.OS !== 'android'){
+      config =  {
+        google: {
+          callback_url: `com.googleusercontent.apps.394080947164-6pghdmlp08sodorous0phumqthuk975r:/google`,
+          client_id: '394080947164-6pghdmlp08sodorous0phumqthuk975r.apps.googleusercontent.com'
+        }
       }
     }
+    else {
+      config =  {
+        google: {
+          callback_url: 'localhost/google',
+          client_id: '612930134863-atb2cfu18j77u40crracsrkc10f9cigi.apps.googleusercontent.com',
+          client_secret: 'zKkBFZPhwLzku6EiUxn3rCaW'
+        }
+      }
+    }
+    
+
 
     const manager = new OAuthManager('firestackexample')
     manager.configure(config);

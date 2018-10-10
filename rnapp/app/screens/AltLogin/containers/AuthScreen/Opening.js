@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, StatusBar } from 'react-native'
+import { StyleSheet, StatusBar, Platform} from 'react-native'
 import { Text, View } from 'react-native-animatable'
 import { Button, SocialIcon } from 'react-native-elements'
 
@@ -18,52 +18,87 @@ export default class Opening extends Component {
         </View>
       )
     }
-    return (
-      <View style={styles.container}>
-      <StatusBar
-       hidden
-      />
-        <View animation={'zoomIn'} delay={600} duration={400}>
-          <CustomButton
-            text={'Create Account'}
-            onPress={this.props.onCreateAccountPress}
-            buttonStyle={styles.createAccountButton}
-            textStyle={styles.createAccountButtonText}
-          />
-        </View>
-        <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
-          <View style={styles.separatorLine} />
-          <Text style={styles.separatorOr}>{'🆚'}</Text>
-          <View style={styles.separatorLine} />
-        </View>
-        <View animation={'zoomIn'} delay={800} duration={400}>
-          <CustomButton
-            accessible={true}
-            accessibilityLabel={"login"}
-            testID="23135thisisit"
-            text={'Sign In'}
-            onPress={this.props.onSignInPress}
-            buttonStyle={styles.signInButton}
-            textStyle={styles.signInButtonText}
-          />
-        </View>
-        <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
-          <View style={styles.separatorLine} />
-          <Text style={styles.separatorOr}>{'🆚'}</Text>
-          <View style={styles.separatorLine} />
-        </View>
-        <View animation={'zoomIn'} delay={800} duration={400}>
-      
-          <SocialIcon
-            title='Continue With Google'
-            button
-            type='google-plus-official'
-            onPress={this.props.onGoogleSignInPress}
-            style={{ marginBottom: 10, borderRadius:9, height: 52,}}
+    if (Platform.OS !== 'android'){
+      return (
+        <View style={styles.container}>
+        <StatusBar
+         hidden
         />
+          <View animation={'zoomIn'} delay={600} duration={400}>
+            <CustomButton
+              text={'Create Account'}
+              onPress={this.props.onCreateAccountPress}
+              buttonStyle={styles.createAccountButton}
+              textStyle={styles.createAccountButtonText}
+            />
+          </View>
+          <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
+            <View style={styles.separatorLine} />
+            <Text style={styles.separatorOr}>{'🆚'}</Text>
+            <View style={styles.separatorLine} />
+          </View>
+          <View animation={'zoomIn'} delay={800} duration={400}>
+            <CustomButton
+              accessible={true}
+              accessibilityLabel={"login"}
+              testID="23135thisisit"
+              text={'Sign In'}
+              onPress={this.props.onSignInPress}
+              buttonStyle={styles.signInButton}
+              textStyle={styles.signInButtonText}
+            />
+          </View>
+          <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
+            <View style={styles.separatorLine} />
+            <Text style={styles.separatorOr}>{'🆚'}</Text>
+            <View style={styles.separatorLine} />
+          </View>
+          <View animation={'zoomIn'} delay={800} duration={400}>
+        
+            <SocialIcon
+              title='Continue With Google'
+              button
+              type='google-plus-official'
+              onPress={this.props.onGoogleSignInPress}
+              style={{ marginBottom: 10, borderRadius:9, height: 52,}}
+          />
+          </View>
         </View>
-      </View>
-    )
+      )
+    }
+    else {
+      return (
+        <View style={styles.container}>
+        <StatusBar
+         hidden
+        />
+          <View animation={'zoomIn'} delay={600} duration={400}>
+            <CustomButton
+              text={'Create Account'}
+              onPress={this.props.onCreateAccountPress}
+              buttonStyle={styles.createAccountButton}
+              textStyle={styles.createAccountButtonText}
+            />
+          </View>
+          <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
+            <View style={styles.separatorLine} />
+            <Text style={styles.separatorOr}>{'🆚'}</Text>
+            <View style={styles.separatorLine} />
+          </View>
+          <View animation={'zoomIn'} delay={800} duration={400}>
+            <CustomButton
+              accessible={true}
+              accessibilityLabel={"login"}
+              testID="23135thisisit"
+              text={'Sign In'}
+              onPress={this.props.onSignInPress}
+              buttonStyle={styles.signInButton}
+              textStyle={styles.signInButtonText}
+            />
+          </View>
+        </View>
+      )
+    }
   }
 }
 

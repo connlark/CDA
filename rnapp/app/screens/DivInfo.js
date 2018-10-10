@@ -164,14 +164,14 @@ class DivInfo extends Component {
 
     }
     showAlert = () => {
-        ReactNativeHaptic.generate('selection');
+        if (Platform.OS !== 'android') ReactNativeHaptic.generate('selection');
         this.setState({
           showAlert: true
         });
     };
      
     hideAlert = () => {
-        ReactNativeHaptic.generate('selection');
+        if (Platform.OS !== 'android') ReactNativeHaptic.generate('selection');
         this.setState({
             showAlert: false
         });
@@ -216,10 +216,10 @@ class DivInfo extends Component {
             if (err){
                 console.log(err);
                 this.dropdown.alertWithType('error', 'Deletion Error',err.reason);
-                ReactNativeHaptic.generate('notificationError');
+                if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError');
             }
             else {
-                ReactNativeHaptic.generate('notificationSuccess');
+                if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                 this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
             }
             this.setState({showProgress: false});
@@ -344,10 +344,10 @@ class DivInfo extends Component {
                                 Meteor.call('BalanceHistory.deleteBalanceHistoryDay', selectedData.date, (err) => {
                                     if (err){
                                         console.log(err);
-                                        ReactNativeHaptic.generate('notificationError');
+                                        if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError');
                                     }
                                     else {
-                                        ReactNativeHaptic.generate('notificationSuccess');
+                                        if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                                         this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
                                     }
                                     this.setState({showProgress: false});
