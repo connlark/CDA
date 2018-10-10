@@ -326,7 +326,7 @@ const APP =  withTracker(params => {
     const id = !Meteor.user() ? '': Meteor.user()._id
     return {
       historyReady: handle.ready(),
-      history: Object.freeze(Meteor.collection('balanceHistory').findOne({userId: id}))
+      history: Meteor.collection('balanceHistory').findOne({userId: id}) ? Object.freeze(Meteor.collection('balanceHistory').findOne({userId: id})):Meteor.collection('balanceHistory').findOne({userId: id})
     };
   })(withNavigation(History));
 

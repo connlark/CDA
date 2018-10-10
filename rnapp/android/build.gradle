@@ -3,25 +3,25 @@
 buildscript {
     repositories {
         jcenter()
+        google()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.2.0'
     }
 }
 
 allprojects {
     repositories {
-				// Add jitpack repository (added by react-native-spinkit)
-				maven { url "https://jitpack.io" }
         mavenLocal()
         jcenter()
+        google()
+
+        // Add jitpack repository (added by react-native-spinkit)
+        maven { url "https://jitpack.io" }
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -30,6 +30,8 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+
+
     }
 }
 
@@ -40,3 +42,27 @@ ext {
     targetSdkVersion = 26
     supportLibVersion = "26.1.0"
 }
+
+subprojects {
+
+    project.configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.android.support'
+                    && !details.requested.name.contains('multidex') ) {
+                details.useVersion "26.1.0"
+            }
+        }
+    }
+
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                defaultConfig {
+                    targetSdkVersion rootProject.ext.targetSdkVersion
+                }
+            }
+        }
+    }
+}
+

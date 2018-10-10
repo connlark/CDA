@@ -145,7 +145,9 @@ dependencies {
     compile project(':appcenter')
     compile project(':react-native-code-push')
     compile project(':react-native-svg')
-    compile project(':react-native-camera')
+    compile (project(':react-native-camera')) {
+        exclude group: "com.android.support", module: 'support-v4'
+    }
     compile project(':react-native-spinkit')
     compile project(':react-native-vector-icons')
     compile project(':react-native-device-info')

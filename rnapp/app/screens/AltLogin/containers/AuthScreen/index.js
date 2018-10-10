@@ -65,7 +65,7 @@ export default class AuthScreen extends Component {
   }
 
   _setVisibleForm = async (visibleForm) => {
-    ReactNativeHaptic.generate('selection');
+    if (Platform.OS !== 'android') ReactNativeHaptic.generate('selection');
     // 1. Hide the current form (if any)
     if (this.state.visibleForm && this.formRef && this.formRef.hideForm) {
       await this.formRef.hideForm()

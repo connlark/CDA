@@ -75,7 +75,7 @@ class AltHome extends Component {
         ws.onopen = () => {
             // connection opened
             console.log("I openend the connection without troubles!");
-            ReactNativeHaptic.generate('notificationSuccess')
+            if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess')
             // First step is to try subscribe to the proper channel
 
             let payload = {
@@ -320,7 +320,7 @@ class AltHome extends Component {
                         style={{marginTop: -1}}
                         renderError={() => {
                             this.setState({showWebView: false});
-                            ReactNativeHaptic.generate('notificationError')
+                            if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError')
                             Alert.alert(
                                 'Webpage Loading Error'
                               );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, Text } from 'react-native';
+import { NativeModules, Text, Platform} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import Meteor, { createContainer } from 'react-native-meteor';
 import { createStore, applyMiddleware } from 'redux';
@@ -29,7 +29,7 @@ const ADDED = 'ddp/added';
 const CHANGED  = 'ddp/changed';
 const REMOVED = 'ddp/removed';
 
-if (__DEV__) {
+if (__DEV__ && Platform.OS === 'ios') {
   process.env.REACT_NAV_LOGGING = false
   NativeModules.DevSettings.setIsDebuggingRemotely(true);
   NativeModules.DevSettings.setHotLoadingEnabled(true)
