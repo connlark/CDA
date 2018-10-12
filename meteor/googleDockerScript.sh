@@ -52,7 +52,7 @@ RUN cd /usr/app/programs/server && npm install --unsafe-perm --save simpl-schema
 RUN cd /usr/app/programs/server && npm install --unsafe-perm --save @babel/runtime@latest
 WORKDIR /usr/app
 ENV PORT=3000
-ENV MONGO_URL=mongodb://connorlarkin:PR7-DUq-h88-LAo@cryptocluster-shard-00-00-vm6wk.mongodb.net:27017,cryptocluster-shard-00-01-vm6wk.mongodb.net:27017,cryptocluster-shard-00-02-vm6wk.mongodb.net:27017/test?ssl=true&replicaSet=CryptoCluster-shard-0&authSource=admin
+ENV MONGO_URL=mongodb://meteor-app-user:cGyWyPKpbj7ICdtt@cryptocluster-shard-00-00-vm6wk.mongodb.net:27017,cryptocluster-shard-00-01-vm6wk.mongodb.net:27017,cryptocluster-shard-00-02-vm6wk.mongodb.net:27017/test?ssl=true&replicaSet=CryptoCluster-shard-0&authSource=admin
 ENV ROOT_URL=http://$APP_DOMAIN:$APP_PORT/
 CMD [ "npm", "start" ]
 EXPOSE 3000

@@ -1,7 +1,7 @@
 {
     "galaxy.meteor.com": {
        "env": {
-         "MONGO_URL": "mongodb://connorlarkin:PR7-DUq-h88-LAo@cryptocluster-shard-00-00-vm6wk.mongodb.net:27017,cryptocluster-shard-00-01-vm6wk.mongodb.net:27017,cryptocluster-shard-00-02-vm6wk.mongodb.net:27017/test?ssl=true&replicaSet=CryptoCluster-shard-0&authSource=admin"
+         "MONGO_URL": "mongodb://meteor-app-user:cGyWyPKpbj7ICdtt@cryptocluster-shard-00-00-vm6wk.mongodb.net:27017,cryptocluster-shard-00-01-vm6wk.mongodb.net:27017,cryptocluster-shard-00-02-vm6wk.mongodb.net:27017/test?ssl=true&replicaSet=CryptoCluster-shard-0&authSource=admin"
        }
      }
   }
