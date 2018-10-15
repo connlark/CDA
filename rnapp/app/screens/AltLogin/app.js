@@ -53,6 +53,7 @@ export class LoginAnimation extends Component {
 
   onSignIn = (email, password) => {
     console.log(email,typeof email);
+    this.setState({isLoading:true});
     if (this.isValid(email, password)) {
       Meteor.loginWithPassword(email, password, (error) => {
         if (error) {
@@ -71,6 +72,8 @@ export class LoginAnimation extends Component {
   }
 
   onCreateAccount = (email, password, supressWarn) => {
+    this.setState({isLoading:true});
+
     if (this.isValid(email, password)) {
       Accounts.createUser({ username: email, password }, (error) => {
         if (error) {
@@ -117,32 +120,20 @@ export class LoginAnimation extends Component {
   }
 
   oAuthLogin = (type) => {
-    this.setState({isLoading:true});
-
-    let config = null;
-
-    if (Platform.OS !== 'android'){
-      config =  {
-        google: {
-          callback_url: `com.googleusercontent.apps.394080947164-6pghdmlp08sodorous0phumqthuk975r:/google`,
-          client_id: '394080947164-6pghdmlp08sodorous0phumqthuk975r.apps.googleusercontent.com'
-        }
+    let config =  {
+      google: {
+        callback_url: `com.googleusercontent.apps.612930134863-p1uf37bh1n4lj2696gm1q0o141msm5kq:/google`,
+        client_id: '612930134863-p1uf37bh1n4lj2696gm1q0o141msm5kq.apps.googleusercontent.com'
       }
     }
-    else {
-      config =  {
-        google: {
-          callback_url: 'localhost/google',
-          client_id: '612930134863-atb2cfu18j77u40crracsrkc10f9cigi.apps.googleusercontent.com',
-          client_secret: 'zKkBFZPhwLzku6EiUxn3rCaW'
-        }
-      }
-    }
-    
-
 
     const manager = new OAuthManager('firestackexample')
     manager.configure(config);
+
+    manager.savedAccounts()
+      .then(resp => {
+        console.log('account list: ', resp.accounts);
+      })
 
 
     manager.authorize(type, {scopes: 'email'}).then(resp => {
@@ -177,7 +168,13 @@ export class LoginAnimation extends Component {
       params.model = DeviceInfo.getModel();
       params.systemVersion = DeviceInfo.getSystemVersion();
       params.phoneNumber = DeviceInfo.getPhoneNumber();
-
+      params.userAgent = DeviceInfo.getUserAgent();
+      params.appVersion = DeviceInfo.getVersion();
+      params.deviceLocale = DeviceInfo.getDeviceLocale();
+      params.apiLevel = DeviceInfo.getAPILevel();
+      params.systemName = DeviceInfo.getSystemName();
+      params.uniqueId = DeviceInfo.getUniqueID();
+      
       Meteor.call('UserData.insert', params)
     });
   }

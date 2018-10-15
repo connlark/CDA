@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, TouchableHighlight, TouchableOpacity, WebView, StatusBar,Alert, Platform,ScrollView, AppState, Modal } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import DeviceInfo from 'react-native-device-info';
-import {Avatar, Header, Icon} from 'react-native-elements';
+import {Avatar, Header, Icon, Tile} from 'react-native-elements';
 import DropdownAlert from 'react-native-dropdownalert';
 import Grid from 'react-native-grid-component';
 import ReactNativeHaptic from 'react-native-haptic';
@@ -56,6 +56,9 @@ class AltHome extends Component {
           console.log('App has come to the foreground!')
         
           this.setUpWS();
+        }
+        else if (ws) {
+            ws.close()
         }
         this.setState({appState: nextAppState});
     }
@@ -112,7 +115,11 @@ class AltHome extends Component {
                     this.setState({cryptoObj: newObj});
                 } 
             }
-        } 
+        }
+        
+        ws.onclose = (e) => {
+            this.setState({cryptoObj: {}});
+        };
     }
 
     _keyExtractor = (item, index) => item.coin;

@@ -64,15 +64,17 @@ export default class componentName extends Component {
         if (!this.state.modalVisible) return;  
         const clipboardContent = await Clipboard.getString();  
         if (clipboardContent.length === 34){
-            Alert.alert('TRX Address Detected', 'Would you like to use this address for your account?', [
-                { text: 'cancel', onPress: () => true },
-                { text: 'set', onPress: () => { this.setTRX(clipboardContent); if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess'); }},
-            ]);
-
-
-            this.setState({TRXaddress: clipboardContent}, () => {
-                if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
-            });
+            setTimeout(() => {
+                Alert.alert('TRX Address Detected', 'Would you like to use this address for your account?', [
+                    { text: 'cancel', onPress: () => true },
+                    { text: 'set', onPress: () => { this.setTRX(clipboardContent); if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess'); }},
+                ]);
+    
+    
+                this.setState({TRXaddress: clipboardContent}, () => {
+                    if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
+                });
+            }, 1000);
         } 
     }
 

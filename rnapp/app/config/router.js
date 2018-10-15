@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import ReactNativeHaptic from 'react-native-haptic';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator, createSwitchNavigator, createStackNavigator} from 'react-navigation';

@@ -264,7 +264,7 @@ class Settings extends Component {
                 preferredAndroidMarket: AndroidMarket.Google,
                 preferInApp:true,
                 openAppStoreIfInAppFails:true,
-                fallbackPlatformURL:"http://connorlarkin.com",
+                fallbackPlatformURL:"http://cda.connorlarkin.com",
             }
             Rate.rate(options, (success)=>{
                 if (success) {
