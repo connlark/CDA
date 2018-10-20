@@ -46,7 +46,8 @@ class Settings extends Component {
       updateText: null,
       TRXAddress: null,
       switchValue: true,
-      rated: false
+      rated: false,
+      username: ''
     };
   }
 
@@ -97,7 +98,8 @@ class Settings extends Component {
 
         return {
             TRXAddress: TRX,
-            CoinExKeys: CoinEx
+            CoinExKeys: CoinEx,
+            username: user.username
         };
     }
 
@@ -274,7 +276,7 @@ class Settings extends Component {
             });
     }
     render() {
-        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys } = this.state;
+        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username } = this.state;
         var bgColor = '#DCE3F4';
         return (
           <View style={{backgroundColor:'#EFEFF4',flex:1}}>
@@ -340,7 +342,7 @@ class Settings extends Component {
 
                 <SettingsList.Item
                   icon={<Image style={styles.imageStyle} source={require('./images/user.png')}/>}
-                  title='Log Out'
+                  title={`Log Out: ${username}`}
                   onPress={this.logOut}
                 />
                 <SettingsList.Item

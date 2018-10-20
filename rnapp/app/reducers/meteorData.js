@@ -27,7 +27,7 @@ export function doSomething(action) {
 // Reducer
 export default reducer = (state = initialState, action) => {
     const { collection, id, fields } = action.payload || {};
-
+    
     /*if (state.users && Object.keys(state.users)[0] && collection.match(/balanceHistory|balances/) && fields){
       const userId = Object.keys(state.users)[0];
       console.log('dbhwiuefhweoifhweoiwefwfoiwheoifheoifhoidhvoiwhowihvoiehwoi')
@@ -56,6 +56,7 @@ export default reducer = (state = initialState, action) => {
               }
             });    
           }
+          console.log(collection)
           state[collection] = {};
           return {
             ...state,

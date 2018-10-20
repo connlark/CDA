@@ -20,6 +20,7 @@ import { storeItem, retrieveItem } from './app/lib';
 
 if (Text.defaultProps == null) Text.defaultProps = {};
 Text.defaultProps.allowFontScaling = false;
+
 let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket';
@@ -78,9 +79,9 @@ PushNotification.configure({
 
   // (required) Called when a remote or local notification is opened or received
   onNotification(notification) {
-    alert('ss')
     store.dispatch(recieveNotification(notification))
   },
+  senderID: "612930134863",
 
   // IOS ONLY (optional): default: all - Permissions to register.
   permissions: {

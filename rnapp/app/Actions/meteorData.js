@@ -1,5 +1,7 @@
 import { storeItem, retrieveItem} from '../lib';
 
+export const ADD_BALANCE_DATA = 'ADD_BALANCE_DATA'
+export const CHANGE_BALANCE = 'CHANGE_BALANCE';
 let theID = null;
 export function recieveData(action) {
     return (dispatch, getState) => {
@@ -27,5 +29,19 @@ export function recieveData(action) {
         else {
             dispatch(action)
         }
+    }
+  }
+
+export function recieveBalanceData(data) {
+    return {
+      type: 'ADD_BALANCE_DATA',
+      data
+    }
+  }
+
+export function recieveCoinData(data) {
+    return {
+      type: CHANGE_BALANCE,
+      data
     }
   }

@@ -38,7 +38,7 @@ class rnappUITests: XCTestCase {
       let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "Home").element(boundBy: 0) // second upgrade button-containing element
       meohjjme.tap()
       
-      sleep(2)
+      sleep(10)
       snapshot("Home")
     }
   
@@ -59,7 +59,7 @@ class rnappUITests: XCTestCase {
     
     meohme.tap()
 
-    sleep(9)
+    sleep(10)
     snapshot("DIV")
   }
   
@@ -84,7 +84,7 @@ class rnappUITests: XCTestCase {
     let app = XCUIApplication()
     let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "History").element(boundBy: 0) // second upgrade button-containing element
     meohjjme.tap()
-    sleep(6)
+    sleep(10)
     snapshot("History")
   }
   
@@ -104,7 +104,7 @@ class rnappUITests: XCTestCase {
     let meohme = app.descendants(matching: .staticText).containing(.staticText, identifier: "TTESTME").element(boundBy: 0)
 
     meohme.swipeLeft()
-    sleep(4)
+    sleep(7)
     snapshot("Totals")
   }
   
