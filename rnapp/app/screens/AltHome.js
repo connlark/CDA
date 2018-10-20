@@ -334,7 +334,7 @@ class AltHome extends Component {
                        hidden
                     />
                     <WebView
-                        useWebKit={true}
+                        useWebKit={Platform.OS !== 'android' ? true:false}
                         startInLoadingState
                         source={{uri: url}}
                         style={{marginTop: -1}}
