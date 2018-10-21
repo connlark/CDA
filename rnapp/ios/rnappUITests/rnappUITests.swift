@@ -49,17 +49,16 @@ class rnappUITests: XCTestCase {
     
     doLogin()
     let app = XCUIApplication()
-   
+    sleep(20)
     let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "History").element(boundBy: 0) // second upgrade button-containing element
         meohjjme.tap()
-    sleep(7)
+    sleep(20)
     
-    sleep(9)
     let meohme = app.descendants(matching: .staticText).containing(.staticText, identifier: "TTESTME").element(boundBy: 0)
     
     meohme.tap()
 
-    sleep(10)
+    sleep(20)
     snapshot("DIV")
   }
   
@@ -84,7 +83,7 @@ class rnappUITests: XCTestCase {
     let app = XCUIApplication()
     let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "History").element(boundBy: 0) // second upgrade button-containing element
     meohjjme.tap()
-    sleep(10)
+    sleep(20)
     snapshot("History")
   }
   
@@ -106,6 +105,8 @@ class rnappUITests: XCTestCase {
     meohme.swipeLeft()
     sleep(7)
     snapshot("Totals")
+    
+    
   }
   
   func doLogin(){
@@ -150,7 +151,12 @@ class rnappUITests: XCTestCase {
  
       upgradeButtonContainer.doubleTap()
        UIPasteboard.general.string = "seed"
-      app.menuItems.element(boundBy: 0).tap()
+      if (app.menuItems.element.exists){
+        if (app.menuItems.element(boundBy: 0).exists){
+          app.menuItems.element(boundBy: 0).tap()
+        }
+      }
+      
      
      // upgradeButtonContainer.typeText("dev")
       
@@ -167,11 +173,14 @@ class rnappUITests: XCTestCase {
       print(meohme)
      // upgreeadeButtonContainer.typeText("dev")
   
+      upgradeButtonContainer.tap()
+      upgreeadeButtonContainer.tap()
       upgreeadeButtonContainer.typeText("\n")
       let upgreeadfreButtonContainer = app.descendants(matching: .other).element(boundBy: 19)
       print(upgreeadfreButtonContainer)
       
       upgreeadfreButtonContainer.tap()
+      
       sleep(3)
     }
   }

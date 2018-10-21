@@ -36,6 +36,7 @@ export default class AuthTextInput extends Component {
             onBlur={() => this.setState({ isFocused: false })}
             onChangeText={this.props.onChangeText}
             placeholder={placeholder}
+            onSubmitEditing={this.props.onSubmitEditing}
           />
         </View>
       </View>

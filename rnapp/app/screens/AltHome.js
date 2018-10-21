@@ -172,7 +172,6 @@ class AltHome extends Component {
             if (data && data.token){
               Meteor.call('notifications.set.pushToken', data, err => {
                 //if (err) { alert(`notifications.set.pushToken: ${err.reason}`); }
-                this.props.navigation.navigate('App')
               });
             }
           });
@@ -268,13 +267,12 @@ class AltHome extends Component {
             <View style={{marginTop: 10}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 10}}> {formattedBalance} {item.coin}</Text>
             </View>
-            <View style={{marginTop: 10, marginBottom: 100}}>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}> 💲 {bal !== 0 ? numberWithCommas(bal.toFixed(3)):formattedUSDBalance}  </Text>
+            <View style={{marginTop: 10, marginBottom: 100, flexDirection: 'row', alignItems: 'center'}}>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>💲</Text>
+                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>{bal !== 0 ? numberWithCommas(bal.toFixed(3)):formattedUSDBalance}</Text>
             </View>
         </View>
       );
-      console.log(color)
-      return (<Text>hi</Text>)
     }
 
     setModalVisible(visible) {

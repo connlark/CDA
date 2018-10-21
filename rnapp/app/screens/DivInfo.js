@@ -49,8 +49,8 @@ class DivInfo extends Component {
       // Reset any parts of state that are tied to that user.
       // In this simple example, that's just the email.
       if (props.history && props.history.history && props.history !== state.prevHistory) {
-        let thisOne = null;
-        const slices = props.history.history.slice();
+        //let thisOne = null;
+        /*const slices = props.history.history.slice();
         const hi = consolodateData(slices);
           const item = props.navigation.state.params.item;
           if (item && hi){
@@ -59,7 +59,8 @@ class DivInfo extends Component {
                 thisOne = e;
             }
           })
-        }
+        }*/
+        let thisOne = props.navigation.state.params.item;
 
         if (!thisOne){
             props.navigation.goBack();
@@ -67,8 +68,8 @@ class DivInfo extends Component {
         }
         thisOne.divData.coinDeltas.sort((a,b) => b.valueUSD - a.valueUSD)
         return {
-          prevHistory: props.history,
-          history: {history: hi},
+         // prevHistory: props.history,
+          //history: {history: hi},
           selectedCoin: thisOne
         };
       }

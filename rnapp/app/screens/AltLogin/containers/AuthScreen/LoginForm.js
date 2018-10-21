@@ -61,6 +61,7 @@ export default class LoginForm extends Component {
             secureTextEntry={true}
             withRef={true}
             onChangeText={(value) => this.setState({ password: value })}
+            onSubmitEditing={() => onLoginPress(email, password)}
             isEnabled={!isLoading}
           />
         </View>
