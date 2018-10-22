@@ -31,6 +31,7 @@
     "react-native-device-info": "0.24.0",
     "react-native-dropdownalert": "^3.7.0",
     "react-native-elements": "^0.19.1",
+    "react-native-email": "^1.0.2",
     "react-native-grid-component": "^1.1.0",
     "react-native-haptic": "^1.0.1",
     "react-native-js-stepper": "^0.2.1",
@@ -73,7 +74,6 @@
     "preset": "react-native",
     "setupFiles": [
       "<rootDir>/node_modules/appcenter/test/AppCenterMock.js",
-      "<rootDir>/node_modules/appcenter-push/test/AppCenterPushMock.js",
       "<rootDir>/node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js",
       "<rootDir>/node_modules/appcenter-crashes/test/AppCenterCrashesMock.js"
     ]

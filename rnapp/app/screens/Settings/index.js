@@ -17,6 +17,7 @@ import { IS_X } from '../../config/styles';
 import AddCredentialsModal from '../../components/addCredentialsModal'
 import {connect, createProvider} from 'react-redux'
 import Rate, { AndroidMarket } from 'react-native-rate'
+import email from 'react-native-email'
 
 import {
     SettingsDividerShort, 
@@ -185,59 +186,7 @@ class Settings extends Component {
             }}        
         ],{ cancelable: false });
   } 
-  /*render() {
-      const { users } = this.props;
-      const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys } = this.state;
-      let user = {profile: null};
-      if (users && users[0]){
-        user = users[0]
-      }
-      return (
-        <View style={{flex: 1, height: '100%'}}>
-        <ScrollView stickyHeaderIndices={[0]} style={{flex: 1, backgroundColor: (Platform.OS === 'ios') ? colors.iosSettingsBackground : colors.white}}>
-            <Header
-                outerContainerStyles={{marginTop: -15, height: IS_X ? 97:70}}
-                centerComponent={{ text: 'Settings', style: { color: '#fff', fontSize:20 } }}
-                leftComponent={{ icon: 'eject', color: '#fff', onPress: this.logOut, underlayColor: 'transparent' }}
-                />
-            <SettingsCategoryHeader title={'My Account'} textStyle={(Platform.OS === 'android') ? {color: colors.monza} : null}/>
-    
-            <SettingsSwitch
-                title={'Allow Push Notifications'}
-                onSaveValue={(value) => {
-                    console.log('allow push notifications:', value);
-                    this.setState({
-                        allowPushNotifications: value
-                    });
-                }}
-                value={this.state.allowPushNotifications}
-                thumbTintColor={(this.state.allowPushNotifications) ? colors.switchEnabled : colors.switchDisabled}
-            />
-            <View style={{marginTop: 10}}/>
-            {TRXAddress && <SettingsCategoryHeader title={`TRX Wallet: ${TRXAddress}`} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} subTitletitleStyle={{color:'black', fontFamily: 'Avenir', fontSize: 12, fontWeight: '400'}}/>}
-            {CoinExKeys && <SettingsCategoryHeader title={`CoinEx Api Key: ${CoinExKeys.apiKey}`} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'black', fontFamily: 'Avenir', fontSize: 12, fontWeight: '400'}}/>}
-            
-            
-            <View style={{marginTop: '90%'}}/>
-            <SettingsCategoryHeader title={'Edit CoinEx API & TRX Wallet'} titleProps={{onPress: () => this.mymodal.setModalVisible( true)}} titleStyle={{color:'indigo', fontSize: 14, fontWeight: '400'}}/>
 
-            { updateText ? 
-                <SettingsCategoryHeader title={updateText} titleProps={{onPress: this.updateApp}} titleStyle={{color:'blue', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
-                :null
-            }
-
-            { isPending ?
-                <SettingsCategoryHeader title={isDownloading ? `( ${receivedBytes} / ${totalBytes})`:`New Update Available!`} titleProps={{onPress: this.updateApp}} titleStyle={{color:'red', fontFamily: 'Avenir', fontSize: 17, fontWeight: '400'}}/>
-                :null
-            }
-            <SettingsCategoryHeader title={`App Version: ${appVersion} ( ${label} )`} titleProps={{onPress: this.updateApp}}/>
-            <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
-
-            </ScrollView>
-            <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
-        </View>
-        );
-    }*/
     onValueChange = (value) => {
         this.setState({switchValue: value});
     }
@@ -275,6 +224,17 @@ class Settings extends Component {
                 }
             });
     }
+
+    handleEmail = () => {
+        const to = ['connor.larkin1@gmail.com'] // string or array of email addresses
+        email(to, {
+            // Optional additional arguments
+            cc: ['clswimmer411@me.com'], // string or array of email addresses
+            subject: '☀️ Regarding something about Crypto Dividend Tracker ☀️',
+            body: '🔥🔥🔥 Your message to me here! 🔥🔥🔥'
+        }).catch(console.error)
+    }
+
     render() {
         const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username } = this.state;
         var bgColor = '#DCE3F4';
@@ -348,6 +308,11 @@ class Settings extends Component {
                 <SettingsList.Item
                     title={'😃 Rate App 😃'} 
                     onPress={this.rateApp}
+                    hasNavArrow={true}
+                />
+                <SettingsList.Item
+                    title={'Contact Developer'} 
+                    onPress={this.handleEmail}
                     hasNavArrow={true}
                 />
               </SettingsList>

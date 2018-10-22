@@ -249,7 +249,7 @@ class AltHome extends Component {
                     rounded
                     large
                     //title={String(item.fullName).substring(0,2)}
-                    source={{uri: imgUrl, cache: 'default'}}
+                    source={{uri: imgUrl, cache: 'force-cache'}}
                     onPress={() => {
                         this.setState({selectedCoinObj: {
                             url:'https://www.cryptocompare.com'+item.ccurl,

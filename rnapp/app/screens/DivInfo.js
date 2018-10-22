@@ -122,7 +122,7 @@ class DivInfo extends Component {
                     { coinPixArr.map((e) => (
                         <Avatar
                             size="medium"
-                            source={{uri: e.uri, cache: 'default'}}
+                            source={{uri: e.uri, cache: 'force-cache'}}
                             onPress={() => console.log("Works!")}
                             activeOpacity={0.7}
                             containerStyle={{flex: 1, backgroundColor: 'transparent'}}

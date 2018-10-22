@@ -21,10 +21,10 @@ import { storeItem, retrieveItem } from './app/lib';
 if (Text.defaultProps == null) Text.defaultProps = {};
 Text.defaultProps.allowFontScaling = false;
 
-let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
+//let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket';
-//let METEOR_URL = 'ws://localhost:3000/websocket';
+let METEOR_URL = 'ws://localhost:3000/websocket';
 
 const ADDED = 'ddp/added';
 const CHANGED  = 'ddp/changed';
