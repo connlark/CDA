@@ -316,8 +316,6 @@ class AltHome extends Component {
     render() {
         const { balances, balancesReady, balanceDataRedux } = this.props;
         const { refreshing, showWebView, selectedCoinObj } = this.state;
-        const hello = {hi: 'hi'}
-        console.log(hello?.hi)
 
         if(showWebView){ 
             const { url, name } = selectedCoinObj;
