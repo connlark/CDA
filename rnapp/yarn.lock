@@ -6340,10 +6340,10 @@ redux-persist@5.6.12:
   resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.6.12.tgz#7c65f7d9cdd04104507526ef02b30423c4b85743"
   integrity sha512-be7czsCMuCH4wYAEUIvLbGaKeaQN4uCmxGImYneS05mo8XruCGFlRhuLUfEr+ytXLYUJtKzFAPcUbM3SDXzHWQ==
 
-redux-saga@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
-  integrity sha1-CiMdsKFIkwHdmA9vL4jYztQY9yQ=
+redux-saga@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.2.tgz#993662e86bc945d8509ac2b8daba3a8c615cc971"
+  integrity sha512-iIjKnRThI5sKPEASpUvySemjzwqwI13e3qP7oLub+FycCRDysLSAOwt958niZW6LhxfmS6Qm1BzbU70w/Koc4w==
 
 redux-thunk@^2.3.0:
   version "2.3.0"
