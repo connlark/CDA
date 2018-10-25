@@ -5786,10 +5786,10 @@ react-native-device-info@0.24.0:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.24.0.tgz#a6c2a8977229e1b94435e30469fa6af21a68f3ea"
   integrity sha512-ab04CWcBeVJCAnjgYV2s1LscAypqJJxnt40EPdrQYe8J+nspUb9fNOPC+bfrJe3u8HKZuJ5dZmMAv29ANpl1Dw==
 
-react-native-dialogs@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/react-native-dialogs/-/react-native-dialogs-0.0.21.tgz#57ea0d0cfcebbbe035e79282e0febca9ef1e6a2c"
-  integrity sha512-yhGf785OUi7Ype9U8aTvJt3N0OMCjjMFf/iP11hbkdAmVbaqyNEFmgvjUrwAUVJ/JrUqb5v8n5Hw903Gzi7r5Q==
+react-native-dialogs@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-dialogs/-/react-native-dialogs-1.0.2.tgz#d16d68cecbd57f74904fb2d58fd846622d5fec9a"
+  integrity sha512-3hH6s67RD6w9MVttqWARnto3wnmSgnwPCzsk4aVaQbFjtgVZQecn+oP+jqj01G6OvxAtuG7aSe62fYGs5xileA==
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
@@ -5965,13 +5965,13 @@ react-native-screens@^1.0.0-alpha.11:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.12.tgz#5953c39c9dbfbe324610005e07d85a416081c48c"
   integrity sha512-n/XyqUStDjtCymXUhAxG98asvgI8/OSH+v9AaAzUFEqfBwJLY8/UjY6m8PIJSgqRt4aR/Z9nO+A1mcMXw6dMdA==
 
-react-native-settings-components@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-settings-components/-/react-native-settings-components-0.0.1.tgz#0ac3b77e02b62542c0e7a708d538cde3aa87881c"
-  integrity sha1-CsO3fgK2JULA56cI1TjN46qHiBw=
+react-native-settings-components@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-settings-components/-/react-native-settings-components-0.0.2.tgz#39e4e352b85674897e31ecde05e6195c59023c14"
+  integrity sha512-rlac3meFPmCyMpV7cj58P3ZiqcMUbj2F0Gt+F76Ghneu9hUgU6LWKqxiKIQc0lhgJBof9khBTJYpqkWNmG7SaA==
   dependencies:
-    prop-types "^15.6.0"
-    react-native-dialogs "^0.0.21"
+    lodash "^4.17.11"
+    react-native-dialogs "^1.0.2"
 
 react-native-settings-list@^1.8.0:
   version "1.8.0"
