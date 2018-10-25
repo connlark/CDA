@@ -1689,9 +1689,9 @@ meteor-babel@^7.1.2:
     meteor-babel-helpers "0.0.3"
     reify "0.17.3"
 
-meteor-node-stubs@^0.3.2:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/meteor-node-stubs/-/meteor-node-stubs-0.3.3.tgz#4037ec464573642b0efee3961a649a4818f796db"
+meteor-node-stubs@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/meteor-node-stubs/-/meteor-node-stubs-0.4.1.tgz#f755d8f127c1a1ae3d57dc71df197bb8c0e26767"
   dependencies:
     assert "^1.4.1"
     browserify-zlib "^0.1.4"
@@ -1707,7 +1707,7 @@ meteor-node-stubs@^0.3.2:
     process "^0.11.9"
     punycode "^1.4.1"
     querystring-es3 "^0.2.1"
-    readable-stream "git+https://github.com/meteor/readable-stream.git"
+    readable-stream "^2.3.6"
     stream-browserify "^2.0.1"
     stream-http "^2.8.0"
     string_decoder "^1.1.0"
@@ -2042,17 +2042,6 @@ readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.3.6:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-"readable-stream@git+https://github.com/meteor/readable-stream.git":
-  version "2.3.5"
-  resolved "git+https://github.com/meteor/readable-stream.git#c688cdd193549919b840e8d72a86682d91961e12"
-  dependencies:
-    inherits "~2.0.3"
-    isarray "~1.0.0"
-    process-nextick-args "~2.0.0"
-    safe-buffer "~5.1.1"
-    string_decoder "~1.1.0"
-    util-deprecate "~1.0.1"
-
 regenerate-unicode-properties@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/regenerate-unicode-properties/-/regenerate-unicode-properties-7.0.0.tgz#107405afcc4a190ec5ed450ecaa00ed0cafa7a4c"
@@ -2276,7 +2265,7 @@ string-width@^1.0.1:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
-string_decoder@^1.1.0, string_decoder@~1.1.0, string_decoder@~1.1.1:
+string_decoder@^1.1.0, string_decoder@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
   dependencies:
