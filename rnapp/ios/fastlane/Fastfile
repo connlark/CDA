@@ -19,7 +19,7 @@ platform :ios do
   lane :beta do
       ensure_git_status_clean
       increment_build_number
-      commit_version_bump(workspace: "rnapp.xcworkspace")
+      commit_version_bump(xcodeproj: "rnapp/ios/rnapp.xcodeproj")
       add_git_tag
       gym(scheme: "rnapp", workspace: "rnapp.xcworkspace")
       #build_app(
