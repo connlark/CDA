@@ -1,9 +1,39 @@
-{
-    "device_frame_version": "latest",
+  {
     "default": {
+      "device_frame_version": "latest",
       "show_complete_frame": false,
-      "stack_title": false,
+      "title": {
+        "color": "#545454"
+      },
+      "background": "./background.jpg",
       "padding": 50
     },
-    "data": []
+  
+  
+    "data": [
+      {
+        "filter": "0History",
+        "keyword": {
+          "color": "#d21559"
+        }
+      },
+      {
+        "filter": "1DIV",
+        "keyword": {
+          "color": "#feb909"
+        }
+      },
+      {
+        "filter": "2Home",
+        "keyword": {
+          "color": "#aa4dbc"
+        }
+      },
+      {
+        "filter": "3Settings",
+        "keyword": {
+          "color": "#31bb48"
+        }
+      }
+    ]
   }

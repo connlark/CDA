@@ -39,7 +39,7 @@ class rnappUITests: XCTestCase {
       meohjjme.tap()
       
       sleep(10)
-      snapshot("Home")
+      snapshot("2Home")
     }
   
   func testDIV() {
@@ -59,7 +59,7 @@ class rnappUITests: XCTestCase {
     meohme.tap()
 
     sleep(20)
-    snapshot("DIV")
+    snapshot("1DIV")
   }
   
   func testSettings() {
@@ -72,7 +72,7 @@ class rnappUITests: XCTestCase {
     meohjjme.tap()
     
     sleep(4)
-    snapshot("Settings")
+    snapshot("3Settings")
   }
   
   func testStats() {
@@ -84,7 +84,7 @@ class rnappUITests: XCTestCase {
     let meohjjme = app.descendants(matching: .button).containing(.button, identifier: "History").element(boundBy: 0) // second upgrade button-containing element
     meohjjme.tap()
     sleep(20)
-    snapshot("History")
+    snapshot("0History")
   }
   
   func testTotals() {
@@ -104,7 +104,7 @@ class rnappUITests: XCTestCase {
 
     meohme.swipeLeft()
     sleep(7)
-    snapshot("Totals")
+    snapshot("4Totals")
     
     
   }
