@@ -12,24 +12,23 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 update_fastlane
-
+before_all do
+  ENV['DEVELOPER_DIR'] = '/Applications/Xcode.app/Contents/Developer'
+  skip_docs
+  update_fastlane
+  clear_derived_data
+  ensure_git_status_clean
+end
 default_platform(:ios)
 
 platform :ios do
   lane :beta do
-      ensure_git_status_clean
+      xcodeproj = "./ios/rnapp.xcodeproj"
       increment_build_number
-      commit_version_bump(xcodeproj: "rnapp/ios/rnapp.xcodeproj")
       add_git_tag
       gym(scheme: "rnapp", workspace: "rnapp.xcworkspace")
-      #build_app(
-       #   workspace: "rnapp.xcworkspace",
-        #  scheme: "rnapp",
-         # clean: true
-          #)
-      upload_to_testflight(
-          app_identifier: "com.connorlarkin.CDA"
-          )
+      pilot
+      push_to_git_remote
   end
   
   lane :screenshots do
