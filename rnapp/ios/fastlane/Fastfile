@@ -17,6 +17,7 @@ before_all do
   skip_docs
   update_fastlane
   clear_derived_data
+  git_pull
   ensure_git_status_clean
 end
 default_platform(:ios)
@@ -25,6 +26,7 @@ platform :ios do
   lane :beta do
       xcodeproj = "./ios/rnapp.xcodeproj"
       increment_build_number
+      git_commit(path: "./ios/rnapp.xcodeproj", message: "Version Bump")
       add_git_tag
       gym(scheme: "rnapp", workspace: "rnapp.xcworkspace")
       pilot
