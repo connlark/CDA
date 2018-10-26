@@ -1,0 +1,12 @@
+This app continually checks your CoinEx and TRX assets and sends you a notification every time your balance changes! 
+
+Perfect for those that don't want to manually check their balances and asset history to check for passive income. The coin deltas are tracked and plotted so you can see detailed history and trends of your passive income.
+
+Current assets/exchanges supported:
+
+• CoinEx Exchange 
+• TRX Wallet (includes all TRON tokens and TRX)
+• More added soon™! 
+
+
+PLEASE NOTE: This app does not generate passive income on its own, it only tracks balance changes from external sources. You must already possess a CoinEx or TRX account to track your assets. Also, if you manually move assets or make trades the app does not currently have a way to distinguish between airdrops/dividends and manual changes to balances.
