@@ -5810,10 +5810,10 @@ react-native-awesome-alerts@1.1.1:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-camera@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.3.0.tgz#b4d8bea052ab4bd43f58576dac03def7a5ea416e"
-  integrity sha512-f4Nev0dvJmWQPbXLYu4BF17agLWS6iQ+vanPlWkEaa4MAjbClD/YrQaR8w9vY+C472crSp3kRGHJXIQzSwgMpw==
+react-native-camera@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.3.1.tgz#d7c1a207bfc33b11c130762d6b494b4169562463"
+  integrity sha512-IFhU+7ax60eXnqqoTI0r6l/2AoZcYduBJ3tLKdDPue/1w6Fnfx5f2BEIU3hTNzjGX3v29vz+xZNKo0pwcrJmOA==
   dependencies:
     lodash "^4.17.10"
     prop-types "^15.6.2"
