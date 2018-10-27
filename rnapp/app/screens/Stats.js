@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, FlatList,TouchableOpacity, ScrollView } from 'react-native';
 import Meteor, { withTracker } from 'react-native-meteor';
 import Grid from 'react-native-grid-component';
+import { numberWithCommas } from '../lib'
 
 import Graph from '../components/graph';
 import Swipeout from 'react-native-swipeout';
@@ -84,9 +85,9 @@ class Stats extends Component {
             return (
                 <ScrollView style={{flex:1}} contentContainerStyle={{alignItems: 'center'}}>
                     <View style={{marginTop: '70%', alignItems: 'center'}}>
-                        <Text style={styles.text}>Last 24h: $ {lastHourUSD.toFixed(2)} </Text>
-                        <Text style={styles.text}>Total Divs: $ {totalUSD.toFixed(2)} </Text>
-                        <Text style={styles.textSmall}>Net Worth: $ {netWorth.toFixed(2)} </Text>
+                        <Text style={styles.text}>Last 24h: $ {numberWithCommas(lastHourUSD.toFixed(2))} </Text>
+                        <Text style={styles.text}>Total Divs: $ {numberWithCommas(totalUSD.toFixed(2))} </Text>
+                        <Text style={styles.textSmall}>Net Worth: $ {numberWithCommas(netWorth.toFixed(2))} </Text>
                     </View>
                    
                 </ScrollView>
