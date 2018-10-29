@@ -6132,10 +6132,10 @@ react-navigation-material-bottom-tabs@^0.4.0:
     prop-types "^15.6.0"
     react-navigation-tabs "^0.4.0"
 
-react-navigation-redux-helpers@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/react-navigation-redux-helpers/-/react-navigation-redux-helpers-2.0.5.tgz#2c2412d5b7184bbcee850b5d2c350cca34ad6cf6"
-  integrity sha512-oxDpPqmXdzUJJ32ef8NY6Cu9XDJNO4DU91p0+ZgleEfaZwec9t2ua6sKwQyOfdWQPDwbJAxiXfZIAe3ao5MG6Q==
+react-navigation-redux-helpers@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/react-navigation-redux-helpers/-/react-navigation-redux-helpers-2.0.8.tgz#f237592d9a5f24f64b283c0693bc84c5e32676ec"
+  integrity sha512-gCxHOGWNbRtt6Se93uuIE3cKqmqln73wlMeyD02aE1vs0cl9fn7BUKXX+UESrBSUOqadeoS1I7AH4arxZAARTQ==
   dependencies:
     invariant "^2.2.2"
 
