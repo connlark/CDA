@@ -41,6 +41,8 @@
 		7C6248163DA94BE3BE0E5987 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F50AC097B5E4FA291B99C01 /* FontAwesome.ttf */; };
 		816442EBAE734DD2A428FBED /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBE4FAFA9E94511BB9D9E41 /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		8734F4192188182D004858F7 /* libRNIap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8734F418218817FF004858F7 /* libRNIap.a */; };
+		8734F41B2188194B004858F7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8734F41A2188194B004858F7 /* StoreKit.framework */; };
 		873654342160AC2E0052958D /* Peso.png in Resources */ = {isa = PBXBuildFile; fileRef = 873653FC2160AC2E0052958D /* Peso.png */; };
 		873654352160AC2E0052958D /* Peso.png in Resources */ = {isa = PBXBuildFile; fileRef = 873653FC2160AC2E0052958D /* Peso.png */; };
 		873654362160AC2E0052958D /* Peso.png in Resources */ = {isa = PBXBuildFile; fileRef = 873653FC2160AC2E0052958D /* Peso.png */; };
@@ -356,6 +358,13 @@
 			remoteGlobalIDString = D91353961DA7849100AABC96;
 			remoteInfo = OAuthManager;
 		};
+		8734F417218817FF004858F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8734F413218817FE004858F7 /* RNIap.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNIap;
+		};
 		878E3F83216C697A00ECF3D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 008D13BA8767479FB2786F3C /* RNRate.xcodeproj */;
@@ -519,6 +528,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D8D2713862A450F8F6F4317 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8734F413218817FE004858F7 /* RNIap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNIap.xcodeproj; path = "../node_modules/react-native-iap/ios/RNIap.xcodeproj"; sourceTree = "<group>"; };
+		8734F41A2188194B004858F7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		873653FC2160AC2E0052958D /* Peso.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Peso.png; sourceTree = "<group>"; };
 		87AAE1B920FF06DA00910330 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		87AAE1C320FF107000910330 /* rnapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = rnapp.entitlements; path = rnapp/rnapp.entitlements; sourceTree = "<group>"; };
@@ -563,6 +574,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8734F4192188182D004858F7 /* libRNIap.a in Frameworks */,
 				87CE4475213FA4DC0005EE8C /* libReactNativeHaptic.a in Frameworks */,
 				87AAE1C220FF06F700910330 /* libRCTPushNotification.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -589,6 +601,7 @@
 				0C3074049DBF446FBF0037A8 /* libAppCenterReactNativeAnalytics.a in Frameworks */,
 				E24BC58051084C70BA0DD3B2 /* libAppCenterReactNativeCrashes.a in Frameworks */,
 				6B70D865A0F54BCCB52C2AFE /* libOAuthManager.a in Frameworks */,
+				8734F41B2188194B004858F7 /* StoreKit.framework in Frameworks */,
 				6204F5D1F89C4E3B9B23DA3B /* Pods_rnapp.framework in Frameworks */,
 				35DF1C8D54EF4E738386EA63 /* libRNRate.a in Frameworks */,
 			);
@@ -725,6 +738,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8734F41A2188194B004858F7 /* StoreKit.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				E9579E45B3ED43ED8330A480 /* libz.tbd */,
 				5245587AD11688E10C37988D /* Pods_rnapp.framework */,
@@ -754,6 +768,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8734F413218817FE004858F7 /* RNIap.xcodeproj */,
 				87CE446F213FA4B00005EE8C /* ReactNativeHaptic.xcodeproj */,
 				87AAE1B920FF06DA00910330 /* RCTPushNotification.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -851,6 +866,14 @@
 			isa = PBXGroup;
 			children = (
 				8733C0482132703B00422C39 /* libOAuthManager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8734F414218817FE004858F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8734F418218817FF004858F7 /* libRNIap.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1093,6 +1116,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 1;
 							};
@@ -1208,6 +1234,10 @@
 				{
 					ProductGroup = 87AAE1A420FF020900910330 /* Products */;
 					ProjectRef = 23AD8692B6F3408185ADE1AD /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 8734F414218817FE004858F7 /* Products */;
+					ProjectRef = 8734F413218817FE004858F7 /* RNIap.xcodeproj */;
 				},
 				{
 					ProductGroup = 878E3F80216C697A00ECF3D7 /* Products */;
@@ -1521,6 +1551,13 @@
 			fileType = archive.ar;
 			path = libOAuthManager.a;
 			remoteRef = 8733C0472132703B00422C39 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8734F418218817FF004858F7 /* libRNIap.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNIap.a;
+			remoteRef = 8734F417218817FF004858F7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		878E3F84216C697A00ECF3D7 /* libRNRate.a */ = {

@@ -18,6 +18,7 @@ import AddCredentialsModal from '../../components/addCredentialsModal'
 import {connect, createProvider} from 'react-redux'
 import Rate, { AndroidMarket } from 'react-native-rate'
 import email from 'react-native-email'
+import Modal from "react-native-modal";
 
 import {
     SettingsDividerShort, 
@@ -27,8 +28,20 @@ import {
     SettingsSwitch, 
     SettingsPicker
 } from 'react-native-settings-components';
-import { Header } from 'react-native-elements';
+import { PricingCard } from 'react-native-elements'
 import Analytics from 'appcenter-analytics';
+import * as RNIap from 'react-native-iap';
+
+
+const itemSkus = Platform.select({
+  ios: [
+    'tip99'
+  ],
+  android: [
+    'com.example.coins100'
+  ]
+});
+
 
 class Settings extends Component {
   constructor(props) {
@@ -37,8 +50,8 @@ class Settings extends Component {
       username: '',
       allowPushNotifications: false,
       gender: '',
-      appVersion: '1.0',
-      label: 'v1',
+      appVersion: '1.1.1',
+      label: 'v0',
       isPending: false,
       isDownloading: false,
       showIsUpToDate: false,
@@ -48,11 +61,12 @@ class Settings extends Component {
       TRXAddress: null,
       switchValue: true,
       rated: false,
-      username: ''
+      username: '',
+      isModalVisiblePAY: true
     };
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     const { user } = this.props;
     codePush.getCurrentPackage().then((e) => {
       this.setState({
@@ -75,6 +89,17 @@ class Settings extends Component {
     if (user){
         this.getTRXAddress(user.profile);
     }
+
+    try {
+        const products = await RNIap.getProducts(itemSkus);
+        this.setState({ products });
+      } catch(err) {
+        console.warn(err); // standardized err.code and err.message available
+      }
+  }
+
+  componentWillUnmount() {
+    RNIap.endConnection();
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -95,7 +120,6 @@ class Settings extends Component {
                 CoinEx = e.token;
             }
         });
-        console.log(TRX)
 
         return {
             TRXAddress: TRX,
@@ -103,7 +127,6 @@ class Settings extends Component {
             username: user.username
         };
     }
-
     
     return null;
     }
@@ -226,17 +249,34 @@ class Settings extends Component {
     }
 
     handleEmail = () => {
+        Analytics.trackEvent('handleTip clicked');
+
         const to = ['connor.larkin1@gmail.com'] // string or array of email addresses
         email(to, {
             // Optional additional arguments
-            cc: ['clswimmer411@me.com'], // string or array of email addresses
-            subject: '☀️ Regarding something about Crypto Dividend Tracker ☀️',
-            body: '🔥🔥🔥 Your message to me here! 🔥🔥🔥'
+            cc: [], // string or array of email addresses
+            subject: '☀️ Regarding something about Crypto Dividend Tracker hopefully not a bug, if so, sorry ☀️',
+            body: '🔥🔥🔥 \n\n Your message to me here! \n\n 🔥🔥🔥'
         }).catch(console.error)
     }
 
+    onPayButtonPress = () => {
+        Analytics.trackEvent('handleTip clicked');
+
+        RNIap.buyProduct('tip99').then(purchase => {
+            const title = 'BOUGHT '+purchase.productId;
+            const info = { 
+                transactionDate: Date(purchase.transactionDate).toString(), 
+                transactionId: String(purchase.transactionId)
+            };
+            Analytics.trackEvent(title, info);
+        }).finally(() => {
+            this.setState({isModalVisiblePAY: false})
+        });
+    }
+
     render() {
-        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username } = this.state;
+        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username, isModalVisiblePAY } = this.state;
         var bgColor = '#DCE3F4';
         return (
           <View style={{backgroundColor:'#EFEFF4',flex:1}}>
@@ -306,21 +346,36 @@ class Settings extends Component {
                   onPress={this.logOut}
                 />
                 <SettingsList.Item
-                    title={'😃 Rate App 😃'} 
+                    title={' 😃    Rate App'} 
                     onPress={this.rateApp}
                     hasNavArrow={true}
                 />
                 <SettingsList.Item
-                    title={'Contact Developer'} 
+                    title={' 📲    Contact Developer'} 
                     onPress={this.handleEmail}
                     hasNavArrow={true}
                 />
+                <SettingsList.Item
+                    title={' 🍯    Tip Jar'} 
+                    onPress={() => this.setState({isModalVisiblePAY: true})}
+                    hasNavArrow={false}
+                />
               </SettingsList>
               <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
-
             </View>
             <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
-
+            <Modal isVisible={isModalVisiblePAY} useNativeDriver onBackdropPress={() => this.setState({isModalVisiblePAY: false})} onSwipe={() => this.setState({isModalVisiblePAY: false})} backdropOpacity={0.4} hideModalContentWhileAnimating>
+                <View style={{ alignItems: 'center', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center' }}>
+                    <PricingCard
+                        color='steelblue'
+                        title='Well I need a dollar dollar, a dollar is what I need '
+                        price='$0.99'
+                        info={['And if I share with you my story would you share your dollar with me', '💙💙💙']}
+                        button={{ title: 'Tip!', icon: 'flight-takeoff' }}
+                        onButtonPress={this.onPayButtonPress}
+                    />
+                </View>
+            </Modal>
           </View>
         );
       }
