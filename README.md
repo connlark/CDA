@@ -16,7 +16,7 @@ Current assets/exchanges supported:
 
 • More added soon™! 
 
-<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-0History_framed.png" width="30%">.
-<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-1DIV_framed.png" width="30%">.
-<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-2Home_framed.png" width="30%">.
-<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-3Settings_framed.png" width="30%">.
+<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-0History_framed.png" width="25%">.
+<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-1DIV_framed.png" width="25%">.
+<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-2Home_framed.png" width="25%">.
+<img src="https://github.com/connorlarkin1/CDA/blob/master/assets/framedSS/iPhone%20X-3Settings_framed.png" width="25%">.
