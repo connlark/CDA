@@ -7,7 +7,8 @@ import {
   Platform, 
   ScrollView,
   Image,
-  Alert
+  Alert,
+  Linking
 } from 'react-native';
 import codePush from "react-native-code-push";
 import Meteor, { withTracker } from 'react-native-meteor';
@@ -19,6 +20,7 @@ import {connect, createProvider} from 'react-redux'
 import Rate, { AndroidMarket } from 'react-native-rate'
 import email from 'react-native-email'
 import Modal from "react-native-modal";
+import ReactNativeHaptic from 'react-native-haptic';
 
 import {
     SettingsDividerShort, 
@@ -62,7 +64,7 @@ class Settings extends Component {
       switchValue: true,
       rated: false,
       username: '',
-      isModalVisiblePAY: true
+      isModalVisiblePAY: false
     };
   }
 
@@ -260,19 +262,45 @@ class Settings extends Component {
         }).catch(console.error)
     }
 
-    onPayButtonPress = () => {
+    onPayButtonPress = (qty) => {
         Analytics.trackEvent('handleTip clicked');
 
-        RNIap.buyProduct('tip99').then(purchase => {
-            const title = 'BOUGHT '+purchase.productId;
-            const info = { 
-                transactionDate: Date(purchase.transactionDate).toString(), 
-                transactionId: String(purchase.transactionId)
-            };
-            Analytics.trackEvent(title, info);
-        }).finally(() => {
+        if (Platform.OS !== 'android') {
+            ReactNativeHaptic.generate('notificationSuccess')
+
+            RNIap.buyProductWithQuantityIOS('tip99',qty).then(purchase => {
+                const title = 'BOUGHT '+purchase.productId;
+                const info = { 
+                    transactionDate: Date(purchase.transactionDate).toString(), 
+                    transactionId: String(purchase.transactionId)
+                };
+                this.dropdown.alertWithType('success', 'Thank You!','☻ ☻ ☻ ');
+    
+                Analytics.trackEvent(title, info);
+            }).finally(() => {
+                this.setState({isModalVisiblePAY: false})
+            });
+        }
+        else {
             this.setState({isModalVisiblePAY: false})
-        });
+
+            alert('not available right now :) THANKS THO ')
+        }
+    }
+
+    onHelpPress = () => {
+        Alert.alert('Help with assets',
+        'Try following these links to solve issues or contact me if these dont help. Note that this app will count transactions as dividends. \n\nAlso, coinex balance won\'t show unless the corrent IP is put in the whitelist.',
+        [
+            {text: 'CoinEx: dividend allocation plan', onPress: () => {
+                Linking.openURL('https://www.coinex.com/announcement/detail?id=76&lang=en_US')
+            }},
+            {text: 'TRON: How to vote & get dividends', onPress: () => {
+                Linking.openURL('https://medium.com/tron-foundation/how-to-vote-for-super-representatives-d81d14d9743d')
+            }},
+            {text: 'Cancel', onPress: () => {
+            }}          
+        ],{ cancelable: true });
     }
 
     render() {
@@ -306,6 +334,11 @@ class Settings extends Component {
                   title={`TRX Wallet`}
                   titleInfo={`${TRXAddress ? TRXAddress.substring(0,3) + '......' + TRXAddress.substring(TRXAddress.length-3): 'Tap To Set!'}`}
                   onPress={() => this.mymodal.setModalVisible( true)}
+                />
+                <SettingsList.Item
+                  title={` ❓   Help`}
+                //  titleInfo={`Help`}
+                  onPress={this.onHelpPress}
                 />
                 <SettingsList.Item
                   icon={<Image style={styles.imageStyle} source={require('./images/refresh.png')}/>}
@@ -355,11 +388,14 @@ class Settings extends Component {
                     onPress={this.handleEmail}
                     hasNavArrow={true}
                 />
-                <SettingsList.Item
-                    title={' 🍯    Tip Jar'} 
-                    onPress={() => this.setState({isModalVisiblePAY: true})}
-                    hasNavArrow={false}
-                />
+                { username !== 'seed' && 
+                    <SettingsList.Item
+                        title={' 🍯    Tip Jar'} 
+                        onPress={() => this.setState({isModalVisiblePAY: true})}
+                        hasNavArrow={false}
+                    />
+                }
+                
               </SettingsList>
               <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
             </View>
@@ -368,11 +404,19 @@ class Settings extends Component {
                 <View style={{ alignItems: 'center', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center' }}>
                     <PricingCard
                         color='steelblue'
-                        title='Well I need a dollar dollar, a dollar is what I need '
+                        title='Dollar Support Club'
                         price='$0.99'
-                        info={['And if I share with you my story would you share your dollar with me', '💙💙💙']}
-                        button={{ title: 'Tip!', icon: 'flight-takeoff' }}
-                        onButtonPress={this.onPayButtonPress}
+                        info={['will pay for 15 days of server life', '💙💙💙']}
+                        button={{ title: 'Tip', icon: 'payment' }}
+                        onButtonPress={() =>this.onPayButtonPress(1)}
+                    />
+                    <PricingCard
+                        color='steelblue'
+                        title='Premium™️ Dollar Support Club'
+                        price='$0.99 x 2'
+                        info={['Month of server life!', '💙❤️💙']}
+                        button={{ title: 'Tip', icon: 'payment' }}
+                        onButtonPress={() =>this.onPayButtonPress(2)}
                     />
                 </View>
             </Modal>
