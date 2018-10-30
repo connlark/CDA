@@ -4,9 +4,9 @@ app_review_information(
   last_name: "Larkin",
   phone_number: "8475659827",
   email_address: "connor.larkin1@gmail.com",
-  demo_user: "seed",       # add the user if testers will need to log in
-  demo_password: "seed",   # add the password if testers need it
-  notes: "TESTING PLSSSSS"
+  demo_user: "dev",       # add the user if testers will need to log in
+  demo_password: "dev",   # add the password if testers need it
+  notes: "Source Code: https://github.com/connorlarkin1/CDA/tree/master/rnapp"
 )
 # if you app has more complex structure, check out /fastlane/metadata/review_information folder
 
@@ -19,6 +19,6 @@ submission_information({
 
 automatic_release false
 
-app_icon './fastlane/metadata/AppIcon.png'
+app_icon "./fastlane/metadata/AppIcon.png"
 
 app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"

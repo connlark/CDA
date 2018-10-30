@@ -37,7 +37,8 @@ import * as RNIap from 'react-native-iap';
 
 const itemSkus = Platform.select({
   ios: [
-    'tip99'
+    'tip99',
+    'tip_1.99'
   ],
   android: [
     'com.example.coins100'
@@ -266,14 +267,14 @@ class Settings extends Component {
         Analytics.trackEvent('handleTip clicked');
 
         if (Platform.OS !== 'android') {
-            ReactNativeHaptic.generate('notificationSuccess')
-
-            RNIap.buyProductWithQuantityIOS('tip99',qty).then(purchase => {
+            const titleIOS = qty === 1 ? 'tip99':'tip_1.99';
+            RNIap.buyProductWithQuantityIOS(titleIOS,1).then(purchase => {
                 const title = 'BOUGHT '+purchase.productId;
                 const info = { 
                     transactionDate: Date(purchase.transactionDate).toString(), 
                     transactionId: String(purchase.transactionId)
                 };
+                ReactNativeHaptic.generate('notificationSuccess')
                 this.dropdown.alertWithType('success', 'Thank You!','☻ ☻ ☻ ');
     
                 Analytics.trackEvent(title, info);
@@ -404,16 +405,16 @@ class Settings extends Component {
                 <View style={{ alignItems: 'center', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center' }}>
                     <PricingCard
                         color='steelblue'
-                        title='Dollar Support Club'
+                        title='Basic Support'
                         price='$0.99'
                         info={['will pay for 15 days of server life', '💙💙💙']}
                         button={{ title: 'Tip', icon: 'payment' }}
                         onButtonPress={() =>this.onPayButtonPress(1)}
                     />
                     <PricingCard
-                        color='steelblue'
-                        title='Premium™️ Dollar Support Club'
-                        price='$0.99 x 2'
+                        color='lightblue'
+                        title='Premium™️ Support'
+                        price='$1.99'
                         info={['Month of server life!', '💙❤️💙']}
                         button={{ title: 'Tip', icon: 'payment' }}
                         onButtonPress={() =>this.onPayButtonPress(2)}

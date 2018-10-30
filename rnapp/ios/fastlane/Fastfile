@@ -18,7 +18,7 @@ before_all do
   update_fastlane
   clear_derived_data
   git_pull
-  ensure_git_status_clean
+  #ensure_git_status_clean
 end
 default_platform(:ios)
 
