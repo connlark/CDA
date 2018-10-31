@@ -13,17 +13,12 @@ import moment from 'moment';
 import { withNavigation } from 'react-navigation';
 import { Card } from 'react-native-material-ui';
 import { material, human, iOSUIKit} from 'react-native-typography'
+import { storeItem, retrieveItem } from '../lib'
 
 import NeedData from '../components/needData'
 
 import { IS_X } from '../config/styles';
 import { consolodateData, numberWithCommas } from '../lib'
-
-var swipeoutBtns = [
-    {
-      text: 'Button'
-    }
-  ]
 
 class History extends Component {
     constructor(props){
@@ -37,6 +32,14 @@ class History extends Component {
             history: {},
             revHistory:[]
         };
+    }
+
+    componentDidMount(){
+        retrieveItem('is_first_login').then((obj) => {
+            if (obj){
+                this.props.navigation.navigate('Settings')
+            }
+        });   
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -236,7 +239,7 @@ class History extends Component {
             return (
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
                         <NeedData 
-                            text={'Things will show here once a linked account show an asset increase!'} 
+                            text={'Things will show up here once a linked account shows an asset increase!'} 
                             onPress={() => this.props.navigation.navigate('Settings')}
                             smallFont
                         />

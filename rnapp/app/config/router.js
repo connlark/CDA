@@ -34,6 +34,7 @@ const AppTabs = createMaterialBottomTabNavigator(
     },
     {
       shifting: true,
+      initialRouteName: 'History',
       barStyle: {
         backgroundColor: '#f8f7f9',
         borderTopWidth: StyleSheet.hairlineWidth,

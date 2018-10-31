@@ -102,6 +102,7 @@ android {
         applicationId "com.connorlarkin.cda"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        multiDexEnabled true
         versionCode 8
         versionName "1.1.1"
         ndk {
@@ -139,8 +140,10 @@ android {
 
 apply plugin: 'io.fabric'
 
-
 dependencies {
+    compile (project(':lottie-react-native')) {
+        exclude group: 'com.android.support'
+    }
     compile project(':react-native-oauth')
     compile project(':react-native-push-notification')
     compile project(':appcenter-crashes')

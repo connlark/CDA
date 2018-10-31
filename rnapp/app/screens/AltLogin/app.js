@@ -9,7 +9,7 @@ import DeviceInfo from 'react-native-device-info';
 
 import AuthScreen from './containers/AuthScreen'
 import HomeScreen from './containers/HomeScreen'
-
+import { storeItem } from '../../lib'
 /**
  * The root component of the application.
  * In this component I am handling the entire application state, but in a real app you should
@@ -94,7 +94,9 @@ export class LoginAnimation extends Component {
           }
         
         } else {
-            this.onSignIn(email, password);
+            storeItem('is_first_login', true).finally(() => {
+              this.onSignIn(email, password);
+            });
         }
       });
     }

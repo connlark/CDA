@@ -13,21 +13,11 @@ import moment from 'moment';
 import { withNavigation } from 'react-navigation';
 import { Card } from 'react-native-material-ui';
 import { List, ListItem } from 'react-native-elements'
+import Swipeout from 'react-native-swipeout';
 
 import { IS_X } from '../config/styles';
 import { consolodateData, numberWithCommas } from '../lib'
-const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President'
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman'
-  },
-];
+
 
 class DivInfo extends Component {
     constructor(props){
@@ -62,7 +52,7 @@ class DivInfo extends Component {
         }*/
         let thisOne = props.navigation.state.params.item;
 
-        if (!thisOne){
+        if (!thisOne || thisOne.divData?.USDdelta < 0.00001){
             props.navigation.goBack();
             return null;
         }
@@ -222,6 +212,9 @@ class DivInfo extends Component {
             else {
                 if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                 this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
+                setTimeout(() => {
+                    this.props.navigation.goBack();
+                }, 500);
             }
             this.setState({showProgress: false});
         });
@@ -246,7 +239,17 @@ class DivInfo extends Component {
         formattedDelta = Number(delta).toFixed(3);
       }
 
+      var swipeoutBtns = [
+        {
+          text: 'Delete',
+          onPress: () => this.deleteDelta(item),
+          type: 'delete',
+          autoClose: true
+        }
+      ]
+
       return (
+        <Swipeout right={swipeoutBtns} backgroundColor={'white'}>
         <ListItem
           roundAvatar
           title={item.coin}
@@ -254,7 +257,7 @@ class DivInfo extends Component {
           avatar={{uri:item.uri}}
           //switchButton={true}
           hideChevron={true}
-          badge={{ onPress: () => this.deleteDelta(item), value: '❌', textStyle: { color: 'white' }, containerStyle: { backgroundColor: 'white', marginRight: 10 } }}
+          badge={{ onPress: () => this.deleteDelta(item), value: '⫶', textStyle: { color: 'black' }, containerStyle: { backgroundColor: 'white', marginRight: 10 } }}
           //switched={this.state.switched.indexOf(item.coin) === -1}
           onSwitch={() => {
               var index = this.state.switched.indexOf(item.coin);
@@ -279,6 +282,7 @@ class DivInfo extends Component {
               this.setState({switched: arr});
           }}
         />
+        </Swipeout>
       )
     }
 
@@ -359,7 +363,7 @@ class DivInfo extends Component {
                                 this.hideAlert();
                             }}
                         />
-                        <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
+                        <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={2000} />
                 </View>
             );
 

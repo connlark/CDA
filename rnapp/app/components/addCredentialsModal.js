@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Modal, Alert, Linking, Clipboard, AppState, Platform } from 'react-native';
+import { View, Text, StyleSheet, Modal, Alert, Linking, Clipboard, AppState, Platform, Image } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Stepper from 'react-native-js-stepper'
 import NavigationBar from 'react-native-navbar';
@@ -174,7 +174,7 @@ export default class componentName extends Component {
     }
 
     renderTRXScreen = () => {
-        const { readFromQrTRX } = this.state;
+        const { readFromQrTRX, helpTRX } = this.state;
         return (
             <View style={{flex: 1, alignItems: 'center', alignContent: 'center'}}>
                 { readFromQrTRX ? 
@@ -201,7 +201,8 @@ export default class componentName extends Component {
                                     </View>
                                 }
                             />
-                    :
+                    :   
+                        <>
                         <Sae
                             label={'TRX Wallet Address'}
                             iconClass={Ionicons}
@@ -218,10 +219,20 @@ export default class componentName extends Component {
                             onSubmitEditing={this.handleSubmit}
                             value={this.state.TRXaddress}
                         />
-                
+                        { this.state.helpTRX && 
+                            <>
+                            <Image
+                                source={require('../images/trxShow.png')}
+                                style={{marginTop: 40, width: '80%', height:'20%'}}
+                            />
+                            <Text> Go to tronscan.org and login to your TRX account. Then, come back and input your address</Text>
+
+                            </>
+                        }
+                        </>
                 }
                 
-                <View style={{top: readFromQrTRX ? '-11%':'87%'}} flexDirection={'row'}>
+                <View style={{top: readFromQrTRX ? '-11%': helpTRX ? '57%':'87%'}} flexDirection={'row'}>
 
             
                 <Button
@@ -241,7 +252,14 @@ export default class componentName extends Component {
                     onPress={() => Linking.openURL('https://tronscan.org/#/wallet/new')}
                 />
                 </View>
-
+                <Button
+                    color={'white'}
+                    backgroundColor={'#9bc2cf'}
+                    borderRadius={9}             
+                    icon={{name: 'help', type: 'ionicons'}}
+                    title={'Help'}
+                    onPress={() => this.setState({helpTRX: !this.state.helpTRX})}
+                />
             </View>
         );
     }
@@ -344,7 +362,8 @@ export default class componentName extends Component {
     }
 
     cleanup = () => {
-        ReactNativeHaptic.generate('impactLight');
+        if (Platform.OS !== 'android') ReactNativeHaptic.generate('impactLight'); 
+
         this.toggleConfetti(false);
         this.setState({
             readFromQrTRX: false

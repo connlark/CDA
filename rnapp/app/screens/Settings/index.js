@@ -34,6 +34,8 @@ import { PricingCard } from 'react-native-elements'
 import Analytics from 'appcenter-analytics';
 import * as RNIap from 'react-native-iap';
 
+import { storeItem, retrieveItem } from '../../lib'
+
 
 const itemSkus = Platform.select({
   ios: [
@@ -92,6 +94,14 @@ class Settings extends Component {
     if (user){
         this.getTRXAddress(user.profile);
     }
+
+    retrieveItem('is_first_login').then((obj) => {
+        if (obj){
+            storeItem('is_first_login', false).then(() => {
+                this.mymodal.setModalVisible(true)
+            });
+        }
+    });  
 
     try {
         const products = await RNIap.getProducts(itemSkus);
@@ -400,9 +410,9 @@ class Settings extends Component {
               </SettingsList>
               <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
             </View>
-            <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
+            <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={1500} />
             <Modal isVisible={isModalVisiblePAY} useNativeDriver onBackdropPress={() => this.setState({isModalVisiblePAY: false})} onSwipe={() => this.setState({isModalVisiblePAY: false})} backdropOpacity={0.4} hideModalContentWhileAnimating>
-                <View style={{ alignItems: 'center', alignSelf: 'center', flexDirection: 'column', justifyContent: 'center' }}>
+                <View style={{ flex: 1, alignItems: 'center',  justifyContent: 'center' }}>
                     <PricingCard
                         color='steelblue'
                         title='Basic Support'
@@ -410,11 +420,13 @@ class Settings extends Component {
                         info={['will pay for 15 days of server life', '💙💙💙']}
                         button={{ title: 'Tip', icon: 'payment' }}
                         onButtonPress={() =>this.onPayButtonPress(1)}
+                        containerStyle={{width: '90%'}}
                     />
                     <PricingCard
                         color='lightblue'
-                        title='Premium™️ Support'
+                        title='Premium Support'
                         price='$1.99'
+                        containerStyle={{width: '90%'}}
                         info={['Month of server life!', '💙❤️💙']}
                         button={{ title: 'Tip', icon: 'payment' }}
                         onButtonPress={() =>this.onPayButtonPress(2)}

@@ -1,5 +1,5 @@
 import Dimensions from 'Dimensions';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 let dimen = Dimensions.get('window');

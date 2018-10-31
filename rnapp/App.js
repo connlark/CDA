@@ -81,7 +81,6 @@ PushNotification.configure({
   onNotification(notification) {
     store.dispatch(recieveNotification(notification))
   },
-  senderID: "612930134863",
 
   // IOS ONLY (optional): default: all - Permissions to register.
   permissions: {

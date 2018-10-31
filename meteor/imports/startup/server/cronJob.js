@@ -342,7 +342,7 @@ const mergeBalances = (userId) => {
                 }
             );
         }
-        else if (dtaCX){
+        else if (dtaCX && dtaCX.balanceData && dtaCX.balanceData.length > 0){
             if (currBal){
                 Balances.update(
                     {userId: userId},

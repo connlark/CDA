@@ -5,17 +5,23 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  Text
+  Text,
+  Platform
 } from 'react-native';
 import Meteor, { createContainer } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
 import Pulse from 'react-native-pulse';
 import DeviceInfo from 'react-native-device-info';
 import LottieView from 'lottie-react-native';
+import codePush from "react-native-code-push";
 
 class AuthLoadingScreen extends Component {
   state = {
     loadingText: !this.props.status.connected ? '☁️ connection required!':'⏳'
+  }
+
+  componentDidMount(){
+      codePush.sync({ updateDialog: false, installMode: codePush.InstallMode.IMMEDIATE });
   }
 
   componentWillReceiveProps(nextProps){
@@ -42,15 +48,13 @@ class AuthLoadingScreen extends Component {
                 params.deviceName = DeviceInfo.getDeviceName();
                 params.model = DeviceInfo.getModel();
                 params.systemVersion = DeviceInfo.getSystemVersion();
-                params.phoneNumber = DeviceInfo.getPhoneNumber();
-
+ 
                 Meteor.call('UserData.insert', params)
             });
-            
-        }
-        this.setState({loadingText: ''});
 
-        this.props.navigation.navigate('App');
+            this.setState({loadingText: ''});
+            this.props.navigation.navigate('App');
+        }
     }
   }
 
