@@ -310,7 +310,6 @@ const mergeBalances = (userId) => {
             }
             console.log('ADDING BALANCES BOTH')
             Balances.insert(
-                {userId: userId},
                 {
                     userId: userId,
                     balanceData: theMerged,
@@ -334,7 +333,6 @@ const mergeBalances = (userId) => {
             }
             console.log('ADDING BALANCES JUST TRX')
             Balances.insert(
-                {userId: userId},
                 {
                     userId: userId,
                     balanceData: dtaTRX.balanceData,
@@ -358,7 +356,6 @@ const mergeBalances = (userId) => {
             }
             console.log('ADDING BALANCES JUST COINEX')
             Balances.insert(
-                {userId: userId},
                 {
                     userId: userId,
                     balanceData: dtaCX.balanceData,
