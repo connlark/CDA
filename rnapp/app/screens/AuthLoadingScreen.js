@@ -11,10 +11,11 @@ import Meteor, { createContainer } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
 import Pulse from 'react-native-pulse';
 import DeviceInfo from 'react-native-device-info';
+import LottieView from 'lottie-react-native';
 
 class AuthLoadingScreen extends Component {
   state = {
-    loadingText: !this.props.status.connected ? '☁️ connection required!':''
+    loadingText: !this.props.status.connected ? '☁️ connection required!':'⏳'
   }
 
   componentWillReceiveProps(nextProps){
@@ -47,7 +48,7 @@ class AuthLoadingScreen extends Component {
             });
             
         }
-        
+        this.setState({loadingText: ''});
 
         this.props.navigation.navigate('App');
     }
@@ -58,10 +59,14 @@ class AuthLoadingScreen extends Component {
     const { loadingText } = this.state;
     return (
       <View style={styles.container}>
-                    <Pulse color='#01b7b7' numPulses={10} diameter={230} speed={5} duration={2000} />
                     <View style={{flex: 1, marginTop: '99%'}}>
                         <Text style={styles.text}>{loadingText}</Text>
                     </View>
+                    <LottieView
+                        source={require('../lottie/soda_loader.json')}
+                        autoPlay
+                        loop
+                    />
                     <DropdownAlert
                         ref={(ref) => this.dropdown = ref}
                         useNativeDriver

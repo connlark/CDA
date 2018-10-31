@@ -10,6 +10,8 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import DropdownAlert from 'react-native-dropdownalert';
 import { IS_X } from '../config/styles';
 import Loading from '../components/loading'
+import NeedData from '../components/needData'
+
 var swipeoutBtns = [
     {
       text: 'Button'
@@ -80,7 +82,7 @@ class Stats extends Component {
 
     render() {
         const { lastHourUSD, totalUSD, netWorth } = this.state.stats;
-        const { historyReady, history } = this.props;
+        const { historyReady, history, navigation } = this.props;
         if(historyReady && history &&  history.history.length > 0){
             return (
                 <ScrollView style={{flex:1}} contentContainerStyle={{alignItems: 'center'}}>
@@ -96,12 +98,12 @@ class Stats extends Component {
         }
         else if (historyReady){
             return (
-                <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
-                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => true}>
-                        <View style={{marginBottom: 10}}>
-                            <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
-                        </View>
-                    </TouchableOpacity>
+                <View style={{flex:1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                        <NeedData 
+                            text={'Things will show here once a linked account show an asset increase!'} 
+                            onPress={() => navigation?.navigate?.('Settings')}
+                            smallFont
+                        />
                 </View>
                 
             )

@@ -12,6 +12,9 @@ import { Avatar } from 'react-native-elements';
 import moment from 'moment';
 import { withNavigation } from 'react-navigation';
 import { Card } from 'react-native-material-ui';
+import { material, human, iOSUIKit} from 'react-native-typography'
+
+import NeedData from '../components/needData'
 
 import { IS_X } from '../config/styles';
 import { consolodateData, numberWithCommas } from '../lib'
@@ -205,7 +208,7 @@ class History extends Component {
                     
                     >
                     <View style={{height: IS_X ? 55:30,}}/>
-                    <Text accessible={true} testID={'TTESTME'} accessibilityLabel={'TEST_ffACLBdddL'} onPress={this.handleDebugTouch} style={styles.headerText} >  Dividends </Text> 
+                    <Text accessible={true} testID={'TTESTME'} accessibilityLabel={'TEST_ffACLBdddL'} onPress={this.handleDebugTouch} style={styles.headerText}>  Dividends </Text> 
                         
                         <Graph
                             history={history}
@@ -224,53 +227,19 @@ class History extends Component {
                         </View>
                         
                     </ScrollView>
-                    <AwesomeAlert
-                            show={showAlert}
-                            showProgress={showProgress}
-                            title="Delete This Delta?"
-                            message={`\nDate: ${selectedData.date.toLocaleDateString()} @ ${selectedData.date.toLocaleTimeString()}\n\nUSD Value: $ ${Number(selectedData.divData.USDdelta).toFixed(3)}\n\n${this.doParse(selectedData.divData.coinDeltas)}`}
-                            closeOnTouchOutside={true}
-                            closeOnHardwareBackPress={false}
-                            showCancelButton={true}
-                            showConfirmButton={true}
-                            cancelText="No, cancel"
-                            confirmText="Yes, delete it"
-                            confirmButtonColor="#DD6B55"
-                            onCancelPressed={() => {
-                                this.hideAlert();
-                            }}
-                            onConfirmPressed={() => {
-                                this.setState({showProgress: true});
-                                Meteor.call('BalanceHistory.deleteBalanceHistoryDay', selectedData.date, (err) => {
-                                    if (err){
-                                        console.log(err);
-                                        if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationError');
-                                    }
-                                    else {
-                                        if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
-                                        this.dropdown.alertWithType('success', 'Successfully deleted the datapoint','');
-                                    }
-                                    this.setState({showProgress: false});
-                                });
-                                this.hideAlert();
-                            }}
-                            onDismiss={() => {
-                                this.hideAlert();
-                            }}
-                        />
-                        <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
+                    <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={850} />
                 </View>
             );
 
         }
         else if (historyReady){
             return (
-                <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
-                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.props.navigation.navigate('Settings')}>
-                        <View style={{marginBottom: 10}}>
-                            <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
-                        </View>
-                    </TouchableOpacity>
+                <View style={{flex:1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                        <NeedData 
+                            text={'Things will show here once a linked account show an asset increase!'} 
+                            onPress={() => this.props.navigation.navigate('Settings')}
+                            smallFont
+                        />
                 </View>
                 
             )
@@ -317,6 +286,7 @@ const styles = StyleSheet.flatten({
     headerText: {
         fontWeight: 'bold',
         fontSize: 50,
+        letterSpacing: Platform.OS === "ios" ? 0.41 : undefined,
     },
 });
 

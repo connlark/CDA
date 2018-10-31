@@ -13,9 +13,12 @@ import PushNotification from 'react-native-push-notification';
 import store from '../config/store';
 import { recieveBalanceData, recieveCoinData } from '../Actions/meteorData'
 import { connect } from 'react-redux';
+import { material, human, iOSUIKit, iOSColors} from 'react-native-typography'
+import moment from 'moment';
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
+import NeedData from '../components/needData'
 import { IS_X } from '../config/styles';
 import { storeItem, retrieveItem } from '../lib';
 
@@ -160,8 +163,10 @@ class AltHome extends Component {
     _keyExtractor = (item, index) => item.coin;
 
     _renderHeader = () => {
+        const { cryptoObj } = this.state;
         return (
             <View style={styles.headerView}> 
+                <Text style={styles.date}>       {moment(new Date).format("MMMM Do")} {Object.keys(cryptoObj).length > 0 || '  🔴 '}</Text>
                 <Text onPress={() => this.setState({showUSDValue: !this.state.showUSDValue})} style={styles.headerText}>  Balances </Text> 
             </View>
         )
@@ -286,32 +291,8 @@ class AltHome extends Component {
     }
 
     itemHasChanged = (item, d2) => {
-        /*let bal = 0;
-
-        if (this.state.cryptoObj[`${item.coin}USDT`]){
-            bal = Number(item.balance) * Number(this.state.cryptoObj[`${item.coin}USDT`])
-        }
-        else if (this.state.cryptoObj[`${item.coin}BCH`]){
-            bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`${item.coin}BCH`])
-        }
-        else if (item.coin === 'SEED' && this.state.cryptoObj[`TRXBCH`]){
-            bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`TRXBCH`])
-        }
-
-        if (d2.balance != bal || assert.deepEqual(item, d2, false)){
-            return true;
-        } 
-        else {
-            return false
-        }*/
         return true;
-
     }
-
-    /*shouldComponentUpdate(nextProps, nextState) {
-       // console.log(assert.deepEqual(this.props.balance?.[0]?.balanceData,nextProps?.balance[0]?.balanceData, false))
-        //return this.state.value != nextState.value;
-    }*/
 
     render() {
         const { balances, balancesReady, balanceDataRedux } = this.props;
@@ -377,12 +358,11 @@ class AltHome extends Component {
         }
         else if (balancesReady){
             return (
-                <View style={{flex:1, alignItems: 'center', marginTop: '30%'}}>
-                    <TouchableOpacity style={{marginBottom: 10}} style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 9, width: '90%' }, styles.alertItem]} onPress={() => this.props.navigation.navigate('Settings')}>
-                        <View style={{marginBottom: 10}}>
-                            <Text style={{fontSize: 14}}> Add CoinEx API credentials or link a TRX wallet! </Text>
-                        </View>
-                    </TouchableOpacity>
+                <View style={{flex:1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                        <NeedData 
+                            text={'Add a TRX wallet or CoinEx account in settings!'} 
+                            onPress={() => this.props.navigation.navigate('Settings')}
+                        />
                     <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
                 </View>
 
@@ -423,9 +403,10 @@ const styles = StyleSheet.flatten({
     headerText: {
         fontWeight: 'bold',
         fontSize: 50,
+        letterSpacing: Platform.OS === "ios" ? 0.41 : undefined,
     },
     headerView: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         marginTop: IS_X ? 55:30,
     },
     itemView:{
@@ -468,5 +449,9 @@ const styles = StyleSheet.flatten({
         shadowOffset:{  width: 2.5,  height: 2.5,  },
         shadowColor: 'grey',
         shadowOpacity: 0.3,
+      },
+      date: {
+        ...iOSUIKit.footnoteEmphasizedObject,
+        color: iOSColors.gray
       },
 });
