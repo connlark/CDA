@@ -47,7 +47,7 @@ Meteor.methods({
     });
   },
   'notifications.send.APNMsg.TOALL'() {
-    const users = Meteor.users.find();
+    /*const users = Meteor.users.find();
     users.map((user) => {
       user.pushToDevices.map((device) => {
         const token = device.token;
@@ -63,7 +63,7 @@ Meteor.methods({
             else { console.log('APN msg sent successfully!'); }
           });
       });
-    });
+    });*/
   },
   'notifications.remove.pushToken'() {
     const userId = this.userId;
