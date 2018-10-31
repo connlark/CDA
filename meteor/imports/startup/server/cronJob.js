@@ -331,14 +331,15 @@ const mergeBalances = (userId) => {
 
                 return;
             }
-            console.log('ADDING BALANCES JUST TRX')
-            Balances.insert(
-                {
-                    userId: userId,
-                    balanceData: dtaTRX.balanceData,
-                    createdAt: new Date
-                }
-            );
+            console.log('ADDING BALANCES JUST TRX', dtaTRX.balanceData)
+
+            const mememe = {
+                userId: userId,
+                balanceData: dtaTRX.balanceData,
+                createdAt: new Date
+            }
+            console.log(mememe)
+            Balances.insert(mememe);
         }
         else if (dtaCX && dtaCX.balanceData && dtaCX.balanceData.length > 0){
             if (currBal){
@@ -354,7 +355,7 @@ const mergeBalances = (userId) => {
 
                 return;
             }
-            console.log('ADDING BALANCES JUST COINEX')
+            console.log('ADDING BALANCES JUST COINEX', dtaCX.balanceData)
             Balances.insert(
                 {
                     userId: userId,
