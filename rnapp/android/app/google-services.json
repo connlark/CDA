@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "612930134863",
+    "firebase_url": "https://coinex-tracker.firebaseio.com",
+    "project_id": "coinex-tracker",
+    "storage_bucket": "coinex-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612930134863:android:1d2e2030ddeea261",
+        "android_client_info": {
+          "package_name": "com.connorlarkin.cda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612930134863-b5mc9pgu56sjl7fn6qlmsqf98og1c4j9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT98ayoHXeQb5optE1TfOF-Sf09Vte68g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

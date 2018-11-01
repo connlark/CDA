@@ -75,4 +75,6 @@ public class MainApplication extends Application implements ReactApplication {
     Fabric.with(this, new Crashlytics());
     SoLoader.init(this, /* native exopackage */ false);
   }
+
+
 }

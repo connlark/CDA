@@ -99,6 +99,7 @@ PushNotification.configure({
     * - if not, you must call PushNotificationsHandler.requestPermissions() later
     */
   requestPermissions: true,
+  senderID: '612930134863'
 });   
 
 
