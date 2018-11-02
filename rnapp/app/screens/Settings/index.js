@@ -21,6 +21,7 @@ import Rate, { AndroidMarket } from 'react-native-rate'
 import email from 'react-native-email'
 import Modal from "react-native-modal";
 import ReactNativeHaptic from 'react-native-haptic';
+import Crashes from 'appcenter-crashes';
 
 import {
     SettingsDividerShort, 
@@ -397,6 +398,7 @@ class Settings extends Component {
                 <SettingsList.Item
                     title={' 📲    Contact Developer'} 
                     onPress={this.handleEmail}
+                    onLongPress={() => Crashes.generateTestCrash()}
                     hasNavArrow={true}
                 />
                 { username !== 'seed' && 
