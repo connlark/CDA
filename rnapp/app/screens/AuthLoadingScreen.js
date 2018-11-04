@@ -22,6 +22,13 @@ class AuthLoadingScreen extends Component {
 
   componentDidMount(){
       codePush.sync({ updateDialog: false, installMode: codePush.InstallMode.IMMEDIATE });
+
+      setTimeout(() => {
+        if (this.props.meteorUser){
+            this.setState({hi: true})
+        }
+          
+      }, 5000);
   }
 
   componentWillReceiveProps(nextProps){

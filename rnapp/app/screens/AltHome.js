@@ -15,6 +15,8 @@ import { recieveBalanceData, recieveCoinData } from '../Actions/meteorData'
 import { connect } from 'react-redux';
 import { material, human, iOSUIKit, iOSColors} from 'react-native-typography'
 import moment from 'moment';
+import NumberTicker from 'react-native-number-ticker';
+import Ticker from "react-native-ticker";
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
@@ -223,6 +225,8 @@ class AltHome extends Component {
         else if (item.coin === 'SEED' && this.state.cryptoObj[`TRXBCH`]){
             bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`TRXBCH`])
         }
+
+        
         
         return (
         <View style={[{ backgroundColor: color ? color:'white', alignItems: 'center', borderRadius: 9 }, styles.item]} key={i}>
@@ -272,9 +276,9 @@ class AltHome extends Component {
             <View style={{marginTop: 10}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 10}}> {formattedBalance} {item.coin}</Text>
             </View>
-            <View style={{marginTop: 10, marginBottom: 100, flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{marginTop: 10, marginBottom: 100, flexDirection: 'row', alignItems: 'center', justifyContent: "center"}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>💲</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>{bal !== 0 ? numberWithCommas(bal.toFixed(3)):formattedUSDBalance}</Text>
+                <Ticker text={bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))} textStyle={{fontSize: 14}} rotateTime={500} />
             </View>
         </View>
       );

@@ -13,6 +13,9 @@ import moment from 'moment';
 import { withNavigation } from 'react-navigation';
 import { Card } from 'react-native-material-ui';
 import { material, human, iOSUIKit} from 'react-native-typography'
+import NumberTicker from 'react-native-number-ticker';
+import Ticker from "react-native-ticker";
+
 import { storeItem, retrieveItem } from '../lib'
 
 import NeedData from '../components/needData'
@@ -116,8 +119,9 @@ class History extends Component {
                 </View>
                 
                 
-                <View style={{marginTop: 5, marginBottom: 5}}>
-                    <Text style={{fontSize: 16}}> 💰 {numberWithCommas(item.divData.USDdelta)} </Text>
+                <View style={{marginTop: 5, marginBottom: 5, flexDirection: 'row', justifyContent: "center", alignItems: "center"}}>
+                    <Text style={{fontSize: 16}}>💰</Text>
+                    <Ticker text={numberWithCommas(item.divData.USDdelta.toFixed(3))} textStyle={{fontSize: 16, color: 'black'}} rotateTime={500} />
                 </View>
         </TouchableOpacity>
 
