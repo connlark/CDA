@@ -121,7 +121,7 @@ class History extends Component {
                 
                 <View style={{marginTop: 5, marginBottom: 5, flexDirection: 'row', justifyContent: "center", alignItems: "center"}}>
                     <Text style={{fontSize: 16}}>💰</Text>
-                    <Ticker text={numberWithCommas(item.divData.USDdelta.toFixed(3))} textStyle={{fontSize: 16, color: 'black'}} rotateTime={500} />
+                    <Ticker text={numberWithCommas(Number(item.divData.USDdelta).toFixed(3))} textStyle={{fontSize: 16, color: 'black'}} rotateTime={500} />
                 </View>
         </TouchableOpacity>
 

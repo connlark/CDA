@@ -11,6 +11,9 @@ import ReactNativeHaptic from 'react-native-haptic';
 import DropdownAlert from 'react-native-dropdownalert';
 import Meteor, { withTracker } from 'react-native-meteor';
 import Confetti from 'react-native-confetti';
+import ModalMe from 'react-native-modalbox';
+import LottieView from 'lottie-react-native';
+import { material, human, iOSUIKit, iOSColors} from 'react-native-typography'
 
 import { IS_X } from '../lib'
 
@@ -24,7 +27,11 @@ export default class componentName extends Component {
             readFromQrTRX: false,
             readFromQrCoinEx: true, 
             apiKey: '',
-            secretKey: ''
+            secretKey: '',
+            isDisabled: false,
+            infoModalOpen: false,
+            infoModalTest:'',
+            isScanQR: false
         };
     }
 
@@ -89,6 +96,9 @@ export default class componentName extends Component {
                     this.dropdown.alertWithType('success', 'TRX Address Added!','');
                     if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                     this.toggleConfetti(true);
+                    this.setState({infoModalTest: 'TRX Address Added!'}, () => {
+                        this.setState({infoModalOpen: true})
+                    })
                 });
             }
             
@@ -112,6 +122,9 @@ export default class componentName extends Component {
                 this.dropdown.alertWithType('success', 'CoinEx API Data Added!','');
                 if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                 this.toggleConfetti(true);
+                this.setState({infoModalTest: 'CoinEx Keys Added!'}, () => {
+                    this.setState({infoModalOpen: true})
+                })
             }
         })
     }
@@ -181,7 +194,7 @@ export default class componentName extends Component {
                             <QRCodeScanner
                                 ref={component => this.TRXscanner = component}
                                 onRead={this.onReadTRX}
-                                reactivateTimeout={3}
+                                reactivateTimeout={4}
                                 topViewStyle={{
                                     height: 140,
                                     margin: 5
@@ -241,7 +254,15 @@ export default class componentName extends Component {
                     borderRadius={9}             
                     icon={{name: readFromQrTRX ? 'add':'camera', type: 'ionicons'}}
                     title={readFromQrTRX ?'Manually Add':'Read From QR'}
-                    onPress={() => this.setState({readFromQrTRX: !readFromQrTRX})}
+                    onPress={() => {
+                        this.setState({readFromQrTRX: !readFromQrTRX}, () => {
+                            if (!this.state.hasShownQR){
+                                this.setState({isScanQR: true}, () => {
+                                    this.setState({infoModalOpen: true, hasShownQR: true})
+                                })
+                            }
+                        });
+                    }}
                 />
                 <Button
                     color={'white'}
@@ -277,22 +298,28 @@ export default class componentName extends Component {
                                 alignItems: 'center', 
                                 alignContent: 'center'
                             }}*/
+                            topViewStyle={{
+                                    height: 140,
+                                    margin: 5
+                            }}
                             cameraStyle={{
-                                alignItems: 'center', 
-                                marginTop: '10%',
-                                width: '70%',
-                                height: '70%',
-                                marginLeft: '15%',
-                                borderRadius: 9,
-                                marginBottom: '-10%'
+                                    marginTop: '10%',
+                                    width: '70%',
+                                    height: '70%',
+                                    marginLeft: '15%',
+                                    marginBottom: '-10%',
+                                    borderRadius: 9
+                                }}
+                            containerStyle={{
+                                borderRadius: 9
                             }}
                             topContent={
                                 <>
-                                <Text style={styles.centerText}>
+                                <Text style={[styles.centerText, styles.infoText]}>
                                     Go to <Text style={styles.textBold}>https://www.coinex.com/apikey</Text> on your computer and scan the QR code for an API key.
                                 </Text>
                                 <View style={{marginTop: 10}}/>
-                                <Text style={styles.centerTextRed}>
+                                <Text style={[styles.centerTextRed,styles.infoREDText]}>
                                     NOTE: You must add <Text style={styles.textBoldRed}>104.154.43.177</Text> to your IP White List
                                 </Text>
                                 </>
@@ -368,9 +395,16 @@ export default class componentName extends Component {
         this.setState({
             readFromQrTRX: false
         });
+
+        if (!this.state.hasShownQR){
+            this.setState({isScanQR: true}, () => {
+                this.setState({infoModalOpen: true, hasShownQR: true})
+            })
+        }
     }
 
     render() {
+        const { isScanQR } = this.state;
         const leftButtonConfig = {
             title: 'Back',
             handler: () => this.setModalVisible(false),
@@ -401,7 +435,7 @@ export default class componentName extends Component {
                         inactiveDotStyle={styles.inactiveDot}
                         showTopStepper={true}
                         showBottomStepper={true}
-                        steps={['TRX Wallet', 'CoinEx Keys']}
+                        steps={['Tron Wallet', 'CoinEx Account']}
                         backButtonTitle=""
                         nextButtonTitle=""
                         activeStepStyle={styles.activeStep}
@@ -413,9 +447,23 @@ export default class componentName extends Component {
                             {[this.renderTRXScreen(), this.renderQRScreen()]}
                     </Stepper>
                     <Confetti size={2} confettiCount={200} ref={(node) => this._confettiView = node}/>
+                    <ModalMe onClosed={() => this.setState({infoModalOpen: false, isScanQR: false})} style={[styles.modal]} backdropOpacity={0.23} position={"center"} ref={"modal3"} isOpen={this.state.infoModalOpen}>
+                        <View style={{flex: 1, alignItems: 'center'}}>   
+                            <LottieView
+                                source={isScanQR ? require('../lottie/scan_qr_code_success.json'):require('../lottie/check_animation.json')}
+                                autoPlay
+                                loop={isScanQR}
+                                style={{height: 300, width: 300, marginLeft: isScanQR? 15:0, marginTop: isScanQR? -3:0}}
+                            />
+                            <Text style={[{marginTop: isScanQR ? -280:-295},styles.infoText]}>{isScanQR ? 'Scan QR to add assets automatically':this.state.infoModalTest}</Text>
+
+
+                        </View>
+                    </ModalMe>
                     <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={1000} />
 
                 </Modal>
+                
             </View>
         );
     }
@@ -464,5 +512,20 @@ const styles = StyleSheet.create({
     },
     inactiveStepNumber: {
       color: 'black'
-    }
+    },
+    modal: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 300,
+        width: 300,
+        borderRadius: 50
+    },
+    infoText: {
+        ...iOSUIKit.footnoteEmphasizedObject,
+        color: iOSColors.gray
+      },
+      infoREDText: {
+        ...iOSUIKit.footnoteEmphasizedObject,
+        color: iOSColors.red
+      }
   })

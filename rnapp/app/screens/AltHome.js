@@ -278,7 +278,11 @@ class AltHome extends Component {
             </View>
             <View style={{marginTop: 10, marginBottom: 100, flexDirection: 'row', alignItems: 'center', justifyContent: "center"}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>💲</Text>
+                { process.env.NODE_ENV === 'production' ? 
                 <Ticker text={bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))} textStyle={{fontSize: 14}} rotateTime={500} />
+                : 
+                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>{bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))}</Text>
+                }
             </View>
         </View>
       );
@@ -367,10 +371,7 @@ class AltHome extends Component {
                             text={'Add a TRX wallet or CoinEx account in settings!'} 
                             onPress={() => this.props.navigation.navigate('Settings')}
                         />
-                    <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
                 </View>
-
-            
             );
         }
         return (
