@@ -13,7 +13,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "deploy": "gcloud app deploy",
+    "deploy": "gcloud app deploy --project cda-web",
     "start": "node app.js",
     "lint": "repo-tools lint",
     "pretest": "npm run lint",
