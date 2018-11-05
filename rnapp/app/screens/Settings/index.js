@@ -22,6 +22,7 @@ import email from 'react-native-email'
 import Modal from "react-native-modal";
 import ReactNativeHaptic from 'react-native-haptic';
 import Crashes from 'appcenter-crashes';
+import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 
 import {
     SettingsDividerShort, 
@@ -208,21 +209,34 @@ class Settings extends Component {
         [
             {text: 'Cancel', onPress: () => (null)},
             {text: 'Ok', onPress: () => {
-                Meteor.call('notifications.remove.pushToken', err => {
-                    if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
-                    Meteor.logout((err) => {
-                    if (err){
-                        alert(JSON.stringify(err));
-                    }
-                    else {
-                        Analytics.trackEvent('Logged Out');
-                        this.props.navigation.navigate('Auth');
-                    }
-                    })
-                });
+                this.GOOGsignOut().finally((E) => {
+                    Meteor.call('notifications.remove.pushToken', err => {
+                        if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
+                        Meteor.logout((err) => {
+                        if (err){
+                            alert(JSON.stringify(err));
+                        }
+                        else {
+                            Analytics.trackEvent('Logged Out');
+                            this.props.navigation.navigate('Auth');
+                        }
+                        })
+                    });
+                })
+                
             }}        
         ],{ cancelable: false });
   } 
+
+  GOOGsignOut = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      this.setState({ user: false }); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
     onValueChange = (value) => {
         this.setState({switchValue: value});

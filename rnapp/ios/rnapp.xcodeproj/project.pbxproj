@@ -36,7 +36,6 @@
 		57058E69FB204950B8DAFC8F /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C065DE9412D44A097D7333F /* libRNCamera.a */; };
 		6204F5D1F89C4E3B9B23DA3B /* Pods_rnapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5245587AD11688E10C37988D /* Pods_rnapp.framework */; };
 		67E62749EF6B4054AE186BD3 /* libAppCenterReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A738A158A87C4E108C76B618 /* libAppCenterReactNative.a */; };
-		6B70D865A0F54BCCB52C2AFE /* libOAuthManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57BC79E97D9E47079EC2D047 /* libOAuthManager.a */; };
 		71A9457BCC6944B3AC1F3CA6 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 499153D568B549ECA36FF391 /* libRNDeviceInfo.a */; };
 		7C6248163DA94BE3BE0E5987 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F50AC097B5E4FA291B99C01 /* FontAwesome.ttf */; };
 		816442EBAE734DD2A428FBED /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDBE4FAFA9E94511BB9D9E41 /* libRNSVG.a */; };
@@ -54,6 +53,13 @@
 		87CDAA3E21371EBB00156A0F /* rnappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA3D21371EBB00156A0F /* rnappUITests.swift */; };
 		87CDAA9621371F6500156A0F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CDAA9521371F6500156A0F /* SnapshotHelper.swift */; };
 		87CE4475213FA4DC0005EE8C /* libReactNativeHaptic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CE4474213FA4B00005EE8C /* libReactNativeHaptic.a */; };
+		87D0CB752190453600CCE972 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D0CB6D2190451C00CCE972 /* libRNGoogleSignin.a */; };
+		87D0CBD5219045BB00CCE972 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D0CB96219045BB00CCE972 /* AddressBook.framework */; };
+		87D0CBD7219045C400CCE972 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D0CBD6219045C400CCE972 /* SafariServices.framework */; };
+		87D0CBD9219045CD00CCE972 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D0CBD8219045CD00CCE972 /* SystemConfiguration.framework */; };
+		87D0CBDB219046C500CCE972 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87D0CBDA219046C500CCE972 /* GoogleService-Info.plist */; };
+		87D0CBDC219046C500CCE972 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87D0CBDA219046C500CCE972 /* GoogleService-Info.plist */; };
+		87D0CBDD219046C500CCE972 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87D0CBDA219046C500CCE972 /* GoogleService-Info.plist */; };
 		87EF8225215F06D8000ED1DF /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		8E449959228B4DE5868B877C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2F35D3EC7E24BB7AACAF3F7 /* Zocial.ttf */; };
 		937A249E9BF24E328BED8799 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3967388BA3E941719E1B0694 /* Foundation.ttf */; };
@@ -355,13 +361,6 @@
 			remoteGlobalIDString = 9D23B34F1C767B80008B4819;
 			remoteInfo = ReactNativePermissions;
 		};
-		8733C0472132703B00422C39 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 39752642D04D457DB3091933 /* OAuthManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D91353961DA7849100AABC96;
-			remoteInfo = OAuthManager;
-		};
 		8734F417218817FF004858F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8734F413218817FE004858F7 /* RNIap.xcodeproj */;
@@ -516,6 +515,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = ReactNativeHaptic;
 		};
+		87D0CB6C2190451C00CCE972 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 87D0CB322190451B00CCE972 /* RNGoogleSignin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9FD355121D3E4A2900D06170;
+			remoteInfo = RNGoogleSignin;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -578,12 +584,10 @@
 		335258C707273EA3021206D3 /* Pods-rnappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnappTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-rnappTests/Pods-rnappTests.release.xcconfig"; sourceTree = "<group>"; };
 		35D46A23A85F4E4F83A03B14 /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		3967388BA3E941719E1B0694 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		39752642D04D457DB3091933 /* OAuthManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = OAuthManager.xcodeproj; path = "../node_modules/react-native-oauth/ios/OAuthManager.xcodeproj"; sourceTree = "<group>"; };
 		398C1A0F9D804493863E59DE /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		3F50AC097B5E4FA291B99C01 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		499153D568B549ECA36FF391 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		5245587AD11688E10C37988D /* Pods_rnapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rnapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		57BC79E97D9E47079EC2D047 /* libOAuthManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libOAuthManager.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D8D2713862A450F8F6F4317 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
@@ -600,6 +604,11 @@
 		87CDAA3F21371EBB00156A0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87CDAA9521371F6500156A0F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		87CE446F213FA4B00005EE8C /* ReactNativeHaptic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeHaptic.xcodeproj; path = "../node_modules/react-native-haptic/ios/ReactNativeHaptic.xcodeproj"; sourceTree = "<group>"; };
+		87D0CB322190451B00CCE972 /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
+		87D0CB96219045BB00CCE972 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		87D0CBD6219045C400CCE972 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		87D0CBD8219045CD00CCE972 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		87D0CBDA219046C500CCE972 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C065DE9412D44A097D7333F /* libRNCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCamera.a; sourceTree = "<group>"; };
 		8C6B9718269EDE475F5226D4 /* Pods_rnappTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rnappTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB884459D2DA32C43B63EB2 /* Pods-rnappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnappTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rnappTests/Pods-rnappTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -636,6 +645,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1DFF291444C4F9C8B10D8CF /* libz.tbd in Frameworks */,
+				87D0CBD9219045CD00CCE972 /* SystemConfiguration.framework in Frameworks */,
+				87D0CBD7219045C400CCE972 /* SafariServices.framework in Frameworks */,
+				87D0CBD5219045BB00CCE972 /* AddressBook.framework in Frameworks */,
+				87D0CB752190453600CCE972 /* libRNGoogleSignin.a in Frameworks */,
 				876C874C218921E300180940 /* libLottieReactNative.a in Frameworks */,
 				8797088021891F3900527831 /* libLottie.a in Frameworks */,
 				8734F4192188182D004858F7 /* libRNIap.a in Frameworks */,
@@ -661,11 +675,9 @@
 				55A8FDA0014A453BB5247B5A /* libReactNativePermissions.a in Frameworks */,
 				816442EBAE734DD2A428FBED /* libRNSVG.a in Frameworks */,
 				E9A766445D3949009E0F53E4 /* libCodePush.a in Frameworks */,
-				B1DFF291444C4F9C8B10D8CF /* libz.tbd in Frameworks */,
 				67E62749EF6B4054AE186BD3 /* libAppCenterReactNative.a in Frameworks */,
 				0C3074049DBF446FBF0037A8 /* libAppCenterReactNativeAnalytics.a in Frameworks */,
 				E24BC58051084C70BA0DD3B2 /* libAppCenterReactNativeCrashes.a in Frameworks */,
-				6B70D865A0F54BCCB52C2AFE /* libOAuthManager.a in Frameworks */,
 				8734F41B2188194B004858F7 /* StoreKit.framework in Frameworks */,
 				6204F5D1F89C4E3B9B23DA3B /* Pods_rnapp.framework in Frameworks */,
 				35DF1C8D54EF4E738386EA63 /* libRNRate.a in Frameworks */,
@@ -803,6 +815,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87D0CBD8219045CD00CCE972 /* SystemConfiguration.framework */,
+				87D0CBD6219045C400CCE972 /* SafariServices.framework */,
+				87D0CB96219045BB00CCE972 /* AddressBook.framework */,
 				8734F41A2188194B004858F7 /* StoreKit.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				E9579E45B3ED43ED8330A480 /* libz.tbd */,
@@ -833,6 +848,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				87D0CB322190451B00CCE972 /* RNGoogleSignin.xcodeproj */,
 				8797087021891ECE00527831 /* Lottie.xcodeproj */,
 				8797083121891E6600527831 /* LottieReactNative.xcodeproj */,
 				8734F413218817FE004858F7 /* RNIap.xcodeproj */,
@@ -860,7 +876,6 @@
 				F92D4D874A2B40DC9A4A729C /* AppCenterReactNative.xcodeproj */,
 				B3E640FFFB7D44CAB167113D /* AppCenterReactNativeAnalytics.xcodeproj */,
 				16237605AA5F42FEA63F346E /* AppCenterReactNativeCrashes.xcodeproj */,
-				39752642D04D457DB3091933 /* OAuthManager.xcodeproj */,
 				008D13BA8767479FB2786F3C /* RNRate.xcodeproj */,
 			);
 			name = Libraries;
@@ -887,6 +902,7 @@
 				ACE621844BDE4F7D86F03AA9 /* Resources */,
 				87AAE17E20FF020500910330 /* Recovered References */,
 				29C324D452A641F392F0A312 /* AppCenter-Config.plist */,
+				87D0CBDA219046C500CCE972 /* GoogleService-Info.plist */,
 				AEBA8E574A918027689E2CB2 /* Pods */,
 			);
 			indentWidth = 2;
@@ -925,14 +941,6 @@
 			isa = PBXGroup;
 			children = (
 				872DECE6210A9E3000A857F9 /* libReactNativePermissions.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		8733C0442132703A00422C39 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8733C0482132703B00422C39 /* libOAuthManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1019,7 +1027,6 @@
 				A738A158A87C4E108C76B618 /* libAppCenterReactNative.a */,
 				028BBD132E284EA0AD647769 /* libAppCenterReactNativeAnalytics.a */,
 				9A6B6004F8EE4F22B071AD24 /* libAppCenterReactNativeCrashes.a */,
-				57BC79E97D9E47079EC2D047 /* libOAuthManager.a */,
 				2BCDF2FFEC6147858D5FABF7 /* libRNRate.a */,
 			);
 			name = "Recovered References";
@@ -1074,6 +1081,14 @@
 			isa = PBXGroup;
 			children = (
 				87CE4474213FA4B00005EE8C /* libReactNativeHaptic.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87D0CB332190451B00CCE972 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87D0CB6D2190451C00CCE972 /* libRNGoogleSignin.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1149,6 +1164,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				B8A3B3E72FB081CA5F1B5791 /* [CP] Embed Pods Frameworks */,
 				876B8AE4218926560077CBB2 /* Embed Frameworks */,
+				68FF9E66E82D16BFF5EB0478 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1260,10 +1276,6 @@
 					ProjectRef = 8797083121891E6600527831 /* LottieReactNative.xcodeproj */;
 				},
 				{
-					ProductGroup = 8733C0442132703A00422C39 /* Products */;
-					ProjectRef = 39752642D04D457DB3091933 /* OAuthManager.xcodeproj */;
-				},
-				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -1330,6 +1342,10 @@
 				{
 					ProductGroup = 87AAE1A420FF020900910330 /* Products */;
 					ProjectRef = 23AD8692B6F3408185ADE1AD /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 87D0CB332190451B00CCE972 /* Products */;
+					ProjectRef = 87D0CB322190451B00CCE972 /* RNGoogleSignin.xcodeproj */;
 				},
 				{
 					ProductGroup = 8734F414218817FE004858F7 /* Products */;
@@ -1642,13 +1658,6 @@
 			remoteRef = 872DECE5210A9E3000A857F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8733C0482132703B00422C39 /* libOAuthManager.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libOAuthManager.a;
-			remoteRef = 8733C0472132703B00422C39 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		8734F418218817FF004858F7 /* libRNIap.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1789,6 +1798,13 @@
 			remoteRef = 87CE4473213FA4B00005EE8C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		87D0CB6D2190451C00CCE972 /* libRNGoogleSignin.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGoogleSignin.a;
+			remoteRef = 87D0CB6C2190451C00CCE972 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1804,6 +1820,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873654352160AC2E0052958D /* Peso.png in Resources */,
+				87D0CBDC219046C500CCE972 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1820,6 +1837,7 @@
 				937A249E9BF24E328BED8799 /* Foundation.ttf in Resources */,
 				209B07A1B247459C867C6053 /* Ionicons.ttf in Resources */,
 				324B30E2906249D19F5BC371 /* MaterialCommunityIcons.ttf in Resources */,
+				87D0CBDB219046C500CCE972 /* GoogleService-Info.plist in Resources */,
 				EF226137906E4A399C3303AF /* MaterialIcons.ttf in Resources */,
 				36D5B41486B24E558B7C37CC /* Octicons.ttf in Resources */,
 				4C8C74821BFF4BEF99B2C9B5 /* SimpleLineIcons.ttf in Resources */,
@@ -1834,6 +1852,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873654362160AC2E0052958D /* Peso.png in Resources */,
+				87D0CBDD219046C500CCE972 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1872,6 +1891,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		68FF9E66E82D16BFF5EB0478 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-rnapp/Pods-rnapp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rnapp/Pods-rnapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8410C4B1701F2DEDEA3556C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1898,10 +1939,20 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-rnapp/Pods-rnapp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DCTAuth/DCTAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DCTAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1994,17 +2045,12 @@
 					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
-					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -2036,17 +2082,12 @@
 					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
-					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -2068,6 +2109,23 @@
 				CURRENT_PROJECT_VERSION = 53;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 24MA2Z46AJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DCTAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/AppCenter/AppCenter-SDK-Apple/iOS\"",
+					"\"${PODS_ROOT}/AppCenterReactNativeShared/AppCenterReactNativeShared\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleAppMeasurement/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/GoogleSdk",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
@@ -2083,7 +2141,6 @@
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes/**",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
-					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 					"$(SRCROOT)/../node_modules/lottie-ios/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/**",
@@ -2114,6 +2171,23 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 53;
 				DEVELOPMENT_TEAM = 24MA2Z46AJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DCTAuth\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/AppCenter/AppCenter-SDK-Apple/iOS\"",
+					"\"${PODS_ROOT}/AppCenterReactNativeShared/AppCenterReactNativeShared\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleAppMeasurement/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/GoogleSdk",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
@@ -2129,7 +2203,6 @@
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes/**",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
-					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 					"$(SRCROOT)/../node_modules/lottie-ios/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/**",
@@ -2255,10 +2328,7 @@
 				INFOPLIST_FILE = rnappUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";
@@ -2300,10 +2370,7 @@
 				INFOPLIST_FILE = rnappUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";

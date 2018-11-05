@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>612930134863-p1uf37bh1n4lj2696gm1q0o141msm5kq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.612930134863-p1uf37bh1n4lj2696gm1q0o141msm5kq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>612930134863-4o7tdl3vvb84f1dhdvj03r19b1vubhaf.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB23wuM-UCFrVryCxfpcfCs3ZhSaxyfYQw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>612930134863</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.connorlarkin.CDA</string>
+	<key>PROJECT_ID</key>
+	<string>coinex-tracker</string>
+	<key>STORAGE_BUCKET</key>
+	<string>coinex-tracker.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:612930134863:ios:1279cf3ca084a92e</string>
+	<key>DATABASE_URL</key>
+	<string>https://coinex-tracker.firebaseio.com</string>
+</dict>
+</plist>

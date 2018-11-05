@@ -12,7 +12,6 @@ import Settings from '../screens/Settings';
 import Stats from '../screens/Stats';
 import AltHome from '../screens/AltHome';
 import AltLogin from '../screens/AltLogin/app';
-import Login from '../screens/Login';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 import DivInfo from '../screens/DivInfo';
 

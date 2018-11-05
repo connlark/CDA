@@ -6,17 +6,20 @@
  */
 
 #import "AppDelegate.h"
-#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
-#import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
-#import <AppCenterReactNative/AppCenterReactNative.h>
+
+#import <AppCenterReactNativeCrashes.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNative.h>
+
 #import <CodePush/CodePush.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTPushNotificationManager.h>
 
-#import "OAuthManager.h"
+#import <RNGoogleSignin/RNGoogleSignin.h>
 
+@import Firebase;
 
 @implementation AppDelegate
 
@@ -48,11 +51,11 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   [RCTPushNotificationManager didReceiveLocalNotification:notification];
 }
   
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-  return [OAuthManager handleOpenUrl:application
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [RNGoogleSignin application:application
                              openURL:url
-                   sourceApplication:sourceApplication
-                          annotation:annotation];
+                   sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                          annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
 }
 
 
@@ -66,8 +69,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 
   [AppCenterReactNative register];  // Initialize AppCenter
   
-  [OAuthManager setupOAuthHandler:application];  // Initialize OAuthManager
-
+  [FIRApp configure]; //Initialize FIREBASE
+  
   
     #ifdef DEBUG
         jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -90,6 +93,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   UIView* launchScreenView = [[[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil] objectAtIndex:0];
   launchScreenView.frame = self.window.bounds;
   rootView.loadingView = launchScreenView;
+
+  
   return YES;
 }
 

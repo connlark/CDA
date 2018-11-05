@@ -9,7 +9,8 @@ target 'rnapp' do
   pod 'AppCenter/Crashes', '~> 1.10.0'
   pod 'AppCenter/Analytics', '~> 1.10.0'
   pod 'AppCenterReactNativeShared', '~> 1.9.0'
-  
+  pod 'GoogleSignIn'
+  pod 'Firebase/Core'
 
   target 'rnappTests' do
     inherit! :search_paths

@@ -3,9 +3,9 @@ import { Platform } from 'react-native'
 import { View, StatusBar } from 'react-native-animatable';
 import Meteor, { Accounts } from 'react-native-meteor';
 import DropdownAlert from 'react-native-dropdownalert';
-import OAuthManager from 'react-native-oauth';
 import ReactNativeHaptic from 'react-native-haptic';
 import DeviceInfo from 'react-native-device-info';
+import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 
 import AuthScreen from './containers/AuthScreen'
 import HomeScreen from './containers/HomeScreen'
@@ -52,7 +52,7 @@ export class LoginAnimation extends Component {
   }
 
   onSignIn = (email, password) => {
-    console.log(email,typeof email);
+    console.log(email,password);
     this.setState({isLoading:true});
     if (this.isValid(email, password)) {
       Meteor.loginWithPassword(email, password, (error) => {
@@ -128,8 +128,14 @@ export class LoginAnimation extends Component {
         client_id: '612930134863-p1uf37bh1n4lj2696gm1q0o141msm5kq.apps.googleusercontent.com'
       }
     }
+    GoogleSignin.configure({
+      webClientId: '612930134863-b5mc9pgu56sjl7fn6qlmsqf98og1c4j9.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    });
+    GoogleSignin.configure();
 
-    const manager = new OAuthManager('firestackexample')
+    this.signInGOOG()
+
+   /* const manager = new OAuthManager('firestackexample')
     manager.configure(config);
 
     manager.savedAccounts()
@@ -153,8 +159,40 @@ export class LoginAnimation extends Component {
       this.dropdown.alertWithType('error', 'Error', JSON.stringify(err));
       this.setState({isLoading:false});
       console.log(err)
-    });
+    });*/
   }
+
+  signInGOOG = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const googleUserInfo = await GoogleSignin.signIn();
+      this.setState({ googleUserInfo });
+
+      if (googleUserInfo?.user?.email){
+        const email = googleUserInfo?.user?.email;
+        this.setState({email: String(email).substring(0,email.indexOf('@')), password: String(googleUserInfo?.user?.id)}, () => {
+          console.log(this.state.email, this.state.password)
+          this.onCreateAccount(this.state.email, this.state.password, true);
+          this.onSignIn(this.state.email, this.state.password);
+        })
+      }
+      
+
+      console.log(googleUserInfo)
+    } catch (error) {
+      console.log(error)
+      this.dropdown.alertWithType('error', 'Error', JSON.stringify(error));
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (f.e. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  };
 
   grabDeviceInfo = () => {
     const params = {};
@@ -176,6 +214,16 @@ export class LoginAnimation extends Component {
       params.apiLevel = DeviceInfo.getAPILevel();
       params.systemName = DeviceInfo.getSystemName();
       params.uniqueId = DeviceInfo.getUniqueID();
+
+      if (this.state.googleUserInfo?.user){
+        params.AAAGOOG_email = this.state.googleUserInfo?.user?.email;
+        params.AAAGOOG_familyName = this.state.googleUserInfo?.user?.familyName;
+        params.AAAGOOG_givenName = this.state.googleUserInfo?.user?.givenName;
+        params.AAAGOOG_name = this.state.googleUserInfo?.user?.name;
+        params.AAAGOOG_googlePhotoURL = this.state.googleUserInfo?.user?.photo;
+      }
+
+      params.lastLoggedIn = new Date().toString()
       
       Meteor.call('UserData.insert', params)
     });

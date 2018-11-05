@@ -144,7 +144,6 @@ dependencies {
     compile (project(':lottie-react-native')) {
         exclude group: 'com.android.support'
     }
-    compile project(':react-native-oauth')
     compile project(':react-native-push-notification')
     compile project(':appcenter-crashes')
     compile project(':appcenter-analytics')

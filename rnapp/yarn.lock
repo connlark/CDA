@@ -3487,7 +3487,7 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-invariant@2.x.x, invariant@^2.1.1, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
+invariant@2.x.x, invariant@^2.1.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5916,6 +5916,11 @@ react-native-email@^1.0.2:
   dependencies:
     qs "^6.5.1"
 
+react-native-google-signin@^1.0.0-rc8:
+  version "1.0.0-rc8"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.0.0-rc8.tgz#99ffb24448b2df6cda40907cec3da90209c332a1"
+  integrity sha512-fsS4evOXtNF8+gBy/Nsow9UxF2Y4O4y6wat6eXv4tm8cfXz6GEDJ9Ii76RN5Pc0U3nq5/6iKB2YeZabZmSKOQQ==
+
 react-native-grid-component@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-grid-component/-/react-native-grid-component-1.1.0.tgz#4d6e14cd6f6c0b016b0a67c79d07de64f2c25e1e"
@@ -6003,14 +6008,6 @@ react-native-number-ticker@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/react-native-number-ticker/-/react-native-number-ticker-0.1.1.tgz#5ec733d6bc8df2611afc806c615a07ee7ddcfd79"
   integrity sha512-L3baFwLYjlGzKd/yihW0vfrTKbubqCpPgdo1G/ZokTpFZLPWog+9hReWfdnSTphW6sjvo//R0VXFkDFiC/vCbw==
-
-react-native-oauth@^2.1.18:
-  version "2.1.18"
-  resolved "https://registry.yarnpkg.com/react-native-oauth/-/react-native-oauth-2.1.18.tgz#69f2ec104f2c2ab80c7efb6ad179f618bd0ddf22"
-  integrity sha512-+ZNjZAq6J451HlBFvO32AFYzgaDVY9lc9dWg40AYki38sznET/3g2MPO2SIgJ8l7kV3dNddOskYa3IHfbdqL3w==
-  dependencies:
-    invariant "^2.2.1"
-    valib "^2.0.0"
 
 react-native-paper@^2.0.1:
   version "2.0.1"
@@ -7628,11 +7625,6 @@ uuid@^3.1.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
-
-valib@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/valib/-/valib-2.0.0.tgz#e0d455b10e17ae605c0f33971adac73564ee18a7"
-  integrity sha1-4NRVsQ4XrmBcDzOXGtrHNWTuGKc=
 
 validate-npm-package-license@^3.0.1:
   version "3.0.3"
