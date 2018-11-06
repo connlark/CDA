@@ -16,15 +16,15 @@ jobs:
       - checkout
       - run: 
           name: cd meteor 
-          command: cd meteor
+          command: cd meteor; ls
       - restore_cache:
-          key: build-temp-{{ checksum ".meteor/release" }}-{{ checksum ".circleci/config.yml" }}
+          key: build-temp-{{ checksum "./meteor/.meteor/release" }}-{{ checksum ".circleci/config.yml" }}
       - restore_cache:
-          key: meteor-release-{{ checksum ".meteor/release" }}-{{ checksum ".circleci/config.yml" }}
+          key: meteor-release-{{ checksum "./meteor/.meteor/release" }}-{{ checksum ".circleci/config.yml" }}
       - restore_cache:
-          key: meteor-packages-{{ checksum ".meteor/versions" }}-{{ checksum ".circleci/config.yml" }}
+          key: meteor-packages-{{ checksum "./meteor/.meteor/versions" }}-{{ checksum ".circleci/config.yml" }}
       - restore_cache:
-          key: npm-packages-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
+          key: npm-packages-{{ checksum "./meteor/package.json" }}-{{ checksum ".circleci/config.yml" }}
       - run:
           name: install build essentials
           command: sudo apt-get install -y build-essential
@@ -34,7 +34,7 @@ jobs:
             if [ -e ~/build-temp/meteor-bin ]
             then
                 echo "Cached Meteor bin found, restoring it"
-                sudo cp ~/build-temp/meteor-bin /usr/local/bin/meteor
+                sudo cp ~/build-temp/meteor-bin /usr/local/bin/meteor/meteor
             else
                 echo "No cached Meteor bin found."
             fi
@@ -42,45 +42,45 @@ jobs:
           name: install Meteor
           command: |
             # only install meteor if bin isn't found
-            command -v meteor >/dev/null 2>&1 || curl https://install.meteor.com | /bin/sh
+            ls; cd meteor; command -v meteor >/dev/null 2>&1 || curl https://install.meteor.com | /bin/sh
       - run:
           name: check versions
           command: |
             echo "Meteor version:"
             # this forces Meteor to download whatever release your project is using
-            meteor --version
+            cd meteor; meteor --version
             which meteor
             echo "Meteor node version:"
-            meteor node -v
+            cd meteor ; meteor node -v
             echo "Meteor npm version:"
-            meteor npm -v
+            cd meteor; meteor npm -v
             echo "Java version:"
-            java -version
+            cd meteor; java -version
       - run: 
           name: install npm packages
-          command: meteor npm i
+          command: cd meteor; meteor npm i
       - run:
           name: meteor npm test
-          command: meteor npm test
+          command: cd meteor; meteor npm test
       - run:
           name: copy meteor bin to build cache
           command: |
             mkdir -p ~/build-temp
-            cp /usr/local/bin/meteor ~/build-temp/meteor-bin
+            cp /usr/local/bin/meteor/meteor ~/build-temp/meteor-bin
       - save_cache:
-          key: build-temp-{{ checksum ".meteor/release" }}-{{ checksum ".circleci/config.yml" }}
+          key: build-temp-{{ checksum "./meteor/.meteor/release" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - ~/build-temp
       - save_cache:
-          key: meteor-release-{{ checksum ".meteor/release" }}-{{ checksum ".circleci/config.yml" }}
+          key: meteor-release-{{ checksum "./meteor/.meteor/release" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - ~/.meteor
       - save_cache:
-          key: meteor-packages-{{ checksum ".meteor/versions" }}-{{ checksum ".circleci/config.yml" }}
+          key: meteor-packages-{{ checksum "./meteor/.meteor/versions" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - .meteor/
       - save_cache:
-          key: npm-packages-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
+          key: npm-packages-{{ checksum "./meteor/package.json" }}-{{ checksum ".circleci/config.yml" }}
           paths:
-            - ./node_modules/
+            - ./meteor/node_modules/
             - ~/.npm/
