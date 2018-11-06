@@ -31,12 +31,23 @@ export default class componentName extends Component {
             isDisabled: false,
             infoModalOpen: false,
             infoModalTest:'',
-            isScanQR: false
+            isScanQR: false,
+            colors: []
         };
+
     }
 
     componentDidMount(){
         AppState.addEventListener('change', this._handleAppStateChange);
+        let newColors = [];
+
+        for (let index = 0; index < 20; index++) {
+            newColors.push('#' + ('00000' + (Math.random() * 16777216 << 0).toString(16)).substr(-6))
+
+            console.log(newColors)
+            
+        }
+        this.setState({colors: newColors})
     }
 
     _handleAppStateChange = (nextAppState) => {
@@ -81,7 +92,7 @@ export default class componentName extends Component {
                 this.setState({TRXaddress: clipboardContent}, () => {
                     if (Platform.OS !== 'android') ReactNativeHaptic.generate('notificationSuccess');
                 });
-            }, 1000);
+            }, 500);
         } 
     }
 
@@ -404,7 +415,7 @@ export default class componentName extends Component {
     }
 
     render() {
-        const { isScanQR } = this.state;
+        const { isScanQR, colors } = this.state;
         const leftButtonConfig = {
             title: 'Back',
             handler: () => this.setModalVisible(false),
@@ -446,7 +457,7 @@ export default class componentName extends Component {
                         inactiveStepNumberStyle={styles.inactiveStepNumber}>
                             {[this.renderTRXScreen(), this.renderQRScreen()]}
                     </Stepper>
-                    <Confetti size={2} confettiCount={200} ref={(node) => this._confettiView = node}/>
+                    <Confetti colors={colors} size={1.3} timeout={1} untilStopped ref={(node) => this._confettiView = node}/>
                     <ModalMe onClosed={() => this.setState({infoModalOpen: false, isScanQR: false})} style={[styles.modal]} backdropOpacity={0.23} position={"center"} ref={"modal3"} isOpen={this.state.infoModalOpen}>
                         <View style={{flex: 1, alignItems: 'center'}}>   
                             <LottieView

@@ -210,20 +210,20 @@ class Settings extends Component {
             {text: 'Cancel', onPress: () => (null)},
             {text: 'Ok', onPress: () => {
                 this.GOOGsignOut().finally((E) => {
-                    Meteor.call('notifications.remove.pushToken', err => {
-                        if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
-                        Meteor.logout((err) => {
-                        if (err){
-                            alert(JSON.stringify(err));
-                        }
-                        else {
-                            Analytics.trackEvent('Logged Out');
-                            this.props.navigation.navigate('Auth');
-                        }
-                        })
-                    });
                 })
-                
+
+                Meteor.call('notifications.remove.pushToken', err => {
+                    if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
+                    Meteor.logout((err) => {
+                    if (err){
+                        alert(JSON.stringify(err));
+                    }
+                    else {
+                        Analytics.trackEvent('Logged Out');
+                        this.props.navigation.navigate('Auth');
+                    }
+                    })
+                });
             }}        
         ],{ cancelable: false });
   } 
