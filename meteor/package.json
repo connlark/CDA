@@ -5,7 +5,8 @@
     "start": "meteor run",
     "cleanup": "rm -rf ../bundle/",
     "deploy": "meteor build ../ --directory --architecture os.linux.x86_64 --server-only;cp app.yaml ../bundle/ && cp Dockerfile ../bundle/;cd ../bundle && gcloud app deploy --verbosity=info -q",
-    "test": "MOCHA_GREP=test TEST_WATCH=1 meteor test --once --driver-package meteortesting:mocha",
+    "test": "MOCHA_GREP=test TEST_WATCH=1 meteor test --driver-package meteortesting:mocha",
+    "test:circle": "MOCHA_GREP=test meteor test --once --driver-package meteortesting:mocha",
     "testFull": "meteor test --full-app"
   },
   "dependencies": {

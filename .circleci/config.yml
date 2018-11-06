@@ -60,8 +60,8 @@ jobs:
           name: install npm packages
           command: cd meteor; meteor npm i
       - run:
-          name: meteor npm test
-          command: cd meteor; meteor npm test
+          name: ___RUN UNIT TESTS___
+          command: cd meteor; meteor npm run test:circle
       - run:
           name: copy meteor bin to build cache
           command: |
