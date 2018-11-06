@@ -62,7 +62,7 @@ jobs:
       - run:
           name: ___RUN UNIT TESTS___
           command: cd meteor; meteor npm run test:circle
-     - run:
+      - run:
           name: copy meteor bin to build cache
           command: |
             mkdir -p ~/build-temp
