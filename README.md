@@ -1,6 +1,8 @@
 ![npm version](https://img.shields.io/badge/React%20Native-0.57.3-blue.svg)
 ![MIT](https://img.shields.io/badge/Meteor-1.9.2-red.svg)
 ![Build status](https://build.appcenter.ms/v0.1/apps/9f06e61c-f59d-4d9e-a647-f7d39a8a2a30/branches/master/badge)
+[![CircleCI](https://circleci.com/gh/connorlarkin1/CDA.svg?style=svg)](https://circleci.com/gh/connorlarkin1/CDA)
+
 # Crypto Dividend Notifier
 #### ☀️ Track your cryptocurrency assets! ☀️
 
