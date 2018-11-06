@@ -66,21 +66,24 @@ jobs:
           name: copy meteor bin to build cache
           command: |
             mkdir -p ~/build-temp
-            cp /usr/local/bin/meteor/meteor ~/build-temp/meteor-bin
+            cp /usr/local/bin/meteor ~/build-temp/meteor-bin
       - save_cache:
-          key: build-temp-{{ checksum "./meteor/.meteor/release" }}-{{ checksum ".circleci/config.yml" }}
+          key: build-temp-{{ checksum ".meteor/release" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - ~/build-temp
       - save_cache:
-          key: meteor-release-{{ checksum "./meteor/.meteor/release" }}-{{ checksum ".circleci/config.yml" }}
+          key: meteor-release-{{ checksum ".meteor/release" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - ~/.meteor
       - save_cache:
-          key: meteor-packages-{{ checksum "./meteor/.meteor/versions" }}-{{ checksum ".circleci/config.yml" }}
+          key: meteor-packages-{{ checksum ".meteor/versions" }}-{{ checksum ".circleci/config.yml" }}
           paths:
-            - .meteor/
+            - ./meteor/.meteor/
       - save_cache:
-          key: npm-packages-{{ checksum "./meteor/package.json" }}-{{ checksum ".circleci/config.yml" }}
+          key: npm-packages-{{ checksum "package.json" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - ./meteor/node_modules/
             - ~/.npm/
+      - store_artifacts:
+          path: ./meteor/tests/coverage/unit-tests/
+          destination: unit-tests
