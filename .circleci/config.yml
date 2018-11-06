@@ -51,11 +51,11 @@ jobs:
             cd meteor; meteor --version
             which meteor
             echo "Meteor node version:"
-            cd meteor ; meteor node -v
+            meteor node -v
             echo "Meteor npm version:"
-            cd meteor; meteor npm -v
+            meteor npm -v
             echo "Java version:"
-            cd meteor; java -version
+            java -version
       - run: 
           name: install npm packages
           command: cd meteor; meteor npm i
