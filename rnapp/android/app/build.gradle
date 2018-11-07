@@ -141,6 +141,7 @@ android {
 apply plugin: 'io.fabric'
 
 dependencies {
+    compile project(':react-native-firebase')
     compile (project(':lottie-react-native')) {
         exclude group: 'com.android.support'
     }

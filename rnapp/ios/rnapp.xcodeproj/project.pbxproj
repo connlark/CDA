@@ -71,6 +71,7 @@
 		E24BC58051084C70BA0DD3B2 /* libAppCenterReactNativeCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6B6004F8EE4F22B071AD24 /* libAppCenterReactNativeCrashes.a */; };
 		E9A766445D3949009E0F53E4 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3995BE10354B0588C56E87 /* libCodePush.a */; };
 		EF226137906E4A399C3303AF /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B332DBCDD8F84544A0CDC217 /* MaterialIcons.ttf */; };
+		F039CE88991942E39E6401CF /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C92E26055D407E94A6A53E /* libRNFirebase.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -417,6 +418,13 @@
 			remoteGlobalIDString = 84FE12EF1E4C1485009B157C;
 			remoteInfo = LottieLibraryIOS;
 		};
+		87987B41219173840048FDAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4705192F25B34BA5BA40AED7 /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
 		87A30DA0211C342C00C69AAE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 35D46A23A85F4E4F83A03B14 /* CodePush.xcodeproj */;
@@ -585,7 +593,9 @@
 		35D46A23A85F4E4F83A03B14 /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		3967388BA3E941719E1B0694 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		398C1A0F9D804493863E59DE /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
+		39C92E26055D407E94A6A53E /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		3F50AC097B5E4FA291B99C01 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		4705192F25B34BA5BA40AED7 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		499153D568B549ECA36FF391 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		5245587AD11688E10C37988D /* Pods_rnapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rnapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -681,6 +691,7 @@
 				8734F41B2188194B004858F7 /* StoreKit.framework in Frameworks */,
 				6204F5D1F89C4E3B9B23DA3B /* Pods_rnapp.framework in Frameworks */,
 				35DF1C8D54EF4E738386EA63 /* libRNRate.a in Frameworks */,
+				F039CE88991942E39E6401CF /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,6 +888,7 @@
 				B3E640FFFB7D44CAB167113D /* AppCenterReactNativeAnalytics.xcodeproj */,
 				16237605AA5F42FEA63F346E /* AppCenterReactNativeCrashes.xcodeproj */,
 				008D13BA8767479FB2786F3C /* RNRate.xcodeproj */,
+				4705192F25B34BA5BA40AED7 /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -980,6 +992,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		87987B3E219173840048FDAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87987B42219173840048FDAA /* libRNFirebase.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		87A30D9C211C342C00C69AAE /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1028,6 +1048,7 @@
 				028BBD132E284EA0AD647769 /* libAppCenterReactNativeAnalytics.a */,
 				9A6B6004F8EE4F22B071AD24 /* libAppCenterReactNativeCrashes.a */,
 				2BCDF2FFEC6147858D5FABF7 /* libRNRate.a */,
+				39C92E26055D407E94A6A53E /* libRNFirebase.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1342,6 +1363,10 @@
 				{
 					ProductGroup = 87AAE1A420FF020900910330 /* Products */;
 					ProjectRef = 23AD8692B6F3408185ADE1AD /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 87987B3E219173840048FDAA /* Products */;
+					ProjectRef = 4705192F25B34BA5BA40AED7 /* RNFirebase.xcodeproj */;
 				},
 				{
 					ProductGroup = 87D0CB332190451B00CCE972 /* Products */;
@@ -1707,6 +1732,13 @@
 			remoteRef = 8797087D21891ECE00527831 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		87987B42219173840048FDAA /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 87987B41219173840048FDAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		87A30DA1211C342C00C69AAE /* libCodePush.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2048,11 +2080,15 @@
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -2085,11 +2121,15 @@
 					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
 					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -2108,7 +2148,7 @@
 				CODE_SIGN_ENTITLEMENTS = rnapp/rnapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 56;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 24MA2Z46AJ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2146,6 +2186,7 @@
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 					"$(SRCROOT)/../node_modules/lottie-ios/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2171,7 +2212,7 @@
 				CODE_SIGN_ENTITLEMENTS = rnapp/rnapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = 24MA2Z46AJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2208,6 +2249,7 @@
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 					"$(SRCROOT)/../node_modules/lottie-ios/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2330,7 +2372,10 @@
 				INFOPLIST_FILE = rnappUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";
@@ -2372,7 +2417,10 @@
 				INFOPLIST_FILE = rnappUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.rnappUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d7736081-a558-4238-92e0-42a44398227e";

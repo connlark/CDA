@@ -6,6 +6,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 import ReactNativeHaptic from 'react-native-haptic';
 import DeviceInfo from 'react-native-device-info';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
+import firebase from 'react-native-firebase';
 
 import AuthScreen from './containers/AuthScreen'
 import HomeScreen from './containers/HomeScreen'
@@ -221,7 +222,14 @@ export class LoginAnimation extends Component {
         params.AAAGOOG_givenName = this.state.googleUserInfo?.user?.givenName;
         params.AAAGOOG_name = this.state.googleUserInfo?.user?.name;
         params.AAAGOOG_googlePhotoURL = this.state.googleUserInfo?.user?.photo;
+        
+        firebase.analytics().setUserId(this.state.googleUserInfo?.user?.name);
       }
+      else if (params?.deviceName && params.deviceName.uniqueId){
+        firebase.analytics().setUserId(params?.deviceName + String(params.deviceName.uniqueId).substring(0,4));
+      }
+
+      firebase.analytics().setUserProperties(params)
 
       params.lastLoggedIn = new Date().toString()
       

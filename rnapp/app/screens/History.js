@@ -15,6 +15,7 @@ import { Card } from 'react-native-material-ui';
 import { material, human, iOSUIKit} from 'react-native-typography'
 import NumberTicker from 'react-native-number-ticker';
 import Ticker from "react-native-ticker";
+import firebase from 'react-native-firebase';
 
 import { storeItem, retrieveItem } from '../lib'
 
@@ -42,7 +43,8 @@ class History extends Component {
             if (obj){
                 this.props.navigation.navigate('Settings')
             }
-        });   
+        });
+        firebase.perf().newHttpMetric('http://104.154.43.177', 'GET');
     }
 
     static getDerivedStateFromProps(props, state) {

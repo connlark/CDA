@@ -20,6 +20,7 @@
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
 @import Firebase;
+@import FirebasePerformance;
 
 @implementation AppDelegate
 
@@ -70,7 +71,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   [AppCenterReactNative register];  // Initialize AppCenter
   
   [FIRApp configure]; //Initialize FIREBASE
-  
   
     #ifdef DEBUG
         jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];

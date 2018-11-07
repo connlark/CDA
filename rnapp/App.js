@@ -15,6 +15,7 @@ import store from './app/config/store';
 import {AppNavigator} from './app/config/router';
 import { recieveNotification } from './app/Actions/notificationLogic'
 import { recieveData } from './app/Actions/meteorData';
+import firebase from 'react-native-firebase';
 
 import { storeItem, retrieveItem } from './app/lib';
 
@@ -35,12 +36,15 @@ if (__DEV__ && Platform.OS === 'ios') {
   NativeModules.DevSettings.setIsDebuggingRemotely(true);
   NativeModules.DevSettings.setHotLoadingEnabled(true)
   Analytics.setEnabled(false);
+  firebase.perf().setPerformanceCollectionEnabled(false);
 }
 else if (DeviceInfo.isEmulator()){
   Analytics.setEnabled(false);
+  firebase.perf().setPerformanceCollectionEnabled(false);
 }
 else {
   Analytics.setEnabled(true);
+  firebase.perf().setPerformanceCollectionEnabled(false);
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -68,6 +72,7 @@ PushNotification.configure({
     setTimeout(() => {
       retrieveItem('notificationsPushToken').then((e) => {
         if (!e || e.token !== data.token){
+          firebase.analytics().logEvent('PERSIST NOTIF TOKEN', {data}) 
           storeItem('notificationsPushToken', data);
         }
       });
@@ -79,6 +84,8 @@ PushNotification.configure({
 
   // (required) Called when a remote or local notification is opened or received
   onNotification(notification) {
+    firebase.analytics().logEvent('GET NOTIF', {notification}) 
+
     store.dispatch(recieveNotification(notification))
   },
 

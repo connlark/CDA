@@ -951,33 +951,6 @@
 			children = (
 				A05B09FEF4E5173B3E1B696C12475DFF /* Crashlytics.framework */,
 			);
-			name = Environment;
-			sourceTree = "<group>";
-		};
-		2A8E6FD240B534455AC51A1B54EC0A86 /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				26AF54FE21E511E34758D618E6F7DC26 /* FABAttributes.h */,
-				9FA77CC1A63F2063BE20F23B7B1AA39B /* Fabric.h */,
-				EEA96902E1F70D473CED32172524786B /* Frameworks */,
-			);
-			name = Fabric;
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		2EB3EA3C352F291AAE61124D59F89AFD /* CoreOnly */ = {
-			isa = PBXGroup;
-			children = (
-				E44D5897F7E160D74BDA69DDAE8F1A41 /* Firebase.h */,
-			);
-			name = CoreOnly;
-			sourceTree = "<group>";
-		};
-		3391D57AC490FAF42CAA77C2791A4190 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FA118F3D443314DB09D2BD26AB612A6B /* GoogleAppMeasurement.framework */,
-			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
@@ -1204,7 +1177,6 @@
 				09221CA6924CFE018E0F9FE811943E7A /* Products */,
 				9F9CB80EFA421363D2D231246327FF1F /* Targets Support Files */,
 			);
-			name = Network;
 			sourceTree = "<group>";
 		};
 		7E568BFBD6FE73289CA37FC64E6407F4 /* NSString+URLArguments */ = {
@@ -1389,10 +1361,10 @@
 		9F9CB80EFA421363D2D231246327FF1F /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				26DE41C293533FC56B524C88BC58C416 /* Frameworks */,
+				0DF4D29A2283C4C2BC8978907C551FAC /* Pods-rnapp */,
+				C80CB7DDAD624FF96F5B960C350E56AB /* Pods-rnappTests */,
 			);
-			name = FirebaseInstanceID;
-			path = FirebaseInstanceID;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		A224403230E523A6DD88829EEB09BB1C /* Support Files */ = {
@@ -1686,8 +1658,8 @@
 				3ECCF811A8BAADC2FE0DDB2BFE9542A6 /* DCTAuth-umbrella.h */,
 				90FC50E2AFCED08A1912ADF593C67F3C /* Info.plist */,
 			);
-			name = GoogleSignIn;
-			path = GoogleSignIn;
+			name = "Support Files";
+			path = "../Target Support Files/DCTAuth";
 			sourceTree = "<group>";
 		};
 		D1DBF85A336D55288D9F99BF64C6422F /* Frameworks */ = {

@@ -36,6 +36,7 @@
     "react-native-dropdownalert": "^3.7.0",
     "react-native-elements": "^0.19.1",
     "react-native-email": "^1.0.2",
+    "react-native-firebase": "^5.1.0",
     "react-native-google-signin": "^1.0.0-rc8",
     "react-native-grid-component": "^1.1.0",
     "react-native-haptic": "^1.0.1",
