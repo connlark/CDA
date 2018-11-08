@@ -23,6 +23,7 @@ import Modal from "react-native-modal";
 import ReactNativeHaptic from 'react-native-haptic';
 import Crashes from 'appcenter-crashes';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
+import DeviceInfo from 'react-native-device-info';
 
 import {
     SettingsDividerShort, 
@@ -69,7 +70,8 @@ class Settings extends Component {
       switchValue: true,
       rated: false,
       username: '',
-      isModalVisiblePAY: false
+      isModalVisiblePAY: false,
+      buildNumber: DeviceInfo.getBuildNumber()
     };
   }
 
@@ -210,19 +212,19 @@ class Settings extends Component {
             {text: 'Cancel', onPress: () => (null)},
             {text: 'Ok', onPress: () => {
                 this.GOOGsignOut().finally((E) => {
-                    Meteor.call('notifications.remove.pushToken', err => {
-                        if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
-                        Meteor.logout((err) => {
-                        if (err){
-                            alert(JSON.stringify(err));
-                        }
-                        else {
-                            Analytics.trackEvent('Logged Out');
-                            this.props.navigation.navigate('Auth');
-                        }
-                        })
-                    });
-                })
+                });
+                Meteor.call('notifications.remove.pushToken', err => {
+                    if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
+                    Meteor.logout((err) => {
+                    if (err){
+                        alert(JSON.stringify(err));
+                    }
+                    else {
+                        Analytics.trackEvent('Logged Out');
+                        this.props.navigation.navigate('Auth');
+                    }
+                    })
+                });
                 
             }}        
         ],{ cancelable: false });
@@ -330,7 +332,7 @@ class Settings extends Component {
     }
 
     render() {
-        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username, isModalVisiblePAY } = this.state;
+        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username, isModalVisiblePAY, buildNumber } = this.state;
         var bgColor = '#DCE3F4';
         return (
           <View style={{backgroundColor:'#EFEFF4',flex:1}}>
@@ -376,7 +378,7 @@ class Settings extends Component {
                 <SettingsList.Item
                   icon={<Image style={styles.imageStyle} source={require('./images/general.png')}/>}
                   title={`App Version`} 
-                  titleInfo={` ${appVersion} (${label})`}
+                  titleInfo={` ${appVersion}b${buildNumber} (${label})`}
                   onPress={this.updateApp}
                   hasNavArrow={false}
                 />

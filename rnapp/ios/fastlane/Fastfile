@@ -30,7 +30,7 @@ platform :ios do
       gym(
           scheme: "rnapp", 
           workspace: "rnapp.xcworkspace",
-          output_directory: "IPA_FOLDER/",
+          output_directory: "IPA_FOLDER",
           output_name: "cda-ios.ipa",
         )
       crashlytics(
@@ -39,7 +39,7 @@ platform :ios do
           build_secret: "e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e",
           ipa_path: "./IPA_FOLDER/cda-ios.ipa"
         )
-      pilot
+      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       push_to_git_remote
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",

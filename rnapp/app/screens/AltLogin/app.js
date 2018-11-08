@@ -94,6 +94,14 @@ export class LoginAnimation extends Component {
           }
         
         } else {
+            if (!email.match(/test/)){
+              fetch('https://maker.ifttt.com/trigger/CDA_CREATE_USER/with/key/oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6', {
+                method: 'POST',
+                body: JSON.stringify({
+                  user: email,
+                }),
+              });
+            }
             storeItem('is_first_login', true).finally(() => {
               this.onSignIn(email, password);
             });
