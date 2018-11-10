@@ -57,6 +57,7 @@ class AltHome extends Component {
     }
 
     componentWillUnmount(){
+        ws.close()
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
 
@@ -158,7 +159,7 @@ class AltHome extends Component {
         }
         
         ws.onclose = (e) => {
-            //this.setState({cryptoObj: {}});
+            this.setState({cryptoObj: {}});
         };
     }
 
