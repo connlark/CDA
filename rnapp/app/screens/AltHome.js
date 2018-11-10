@@ -57,15 +57,16 @@ class AltHome extends Component {
     }
 
     componentWillUnmount(){
-        ws.close()
+        if (ws && ws.readyState !== ws.CLOSED) {
+            ws.close()
+        }
+
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
 
     static getDerivedStateFromProps(props, state) {
         const { balancesReady, balances } = props;
-        // Any time the current user changes,
-        // Reset any parts of state that are tied to that user.
-        // In this simple example, that's just the email.
+
         if (balancesReady && Array.isArray(balances?.[0]?.balanceData) && balances?.[0]?.balanceData.length > 0 && props.balances !== state.prevBalance) {
             console.log('getDerivedStateFromProps');
             store.dispatch(recieveBalanceData(props.balances[0]))
@@ -226,8 +227,6 @@ class AltHome extends Component {
         else if (item.coin === 'SEED' && this.state.cryptoObj[`TRXBCH`]){
             bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`TRXBCH`])
         }
-
-        
         
         return (
         <View style={[{ backgroundColor: color ? color:'white', alignItems: 'center', borderRadius: 9 }, styles.item]} key={i}>

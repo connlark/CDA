@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "ios:postinstall": "./fix-rncamera-search-paths.sh ./node_modules/react-native-camera/ios/RNCamera.xcodeproj/project.pbxproj && cd node_modules/react-native/scripts && ./ios-install-third-party.sh && cd ../../../ && cd node_modules/react-native/third-party/glog-0.3.5/ && ../../scripts/ios-configure-glog.sh && cd ../../../../",
+    "android:codepush": "appcenter codepush release-react -a connor.larkin1/CDA-Android -d Production",
     "bundleAndroid": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "test": "jest",
     "ios:beta": "cd ios; bundle exec fastlane ios beta",
@@ -77,6 +78,7 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.49.0",
     "react-test-renderer": "16.6.0"

@@ -71,7 +71,8 @@ class Settings extends Component {
       rated: false,
       username: '',
       isModalVisiblePAY: false,
-      buildNumber: DeviceInfo.getBuildNumber()
+      buildNumber: DeviceInfo.getBuildNumber(),
+      modalVisible: true
     };
   }
 
@@ -331,6 +332,8 @@ class Settings extends Component {
         ],{ cancelable: true });
     }
 
+    closeModal = () => this.setState({modalVisible: false})
+
     render() {
         const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username, isModalVisiblePAY, buildNumber } = this.state;
         var bgColor = '#DCE3F4';
@@ -426,7 +429,7 @@ class Settings extends Component {
                 }
                 
               </SettingsList>
-              <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
+              <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
             </View>
             <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={1500} />
             <Modal isVisible={isModalVisiblePAY} useNativeDriver onBackdropPress={() => this.setState({isModalVisiblePAY: false})} onSwipe={() => this.setState({isModalVisiblePAY: false})} backdropOpacity={0.4} hideModalContentWhileAnimating>
