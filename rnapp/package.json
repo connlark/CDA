@@ -12,6 +12,7 @@
     "android:beta": "yarn run bundleAndroid; cd android; fastlane android beta"
   },
   "dependencies": {
+    "jsc-android": "236355.x.x",
     "@babel/core": "7.1.2",
     "@babel/runtime": "^7.1.2",
     "appcenter": "1.9.0",

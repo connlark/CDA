@@ -2,20 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>Fabric</key>
-  <dict>
-    <key>APIKey</key>
-    <string>a2ec78e354f189482fccf90053282be4754c18d2</string>
-    <key>Kits</key>
-    <array>
-      <dict>
-        <key>KitInfo</key>
-        <dict/>
-        <key>KitName</key>
-        <string>Crashlytics</string>
-      </dict>
-    </array>
-  </dict>
 	<key>AppCenterAppDelegateForwarderEnabled</key>
 	<false/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -70,6 +56,20 @@
 	<string>62</string>
 	<key>CodePushDeploymentKey</key>
 	<string>awpiBImr9WzOgPX2GGoSYZtoecPQHkAgjdYHX</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>a2ec78e354f189482fccf90053282be4754c18d2</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>

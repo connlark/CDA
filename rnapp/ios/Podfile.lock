@@ -6,18 +6,18 @@ PODS:
     - AppCenter/Core
   - AppCenterReactNativeShared (1.9.0):
     - AppCenter/Core (= 1.10.0)
-  - Crashlytics (3.10.9):
-    - Fabric (~> 1.7.13)
+  - Crashlytics (3.11.1):
+    - Fabric (~> 1.8.1)
   - DCTAuth (3.0)
-  - Fabric (1.7.13)
-  - Firebase/Core (5.11.0):
+  - Fabric (1.8.2)
+  - Firebase/Core (5.12.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.3.0)
-  - Firebase/CoreOnly (5.11.0):
-    - FirebaseCore (= 5.1.6)
-  - Firebase/Performance (5.11.0):
+  - Firebase/CoreOnly (5.12.0):
+    - FirebaseCore (= 5.1.7)
+  - Firebase/Performance (5.12.0):
     - Firebase/Core
-    - FirebasePerformance (= 2.2.0)
+    - FirebasePerformance (= 2.2.1)
   - FirebaseABTesting (2.0.0):
     - FirebaseCore (~> 5.0)
     - Protobuf (~> 3.5)
@@ -30,13 +30,13 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.1.6):
+  - FirebaseCore (5.1.7):
     - GoogleUtilities/Logger (~> 5.2)
   - FirebaseInstanceID (3.3.0):
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
-  - FirebasePerformance (2.2.0):
+  - FirebasePerformance (2.2.1):
     - FirebaseAnalytics (~> 5.3)
     - FirebaseInstanceID (~> 3.3)
     - FirebaseRemoteConfig (~> 3.1)
@@ -114,9 +114,9 @@ DEPENDENCIES:
   - AppCenter/Analytics (~> 1.10.0)
   - AppCenter/Crashes (~> 1.10.0)
   - AppCenterReactNativeShared (~> 1.9.0)
-  - Crashlytics (~> 3.10.7)
+  - Crashlytics
   - DCTAuth (from `https://github.com/danielctull/DCTAuth.git`)
-  - Fabric (~> 1.7.11)
+  - Fabric
   - Firebase/Core
   - Firebase/Performance
   - GoogleSignIn
@@ -155,15 +155,15 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AppCenter: 2d196f6547d274ab86836f9082cfdbd3d397e7b6
   AppCenterReactNativeShared: a4bf64d2fae919fc0b235fe47a02ef9ddd3a0011
-  Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
+  Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
   DCTAuth: 8add154decd00335d62917828896bba790ce47fd
-  Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
-  Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
+  Fabric: d2b22f443ba195d8a7cc204da230977c72733b40
+  Firebase: 9190018e296139d938b99521cde0c15a6e8d2946
   FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
-  FirebaseCore: d16552f06821489ce1affe2e5e3e5593402ddfe3
+  FirebaseCore: 027d350adc039aa5483357c6f56556f117c5170e
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
-  FirebasePerformance: 4adfe91a2c696bc43429822ad0e4aa8753b283b4
+  FirebasePerformance: 071ef097e7fb2d4f2f27fac1d4ed72ae3dd737d7
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
@@ -174,6 +174,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 8592ba793bd7b0245c27696212a3c398e2709b14
+PODFILE CHECKSUM: 8ec312ec7f37433a9d29b5b410b8842a3b3973e6
 
 COCOAPODS: 1.5.3

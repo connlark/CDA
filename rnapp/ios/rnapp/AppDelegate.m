@@ -73,6 +73,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   
   [FIRApp configure]; //Initialize FIREBASE
   [Fabric with:@[[Crashlytics class]]];
+
   
     #ifdef DEBUG
         jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];

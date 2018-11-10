@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "612930134863-1fm4sv51ldkkptnl19pmdjkids7mvg3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.connorlarkin.cda",
+            "certificate_hash": "ec6b84ef3b1427c5573aab9e8803626b53eea652"
+          }
+        },
+        {
           "client_id": "612930134863-b5mc9pgu56sjl7fn6qlmsqf98og1c4j9.apps.googleusercontent.com",
           "client_type": 3
         }
