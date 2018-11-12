@@ -32,15 +32,46 @@ platform :ios do
           workspace: "rnapp.xcworkspace",
           output_directory: "IPA_FOLDER",
           output_name: "cda-ios.ipa",
+          include_bitcode: true,
+          include_symbols: true,
+          export_method: "app-store",
+          export_options: "./fastlane/ExportOptions.plist"
         )
+      match(type: "appstore")
+      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      push_to_git_remote
+      ifttt(
+        api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
+        event_name: "IOS_IPA_DONE",
+        value1: "THIS IS GOOD "
+      )
+  end
+
+
+  lane :crashlyticsbeta do
+      increment_build_number(xcodeproj: './rnapp.xcodeproj')  
+      gym(
+          scheme: "rnapp", 
+          workspace: "rnapp.xcworkspace",
+          output_directory: "IPA_FOLDER",
+          output_name: "cda-iosAdhoc.ipa",
+          include_bitcode: true,
+          include_symbols: true,
+          export_options: {
+            provisioningProfiles: { 
+              "com.connorlarkin.CDA" => "match AdHoc com.connorlarkin.CDA",
+            },
+            "method": "ad-hoc",
+          }
+        )
+      match(type: "adhoc")
       crashlytics(
           crashlytics_path: "./Pods/Crashlytics/submit", # path to your Crashlytics submit binary.
           api_token: "a2ec78e354f189482fccf90053282be4754c18d2",
           build_secret: "e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e",
-          ipa_path: "./IPA_FOLDER/cda-ios.ipa"
+          ipa_path: "./IPA_FOLDER/cda-iosAdhoc.ipa",
+          groups: ['iOS-Testers']
         )
-      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
-      push_to_git_remote
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
         event_name: "IOS_IPA_DONE",
