@@ -36,13 +36,15 @@ platform :ios do
           include_bitcode: true,
           include_symbols: true,
           export_method: "app-store",
-          export_options: "./fastlane/ExportOptions.plist"
+          export_options: "./fastlane/ExportOptionsStore.plist"
         )
+      sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
+
       match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
-        event_name: "IOS_IPA_DONE",
+        event_name: "IOS_betaAPPSTORE_DONE",
         value1: "THIS IS GOOD "
       )
   end
@@ -77,6 +79,32 @@ platform :ios do
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
         event_name: "IOS_IPA_DONE",
+        value1: "THIS IS GOOD "
+      )
+  end
+
+
+  lane :appstore do
+      xcodeproj = "./ios/rnapp.xcodeproj"
+      increment_build_number(xcodeproj: './rnapp.xcodeproj')  
+      add_git_tag
+      gym(
+          scheme: "rnapp", 
+          workspace: "rnapp.xcworkspace",
+          output_directory: "IPA_FOLDER",
+          output_name: "cda-ios.ipa",
+          include_bitcode: true,
+          include_symbols: true,
+          export_method: "app-store",
+          export_options: "./fastlane/ExportOptionsStore.plist"
+        )
+      sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
+
+      match(type: "appstore")
+      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      ifttt(
+        api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
+        event_name: "IOS_betaAPPSTORE_DONE",
         value1: "THIS IS GOOD "
       )
   end
