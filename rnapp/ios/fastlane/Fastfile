@@ -18,13 +18,14 @@ before_all do
   update_fastlane
   clear_derived_data
   git_pull
-  #ensure_git_status_clean
+  ensure_git_status_clean
 end
 default_platform(:ios)
 
 platform :ios do
   lane :beta do
       xcodeproj = "./ios/rnapp.xcodeproj"
+      add_badge(dark: false)
       increment_build_number(xcodeproj: './rnapp.xcodeproj')  
       add_git_tag
       gym(
@@ -39,7 +40,6 @@ platform :ios do
         )
       match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
-      push_to_git_remote
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
         event_name: "IOS_IPA_DONE",
@@ -49,7 +49,8 @@ platform :ios do
 
 
   lane :crashlyticsbeta do
-      increment_build_number(xcodeproj: './rnapp.xcodeproj')  
+      increment_build_number(xcodeproj: './rnapp.xcodeproj') 
+      add_badge(alpha: true, shield_gravity: 'NorthEast') 
       gym(
           scheme: "rnapp", 
           workspace: "rnapp.xcworkspace",
@@ -64,13 +65,14 @@ platform :ios do
             "method": "ad-hoc",
           }
         )
+      sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
       match(type: "adhoc")
       crashlytics(
           crashlytics_path: "./Pods/Crashlytics/submit", # path to your Crashlytics submit binary.
           api_token: "a2ec78e354f189482fccf90053282be4754c18d2",
           build_secret: "e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e",
           ipa_path: "./IPA_FOLDER/cda-iosAdhoc.ipa",
-          groups: ['iOS-Testers']
+          groups: ['me']
         )
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
@@ -78,6 +80,14 @@ platform :ios do
         value1: "THIS IS GOOD "
       )
   end
+
+  lane :why do
+      add_badge
+      sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
+
+  end
+
+  
   
   lane :screenshots do
     capture_screenshots(workspace: "rnapp.xcworkspace", scheme: "FASTLANE SCREENSHOTS", number_of_retries: 3, concurrent_simulators: false)
