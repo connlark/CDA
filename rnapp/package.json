@@ -10,7 +10,7 @@
     "test": "jest",
     "ios:beta": "cd ios; bundle exec fastlane ios beta",
     "ios:alpha": "bundle exec fastlane ios crashlyticsbeta",
-    "ios:appstore": "cd ios; bundle exec fastlane ios appstore",
+    "ios:appstore": "cd ios; bundle exec fastlane ios appstoredeploy",
     "ios:clean": "xclean -r DerivedData",
     "android:beta": "unlink node_modules/react-native/scripts/third-party/glog-0.3.5/test-driver; yarn run bundleAndroid; cd android; fastlane android beta"
   },

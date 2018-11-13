@@ -114,9 +114,9 @@ DEPENDENCIES:
   - AppCenter/Analytics (~> 1.10.0)
   - AppCenter/Crashes (~> 1.10.0)
   - AppCenterReactNativeShared (~> 1.9.0)
-  - Crashlytics
+  - Crashlytics (~> 3.11.1)
   - DCTAuth (from `https://github.com/danielctull/DCTAuth.git`)
-  - Fabric
+  - Fabric (~> 1.8.2)
   - Firebase/Core
   - Firebase/Performance
   - GoogleSignIn
@@ -174,6 +174,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 8ec312ec7f37433a9d29b5b410b8842a3b3973e6
+PODFILE CHECKSUM: e90e93583f4c4c71173569393582774537def0dc
 
 COCOAPODS: 1.5.3

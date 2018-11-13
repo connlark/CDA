@@ -1958,7 +1958,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"$(BUILT_PRODUCTS_DIR)/Info.plist",
 			);
 			outputFileListPaths = (
 			);
@@ -1966,7 +1966,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" a2ec78e354f189482fccf90053282be4754c18d2 e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e\n";
+			shellScript = "releaseConfig=\"Release\"\n\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\n    echo \"Running Crashlytics\"\n    \"${PODS_ROOT}/Fabric/run\" a2ec78e354f189482fccf90053282be4754c18d2 e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e\nfi\n";
 		};
 		B8A3B3E72FB081CA5F1B5791 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2208,7 +2208,7 @@
 				CODE_SIGN_ENTITLEMENTS = rnapp/rnapp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = 24MA2Z46AJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

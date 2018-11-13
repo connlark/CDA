@@ -86,7 +86,7 @@ platform :ios do
   end
 
 
-  lane :appstore do
+  lane :appstoredeploy do
       xcodeproj = "./ios/rnapp.xcodeproj"
       increment_build_number(xcodeproj: './rnapp.xcodeproj')  
       add_git_tag
@@ -112,9 +112,7 @@ platform :ios do
   end
 
   lane :why do
-      add_badge
-      sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
-
+      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
   end
 
   

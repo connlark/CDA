@@ -14,9 +14,9 @@ target 'rnapp' do
   pod 'Firebase/Core'
   pod 'Firebase/Performance'
 
-  pod 'Fabric'
-  pod 'Crashlytics'
-  
+  pod 'Fabric', '~> 1.8.2'
+  pod 'Crashlytics', '~> 3.11.1'
+
   target 'rnappTests' do
     inherit! :search_paths
     # Pods for testing
