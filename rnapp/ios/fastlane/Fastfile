@@ -39,7 +39,7 @@ platform :ios do
           export_options: "./fastlane/ExportOptionsStore.plist"
         )
       sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
-
+      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
       match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       ifttt(
@@ -67,6 +67,8 @@ platform :ios do
             "method": "ad-hoc",
           }
         )
+       upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
+
       sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
       match(type: "adhoc")
       crashlytics(
@@ -99,7 +101,7 @@ platform :ios do
           export_options: "./fastlane/ExportOptionsStore.plist"
         )
       sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
-
+      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
       match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       ifttt(
