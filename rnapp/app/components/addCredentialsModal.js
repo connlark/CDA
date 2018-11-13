@@ -280,6 +280,10 @@ export default class componentName extends Component {
                                         this.setState({infoModalOpen: true, hasShownQR: true})
                                     })
                                 }
+                                if (this.state.readFromQrTRX){
+                                    console.log(this.TRXscanner)
+                                    this.TRXscanner?.reactivate?.();
+                                }
                             });
                         }}
                     />

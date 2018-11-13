@@ -13,10 +13,10 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'io.fabric.tools:gradle:1.+'
-        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.google.gms:google-services:4.0.2'
+        classpath 'com.google.firebase:firebase-plugins:1.1.5'
     }
 }
-
 
 allprojects {
     repositories {
@@ -77,5 +77,10 @@ subprojects {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force "com.google.firebase:firebase-core:16.0.5"
+    }
+}
 
 

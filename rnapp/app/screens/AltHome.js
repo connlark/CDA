@@ -17,6 +17,7 @@ import { material, human, iOSUIKit, iOSColors} from 'react-native-typography'
 import moment from 'moment';
 import NumberTicker from 'react-native-number-ticker';
 import Ticker from "react-native-ticker";
+import { withNavigationFocus } from 'react-navigation';
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
@@ -62,6 +63,10 @@ class AltHome extends Component {
         }
 
         AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return  nextProps.isFocused
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -215,6 +220,15 @@ class AltHome extends Component {
         })
     }
 
+    touchItem = (item) => {
+        this.setState({selectedCoinObj: {
+            url:'https://www.cryptocompare.com'+item.ccurl,
+            name: item.fullName
+        }}, () => {
+            this.setState({showWebView: true});
+        });
+    }
+
     _renderGridItem = (item, i) => {
         const { hasPNG, color, formattedBalance, formattedUSDBalance, formattedName, imagePNG, imgUrl} = item;
         let bal = 0;
@@ -241,14 +255,7 @@ class AltHome extends Component {
                    // source={imagePNG}
                    source={imagePNG}
                 //source={require('../../node_modules/cryptocurrency-icons/128/color/btc.png')} 
-                onPress={() => {
-                        this.setState({selectedCoinObj: {
-                            url:'https://www.cryptocompare.com'+item.ccurl,
-                            name: item.fullName
-                        }}, () => {
-                            this.setState({showWebView: true});
-                        });
-                    }}
+                    onPress={() => this.touchItem(item)}
                     activeOpacity={0.4}
                     containerStyle={{ backgroundColor: 'transparent'}}
                     overlayContainerStyle={{backgroundColor: 'transparent'}}
@@ -278,7 +285,11 @@ class AltHome extends Component {
             </View>
             <View style={{marginTop: 10, marginBottom: 100, flexDirection: 'row', alignItems: 'center', justifyContent: "center"}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>💲</Text>
-                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>{bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))}</Text>
+                { process.env.NODE_ENV === 'production' ? 
+                    <Ticker text={bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))} textStyle={{fontSize: 14}} rotateTime={500} />
+                : 
+                    <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>{bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))}</Text>
+                }
             </View>
         </View>
       );
@@ -301,7 +312,7 @@ class AltHome extends Component {
     render() {
         const { balances, balancesReady, balanceDataRedux } = this.props;
         const { refreshing, showWebView, selectedCoinObj } = this.state;
-
+        console.log(this.props.isFocused)
         if(showWebView){ 
             const { url, name } = selectedCoinObj;
 
@@ -393,7 +404,7 @@ export default withTracker(params => {
       balancesReady: handle.ready(),
       balances: Meteor.collection('balances').find({userId: id}, { sort: { createdAt: -1 } } )
     };
-  })(connect(mapStateToProps)(AltHome));
+  })(withNavigationFocus(connect(mapStateToProps)(AltHome)));
 
 const styles = StyleSheet.flatten({
     container: {

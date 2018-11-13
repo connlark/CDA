@@ -21,11 +21,13 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.airbnb.android.react.lottie.LottiePackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;  // <--- import
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+    private FirebaseAnalytics mFirebaseAnalytics;
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
@@ -74,6 +76,8 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     Fabric.with(this, new Crashlytics());
     SoLoader.init(this, /* native exopackage */ false);
+    // Obtain the FirebaseAnalytics instance.
+    mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
   }
 
 
