@@ -9,8 +9,8 @@
     "bundleAndroid": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "test": "jest",
     "ios:beta": "cd ios; bundle exec fastlane ios beta",
-    "ios:alpha": "bundle exec fastlane ios crashlyticsbeta",
-    "ios:appstore": "cd ios; bundle exec fastlane ios appstoredeploy",
+    "ios:alpha": "cd ios; bundle exec fastlane ios alpha",
+    "ios:appstore": "cd ios; bundle exec fastlane ios store",
     "ios:clean": "xclean -r DerivedData",
     "android:beta": "unlink node_modules/react-native/scripts/third-party/glog-0.3.5/test-driver; yarn run bundleAndroid; cd android; fastlane android beta"
   },

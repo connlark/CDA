@@ -24,24 +24,14 @@ default_platform(:ios)
 
 platform :ios do
   lane :beta do
-      xcodeproj = "./ios/rnapp.xcodeproj"
-      add_badge(dark: false)
-      increment_build_number(xcodeproj: './rnapp.xcodeproj')  
-      add_git_tag
-      gym(
-          scheme: "rnapp", 
-          workspace: "rnapp.xcworkspace",
-          output_directory: "IPA_FOLDER",
-          output_name: "cda-ios.ipa",
-          include_bitcode: true,
-          include_symbols: true,
-          export_method: "app-store",
-          export_options: "./fastlane/ExportOptionsStore.plist"
-        )
-      sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
-      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
-      match(type: "appstore")
+      num = last_git_tag[15..-1].to_i + 1
+      versionString = get_version_number.to_s + "-"+ "b%20" + num.to_s + "-blue"
+      add_badge(shield: versionString)
+      
+      buildforstore
+
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      add_git_tag
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
         event_name: "IOS_betaAPPSTORE_DONE",
@@ -50,9 +40,18 @@ platform :ios do
   end
 
 
-  lane :crashlyticsbeta do
-      increment_build_number(xcodeproj: './rnapp.xcodeproj') 
-      add_badge(alpha: true, shield_gravity: 'NorthEast') 
+  lane :alpha do
+      num = last_git_tag[15..-1].to_i + 1
+      increment_build_number(
+          xcodeproj: './rnapp.xcodeproj',
+          build_number: num
+        ) 
+
+      versionString = get_version_number.to_s + "-"+ "b%20" + num.to_s + "-purple"
+      puts versionString
+
+      add_badge(shield: versionString, alpha: true)
+
       gym(
           scheme: "rnapp", 
           workspace: "rnapp.xcworkspace",
@@ -67,9 +66,10 @@ platform :ios do
             "method": "ad-hoc",
           }
         )
-       upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
-
       sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
+
+      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
+
       match(type: "adhoc")
       crashlytics(
           crashlytics_path: "./Pods/Crashlytics/submit", # path to your Crashlytics submit binary.
@@ -86,24 +86,13 @@ platform :ios do
   end
 
 
-  lane :appstoredeploy do
-      xcodeproj = "./ios/rnapp.xcodeproj"
-      increment_build_number(xcodeproj: './rnapp.xcodeproj')  
-      add_git_tag
-      gym(
-          scheme: "rnapp", 
-          workspace: "rnapp.xcworkspace",
-          output_directory: "IPA_FOLDER",
-          output_name: "cda-ios.ipa",
-          include_bitcode: true,
-          include_symbols: true,
-          export_method: "app-store",
-          export_options: "./fastlane/ExportOptionsStore.plist"
-        )
-      sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
-      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
+  lane :appstoredeploy do      
+      buildforstore
+
+
       match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      add_git_tag
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
         event_name: "IOS_betaAPPSTORE_DONE",
@@ -123,9 +112,30 @@ platform :ios do
     upload_to_app_store(skip_waiting_for_build_processing: true)
   end
 
+  private_lane :store do |options|
+        match(type: "appstore")
+        num = last_git_tag[15..-1].to_i + 1
+        increment_build_number(
+          xcodeproj: './rnapp.xcodeproj',
+          build_number: num
+        )
+
+        gym(
+          scheme: "rnapp", 
+          workspace: "rnapp.xcworkspace",
+          output_directory: "IPA_FOLDER",
+          output_name: "cda-ios.ipa",
+          include_bitcode: true,
+          include_symbols: true,
+          export_method: "app-store",
+          export_options: "./fastlane/ExportOptionsStore.plist"
+        )
+        
+        sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
+
+        upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
+        
+        notification(subtitle: "Finished Building", message: "🚀 uploading now 🚀")
+  end
+
 end
-
-
-
-
-
