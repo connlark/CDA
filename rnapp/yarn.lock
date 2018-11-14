@@ -5841,7 +5841,7 @@ react-native-textinput-effects@^0.4.2:
   resolved "https://registry.yarnpkg.com/react-native-textinput-effects/-/react-native-textinput-effects-0.4.2.tgz#05336a8ed9e4992397fc5de714692d774eb91b07"
   integrity sha1-BTNqjtnkmSOX/F3nFGktd065Gwc=
 
-react-native-ticker@^2.2.0:
+react-native-ticker@^2.1.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-native-ticker/-/react-native-ticker-2.2.0.tgz#6772ff482f2193f624d4d8d0f9de3ec29dd47441"
   integrity sha512-SPx4ZmVrg/hSDWv9DFA1KS6j4AkAzDl4DlWL+EvDB1iya5h/uecbokGiTvqu1lwYMe6ASEkmpIKojqH27e2VHA==
