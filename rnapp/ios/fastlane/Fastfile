@@ -18,20 +18,22 @@ before_all do
   update_fastlane
   clear_derived_data
   git_pull
-  ensure_git_status_clean
+  #ensure_git_status_clean
 end
 default_platform(:ios)
 
 platform :ios do
   lane :beta do
-      num = last_git_tag[15..-1].to_i + 1
+      num = last_git_tag.to_i + 1
       versionString = get_version_number.to_s + "-"+ "b%20" + num.to_s + "-blue"
       add_badge(shield: versionString)
       
       buildforstore
 
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
-      add_git_tag
+      add_git_tag(
+        tag:last_git_tag.to_i + 1
+      )
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
           xcodeproj: './rnapp.xcodeproj'
@@ -45,7 +47,7 @@ platform :ios do
 
 
   lane :alpha do
-      num = last_git_tag[15..-1].to_i + 1
+      num = last_git_tag.to_i + 1
       increment_build_number(
           xcodeproj: './rnapp.xcodeproj',
           build_number: num
@@ -82,7 +84,9 @@ platform :ios do
           ipa_path: "./IPA_FOLDER/cda-iosAdhoc.ipa",
           groups: ['me']
         )
-      add_git_tag
+      add_git_tag(
+        tag:last_git_tag.to_i + 1
+      )
       clean_build_artifacts
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
@@ -102,7 +106,9 @@ platform :ios do
 
       match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
-      add_git_tag
+      add_git_tag(
+        tag:last_git_tag.to_i + 1
+      )
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
           xcodeproj: './rnapp.xcodeproj'
@@ -115,7 +121,9 @@ platform :ios do
   end
 
   lane :why do
-      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      add_git_tag(
+        tag: "73"
+      )
   end
 
   
@@ -128,7 +136,7 @@ platform :ios do
 
   private_lane :store do |options|
         match(type: "appstore")
-        num = last_git_tag[15..-1].to_i + 1
+        num = last_git_tag.to_i + 1
         increment_build_number(
           xcodeproj: './rnapp.xcodeproj',
           build_number: num
