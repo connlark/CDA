@@ -94,6 +94,7 @@ platform :ios do
           xcodeproj: './rnapp.xcodeproj',
           force: true
         )
+      push_to_git_remote
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
         event_name: "IOS_IPA_DONE",
