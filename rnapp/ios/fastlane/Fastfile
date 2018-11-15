@@ -48,6 +48,7 @@ platform :ios do
 
   lane :alpha do
       num = last_git_tag.to_i + 1
+      puts last_git_tag
       increment_build_number(
           xcodeproj: './rnapp.xcodeproj',
           build_number: num
