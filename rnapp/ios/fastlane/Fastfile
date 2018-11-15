@@ -32,7 +32,7 @@ platform :ios do
 
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       add_git_tag(
-        tag:last_git_tag.to_i + 1
+        tag: num.to_s
       )
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
@@ -74,7 +74,7 @@ platform :ios do
         )
       sh("git checkout -- /Users/connorlarkin/dev/CDA/rnapp/ios/rnapp/Images.xcassets/")
 
-      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
+      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-iosAdhoc.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
 
       match(type: "adhoc")
       crashlytics(
@@ -85,7 +85,7 @@ platform :ios do
           groups: ['me']
         )
       add_git_tag(
-        tag:last_git_tag.to_i + 1
+        tag: num.to_s
       )
       clean_build_artifacts
       commit_version_bump(
@@ -106,8 +106,11 @@ platform :ios do
 
       match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      
+      num = last_git_tag.to_i + 1
+
       add_git_tag(
-        tag:last_git_tag.to_i + 1
+        tag: num.to_s
       )
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
