@@ -34,6 +34,7 @@ platform :ios do
       add_git_tag(
         tag: num.to_s
       )
+      clean_build_artifacts
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
           xcodeproj: './rnapp.xcodeproj'
@@ -114,10 +115,12 @@ platform :ios do
       add_git_tag(
         tag: num.to_s
       )
+      clean_build_artifacts
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
           xcodeproj: './rnapp.xcodeproj'
         )
+      
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
         event_name: "IOS_betaAPPSTORE_DONE",
@@ -167,7 +170,6 @@ platform :ios do
         sh("git checkout -- ../rnapp/Images.xcassets/")
 
         upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
-        clean_build_artifacts
 
         notification(subtitle: "Finished Building", message: "🚀 uploading now 🚀")
   end
