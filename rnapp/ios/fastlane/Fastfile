@@ -107,7 +107,6 @@ platform :ios do
       buildforstore
 
 
-      match(type: "appstore")
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       
       num = last_git_tag.to_i + 1
@@ -146,7 +145,7 @@ platform :ios do
     upload_to_app_store(skip_waiting_for_build_processing: true)
   end
 
-  private_lane :store do |options|
+  private_lane :buildforstore do |options|
         match(type: "appstore")
         num = last_git_tag.to_i + 1
         increment_build_number(
