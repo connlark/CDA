@@ -104,7 +104,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 11
+        versionCode 12
         versionName "1.1.3"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -118,10 +118,27 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        /*debug {
+            storeFile file("xx-key.keystore")
+            storePassword "xx123"
+            keyAlias "xxxx"
+            keyPassword "xx123"
+        }*/
+        release {
+            keyAlias 'key0'
+            keyPassword 'z@6(V54wzz$WX;P'
+            storeFile file('/Users/connorlarkin/Desktop/androidkeystore')
+            storePassword 'z@6(V54wzz$WX;P'
+        }
+    }
     buildTypes {
         release {
+            testCoverageEnabled = false
+            minifyEnabled true
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -143,7 +160,9 @@ android {
     }
 
     lintOptions {
+        abortOnError false
         checkReleaseBuilds false
+        ignoreWarnings true
     }
 }
 

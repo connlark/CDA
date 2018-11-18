@@ -76,7 +76,7 @@ platform :ios do
         )
       sh("git checkout -- ../rnapp/Images.xcassets/")
 
-      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-iosAdhoc.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
+      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-iosAdhoc.app.dSYM.zip')
 
       match(type: "adhoc")
       crashlytics(
@@ -129,9 +129,9 @@ platform :ios do
   end
 
   lane :why do
-      #add_git_tag(
-       # tag: "73"
-      #)
+      add_git_tag(
+        tag: "76"
+      )
       num = last_git_tag.to_i + 1
 
       puts last_git_tag
@@ -169,7 +169,7 @@ platform :ios do
         
         sh("git checkout -- ../rnapp/Images.xcassets/")
 
-        upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip', api_token: "a2ec78e354f189482fccf90053282be4754c18d2")
+        upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip')
 
         notification(subtitle: "Finished Building", message: "🚀 uploading now 🚀")
   end
