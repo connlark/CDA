@@ -28,11 +28,17 @@ platform :android do
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     increment_version_code gradle_build: 'app/build.gradle'
+
     gradle(
       task: "clean build assembleRelease",
       flags: "-x lint"
       )
-    crashlytics(api_token: "a2ec78e354f189482fccf90053282be4754c18d2", build_secret: "e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e")
+
+    crashlytics(
+        api_token: "a2ec78e354f189482fccf90053282be4754c18d2", 
+        build_secret: "e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e",
+        groups: "android_testers"
+      )
   
     # sh "your_script.sh"
     # You can also use other beta testing services here

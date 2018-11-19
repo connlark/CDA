@@ -25,14 +25,6 @@ import Crashes from 'appcenter-crashes';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import DeviceInfo from 'react-native-device-info';
 
-import {
-    SettingsDividerShort, 
-    SettingsDividerLong, 
-    SettingsEditText, 
-    SettingsCategoryHeader, 
-    SettingsSwitch, 
-    SettingsPicker
-} from 'react-native-settings-components';
 import { PricingCard } from 'react-native-elements'
 import Analytics from 'appcenter-analytics';
 import * as RNIap from 'react-native-iap';
