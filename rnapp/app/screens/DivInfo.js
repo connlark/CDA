@@ -302,7 +302,7 @@ class DivInfo extends Component {
         
         if(historyReady && selectedCoin){
             return (
-                <View style={{flex:1}}>
+                <View style={{flex:1, backgroundColor: '#eee'}}>
                     <ScrollView style={{flex:1, height:'100%'}} 
                         refreshControl={
                             <RefreshControl

@@ -312,7 +312,7 @@ class AltHome extends Component {
     render() {
         const { balances, balancesReady, balanceDataRedux } = this.props;
         const { refreshing, showWebView, selectedCoinObj } = this.state;
-        console.log(this.props.isFocused)
+
         if(showWebView){ 
             const { url, name } = selectedCoinObj;
 
