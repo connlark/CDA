@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import {
   createStackNavigator,
+  createAppContainer
 } from 'react-navigation';
 import codePush from "react-native-code-push";
 import Analytics from 'appcenter-analytics';
@@ -108,8 +109,9 @@ PushNotification.configure({
 
 const RNApp = (props) => {
   const { status, user, loggingIn } = props;
+  const App = createAppContainer(AppNavigator);
   return  <Provider store={store}>
-            <AppNavigator // persistenceKey={"HELLO"} 
+            <App // persistenceKey={"HELLO"} 
             />
           </Provider>
 };

@@ -6,10 +6,10 @@
  */
 
 #import "AppDelegate.h"
-#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
+/**#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
 #import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNative/AppCenterReactNative.h>
-
+*/
 #import <AppCenterReactNativeCrashes.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNative.h>

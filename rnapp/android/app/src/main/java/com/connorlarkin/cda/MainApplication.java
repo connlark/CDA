@@ -23,7 +23,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.airbnb.android.react.lottie.LottiePackage;
-import co.apptailor.googlesignin.RNGoogleSigninPackage;  // <--- import
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Arrays;
@@ -61,8 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNSpinkitPackage(),
             new VectorIconsPackage(),
             new RNDeviceInfo(),
-              new LottiePackage(),
-              new RNGoogleSigninPackage()
+              new LottiePackage()
       );
     }
 
