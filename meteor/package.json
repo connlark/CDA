@@ -13,7 +13,7 @@
     "coinex.com": "^1.0.3",
     "cryptocompare": "^0.5.0",
     "fibers": "^3.0.0",
-    "meteor-babel": "^7.1.2",
+    "meteor-babel": "^7.1.6",
     "meteor-node-stubs": "^0.3.2",
     "moment": "^2.22.2",
     "node-fetch": "^2.1.2",
