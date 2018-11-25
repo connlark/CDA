@@ -15,14 +15,6 @@ import { IS_X } from '../../config/styles';
 import AddCredentialsModal from '../../components/addCredentialsModal'
 import {connect, createProvider} from 'react-redux'
 
-import {
-    SettingsDividerShort, 
-    SettingsDividerLong, 
-    SettingsEditText, 
-    SettingsCategoryHeader, 
-    SettingsSwitch, 
-    SettingsPicker
-} from 'react-native-settings-components';
 import { Header } from 'react-native-elements';
 import Analytics from 'appcenter-analytics';
 

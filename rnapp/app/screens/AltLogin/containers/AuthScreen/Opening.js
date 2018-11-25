@@ -18,7 +18,6 @@ export default class Opening extends Component {
         </View>
       )
     }
-    if (Platform.OS !== 'android'){
       return (
         <View style={styles.container}>
         <StatusBar
@@ -64,43 +63,11 @@ export default class Opening extends Component {
           />
           </View>
         </View>
-      )
+      );
+
     }
-    else {
-      return (
-        <View style={styles.container}>
-        <StatusBar
-         hidden
-        />
-          <View animation={'zoomIn'} delay={600} duration={400}>
-            <CustomButton
-              text={'Create Account'}
-              onPress={this.props.onCreateAccountPress}
-              buttonStyle={styles.createAccountButton}
-              textStyle={styles.createAccountButtonText}
-            />
-          </View>
-          <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
-            <View style={styles.separatorLine} />
-            <Text style={styles.separatorOr}>{'🆚'}</Text>
-            <View style={styles.separatorLine} />
-          </View>
-          <View animation={'zoomIn'} delay={800} duration={400}>
-            <CustomButton
-              accessible={true}
-              accessibilityLabel={"login"}
-              testID="23135thisisit"
-              text={'Sign In'}
-              onPress={this.props.onSignInPress}
-              buttonStyle={styles.signInButton}
-              textStyle={styles.signInButtonText}
-            />
-          </View>
-        </View>
-      )
-    }
-  }
 }
+
 
 const styles = StyleSheet.create({
   container: {

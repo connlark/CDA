@@ -17,6 +17,7 @@ import { material, human, iOSUIKit, iOSColors} from 'react-native-typography'
 import moment from 'moment';
 import NumberTicker from 'react-native-number-ticker';
 import Ticker from "react-native-ticker";
+import { withNavigationFocus } from 'react-navigation';
 
 import { numberWithCommas } from '../lib'
 import Loading from '../components/loading'
@@ -57,14 +58,20 @@ class AltHome extends Component {
     }
 
     componentWillUnmount(){
+        if (ws && ws.readyState !== ws.CLOSED) {
+            ws.close()
+        }
+
         AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return  nextProps.isFocused
     }
 
     static getDerivedStateFromProps(props, state) {
         const { balancesReady, balances } = props;
-        // Any time the current user changes,
-        // Reset any parts of state that are tied to that user.
-        // In this simple example, that's just the email.
+
         if (balancesReady && Array.isArray(balances?.[0]?.balanceData) && balances?.[0]?.balanceData.length > 0 && props.balances !== state.prevBalance) {
             console.log('getDerivedStateFromProps');
             store.dispatch(recieveBalanceData(props.balances[0]))
@@ -158,7 +165,7 @@ class AltHome extends Component {
         }
         
         ws.onclose = (e) => {
-            //this.setState({cryptoObj: {}});
+            this.setState({cryptoObj: {}});
         };
     }
 
@@ -213,6 +220,15 @@ class AltHome extends Component {
         })
     }
 
+    touchItem = (item) => {
+        this.setState({selectedCoinObj: {
+            url:'https://www.cryptocompare.com'+item.ccurl,
+            name: item.fullName
+        }}, () => {
+            this.setState({showWebView: true});
+        });
+    }
+
     _renderGridItem = (item, i) => {
         const { hasPNG, color, formattedBalance, formattedUSDBalance, formattedName, imagePNG, imgUrl} = item;
         let bal = 0;
@@ -225,8 +241,6 @@ class AltHome extends Component {
         else if (item.coin === 'SEED' && this.state.cryptoObj[`TRXBCH`]){
             bal = Number(item.balance) * Number(this.state.cryptoObj[`BCHUSDT`]) * Number(this.state.cryptoObj[`TRXBCH`])
         }
-
-        
         
         return (
         <View style={[{ backgroundColor: color ? color:'white', alignItems: 'center', borderRadius: 9 }, styles.item]} key={i}>
@@ -241,14 +255,7 @@ class AltHome extends Component {
                    // source={imagePNG}
                    source={imagePNG}
                 //source={require('../../node_modules/cryptocurrency-icons/128/color/btc.png')} 
-                onPress={() => {
-                        this.setState({selectedCoinObj: {
-                            url:'https://www.cryptocompare.com'+item.ccurl,
-                            name: item.fullName
-                        }}, () => {
-                            this.setState({showWebView: true});
-                        });
-                    }}
+                    onPress={() => this.touchItem(item)}
                     activeOpacity={0.4}
                     containerStyle={{ backgroundColor: 'transparent'}}
                     overlayContainerStyle={{backgroundColor: 'transparent'}}
@@ -279,9 +286,9 @@ class AltHome extends Component {
             <View style={{marginTop: 10, marginBottom: 100, flexDirection: 'row', alignItems: 'center', justifyContent: "center"}}>
                 <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>💲</Text>
                 { process.env.NODE_ENV === 'production' ? 
-                <Ticker text={bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))} textStyle={{fontSize: 14}} rotateTime={500} />
+                    <Ticker text={bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))} textStyle={{fontSize: 14}} rotateTime={500} />
                 : 
-                <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>{bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))}</Text>
+                    <Text adjustsFontSizeToFit numberOfLines={1} style={{fontSize: 14}}>{bal === 0 ? formattedUSDBalance: numberWithCommas(bal.toFixed(3))}</Text>
                 }
             </View>
         </View>
@@ -397,7 +404,7 @@ export default withTracker(params => {
       balancesReady: handle.ready(),
       balances: Meteor.collection('balances').find({userId: id}, { sort: { createdAt: -1 } } )
     };
-  })(connect(mapStateToProps)(AltHome));
+  })(withNavigationFocus(connect(mapStateToProps)(AltHome)));
 
 const styles = StyleSheet.flatten({
     container: {

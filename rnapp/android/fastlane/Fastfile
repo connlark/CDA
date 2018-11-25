@@ -16,6 +16,10 @@
 default_platform(:android)
 
 platform :android do
+  def increment_version_code(gradle_build: 'android/app/build.gradle')
+    sh %Q{cd ../ && echo "$(awk '{sub(/versionCode [[:digit:]]+$/,"versionCode "$2+1)}1' #{gradle_build})" > #{gradle_build} && cd -}
+  end
+
   desc "Runs all the tests"
   lane :test do
     gradle(task: "test")
@@ -23,8 +27,18 @@ platform :android do
 
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
-    gradle(task: "clean build assembleRelease")
-    crashlytics
+    increment_version_code gradle_build: 'app/build.gradle'
+
+    gradle(
+      task: "clean build assembleRelease",
+      flags: "-x lint"
+      )
+
+    crashlytics(
+        api_token: "a2ec78e354f189482fccf90053282be4754c18d2", 
+        build_secret: "e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e",
+        groups: "android_testers"
+      )
   
     # sh "your_script.sh"
     # You can also use other beta testing services here

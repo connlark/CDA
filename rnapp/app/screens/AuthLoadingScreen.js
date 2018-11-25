@@ -25,10 +25,10 @@ class AuthLoadingScreen extends Component {
 
       setTimeout(() => {
         if (this.props.meteorUser){
-            this.setState({hi: true})
+            this.props.navigation.navigate('App');
         }
           
-      }, 5000);
+      }, 1000);
   }
 
   componentWillReceiveProps(nextProps){

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Modal, Alert, Linking, Clipboard, AppState, Platform, Image } from 'react-native';
+import { View, Text, StyleSheet, Modal, Alert, Linking, Clipboard, AppState, Platform, Image, Keyboard } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Stepper from 'react-native-js-stepper'
 import NavigationBar from 'react-native-navbar';
@@ -15,8 +15,10 @@ import ModalMe from 'react-native-modalbox';
 import LottieView from 'lottie-react-native';
 import { material, human, iOSUIKit, iOSColors} from 'react-native-typography'
 
-import { IS_X } from '../lib'
+import { IS_X, dimensions } from '../lib'
 
+
+const isSmall = dimensions.height < 550;
 export default class componentName extends Component {
     constructor(props) {
         super(props);
@@ -31,13 +33,20 @@ export default class componentName extends Component {
             isDisabled: false,
             infoModalOpen: false,
             infoModalTest:'',
-            isScanQR: false
+            isScanQR: false,
+            buttonsShow: true
         };
     }
 
     componentDidMount(){
         AppState.addEventListener('change', this._handleAppStateChange);
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
     }
+
+    _keyboardDidShow = () => this.setState({buttonsShow: false});
+    
+    _keyboardDidHide = () => this.setState({buttonsShow: true});
 
     _handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
@@ -49,6 +58,8 @@ export default class componentName extends Component {
 
     componentWillUnmount(){
         AppState.removeEventListener('change', this._handleAppStateChange);
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
     }
 
     setModalVisible(visible) {
@@ -187,7 +198,9 @@ export default class componentName extends Component {
     }
 
     renderTRXScreen = () => {
-        const { readFromQrTRX, helpTRX } = this.state;
+        const { readFromQrTRX, helpTRX, buttonsShow } = this.state;
+        const isAndroid = Platform.OS === 'android';
+        
         return (
             <View style={{flex: 1, alignItems: 'center', alignContent: 'center'}}>
                 { readFromQrTRX ? 
@@ -196,15 +209,17 @@ export default class componentName extends Component {
                                 onRead={this.onReadTRX}
                                 reactivateTimeout={4}
                                 topViewStyle={{
-                                    height: 140,
+                                    height: 0,
                                     margin: 5
                                 }}
                                 cameraStyle={{
                                     marginTop: '10%',
-                                    width: '70%',
-                                    height: '70%',
-                                    marginLeft: '15%',
+                                    width: isSmall ? 150: 350,
+                                    height: isSmall ? 150: 350,
                                     borderRadius: 9
+                                }}
+                                containerStyle={{
+                                    alignItems: 'center', alignContent: 'center'
                                 }}
                                 topContent={
                                     <View style={{zIndex: 100}}>
@@ -217,7 +232,7 @@ export default class componentName extends Component {
                     :   
                         <>
                         <Sae
-                            label={'TRX Wallet Address'}
+                            label={'Tap to add TRX Wallet Address'}
                             iconClass={Ionicons}
                             iconName={'ios-key'}
                             iconColor={'grey'}
@@ -244,49 +259,64 @@ export default class componentName extends Component {
                         }
                         </>
                 }
+                { buttonsShow || !isAndroid ? 
                 
-                <View style={{top: readFromQrTRX ? '-11%': helpTRX ? '57%':'87%'}} flexDirection={'row'}>
+                
+                
+                <View style={{bottom: 35,  position: 'absolute'}}>
+                    <View flexDirection={'row'}>
 
-            
-                <Button
-                    color={'white'}
-                    backgroundColor={'#9bc2cf'}
-                    borderRadius={9}             
-                    icon={{name: readFromQrTRX ? 'add':'camera', type: 'ionicons'}}
-                    title={readFromQrTRX ?'Manually Add':'Read From QR'}
-                    onPress={() => {
-                        this.setState({readFromQrTRX: !readFromQrTRX}, () => {
-                            if (!this.state.hasShownQR){
-                                this.setState({isScanQR: true}, () => {
-                                    this.setState({infoModalOpen: true, hasShownQR: true})
-                                })
-                            }
-                        });
-                    }}
-                />
-                <Button
-                    color={'white'}
-                    backgroundColor={'#9bc2cf'}
-                    borderRadius={9}             
-                    icon={{name: 'create', type: 'ionicons'}}
-                    title={'Create Wallet'}
-                    onPress={() => Linking.openURL('https://tronscan.org/#/wallet/new')}
-                />
-                </View>
-                <Button
-                    color={'white'}
-                    backgroundColor={'#9bc2cf'}
-                    borderRadius={9}             
-                    icon={{name: 'help', type: 'ionicons'}}
-                    title={'Help'}
-                    onPress={() => this.setState({helpTRX: !this.state.helpTRX})}
-                />
+                
+                    <Button
+                        color={'white'}
+                        backgroundColor={'#9bc2cf'}
+                        borderRadius={9}             
+                        icon={{name: readFromQrTRX ? 'add':'camera', type: 'ionicons'}}
+                        title={readFromQrTRX ?'Manually Add':'Read From QR'}
+                        onPress={() => {
+                            this.setState({readFromQrTRX: !readFromQrTRX}, () => {
+                                if (!this.state.hasShownQR){
+                                    this.setState({isScanQR: true}, () => {
+                                        this.setState({infoModalOpen: true, hasShownQR: true})
+                                    })
+                                }
+                                if (this.state.readFromQrTRX){
+                                    console.log(this.TRXscanner)
+                                    this.TRXscanner?.reactivate?.();
+                                }
+                            });
+                        }}
+                    />
+                    <Button
+                        color={'white'}
+                        backgroundColor={'#9bc2cf'}
+                        borderRadius={9}             
+                        icon={{name: 'create', type: 'ionicons'}}
+                        title={'Create Wallet'}
+                        onPress={() => Linking.openURL('https://tronscan.org/#/wallet/new')}
+                    />
+                    </View>
+                    <View style={{marginTop: 10}}/>
+                    { !readFromQrTRX ?
+                        <Button
+                            color={'white'}
+                            backgroundColor={'#9bc2cf'}
+                            borderRadius={9}             
+                            icon={{name: 'help', type: 'ionicons'}}
+                            title={'Help'}
+                            onPress={() => this.setState({helpTRX: !this.state.helpTRX})}
+                        />:null
+                    }
+                </View>: null
+                }
             </View>
         );
     }
 
     renderQRScreen = () => {
-        const { readFromQrCoinEx } = this.state;
+        const { readFromQrCoinEx, buttonsShow } = this.state;
+        const isAndroid = Platform.OS === 'android';
+
         return (
             <View style={{flex: 1, alignItems: 'center', alignContent: 'center'}}>
                 { readFromQrCoinEx ? 
@@ -299,27 +329,27 @@ export default class componentName extends Component {
                                 alignContent: 'center'
                             }}*/
                             topViewStyle={{
-                                    height: 140,
+                                    height: 0,
                                     margin: 5
                             }}
                             cameraStyle={{
                                     marginTop: '10%',
-                                    width: '70%',
-                                    height: '70%',
-                                    marginLeft: '15%',
-                                    marginBottom: '-10%',
-                                    borderRadius: 9
+                                    width: isSmall ? 150: 350,
+                                    height: isSmall ? 150: 350,
+                                   // marginBottom: '-10%',
+                                    borderRadius: 9,
+                                    
                                 }}
                             containerStyle={{
-                                borderRadius: 9
+                                borderRadius: 9,
+                                alignItems: 'center', alignContent: 'center'
                             }}
                             topContent={
                                 <>
-                                <Text style={[styles.centerText, styles.infoText]}>
+                                <Text style={[styles.centerText, styles.infoText, {margin: 10}]}>
                                     Go to <Text style={styles.textBold}>https://www.coinex.com/apikey</Text> on your computer and scan the QR code for an API key.
                                 </Text>
-                                <View style={{marginTop: 10}}/>
-                                <Text style={[styles.centerTextRed,styles.infoREDText]}>
+                                <Text style={[styles.centerTextRed,styles.infoREDText, {margin: 10}]}>
                                     NOTE: You must add <Text style={styles.textBoldRed}>104.154.43.177</Text> to your IP White List
                                 </Text>
                                 </>
@@ -363,8 +393,8 @@ export default class componentName extends Component {
                         />
                     </>
                 }
-
-                <View style={{marginBottom: '3.5%', height: 70, marginTop: readFromQrCoinEx ? 0:'70%'}} flexDirection={'row'}>
+                { buttonsShow || !isAndroid ? 
+                <View style={{bottom: 40,  position: 'absolute'}} flexDirection={'row'}>
                                 <Button
                                     color={'white'}
                                     backgroundColor={'#9bc2cf'}
@@ -384,13 +414,14 @@ export default class componentName extends Component {
                                     onPress={() => Linking.openURL('https://www.coinex.com/apikey')}
                                 />
                             </View> 
+                :null}
              </View>
         )
     }
 
     cleanup = () => {
         if (Platform.OS !== 'android') ReactNativeHaptic.generate('impactLight'); 
-
+        Keyboard.dismiss()
         this.toggleConfetti(false);
         this.setState({
             readFromQrTRX: false
@@ -417,13 +448,15 @@ export default class componentName extends Component {
                     animationType="slide"
                     transparent={false}
                     visible={this.state.modalVisible}
-                    presentationStyle={'overFullScreen'}
+                    presentationStyle={'fullScreen'}
                     onRequestClose={this.props.onRequestClose}
                     onShow= {() => {}}
+                    style={{flex: 1}}
+                    style={{margin: 0}}
                 >
                     <NavigationBar
                         leftButton={leftButtonConfig}
-                        style={{marginBottom: -20, marginTop: IS_X ? 10:0}}
+                        style={{marginBottom: Platform.OS === 'android' ? 0:-20, marginTop: IS_X ? 10:0}}
                     />
                     <Stepper
                         ref={component => this.stepper = component}

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { StyleSheet, StatusBar } from 'react-native'
+import { StyleSheet, StatusBar, Platform } from 'react-native'
 import { Text, View } from 'react-native-animatable'
 
 import CustomButton from '../../components/CustomButton'
 import CustomTextInput from '../../components/CustomTextInput'
 import metrics from '../../config/metrics'
+import ReactNativeHaptic from 'react-native-haptic';
 
 export default class LoginForm extends Component {
 
@@ -46,7 +47,11 @@ export default class LoginForm extends Component {
             blurOnSubmit={false}
             withRef={true}
             onSubmitEditing={() => this.passwordInputRef.focus()}
-            onChangeText={(value) => this.setState({ email: value })}
+            onChangeText={(value) => 
+            {
+              if (Platform.OS !== 'android') ReactNativeHaptic.generate('impactLight');
+              this.setState({ email: value })
+            }}
             isEnabled={!isLoading}
           />
           <CustomTextInput
@@ -60,7 +65,10 @@ export default class LoginForm extends Component {
             returnKeyType={'done'}
             secureTextEntry={true}
             withRef={true}
-            onChangeText={(value) => this.setState({ password: value })}
+            onChangeText={(value) => {
+              this.setState({ password: value })
+              if (Platform.OS !== 'android') ReactNativeHaptic.generate('impactLight');
+            }}
             onSubmitEditing={() => onLoginPress(email, password)}
             isEnabled={!isLoading}
           />

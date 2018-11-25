@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "612930134863-amjibcbrcp0ip9787poai2rro7uuqnor.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.connorlarkin.cda",
+            "certificate_hash": "0722df21ab9226f16cc4a6a165c9d09058b0f2cd"
+          }
+        },
+        {
+          "client_id": "612930134863-vbf5gr70mhsupcfi6jg1dsqttiib9agk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.connorlarkin.cda",
+            "certificate_hash": "b75bd6ba8963771aa1dcc43cfde285b71be36228"
+          }
+        },
+        {
+          "client_id": "612930134863-1fm4sv51ldkkptnl19pmdjkids7mvg3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.connorlarkin.cda",
+            "certificate_hash": "ec6b84ef3b1427c5573aab9e8803626b53eea652"
+          }
+        },
+        {
           "client_id": "612930134863-b5mc9pgu56sjl7fn6qlmsqf98og1c4j9.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +53,21 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612930134863-b5mc9pgu56sjl7fn6qlmsqf98og1c4j9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "612930134863-p1uf37bh1n4lj2696gm1q0o141msm5kq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.connorlarkin.CDA",
+                "app_store_id": "1424173972"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2

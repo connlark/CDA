@@ -23,15 +23,8 @@ import Modal from "react-native-modal";
 import ReactNativeHaptic from 'react-native-haptic';
 import Crashes from 'appcenter-crashes';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
+import DeviceInfo from 'react-native-device-info';
 
-import {
-    SettingsDividerShort, 
-    SettingsDividerLong, 
-    SettingsEditText, 
-    SettingsCategoryHeader, 
-    SettingsSwitch, 
-    SettingsPicker
-} from 'react-native-settings-components';
 import { PricingCard } from 'react-native-elements'
 import Analytics from 'appcenter-analytics';
 import * as RNIap from 'react-native-iap';
@@ -69,7 +62,9 @@ class Settings extends Component {
       switchValue: true,
       rated: false,
       username: '',
-      isModalVisiblePAY: false
+      isModalVisiblePAY: false,
+      buildNumber: DeviceInfo.getBuildNumber(),
+      modalVisible: true
     };
   }
 
@@ -210,19 +205,19 @@ class Settings extends Component {
             {text: 'Cancel', onPress: () => (null)},
             {text: 'Ok', onPress: () => {
                 this.GOOGsignOut().finally((E) => {
-                    Meteor.call('notifications.remove.pushToken', err => {
-                        if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
-                        Meteor.logout((err) => {
-                        if (err){
-                            alert(JSON.stringify(err));
-                        }
-                        else {
-                            Analytics.trackEvent('Logged Out');
-                            this.props.navigation.navigate('Auth');
-                        }
-                        })
-                    });
-                })
+                });
+                Meteor.call('notifications.remove.pushToken', err => {
+                    if (err) { console.log(`notifications.rm.pushToken: ${err.reason}`); }
+                    Meteor.logout((err) => {
+                    if (err){
+                        alert(JSON.stringify(err));
+                    }
+                    else {
+                        Analytics.trackEvent('Logged Out');
+                        this.props.navigation.navigate('Auth');
+                    }
+                    })
+                });
                 
             }}        
         ],{ cancelable: false });
@@ -329,8 +324,10 @@ class Settings extends Component {
         ],{ cancelable: true });
     }
 
+    closeModal = () => this.setState({modalVisible: false})
+
     render() {
-        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username, isModalVisiblePAY } = this.state;
+        const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username, isModalVisiblePAY, buildNumber } = this.state;
         var bgColor = '#DCE3F4';
         return (
           <View style={{backgroundColor:'#EFEFF4',flex:1}}>
@@ -376,7 +373,7 @@ class Settings extends Component {
                 <SettingsList.Item
                   icon={<Image style={styles.imageStyle} source={require('./images/general.png')}/>}
                   title={`App Version`} 
-                  titleInfo={` ${appVersion} (${label})`}
+                  titleInfo={` ${appVersion}b${buildNumber} (${label})`}
                   onPress={this.updateApp}
                   hasNavArrow={false}
                 />
@@ -424,7 +421,7 @@ class Settings extends Component {
                 }
                 
               </SettingsList>
-              <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.state.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
+              <AddCredentialsModal ref={component => this.mymodal = component} onRequestClose={this.closeModal} isModalVisible={this.state.modalVisible} {...this.props}/>
             </View>
             <DropdownAlert ref={ref => this.dropdown = ref} closeInterval={1500} />
             <Modal isVisible={isModalVisiblePAY} useNativeDriver onBackdropPress={() => this.setState({isModalVisiblePAY: false})} onSwipe={() => this.setState({isModalVisiblePAY: false})} backdropOpacity={0.4} hideModalContentWhileAnimating>

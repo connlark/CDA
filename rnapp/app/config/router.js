@@ -45,7 +45,7 @@ const AppTabs = createMaterialBottomTabNavigator(
       routes: [
         { key: 'Home', routeName: 'Home' }, { key: 'History', routeName: 'History' }, { key: 'Settings', routeName: 'Settings' },
       ],
-      navigationOptions: ({ navigation }) => ({
+      defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, tintColor }) => {
           const { routeName } = navigation.state;
           let iconName;

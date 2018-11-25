@@ -6,7 +6,10 @@
  */
 
 #import "AppDelegate.h"
-
+/**#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
+#import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNative/AppCenterReactNative.h>
+*/
 #import <AppCenterReactNativeCrashes.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNative.h>
@@ -20,6 +23,8 @@
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
 @import Firebase;
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
@@ -63,6 +68,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
   NSURL *jsCodeLocation;
 
+  [AppCenterReactNative register];  // Initialize AppCenter 
+
   [AppCenterReactNativeCrashes registerWithAutomaticProcessing];  // Initialize AppCenter crashes
 
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];  // Initialize AppCenter analytics
@@ -70,7 +77,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   [AppCenterReactNative register];  // Initialize AppCenter
   
   [FIRApp configure]; //Initialize FIREBASE
-  
+  [Fabric with:@[[Crashlytics class]]];
+
   
     #ifdef DEBUG
         jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];

@@ -24,22 +24,154 @@ default_platform(:ios)
 
 platform :ios do
   lane :beta do
-      xcodeproj = "./ios/rnapp.xcodeproj"
-      increment_build_number(xcodeproj: './rnapp.xcodeproj')  
-      add_git_tag
-      gym(scheme: "rnapp", workspace: "rnapp.xcworkspace")
-      pilot
-      push_to_git_remote
+      num = last_git_tag.to_i + 1
+      versionString = get_version_number.to_s + "-"+ "b%20" + num.to_s + "-blue"
+      add_badge(shield: versionString)
+      
+      buildforstore
+
+      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      add_git_tag(
+        tag: num.to_s
+      )
+      clean_build_artifacts
+      commit_version_bump(
+          message: "Version Bump",# create a commit with a custom message
+          xcodeproj: './rnapp.xcodeproj'
+        )
+      ifttt(
+        api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
+        event_name: "IOS_betaAPPSTORE_DONE",
+        value1: "THIS IS GOOD "
+      )
   end
+
+
+  lane :alpha do
+      num = last_git_tag.to_i + 1
+      puts last_git_tag
+      increment_build_number(
+          xcodeproj: './rnapp.xcodeproj',
+          build_number: num
+        ) 
+
+      versionString = get_version_number.to_s + "-"+ "b%20" + num.to_s + "-purple"
+      puts versionString
+
+      add_badge(shield: versionString, alpha: true)
+
+      gym(
+          scheme: "rnapp", 
+          workspace: "rnapp.xcworkspace",
+          output_directory: "IPA_FOLDER",
+          output_name: "cda-iosAdhoc.ipa",
+          include_bitcode: true,
+          include_symbols: true,
+          export_options: {
+            provisioningProfiles: { 
+              "com.connorlarkin.CDA" => "match AdHoc com.connorlarkin.CDA",
+            },
+            "method": "ad-hoc",
+          }
+        )
+      sh("git checkout -- ../rnapp/Images.xcassets/")
+
+      upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-iosAdhoc.app.dSYM.zip')
+
+      match(type: "adhoc")
+      crashlytics(
+          crashlytics_path: "./Pods/Crashlytics/submit", # path to your Crashlytics submit binary.
+          api_token: "a2ec78e354f189482fccf90053282be4754c18d2",
+          build_secret: "e2515682728fa92b8f7cff2cd790f5ca7295404f39c635ef7d8876fa283d597e",
+          ipa_path: "./IPA_FOLDER/cda-iosAdhoc.ipa",
+          groups: ['me']
+        )
+      add_git_tag(
+        tag: num.to_s
+      )
+      clean_build_artifacts
+      commit_version_bump(
+          message: "Version Bump",# create a commit with a custom message
+          xcodeproj: './rnapp.xcodeproj',
+          force: true
+        )
+      push_to_git_remote
+      ifttt(
+        api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
+        event_name: "IOS_IPA_DONE",
+        value1: "THIS IS GOOD "
+      )
+  end
+
+
+  lane :appstoredeploy do      
+      buildforstore
+
+
+      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      
+      num = last_git_tag.to_i + 1
+
+      add_git_tag(
+        tag: num.to_s
+      )
+      clean_build_artifacts
+      commit_version_bump(
+          message: "Version Bump",# create a commit with a custom message
+          xcodeproj: './rnapp.xcodeproj'
+        )
+      
+      ifttt(
+        api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
+        event_name: "IOS_betaAPPSTORE_DONE",
+        value1: "THIS IS GOOD "
+      )
+  end
+
+  lane :why do
+      add_git_tag(
+        tag: "76"
+      )
+      num = last_git_tag.to_i + 1
+
+      puts last_git_tag
+      puts num
+      versionString = get_version_number.to_s + "-"+ "b%20" + num.to_s + "-purple"
+      puts versionString
+  end
+
+  
   
   lane :screenshots do
     capture_screenshots(workspace: "rnapp.xcworkspace", scheme: "FASTLANE SCREENSHOTS", number_of_retries: 3, concurrent_simulators: false)
     frame_screenshots(white: false)
-    upload_to_app_store(skip_binary_upload: true, skip_metadata: false)
+    upload_to_app_store(skip_waiting_for_build_processing: true)
   end
+
+  private_lane :buildforstore do |options|
+        match(type: "appstore")
+        num = last_git_tag.to_i + 1
+        increment_build_number(
+          xcodeproj: './rnapp.xcodeproj',
+          build_number: num
+        )
+
+        gym(
+          scheme: "rnapp", 
+          workspace: "rnapp.xcworkspace",
+          output_directory: "IPA_FOLDER",
+          output_name: "cda-ios.ipa",
+          include_bitcode: true,
+          include_symbols: true,
+          export_method: "app-store",
+          export_options: "./fastlane/ExportOptionsStore.plist"
+        )
+        
+        sh("git checkout -- ../rnapp/Images.xcassets/")
+
+        upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-ios.app.dSYM.zip')
+
+        notification(subtitle: "Finished Building", message: "🚀 uploading now 🚀")
+  end
+
 end
-
-
-
-
-
