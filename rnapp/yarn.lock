@@ -834,24 +834,24 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-appcenter-analytics@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/appcenter-analytics/-/appcenter-analytics-1.9.0.tgz#16c2a2a715a8d9316c07a5f357015eeff15af343"
-  integrity sha512-I9RF+VdeCAM4WqSLSu57YHrHNwtK0t6dFlsVcfnYKdLAcAhzgWsYd5WPlFelVcNfjhPbEUqt+YE6Sas1X189cg==
+appcenter-analytics@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/appcenter-analytics/-/appcenter-analytics-1.10.0.tgz#48fd31f2bd3ff8808ee68d7ce43bc8c5e20600a2"
+  integrity sha512-TzFIAdsj0Q0A+gGQnsYEcxweZfXNU9shgnBRF2QPTPPUv2DFXQINFeJt1gTgHyJ+qkPSHjJGg5n9XPlCrRzfiQ==
   dependencies:
-    appcenter "1.9.0"
+    appcenter "1.10.0"
 
-appcenter-crashes@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-1.9.0.tgz#f1c14125c4a7c882cfd08e1381b6f78a54ea7386"
-  integrity sha512-FEh0MGOgmu0GVRYyV+dEthvEq/KT70Xltl02OhBU9pBlwfEmcEp9Ume5bjnTFwdWbS+9ogu0o1U7I/N5XHuRQg==
+appcenter-crashes@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-1.10.0.tgz#4feca7e3bf471841b3eb7904d030448c29454be2"
+  integrity sha512-aIZV6rGYN6bujQrpIWa9nuhOlSZWLu078kDXGUPFx+d7LSkP7h7LFo2hfVigijWJ31NrrwBFIzxmmGfriywQgw==
   dependencies:
-    appcenter "1.9.0"
+    appcenter "1.10.0"
 
-appcenter-link-scripts@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-1.9.0.tgz#d8603e2943383bf76f585316e696328743284a67"
-  integrity sha512-R6UacmMhsLi9sn3Y1RjPyBfrkznI2KoNA/CgQ1A61dGxAMxMlKPShGXuG3C57UU8JvdJdo+KUE+dHbF6fAz27A==
+appcenter-link-scripts@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-1.10.0.tgz#4720582afe3fa4a4d927cd570be604882de94d63"
+  integrity sha512-iTrPk8zWpH88VQmqq1aVo+k+wRrvsReJQz16K68if6HdV8ZPIZ40OQJavj3CHYftZYH0AKaDzJqNin/VJ+3trA==
   dependencies:
     debug "^2.2.0"
     glob "^5.0.15"
@@ -861,12 +861,12 @@ appcenter-link-scripts@1.9.0:
     which "^1.2.11"
     xcode "^1.0.0"
 
-appcenter@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-1.9.0.tgz#00ee98256bf6167c62e1ed2c35a59b448affb963"
-  integrity sha512-QyTmKPjM5N2GfqP2ob1htUMWsIVln5ujhXNocr/t/N0u1zJWzaWmcY895AnvH5B7JR1D8pdt57aQKPwTRZeAHA==
+appcenter@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-1.10.0.tgz#f01daaadd1e2e9df3ca2b8dfda89a15c215d7adc"
+  integrity sha512-FdDtlAt4TsexU1NqZ/sjwbgg927Vr8yUkaNPZG19pcJmZsOXUOFDPV1ArNjhCStpf6gNFYVLvHOkooIsdCyobQ==
   dependencies:
-    appcenter-link-scripts "1.9.0"
+    appcenter-link-scripts "1.10.0"
 
 append-transform@^0.4.0:
   version "0.4.0"
@@ -3906,10 +3906,10 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
 
-jsc-android@236355.1.0:
-  version "236355.1.0"
-  resolved "https://registry.yarnpkg.com/jsc-android/-/jsc-android-236355.1.0.tgz#aba6330b9ff9c49632abe50bfc3e5def5c08af58"
-  integrity sha512-6W6KH19eHNjn6jQF9lgV8Www10iBgmUnLwDgmEmI7zQ+/apjz6seCaMQLTD16aXIer6cgGQa7RRavPskydJ2KA==
+jsc-android@236355.1.1:
+  version "236355.1.1"
+  resolved "https://registry.yarnpkg.com/jsc-android/-/jsc-android-236355.1.1.tgz#43e153b722e3c60dd0595be4e7430baf65e67c9c"
+  integrity sha512-2py4f0McZIl/oH6AzPj1Ebutc58fyeLvwq6gyVYp1RsWr4qeLNHAPfW3kmfeVMz44oUBJMQ0lECZg9n4KBhHbQ==
 
 jsdom@^11.5.1:
   version "11.12.0"
@@ -5536,10 +5536,10 @@ react-native-awesome-alerts@1.2.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-camera@1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.4.1.tgz#d962658917cc94d1f83de61a095aa1521f5f1cbc"
-  integrity sha512-aZzvGGiGYrLWamTN1iSQuhkfip3v3pp/yX4CVTNt4GD17tOOy5XvEP7S+9reYfeRqNlIMCXXI09pQEl7T2JEsw==
+react-native-camera@1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.4.3.tgz#71359ae8efdf372fb1b8b5ec72ecae1c6708da4b"
+  integrity sha512-jE9AYNOxwldJxjKKyWrERQH0Qjs6MxoInlqdscCcZnOoxD4Vmq4ut/pwauKsDLJHJyECI7yNzoapLZDtwM2YMw==
   dependencies:
     lodash "^4.17.10"
     prop-types "^15.6.2"
@@ -5599,10 +5599,10 @@ react-native-gesture-handler@^1.0.0, react-native-gesture-handler@^1.0.9:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-google-signin@^1.0.0-rc8:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.0.0.tgz#1af81402995fc11d7a82044cd09a4f5363690c28"
-  integrity sha512-Ke06atQ7/rFA+1MwHEWJos+s1JRncuRdYBlEffzSwRMRa4k50kvI4Sn7qJRTwBsqJ+au/uOZ/kM1WfCWlr3BMg==
+react-native-google-signin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.0.1.tgz#1736f08b921f9ae30d66b86887ef086aee767c99"
+  integrity sha512-ZuSNh/1qPXh+LNtxYGRDpj1oDUQ3ikOVvw5dqyOhZT0KoZcSz6WePwIYVq1BBLkZg4PMkzNpbOSmYChytf6r+Q==
 
 react-native-grid-component@^1.1.0:
   version "1.1.0"
@@ -6091,10 +6091,10 @@ recursive-fs@0.1.4:
   resolved "https://registry.yarnpkg.com/recursive-fs/-/recursive-fs-0.1.4.tgz#47e08b1ddab8d7d9a960aa0d0daea76f875b63fa"
   integrity sha1-R+CLHdq419mpYKoNDa6nb4dbY/o=
 
-redux-devtools-extension@^2.13.5:
-  version "2.13.5"
-  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.5.tgz#3ff34f7227acfeef3964194f5f7fc2765e5c5a39"
-  integrity sha512-QQ9BRy77oURHMdGys9rfQcCQDzXZ1T4oW+eUyE5Cg7DNVau69HJzc4YNDMOmpi0Dzpi1zOQgQ2rUpgJta4Lfqg==
+redux-devtools-extension@^2.13.6:
+  version "2.13.6"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.6.tgz#1e59bb9c4e6c05862ac7417c607d0201ca0854c1"
+  integrity sha512-0Ptt0Jr6vMjPGzybQz6d0cQFDsJpPte+LVpnyo6RcvarO9HNGkcPq0kzi/c9nBNWrtapNoe1gXRF/qcX8znsvw==
 
 redux-logger@^3.0.6:
   version "3.0.6"
