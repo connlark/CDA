@@ -33,7 +33,7 @@ Meteor.startup(() => {
                         }
                     }
                     else {
-                        if (user.profile.some(e => typeof(e.TRXAddress) !== 'undefined')) {
+                        if (user.profile && user.profile.some(e => typeof(e.TRXAddress) !== 'undefined')) {
                             user.profile.map((ob) => {
                                 if (typeof(ob.TRXAddress) !== 'undefined'){
                                     doTheDirtyONLYTRX(user._id, ob.TRXAddress)
