@@ -6008,10 +6008,10 @@ react-native-svg@^6.5.0:
     lodash "^4.16.6"
     pegjs "^0.10.0"
 
-react-native-swipeout@^2.3.4:
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/react-native-swipeout/-/react-native-swipeout-2.3.4.tgz#0490305a6cdb529416b0d8f9841dff7ab6c0d76d"
-  integrity sha512-XwVmoG1kgS8lG4FhKW21weJJQ4HoYP5OsFeA9Cvg+ASdg7UI0+o+7EJzqvKOOtr1MxzJ/1XDnmeGYMydcytGOA==
+react-native-swipeout@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/react-native-swipeout/-/react-native-swipeout-2.3.6.tgz#47dac8a835825cf3f2eef9e495574a3d9ab6d3fa"
+  integrity sha512-t9suUCspzck4vp2pWggWe0frS/QOtX6yYCawHnEes75A7dZCEE74bxX2A1bQzGH9cUMjq6xsdfC94RbiDKIkJg==
   dependencies:
     create-react-class "^15.6.0"
     prop-types "^15.5.10"
