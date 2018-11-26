@@ -5923,10 +5923,10 @@ react-native-platform-touchable@^1.1.1:
   resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
   integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
 
-react-native-pulse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-pulse/-/react-native-pulse-1.0.6.tgz#6d33260ad53730a8c12c96eac1453c31eb80c91a"
-  integrity sha1-bTMmCtU3MKjBLJbqwUU8MeuAyRo=
+react-native-pulse@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-pulse/-/react-native-pulse-1.0.7.tgz#5a8dc60cb6585f90ce8400beb74fbf89e5f7cd1b"
+  integrity sha512-PQvek/hC2YZddzJgyJT9FZbg37eZKl1rcYNlHbSItL3XZ0n3zF5jxFRrYLyGqHnRuRPHoY7qnrdHe4qVwy3Jnw==
 
 react-native-push-notification@3.1.2:
   version "3.1.2"
