@@ -5749,10 +5749,10 @@ react-native-animatable@^1.3.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-awesome-alerts@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-awesome-alerts/-/react-native-awesome-alerts-1.1.1.tgz#eb450153edd2a3f7f70f32cfedfed3e6631bfc08"
-  integrity sha512-2mqZ+TZ1fjizEuZyJWKGoqXzROLCWbw5ck04LVJWrlk8k78JoHsTOEWN32/srjBVC4Elv2a5IEU53Ug5PIKCqg==
+react-native-awesome-alerts@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-awesome-alerts/-/react-native-awesome-alerts-1.2.0.tgz#a19b105d5133e92712d865795d532cd3f1e4de2d"
+  integrity sha512-ouxDGJ/porNkuaeqpgxIJA4jAPqHC9bJIsxLA21NA6eZhnEhbqWOprjsNqwI0/7bJxXm9baTzXESCMzwAy3eZw==
   dependencies:
     prop-types "^15.5.10"
 
