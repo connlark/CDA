@@ -852,12 +852,25 @@ appcenter-analytics@1.9.0:
   dependencies:
     appcenter "1.9.0"
 
-appcenter-crashes@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-1.9.0.tgz#f1c14125c4a7c882cfd08e1381b6f78a54ea7386"
-  integrity sha512-FEh0MGOgmu0GVRYyV+dEthvEq/KT70Xltl02OhBU9pBlwfEmcEp9Ume5bjnTFwdWbS+9ogu0o1U7I/N5XHuRQg==
+appcenter-crashes@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-1.10.0.tgz#4feca7e3bf471841b3eb7904d030448c29454be2"
+  integrity sha512-aIZV6rGYN6bujQrpIWa9nuhOlSZWLu078kDXGUPFx+d7LSkP7h7LFo2hfVigijWJ31NrrwBFIzxmmGfriywQgw==
   dependencies:
-    appcenter "1.9.0"
+    appcenter "1.10.0"
+
+appcenter-link-scripts@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-1.10.0.tgz#4720582afe3fa4a4d927cd570be604882de94d63"
+  integrity sha512-iTrPk8zWpH88VQmqq1aVo+k+wRrvsReJQz16K68if6HdV8ZPIZ40OQJavj3CHYftZYH0AKaDzJqNin/VJ+3trA==
+  dependencies:
+    debug "^2.2.0"
+    glob "^5.0.15"
+    inquirer "1.1.2"
+    mkdirp "^0.5.1"
+    plist "^3.0.1"
+    which "^1.2.11"
+    xcode "^1.0.0"
 
 appcenter-link-scripts@1.9.0:
   version "1.9.0"
@@ -871,6 +884,13 @@ appcenter-link-scripts@1.9.0:
     plist "^3.0.1"
     which "^1.2.11"
     xcode "^1.0.0"
+
+appcenter@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-1.10.0.tgz#f01daaadd1e2e9df3ca2b8dfda89a15c215d7adc"
+  integrity sha512-FdDtlAt4TsexU1NqZ/sjwbgg927Vr8yUkaNPZG19pcJmZsOXUOFDPV1ArNjhCStpf6gNFYVLvHOkooIsdCyobQ==
+  dependencies:
+    appcenter-link-scripts "1.10.0"
 
 appcenter@1.9.0:
   version "1.9.0"
