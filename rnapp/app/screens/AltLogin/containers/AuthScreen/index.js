@@ -107,7 +107,7 @@ export default class AuthScreen extends Component {
           {(visibleForm === 'SIGNUP') && (
             <SignupForm
               ref={(ref) => this.formRef = ref}
-              onLoginLinkPress={() => this._setVisibleForm('LOGIN')}
+              onLoginLinkPress={() => this._setVisibleForm(null)}
               onSignupPress={signup}
               isLoading={isLoading}
             />
@@ -115,7 +115,7 @@ export default class AuthScreen extends Component {
           {(visibleForm === 'LOGIN') && (
             <LoginForm
               ref={(ref) => this.formRef = ref}
-              onSignupLinkPress={() => this._setVisibleForm('SIGNUP')}
+              onSignupLinkPress={() => this._setVisibleForm(null)}
               onLoginPress={login}
               isLoading={isLoading}
             />

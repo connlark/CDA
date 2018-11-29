@@ -130,7 +130,7 @@ platform :ios do
 
   lane :why do
       add_git_tag(
-        tag: "76"
+        tag: "78"
       )
       num = last_git_tag.to_i + 1
 
