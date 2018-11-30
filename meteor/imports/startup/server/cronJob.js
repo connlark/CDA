@@ -51,7 +51,7 @@ Meteor.startup(() => {
 
 export const doTheDirty = (apiToken, userId, TRXAddress) => {
     if (!apiToken && TRXAddress){
-        doTheDirtyONLYTRX(userId, TRXAddress);
+        doTheDirtyONLYTRX(userId, TRXAddress, false);
         return;
     }
     else if (!apiToken){
