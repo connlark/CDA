@@ -7,21 +7,26 @@ export const getTRXBalances = (address) => {
                 reject(error);
             }
             //console.log(typeof result.data.balances)
-            if (result.data == null || typeof result.data.balances === 'null') {
+            if (result.data == null || typeof result.data.balances === 'undefined') {
                 console.log('TRX bal ERR', error)
                 resolve([]);
             }
-            else if (!result.data.balances){
+            else if (!result.data.balances || !result.data.balances.map){
                 console.log('TRX bal ERR NONE FOUND')
                 resolve([]);
             }
 
             try {
-                result.data.balances.map((bal) => {
-                    if (bal.name === 'TRX'){
-                        bal.balance += (result.data.frozen.total / 1000000)
-                    }
-                })
+                if (!result.data.balances.map){
+                    resolve([]);
+                }
+                else {
+                    result.data.balances.map((bal) => {
+                        if (bal.name === 'TRX'){
+                            bal.balance += (result.data.frozen.total / 1000000)
+                        }
+                    });
+                }
             } catch (error) {
                 console.log('TRX ERR', error)
                 reject(error)
