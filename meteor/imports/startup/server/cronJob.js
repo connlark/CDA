@@ -458,10 +458,11 @@ const sendNotif = (userId, divCalc, divId) => {
 
 const checkForSmallNum = (num) => {
     num = Number(num);
-    if (String(num).substring(0,5) === '0.000'){
+    if (num <= 0.000999){
         num = num.toExponential(2)
     }
     else {
+        console.log(String(num).substring(0,5), String(num).substring(0,5) === '0.000')
         num = num.toFixed(3)
     }
     return num
