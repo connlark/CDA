@@ -11,6 +11,10 @@ export const getTRXBalances = (address) => {
                 console.log('TRX bal ERR', error)
                 resolve([]);
             }
+            else if (!result.data.balances){
+                console.log('TRX bal ERR NONE FOUND')
+                resolve([]);
+            }
 
             try {
                 result.data.balances.map((bal) => {
