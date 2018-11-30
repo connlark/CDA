@@ -2298,7 +2298,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.connorlarkin.CDA;
 				PRODUCT_NAME = rnapp;
 				PROVISIONING_PROFILE = "b1410fba-b4c3-4941-b460-cdee54a374be";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.connorlarkin.CDA";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.connorlarkin.CDA";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

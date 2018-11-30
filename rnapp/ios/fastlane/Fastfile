@@ -78,7 +78,7 @@ platform :ios do
 
       upload_symbols_to_crashlytics(dsym_path: './IPA_FOLDER/cda-iosAdhoc.app.dSYM.zip')
 
-      match(type: "adhoc")
+      #match(type: "adhoc")
       crashlytics(
           crashlytics_path: "./Pods/Crashlytics/submit", # path to your Crashlytics submit binary.
           api_token: "a2ec78e354f189482fccf90053282be4754c18d2",
@@ -149,7 +149,7 @@ platform :ios do
   end
 
   private_lane :buildforstore do |options|
-        match(type: "appstore")
+        #match(type: "appstore")
         num = last_git_tag.to_i + 1
         increment_build_number(
           xcodeproj: './rnapp.xcodeproj',
