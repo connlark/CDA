@@ -30,10 +30,11 @@ platform :ios do
       
       buildforstore
 
-      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       add_git_tag(
         tag: num.to_s
       )
+      pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
+      
       clean_build_artifacts
       commit_version_bump(
           message: "Version Bump",# create a commit with a custom message
@@ -107,14 +108,14 @@ platform :ios do
   lane :appstoredeploy do      
       buildforstore
 
-
+      add_git_tag(
+        tag: num.to_s
+      )
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       
       num = last_git_tag.to_i + 1
 
-      add_git_tag(
-        tag: num.to_s
-      )
+      
       clean_build_artifacts
       
       ifttt(
@@ -126,7 +127,7 @@ platform :ios do
 
   lane :why do
       add_git_tag(
-        tag: "82"
+        tag: "83"
       )
       num = last_git_tag.to_i + 1
 
