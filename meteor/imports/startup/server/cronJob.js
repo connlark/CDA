@@ -432,10 +432,10 @@ const doParse = (e) => {
     }
     e.map((o) => {
         if (o.coin.match(/BTC|BCH|ETH/)){
-            out += o.coin + ' ~ ' + Number(o.delta).toFixed(8) +`\t💲 ${Number(o.valueUSD).toFixed(3)}\n`;
+            out += o.coin + ' ~ ' + Number(o.delta).toFixed(8) +`\t💲 ${checkForSmallNum(o.valueUSD)}\n`;
         }
         else {
-            out += o.coin + ' ~ ' + Number(o.delta).toFixed(3) +`\t💲 ${Number(o.valueUSD).toFixed(3)}\n`;
+            out += '💎 ' + o.coin + ': ' + checkForSmallNum(o.delta) +` 💲 ${checkForSmallNum(o.valueUSD)}\n`;
         }
     })
     return out;
@@ -448,11 +448,22 @@ const sendNotif = (userId, divCalc, divId) => {
 
     const params = {
         sendToUserId: userId, 
-        message: `💵 $${Number(divCalc.USDdelta).toFixed(3)}\n\n𝚫:\n\n${doParse(divCalc.coinDeltas)}`, 
+        message: `💵 $${checkForSmallNum(divCalc.USDdelta)}\n\n${doParse(divCalc.coinDeltas)}`, 
         type: 'BalanceChange', 
         extraData: { divId:  divId }
     }
 
     Meteor.call('notifications.send.APNMsg', params);
+}
+
+const checkForSmallNum = (num) => {
+    num = Number(num);
+    if (String(num).substring(0,5) === '0.000'){
+        num = num.toExponential(2)
+    }
+    else {
+        num = num.toFixed(3)
+    }
+    return num
 }
 
