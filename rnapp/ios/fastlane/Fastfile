@@ -116,10 +116,6 @@ platform :ios do
         tag: num.to_s
       )
       clean_build_artifacts
-      commit_version_bump(
-          message: "Version Bump",# create a commit with a custom message
-          xcodeproj: './rnapp.xcodeproj'
-        )
       
       ifttt(
         api_key: "oj5xpv-jmZ9Y8jvUNCxAjwUyrX5YxTda5gVgLS8n-J6",
@@ -130,7 +126,7 @@ platform :ios do
 
   lane :why do
       add_git_tag(
-        tag: "78"
+        tag: "82"
       )
       num = last_git_tag.to_i + 1
 
