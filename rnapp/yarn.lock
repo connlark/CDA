@@ -1817,10 +1817,10 @@ crypto-js@^3.1.6:
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.8.tgz#715f070bf6014f2ae992a98b3929258b713f08d5"
   integrity sha1-cV8HC/YBTyrpkqmLOSkli3E/CNU=
 
-cryptocurrency-icons@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/cryptocurrency-icons/-/cryptocurrency-icons-0.9.0.tgz#2a6a439c1a8afe01b8ad9224acbf59e06d561583"
-  integrity sha512-hwjtJVauV6TFG5Z8pJnTG+4REjbjdE9ZHiribM1JeEcEbXpHs+qLfPEMBP5dSMPv3J7tgrp9OPai2eSr85pSOQ==
+cryptocurrency-icons@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/cryptocurrency-icons/-/cryptocurrency-icons-0.9.1.tgz#b4e7253a68b3487ebcf4c414714813a663d2fdd7"
+  integrity sha512-p9T/Mpp1KailojqQIR4LNf/DMpPv7OL7KtsQQEB362aX6ryyVDdpRN6sIuWhO070/iegH7K44vzJjHAEzxrQTQ==
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.4"
@@ -5566,10 +5566,10 @@ react-native-device-info@0.24.3:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.24.3.tgz#f15eff8d09fe418eaf5e7c89ddaabbc5ed718fd7"
   integrity sha512-usW00Wk6DoXH1eRSMt07j0uYvuka3SIEnJ9girlddAacyqwfa1QMVTN4eYmtaBzuMd/avhis8iHZQ3cLaR9CMA==
 
-react-native-dropdownalert@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-dropdownalert/-/react-native-dropdownalert-3.7.0.tgz#f5cc31a3c50a0783bfa78523fbfc155bacfb8154"
-  integrity sha512-GwQ0qhvA9LfCG/dsmfu+2nk4AsjHFp55Mv42br0k8RoOTjnb339YeGbWpDS76JZ431scF4COkCQldosU5ilGqg==
+react-native-dropdownalert@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-dropdownalert/-/react-native-dropdownalert-3.7.1.tgz#055928bc688c47b80a33043b79567be3b1327856"
+  integrity sha512-pdq3EO2bwUAd/jKhesav+Vy5teknD2F3DDUCNOPp5JWOiSc0OV66TjKpgu0mQp6Pr9zokkhEhhRQbRx0D/bZMQ==
   dependencies:
     prop-types "15.5.10"
 
@@ -5664,10 +5664,10 @@ react-native-meteor@^1.4.0:
     underscore "^1.8.3"
     wolfy87-eventemitter "^4.3.0"
 
-react-native-modal@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-7.0.0.tgz#85bda8b52e0e9181e09bd2ec636ed7cec10d74c3"
-  integrity sha512-i9OFAzuV+pvLcEUB1QvJ/KJlvcApQ+UdNhnjUKac5bP4Mb5kFlj+fkj6Y55hakBISwrQk/0N0Fn1vj8Ob7KR6g==
+react-native-modal@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-7.0.1.tgz#120df1966f5da96e9d89bf384f22b79ab6ca97b1"
+  integrity sha512-I/BZ4ZkVLjD/wApvSjqp/w9+J100czFNGB+SNm3oYHKAfPfm5g1OoB9UQT6DvChmG4TiVX8kiDXTm8FNrbkWpQ==
   dependencies:
     prop-types "^15.6.1"
     react-native-animatable "^1.2.4"
@@ -5713,10 +5713,10 @@ react-native-platform-touchable@^1.1.1:
   resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
   integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
 
-react-native-pulse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-pulse/-/react-native-pulse-1.0.6.tgz#6d33260ad53730a8c12c96eac1453c31eb80c91a"
-  integrity sha1-bTMmCtU3MKjBLJbqwUU8MeuAyRo=
+react-native-pulse@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-pulse/-/react-native-pulse-1.0.7.tgz#5a8dc60cb6585f90ce8400beb74fbf89e5f7cd1b"
+  integrity sha512-PQvek/hC2YZddzJgyJT9FZbg37eZKl1rcYNlHbSItL3XZ0n3zF5jxFRrYLyGqHnRuRPHoY7qnrdHe4qVwy3Jnw==
 
 react-native-push-notification@3.1.2:
   version "3.1.2"
@@ -5799,10 +5799,10 @@ react-native-swipeout@^2.3.4:
     prop-types "^15.5.10"
     react-tween-state "^0.1.5"
 
-react-native-swiper@^1.5.13:
-  version "1.5.13"
-  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.13.tgz#fa695cd4ab77b9a9df2d2bfee38ea7274dd07a2e"
-  integrity sha512-byBPx3qz3FvZhk4O8LR8am5SoO/pwm2Sj1OmFuXOOLYEj87+PzQaTr9u7+mgU76Ti2TP1OWnCPTXH6XUXYwxyw==
+react-native-swiper@^1.5.14:
+  version "1.5.14"
+  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.14.tgz#1c6f949ca377186300f972bb0f30d24062c899aa"
+  integrity sha512-Kn0fxKooN7Shwu1qJYHB+Y8ssXXnvrIwReHXU5jCdyYNfz2QbBv0Cv3sa2Mqzr+XgzORCFFIokc8uCCUITDrVA==
   dependencies:
     prop-types "^15.5.10"
 
@@ -5902,10 +5902,10 @@ react-native@0.57.5:
     xmldoc "^0.4.0"
     yargs "^9.0.0"
 
-react-navigation-drawer@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.1.tgz#b419241e5f29b3399e1a0dd910ac3c58db78695c"
-  integrity sha512-H0GdNpEvTfP94AOg97Ih5GTnkHegsGziVTbbzBF06nX2C5moNZzoodXZ9fxhGuCayH/9WYnXTCdfOi8fKgU4ww==
+react-navigation-drawer@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.3.tgz#5a14de75801a3367762b0562aa506829cb3bb92f"
+  integrity sha512-CcYrYsNQZM8Ko69M3+U+0hxOi3TPj0kPtViYdBltDBNG6bOlsnWkRQ1K/TKVRvkucKp9zsjJepHzfREU5S53Gw==
   dependencies:
     react-native-tab-view "^1.2.0"
 
@@ -5925,10 +5925,10 @@ react-navigation-redux-helpers@^2.0.5:
   dependencies:
     invariant "^2.2.2"
 
-react-navigation-stack@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.1.tgz#988a6bfa482042e995335c29d4c272647fa9172d"
-  integrity sha512-g/divE/w2tiaVSVDtgTInsgiXZDsWf+DF24S3aPWUKJSaR2C/7y1ggpoQGJDR/1gXi+/T23unaAGYfu5HK9Weg==
+react-navigation-stack@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.2.tgz#40ce0b7b61ce455e5ea2d071119b35ab38d75321"
+  integrity sha512-02iKoZRqr467z26lNn3b6oDIlIOj76ogzbSgw5P1WTZW+YuIABlpDGcKuYfJsWkiBC/GdR9Qg8vl/kMepDRICg==
 
 react-navigation-tabs@1.0.0, react-navigation-tabs@^1.0.0:
   version "1.0.0"
@@ -5940,15 +5940,15 @@ react-navigation-tabs@1.0.0, react-navigation-tabs@^1.0.0:
     react-lifecycles-compat "^3.0.4"
     react-native-tab-view "^1.0.0"
 
-react-navigation@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.0.0.tgz#f7ab0fbd8c633ecd92b2bab630e409fb25115b40"
-  integrity sha512-vbehz/Ic77ayj1Cxd5tYM5LsxSwm8d0C/adSbUe+XFU2+x1vhDLejhQnZTWlU6VJFJgoHJkLrKd4zqaDAZ+YyA==
+react-navigation@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.0.2.tgz#b510ced094bac75cee5c866c89b4d5ad7d0a4e52"
+  integrity sha512-yTQThdKSfTeECYlzfjCrRncWCidwhgoY1FrQHBnch97rKe/j6PSYMeRyJ8gG2JYxCnMLI01s6mmrPUHXSB+BHg==
   dependencies:
     "@react-navigation/core" "^3.0.0"
     "@react-navigation/native" "^3.0.1"
-    react-navigation-drawer "^1.0.1"
-    react-navigation-stack "^1.0.1"
+    react-navigation-drawer "^1.0.3"
+    react-navigation-stack "^1.0.2"
     react-navigation-tabs "^1.0.0"
 
 react-proxy@^1.1.7:
@@ -6091,10 +6091,10 @@ recursive-fs@0.1.4:
   resolved "https://registry.yarnpkg.com/recursive-fs/-/recursive-fs-0.1.4.tgz#47e08b1ddab8d7d9a960aa0d0daea76f875b63fa"
   integrity sha1-R+CLHdq419mpYKoNDa6nb4dbY/o=
 
-redux-devtools-extension@^2.13.6:
-  version "2.13.6"
-  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.6.tgz#1e59bb9c4e6c05862ac7417c607d0201ca0854c1"
-  integrity sha512-0Ptt0Jr6vMjPGzybQz6d0cQFDsJpPte+LVpnyo6RcvarO9HNGkcPq0kzi/c9nBNWrtapNoe1gXRF/qcX8znsvw==
+redux-devtools-extension@^2.13.7:
+  version "2.13.7"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.7.tgz#14bd7a1a7c8bee7f397beb1116fd16fc9633b752"
+  integrity sha512-F2GlWMWxCTJGRjJ+GSZcGDcVAj6Pbf77FKb4C9S8eni5Eah6UBGNwxNj8K1MTtmItdZH1Wx+EvIifHN2KKcQrw==
 
 redux-logger@^3.0.6:
   version "3.0.6"
