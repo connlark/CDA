@@ -1,11 +1,11 @@
 PODS:
-  - AppCenter/Analytics (1.10.0):
+  - AppCenter/Analytics (1.11.0):
     - AppCenter/Core
-  - AppCenter/Core (1.10.0)
-  - AppCenter/Crashes (1.10.0):
+  - AppCenter/Core (1.11.0)
+  - AppCenter/Crashes (1.11.0):
     - AppCenter/Core
-  - AppCenterReactNativeShared (1.9.0):
-    - AppCenter/Core (= 1.10.0)
+  - AppCenterReactNativeShared (1.10.0):
+    - AppCenter/Core (= 1.11.0)
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
   - DCTAuth (3.0)
@@ -60,10 +60,9 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - GoogleSignIn (4.3.0):
+  - GoogleSignIn (4.4.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
-    - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleToolboxForMac/DebugUtils (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
@@ -96,13 +95,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
-  - GTMOAuth2 (1.1.6):
-    - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.2.1):
-    - GTMSessionFetcher/Full (= 1.2.1)
   - GTMSessionFetcher/Core (1.2.1)
-  - GTMSessionFetcher/Full (1.2.1):
-    - GTMSessionFetcher/Core (= 1.2.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -111,15 +104,15 @@ PODS:
   - Protobuf (3.6.1)
 
 DEPENDENCIES:
-  - AppCenter/Analytics (~> 1.10.0)
-  - AppCenter/Crashes (~> 1.10.0)
-  - AppCenterReactNativeShared (~> 1.9.0)
+  - AppCenter/Analytics (~> 1.11.0)
+  - AppCenter/Crashes (~> 1.11.0)
+  - AppCenterReactNativeShared (~> 1.10.0)
   - Crashlytics (~> 3.12.0)
   - DCTAuth (from `https://github.com/danielctull/DCTAuth.git`)
   - Fabric (~> 1.9.0)
   - Firebase/Core
   - Firebase/Performance
-  - GoogleSignIn
+  - GoogleSignIn (~> 4.4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -138,7 +131,6 @@ SPEC REPOS:
     - GoogleSignIn
     - GoogleToolboxForMac
     - GoogleUtilities
-    - GTMOAuth2
     - GTMSessionFetcher
     - nanopb
     - Protobuf
@@ -153,8 +145,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/danielctull/DCTAuth.git
 
 SPEC CHECKSUMS:
-  AppCenter: 2d196f6547d274ab86836f9082cfdbd3d397e7b6
-  AppCenterReactNativeShared: a4bf64d2fae919fc0b235fe47a02ef9ddd3a0011
+  AppCenter: 3bccf8d733e337d0db574dd4cb0e33ab9637b7f2
+  AppCenterReactNativeShared: a77b000c2ac6dc2e44472621d7d0770f196e5822
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   DCTAuth: 8add154decd00335d62917828896bba790ce47fd
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
@@ -166,14 +158,13 @@ SPEC CHECKSUMS:
   FirebasePerformance: 071ef097e7fb2d4f2f27fac1d4ed72ae3dd737d7
   FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
-  GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
+  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
-  GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 5a8f9cc23c4a9a2eb8b5b15ab493093657c3b6aa
+PODFILE CHECKSUM: 46b32c4a89f3e2f411bb14df68f45f73ee24a0c9
 
 COCOAPODS: 1.5.3
