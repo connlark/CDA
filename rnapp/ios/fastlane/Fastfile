@@ -107,13 +107,13 @@ platform :ios do
 
   lane :appstoredeploy do      
       buildforstore
-
+      num = last_git_tag.to_i + 1
       add_git_tag(
         tag: num.to_s
       )
       pilot(ipa: "./IPA_FOLDER/cda-ios.ipa")
       
-      num = last_git_tag.to_i + 1
+      
 
       
       clean_build_artifacts
