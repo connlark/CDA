@@ -1933,7 +1933,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-rnapp/Pods-rnapp-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-rnapp/Pods-rnapp-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1944,7 +1944,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rnapp/Pods-rnapp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rnapp/Pods-rnapp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8410C4B1701F2DEDEA3556C6 /* [CP] Check Pods Manifest.lock */ = {
@@ -2006,7 +2006,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-rnapp/Pods-rnapp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-rnapp/Pods-rnapp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DCTAuth/DCTAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -2025,7 +2025,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rnapp/Pods-rnapp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-rnapp/Pods-rnapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

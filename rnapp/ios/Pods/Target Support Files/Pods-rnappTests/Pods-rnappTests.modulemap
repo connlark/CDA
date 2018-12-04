@@ -1,6 +1,0 @@
-framework module Pods_rnappTests {
-  umbrella header "Pods-rnappTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
