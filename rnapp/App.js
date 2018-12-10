@@ -11,6 +11,7 @@ import {
 import codePush from "react-native-code-push";
 import Analytics from 'appcenter-analytics';
 import DeviceInfo from 'react-native-device-info';
+import { useScreens } from 'react-native-screens';
 
 import store from './app/config/store';
 import {AppNavigator} from './app/config/router';
@@ -22,6 +23,7 @@ import { storeItem, retrieveItem } from './app/lib';
 if (Text.defaultProps == null) Text.defaultProps = {};
 Text.defaultProps.allowFontScaling = false;
 
+useScreens();
 let METEOR_URL = 'ws://104.154.43.177:3000/websocket';
 //let METEOR_URL = 'ws://192.168.8.230:3000/websocket';
 //let METEOR_URL = 'wss://singularityllc.meteorapp.com/websocket';
