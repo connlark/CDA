@@ -95,8 +95,10 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
                     ownedCoins.push(o.name)
                 }    
             );
-
-            findCoinBalanceInfoTRX(ownedCoins, balances, userId, shouldNOTCalcDivs);
+            
+            if (ownedCoins.length > 0){
+                findCoinBalanceInfoTRX(ownedCoins, balances, userId, shouldNOTCalcDivs);
+            }
         });
     }
 }
