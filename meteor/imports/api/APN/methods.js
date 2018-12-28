@@ -30,7 +30,7 @@ Meteor.methods({
     Meteor.defer(() => {
       user.pushToDevices.forEach(device => {
         const token = device.token;
-        console.log('APN msg sent successfully!')
+        console.log(user,'APN msg sent successfully!')
         /*agent.createMessage()
           .set({
               type: type,
