@@ -12,7 +12,7 @@ MONGO_PORT=27017
 MONGO_DB=dbname
 
 echo "=> Removing /tmp/${APP_NAME}"
-rm -rf /tmp/${APP_NAME}
+sudo rm -rf /tmp/${APP_NAME}
 
 echo "=> Executing Meteor Build..."
 meteor build \
