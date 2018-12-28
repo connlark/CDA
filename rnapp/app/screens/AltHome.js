@@ -196,8 +196,8 @@ class AltHome extends Component {
         data = data.filter((e) => typeof e.USDvalue !== 'undefined')
         return data.sort( (a,b) => {
             if (a.USDvalue && b.USDvalue){
-
-                return b.USDvalue-a.USDvalue;
+                console.log(a)
+                return Number(b.USDvalue) - Number(a.USDvalue);
             }
             else if (b.USDvalue) {
                 return true;

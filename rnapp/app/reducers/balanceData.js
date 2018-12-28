@@ -38,13 +38,16 @@ const sortData = (data) => {
     if (!data) return;
     data = data.filter((e) => typeof e.USDvalue !== 'undefined')
     return data.sort( (a,b) => {
-        if (a.USDvalue && b.USDvalue){
-
+        /*if (a.USDvalue && b.USDvalue){
+           // console.log(a)
             return b.USDvalue-a.USDvalue;
         }
         else if (b.USDvalue) {
+            console.log(b, a)
             return true;
         }
-        return false;
+        //console.log(a)
+        return false;*/
+        return Number(b.USDvalue) -Number(a.USDvalue)
     });
 }
