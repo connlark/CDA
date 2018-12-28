@@ -15,7 +15,7 @@
     "bcrypt": "^3.0.2",
     "chai": "^4.2.0",
     "coinex.com": "^1.0.3",
-    "cryptocompare": "^0.7.0",
+    "cryptocompare": "^0.7.1",
     "fibers": "^3.1.1",
     "meteor-babel": "^7.1.6",
     "meteor-node-stubs": "^0.4.1",

@@ -87,16 +87,14 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
 
     if (TRXAddress){
         getTRXBalances(TRXAddress).then((e) => {
-            e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED' || coin.name === 'SEED');
+            e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED');
             e.map((o) => {
                     balances.push({coin: o.name, balance: o.balance});
                     ownedCoins.push(o.name)
                 }    
             );
 
-            if (ownedCoins.length > 0){
-                findCoinBalanceInfoTRX(ownedCoins, balances, userId, shouldNOTCalcDivs);
-            }
+            findCoinBalanceInfoTRX(ownedCoins, balances, userId, shouldNOTCalcDivs);
         });
     }
 }
