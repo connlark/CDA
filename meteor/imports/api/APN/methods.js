@@ -30,8 +30,8 @@ Meteor.methods({
     Meteor.defer(() => {
       user.pushToDevices.forEach(device => {
         const token = device.token;
-        console.log(user,'APN msg sent successfully!')
-        /*agent.createMessage()
+        
+        agent.createMessage()
           .set({
               type: type,
               extraData: JSON.stringify(extraData),
@@ -41,8 +41,8 @@ Meteor.methods({
           .alert(message)
           .send(function (err) {
             if (err) { throw new Meteor.Error(SEND_APN_MSG, err.message); }
-            else { console.log('APN msg sent successfully!'); }
-          });*/
+            else { console.log(user,'APN msg sent successfully!'); }
+          });
       });
     });
   },

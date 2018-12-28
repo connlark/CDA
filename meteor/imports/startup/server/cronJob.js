@@ -16,7 +16,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 1 min');
+              return parser.text('every 30 min');
             },
             job: () => {
                 const users = Meteor.users.find({}).fetch();
@@ -95,7 +95,7 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
                     ownedCoins.push(o.name)
                 }    
             );
-            
+
             if (ownedCoins.length > 0){
                 findCoinBalanceInfoTRX(ownedCoins, balances, userId, shouldNOTCalcDivs);
             }
