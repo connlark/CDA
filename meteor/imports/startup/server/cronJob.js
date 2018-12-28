@@ -455,6 +455,11 @@ const sendNotif = (userId, divCalc, divId) => {
     const user = Meteor.users.findOne(userId);
     if (!user.pushToDevices || user.pushToDevices.length === 0) return;
 
+    if (Number(divCalc.USDdelta) <= 0.000000999){
+        console.log('TOO SMALL', divCalc.USDdelta)
+       return;
+    }
+
     const params = {
         sendToUserId: userId, 
         message: `💵 $${checkForSmallNum(divCalc.USDdelta)}\n\n${doParse(divCalc.coinDeltas)}`, 
