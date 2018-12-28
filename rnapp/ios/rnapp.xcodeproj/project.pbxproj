@@ -65,6 +65,7 @@
 		8E449959228B4DE5868B877C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2F35D3EC7E24BB7AACAF3F7 /* Zocial.ttf */; };
 		937A249E9BF24E328BED8799 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3967388BA3E941719E1B0694 /* Foundation.ttf */; };
 		96941EC47AEC416986CE6B39 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1E827926A64F6D82AEA56C /* libRNGestureHandler.a */; };
+		AA197FF5EF474039AA6FF3D6 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51720000495B410485B0F9A4 /* libRNFirebase.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		AE9C30D4AEE361F2119D09C8 /* Pods_rnappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6B9718269EDE475F5226D4 /* Pods_rnappTests.framework */; };
 		B1DFF291444C4F9C8B10D8CF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E9579E45B3ED43ED8330A480 /* libz.tbd */; };
@@ -510,6 +511,13 @@
 			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
 			remoteInfo = "RCTPushNotification-tvOS";
 		};
+		87ADB36921D5D16E00AC9823 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08E35F9F80FB4A349351CAD7 /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
 		87B2636A21A256750005E24B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6F8551421FDA4E56B65E119D /* RNGestureHandler.xcodeproj */;
@@ -575,6 +583,7 @@
 		00E356F21AD99517003FC87E /* rnappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rnappTests.m; sourceTree = "<group>"; };
 		01DD95A7A00A4E2688203A93 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		028BBD132E284EA0AD647769 /* libAppCenterReactNativeAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNativeAnalytics.a; sourceTree = "<group>"; };
+		08E35F9F80FB4A349351CAD7 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		0A3995BE10354B0588C56E87 /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCodePush.a; sourceTree = "<group>"; };
 		10E499E03BAA4D6884E619C3 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -604,6 +613,7 @@
 		3F50AC097B5E4FA291B99C01 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		468EF807E1694C2C9DC61EE7 /* RNScreens.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNScreens.xcodeproj; path = "../node_modules/react-native-screens/ios/RNScreens.xcodeproj"; sourceTree = "<group>"; };
 		499153D568B549ECA36FF391 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		51720000495B410485B0F9A4 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		5245587AD11688E10C37988D /* Pods_rnapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rnapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1E827926A64F6D82AEA56C /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -703,6 +713,7 @@
 				35DF1C8D54EF4E738386EA63 /* libRNRate.a in Frameworks */,
 				96941EC47AEC416986CE6B39 /* libRNGestureHandler.a in Frameworks */,
 				51538CEDB2114C27946E93BF /* libRNScreens.a in Frameworks */,
+				AA197FF5EF474039AA6FF3D6 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,6 +912,7 @@
 				008D13BA8767479FB2786F3C /* RNRate.xcodeproj */,
 				6F8551421FDA4E56B65E119D /* RNGestureHandler.xcodeproj */,
 				468EF807E1694C2C9DC61EE7 /* RNScreens.xcodeproj */,
+				08E35F9F80FB4A349351CAD7 /* RNFirebase.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1062,6 +1074,7 @@
 				2BCDF2FFEC6147858D5FABF7 /* libRNRate.a */,
 				5A1E827926A64F6D82AEA56C /* libRNGestureHandler.a */,
 				76CD2BEEB0A3459188461B04 /* libRNScreens.a */,
+				51720000495B410485B0F9A4 /* libRNFirebase.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1097,6 +1110,14 @@
 			children = (
 				87AAE1BF20FF06DB00910330 /* libRCTPushNotification.a */,
 				87AAE1C120FF06DB00910330 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87ADB36621D5D16E00AC9823 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87ADB36A21D5D16E00AC9823 /* libRNFirebase.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1245,7 +1266,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 940;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -1386,6 +1407,10 @@
 				{
 					ProductGroup = 87AAE1A420FF020900910330 /* Products */;
 					ProjectRef = 23AD8692B6F3408185ADE1AD /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 87ADB36621D5D16E00AC9823 /* Products */;
+					ProjectRef = 08E35F9F80FB4A349351CAD7 /* RNFirebase.xcodeproj */;
 				},
 				{
 					ProductGroup = 87B2636721A256750005E24B /* Products */;
@@ -1850,6 +1875,13 @@
 			remoteRef = 87AAE1C020FF06DB00910330 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		87ADB36A21D5D16E00AC9823 /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 87ADB36921D5D16E00AC9823 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		87B2636B21A256750005E24B /* libRNGestureHandler.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2149,12 +2181,14 @@
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-screens/ios",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -2192,12 +2226,14 @@
 					"$(SRCROOT)/../node_modules/react-native-rate/ios",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-screens/ios",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnappTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -2259,6 +2295,7 @@
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-screens/ios",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2323,6 +2360,7 @@
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-screens/ios",
+					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
 				INFOPLIST_FILE = rnapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2360,6 +2398,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2412,6 +2451,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2447,6 +2487,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -2493,6 +2534,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
