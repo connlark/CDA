@@ -14,7 +14,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 1 min');
+              return parser.text('every 45 min');
             },
             job: () => {
                 const users = Meteor.users.find({}).fetch();
@@ -87,7 +87,7 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
 
     if (TRXAddress){
         getTRXBalances(TRXAddress).then((e) => {
-           // e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED' || coin.name === 'SEED');
+            e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED');
             e.map((o) => {
                     balances.push({coin: o.name, balance: o.balance});
                     ownedCoins.push(o.name)
@@ -100,7 +100,8 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
 }
 
 export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
-    cc.priceMulti(ownedCoins, 'USD')
+    console.log(ownedCoins.length)
+    cc.priceMulti(['TRX'], 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
                     if ( balObj.coin === 'TRX' ||  balObj.coin === 'SEED'){
@@ -454,6 +455,11 @@ const doParse = (e) => {
 const sendNotif = (userId, divCalc, divId) => {
     const user = Meteor.users.findOne(userId);
     if (!user.pushToDevices || user.pushToDevices.length === 0) return;
+
+    if (Number(divCalc.USDdelta) <= 0.000000999){
+        console.log('TOO SMALL', divCalc.USDdelta)
+       return;
+    }
 
     const params = {
         sendToUserId: userId, 

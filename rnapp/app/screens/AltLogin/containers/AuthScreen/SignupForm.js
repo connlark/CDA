@@ -70,7 +70,7 @@ class SignupForm extends Component {
               isLoading={isLoading}
               buttonStyle={styles.createAccountButton}
               textStyle={styles.createAccountButtonText}
-              text={'Sign In anonymously'}
+              text={'Sign in Anonymously'}
             />
           </View>
           <View ref={(ref) => this.buttonRef = ref} style={{marginTop: 10}} animation={'bounceIn'} duration={600} delay={400}>

@@ -41,7 +41,7 @@ export default class Opening extends Component {
               accessible={true}
               accessibilityLabel={"login"}
               testID="23135thisisit"
-              text={'Sign In'}
+              text={'Login'}
               onPress={this.props.onSignInPress}
               buttonStyle={styles.signInButton}
               textStyle={styles.signInButtonText}
