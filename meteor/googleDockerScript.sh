@@ -12,7 +12,7 @@ MONGO_PORT=27017
 MONGO_DB=dbname
 
 echo "=> Removing /tmp/${APP_NAME}"
-sudo rm -rf /tmp/${APP_NAME}
+rm -rf /tmp/${APP_NAME}
 
 echo "=> Executing Meteor Build..."
 meteor build \
@@ -40,7 +40,7 @@ EOF
 echo "=> Creating Dockerfile..."
 cat > Dockerfile <<EOF
 # Pull base image.
-FROM mhart/alpine-node:latest
+FROM mhart/alpine-node:8.11.4
 # Install build tools to compile native npm modules
 RUN apk add --update build-base python
 # Create app directory

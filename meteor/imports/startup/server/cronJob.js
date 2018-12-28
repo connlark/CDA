@@ -5,8 +5,6 @@ import { BalanceHistory } from '../../api/BalanceHistory/balanceHistory';
 import { getTRXBalances } from '../../../lib/tronscanapi';
 
 const cc = require('cryptocompare');
-//cc.setApiKey('ba146dc5a5527a520df6c2b5bcf89ca8c71a60fe64081a6372fecae12a79dbd5')
-
 const Coinex = require('coinex.com');
 import  agent  from './apns'
 
@@ -16,7 +14,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 30 min');
+              return parser.text('every 45 min');
             },
             job: () => {
                 const users = Meteor.users.find({}).fetch();
@@ -89,7 +87,7 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
 
     if (TRXAddress){
         getTRXBalances(TRXAddress).then((e) => {
-           // e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED' || coin.name === 'SEED');
+            e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED' || coin.name === 'SEED');
             e.map((o) => {
                     balances.push({coin: o.name, balance: o.balance});
                     ownedCoins.push(o.name)
