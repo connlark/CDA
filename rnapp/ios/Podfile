@@ -30,6 +30,6 @@ target 'rnapp' do
 end
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
-use_frameworks!
+#use_frameworks!
 
 pod 'DCTAuth', :git => 'https://github.com/danielctull/DCTAuth.git'
