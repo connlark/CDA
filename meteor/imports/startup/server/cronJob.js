@@ -102,7 +102,8 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
 }
 
 export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
-    cc.priceMulti(ownedCoins, 'USD')
+    console.log(ownedCoins.length)
+    cc.priceMulti(['TRX'], 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
                     if ( balObj.coin === 'TRX' ||  balObj.coin === 'SEED'){
