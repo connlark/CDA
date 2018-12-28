@@ -14,7 +14,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 45 min');
+              return parser.text('every 1 min');
             },
             job: () => {
                 const users = Meteor.users.find({}).fetch();
@@ -87,7 +87,7 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
 
     if (TRXAddress){
         getTRXBalances(TRXAddress).then((e) => {
-            e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED');
+           // e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED' || coin.name === 'SEED');
             e.map((o) => {
                     balances.push({coin: o.name, balance: o.balance});
                     ownedCoins.push(o.name)
@@ -103,18 +103,27 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
     cc.priceMulti(ownedCoins, 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
-                    if (prices[balObj.coin]){
-                        balObj.USDprice = prices[balObj.coin].USD;
-                        balObj.USDvalue = parseFloat(prices[balObj.coin].USD * balObj.balance).toFixed(4);
+                    if ( balObj.coin === 'TRX' ||  balObj.coin === 'SEED'){
+                        balObj.USDprice = prices[balObj.TRX].USD;
+                        balObj.USDvalue = parseFloat(prices[balObj.TRX].USD * balObj.balance).toFixed(4);
+                    }
+                    else {
+                        balObj.USDprice = 0;
+                        balObj.USDvalue = 0;
                     }
                     return balObj;
                 });
                 cc.coinList().then(coinList => {
                     balances = balances.map((balObj) => {
-                        if(coinList.Data[balObj.coin]){
+                        if(balObj.coin === 'TRX'){
                             balObj.ccurl = coinList.Data[balObj.coin].Url;
                             balObj.imgUrl = 'https://www.cryptocompare.com'+coinList.Data[balObj.coin].ImageUrl;
                             balObj.fullName = coinList.Data[balObj.coin].FullName;
+                        }
+                        else {
+                            balObj.ccurl = 'https://www.trontokens.org';
+                            balObj.imgUrl = 'https://cdn-images-1.medium.com/max/2000/0*SUwskl5kRI6AZz3F.jpg';
+                            balObj.fullName = balObj.coin;
                         }
                         return balObj;
                     }); 

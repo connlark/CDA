@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { StyleSheet, StatusBar } from 'react-native'
 import { Text, View } from 'react-native-animatable'
+import { withNavigation } from 'react-navigation';
 
 import CustomButton from '../../components/CustomButton'
 import CustomTextInput from '../../components/CustomTextInput'
 import metrics from '../../config/metrics'
 
-export default class SignupForm extends Component {
+class SignupForm extends Component {
   state = {
     email: '',
     password: '',
@@ -21,6 +22,10 @@ export default class SignupForm extends Component {
         this.linkRef.fadeOut(300)
       ])
     }
+  }
+
+  anon = () => {
+    this.props.navigation.navigate('AuthLoading')
   }
 
   render () {
@@ -57,7 +62,18 @@ export default class SignupForm extends Component {
           />
         </View>
         <View style={styles.footer}>
-          <View ref={(ref) => this.buttonRef = ref} animation={'bounceIn'} duration={600} delay={400}>
+
+          <View animation={'bounceIn'} duration={600} delay={400}>
+            <CustomButton
+              onPress={this.anon}
+              isEnabled={isValid}
+              isLoading={isLoading}
+              buttonStyle={styles.createAccountButton}
+              textStyle={styles.createAccountButtonText}
+              text={'Sign In anonymously'}
+            />
+          </View>
+          <View ref={(ref) => this.buttonRef = ref} style={{marginTop: 10}} animation={'bounceIn'} duration={600} delay={400}>
             <CustomButton
               onPress={() => onSignupPress(email, password, fullName)}
               isEnabled={isValid}
@@ -67,6 +83,7 @@ export default class SignupForm extends Component {
               text={'Create Account'}
             />
           </View>
+          
           <Text
             ref={(ref) => this.linkRef = ref}
             style={styles.loginLink}
@@ -88,10 +105,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: metrics.DEVICE_WIDTH * 0.1
   },
   form: {
-    marginTop: 20
+    marginTop: 20,
+    marginBottom:70,
   },
   footer: {
     height: 100,
+    marginBottom: 40,
+    marginTop: -30,
     justifyContent: 'center'
   },
   createAccountButton: {
@@ -107,3 +127,6 @@ const styles = StyleSheet.create({
     padding: 20
   }
 })
+
+
+export default withNavigation(SignupForm);

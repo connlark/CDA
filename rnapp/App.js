@@ -38,6 +38,7 @@ if (__DEV__ && Platform.OS === 'ios') {
   NativeModules.DevSettings.setIsDebuggingRemotely(true);
   NativeModules.DevSettings.setHotLoadingEnabled(true)
   Analytics.setEnabled(false);
+  METEOR_URL = 'ws://localhost:3000/websocket';
 }
 else if (DeviceInfo.isEmulator()){
   Analytics.setEnabled(false);

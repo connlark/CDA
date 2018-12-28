@@ -16,7 +16,7 @@ before_all do
   ENV['DEVELOPER_DIR'] = '/Applications/Xcode.app/Contents/Developer'
   skip_docs
   update_fastlane
-  clear_derived_data
+  clear_derived_data(derived_data_path: "./derived")
   git_pull
   #ensure_git_status_clean
 end
@@ -73,7 +73,8 @@ platform :ios do
               "com.connorlarkin.CDA" => "match AdHoc com.connorlarkin.CDA",
             },
             "method": "ad-hoc",
-          }
+          },
+          derived_data_path: './derived'
         )
       sh("git checkout -- ../rnapp/Images.xcassets/")
 
@@ -161,7 +162,8 @@ platform :ios do
           include_bitcode: true,
           include_symbols: true,
           export_method: "app-store",
-          export_options: "./fastlane/ExportOptionsStore.plist"
+          export_options: "./fastlane/ExportOptionsStore.plist",
+          derived_data_path: './derived'
         )
         
         sh("git checkout -- ../rnapp/Images.xcassets/")

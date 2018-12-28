@@ -329,6 +329,8 @@ class Settings extends Component {
     render() {
         const { appVersion, label, isPending, isDownloading, receivedBytes, totalBytes, showIsUpToDate, updateText, TRXAddress, CoinExKeys, username, isModalVisiblePAY, buildNumber } = this.state;
         var bgColor = '#DCE3F4';
+        const usernm = this.props.meteorUser
+        console.log(usernm)
         return (
           <View style={{backgroundColor:'#EFEFF4',flex:1}}>
             <View style={{borderBottomWidth:1, backgroundColor:'#f7f7f8',borderColor:'#c8c7cc'}}>
@@ -467,6 +469,7 @@ export default withTracker(params => {
     return {
       //user: Meteor.user()
       connected: Meteor.status().connected,
+      meteorUser: Meteor.user()
     };
 })(connetedSettings);
  

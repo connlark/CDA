@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -48,6 +49,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
             new RNScreensPackage(),
             new RNIapPackage(),
             new RNGoogleSigninPackage(),
