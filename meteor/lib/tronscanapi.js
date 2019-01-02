@@ -5,21 +5,23 @@ export const getTRXBalances = (address) => {
             console.log(`TRX RESULT ADDR: ${address} status code: ${result.statusCode}`);
             if (error || result.statusCode !== 200 || !result.data.balances){
                 console.log('TRX ERR', error)
-                resolve([]);
+                reject();
             }
             //console.log(typeof result.data.balances)
             if (result.data == null || typeof result.data.balances === 'undefined') {
                 console.log('TRX bal ERR', error)
-                resolve([]);
+                reject();
             }
             else if (!result.data.balances || !result.data.balances.map || !Array.isArray(result.data.balances)){
                 console.log('TRX bal ERR NONE FOUND')
-                resolve([]);
+                reject();
             }
 
             try {
-                if (!result.data.balances.map){
-                    resolve([]);
+                if (!result.data.balances || !result.data.balances.map){
+                    console.log('TRX bal ERR MAP ERR')
+
+                    reject();
                 }
                 else {
                     result.data.balances.map((bal) => {
@@ -30,7 +32,7 @@ export const getTRXBalances = (address) => {
                 }
             } catch (error) {
                 console.log('TRX ERR', error)
-                resolve([]);
+                reject();
             }
 
             resolve(result.data.balances)
