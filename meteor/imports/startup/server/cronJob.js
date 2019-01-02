@@ -48,7 +48,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 10 sec');
+              return parser.text('every 45 min');
             },
             job: (intendedAt) => {
                 var moment = require('moment');
