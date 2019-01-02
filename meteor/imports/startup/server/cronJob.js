@@ -9,14 +9,53 @@ const Coinex = require('coinex.com');
 import  agent  from './apns'
 
 
+var MyLogger = function(opts) {
+    console.log('\x1b[42m%s\x1b[0m', 'Level', opts.level);
+    console.log('\x1b[42m%s\x1b[0m', 'Message', opts.message);
+    console.log('\x1b[42m%s\x1b[0m', 'Tag', opts.tag);
+  }
+  
 Meteor.startup(() => {
+    
+
+        SyncedCron.config({
+            // Log job run details to console
+            log: true,
+        
+            // Use a custom logger function (defaults to Meteor's logging package)
+            logger: MyLogger,
+        
+            // Name of collection to use for synchronisation and logging
+            collectionName: 'cronHistory',
+        
+            // Default to using localTime
+            utc: true,
+        
+            /*
+            TTL in seconds for history records in collection to expire
+            NOTE: Unset to remove expiry but ensure you remove the index from
+            mongo by hand
+        
+            ALSO: SyncedCron can't use the `_ensureIndex` command to modify
+            the TTL index. The best way to modify the default value of
+            `collectionTTL` is to remove the index by hand (in the mongo shell
+            run `db.cronHistory.dropIndex({startedAt: 1})`) and re-run your
+            project. SyncedCron will recreate the index with the updated TTL.
+            */
+            collectionTTL: 172800
+        });
         SyncedCron.add({
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 45 min');
+              return parser.text('every 10 sec');
             },
-            job: () => {
+            job: (intendedAt) => {
+                var moment = require('moment');
+                console.log('\x1b[42m%s\x1b[0m', 'job should be running at:');
+                console.log('\x1b[42m%s\x1b[0m', moment(new Date, "hmm").format("YYYY-MM-DD HH:mm").toString())
+
+
                 const users = Meteor.users.find({}).fetch();
                 for (let index = 0; index < users.length; index++) {
                     const user = users[index];
