@@ -2155,10 +2155,10 @@ crypto-js@^3.1.6:
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.8.tgz#715f070bf6014f2ae992a98b3929258b713f08d5"
   integrity sha1-cV8HC/YBTyrpkqmLOSkli3E/CNU=
 
-cryptocurrency-icons@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/cryptocurrency-icons/-/cryptocurrency-icons-0.8.1.tgz#27f1beb11f2606823410a5ea03fbdafe1024221e"
-  integrity sha512-EX8174hn9+1sRG654SG0AXzIEfwNMrxt2DPtY67AWpItrMhXAgqOO27s3sNAdMVo1yuMHisEw6NK3ToURYvVqg==
+cryptocurrency-icons@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/cryptocurrency-icons/-/cryptocurrency-icons-0.10.1.tgz#d8d1a71fbf4f9787b50783bbaf170e021415a06e"
+  integrity sha512-Vn+mSeFpCnFNlgE+MHkfhnH35uttlh3FcXKv/dy4xPPZF024n5uAOD81uqGoO12qChkugcgL3GabqoQy9U867w==
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.4"
