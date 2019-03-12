@@ -60,9 +60,10 @@ describe('Endpoint Tests', function () {
 
     it('tests if DICKS coin === 1', async (done) => {
         const bals = await getTRXBalances('THnpUyyvzpFpGGk4fTDXtTj2K7svJx8kfn');
-        bals.map((e) => {
-          if (e.name === 'DICKS'){
-            chai.assert.equal(e.balance, 1, 'balance.dicks equal `1`');
+        bals.asset.map((e) => {
+          console.log(e)
+          if (e.key === 'DICKS'){
+            chai.assert.equal(e.value, 1, 'balance.dicks equal `1`');
             done()
           }
         })

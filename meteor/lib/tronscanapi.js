@@ -1,41 +1,40 @@
+
+const tronWeb = new TronWeb(
+    fullNode,
+    solidityNode,
+    eventServer,
+    privateKey
+);
+
 export const getTRXBalances = (address) => {
     return new Promise((resolve, reject) => {
         if (!address) return;
-        HTTP.get(`https://api.tronscan.org/api/account/${address}`, (error, result) => {
-            console.log(`TRX RESULT ADDR: ${address} status code: ${result.statusCode}`);
-            if (error || result.statusCode !== 200 || !result.data.balances){
-                console.log('TRX ERR', error)
-                reject();
-            }
-            //console.log(typeof result.data.balances)
-            if (result.data == null || typeof result.data.balances === 'undefined') {
-                console.log('TRX bal ERR', error)
-                reject();
-            }
-            else if (!result.data.balances || !result.data.balances.map || !Array.isArray(result.data.balances)){
-                console.log('TRX bal ERR NONE FOUND')
-                reject();
+        //const addrHEX = toHex(address)
+       // console.log('HEX',addrHEX)
+
+        getAccount(address).then((o) => {
+            console.log(o);
+            if (o && o.balance){
+                resolve(o)
             }
 
-            try {
-                if (!result.data.balances || !result.data.balances.map){
-                    console.log('TRX bal ERR MAP ERR')
 
-                    reject();
-                }
-                else {
-                    result.data.balances.map((bal) => {
-                        if (bal.name === 'TRX'){
-                            bal.balance += (result.data.frozen.total / 1000000)
-                        }
-                    });
-                }
-            } catch (error) {
-                console.log('TRX ERR', error)
-                reject();
-            }
-
-            resolve(result.data.balances)
+        }).catch((e) => {
+            reject();
         });
     });
 };
+
+
+async function getAccount(address) {
+
+
+    // The majority of the function calls are asynchronus,
+    // meaning that they cannot return the result instantly.
+    // These methods therefore return a promise, which you can await.
+    const account = await tronWeb.trx.getAccount(address)
+    return account;
+
+    // You can also bind a `then` and `catch` method.
+    
+}

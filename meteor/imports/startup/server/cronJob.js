@@ -124,16 +124,28 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
     let ownedCoins = [];
     let balances = [];
 
-    if (TRXAddress){
+    if (TRXAddress){//
         getTRXBalances(TRXAddress).then((e) => {
-            e = e.filter((coin) => coin.name === 'TRX' || coin.name === 'SEED');
-            e.map((o) => {
-                    balances.push({coin: o.name, balance: o.balance});
-                    ownedCoins.push(o.name)
-                }    
-            );
+            let coins = [];
+            let ownedCoins = ['TRX'];
+            let totalFrozen = 0;
+            if (e.frozen && e.frozen.length > 0){
+                e.frozen.map((obj) => {
+                    totalFrozen+=obj.frozen_balance;
+                })
 
-            findCoinBalanceInfoTRX(ownedCoins, balances, userId, shouldNOTCalcDivs);
+            }
+            coins.push({coin: 'TRX', balance: Number(e.balance) + Number(e.frozen[0].frozen_balance) });
+
+            e.asset.map((coin) => {
+                if (coin.key === 'SEED'){
+                    coins.push({coin: coin.key, balance: coin.value})
+                    ownedCoins.push(coin.key)
+                }
+            })
+
+
+            findCoinBalanceInfoTRX(ownedCoins, coins, userId, shouldNOTCalcDivs);
         });
     }
 }
@@ -143,8 +155,10 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
     cc.priceMulti(['TRX'], 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
+                    console.log('THUS',prices)
                     if ( balObj.coin === 'TRX' ||  balObj.coin === 'SEED'){
                         balObj.USDprice = prices['TRX'].USD;
+                        console.log(prices['TRX'].USD * balObj.balance)
                         balObj.USDvalue = parseFloat(prices['TRX'].USD * balObj.balance).toFixed(4);
                     }
                     else {
