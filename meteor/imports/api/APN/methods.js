@@ -41,7 +41,7 @@ Meteor.methods({
           .alert(message)
           .send(function (err) {
             if (err) { throw new Meteor.Error(SEND_APN_MSG, err.message); }
-            else { console.log('APN msg sent successfully!'); }
+            else { console.log('APN msg sent successfully!', sendToUserId); }
           });
       });
     });

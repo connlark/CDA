@@ -137,15 +137,21 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
             }
             coins.push({coin: 'TRX', balance: Number(Number(e.balance) + Number(totalFrozen))/ 1000000 });
 
-            e.asset.map((coin) => {
-                if (coin.key === 'SEED'){
-                    coins.push({coin: coin.key, balance: coin.value})
-                    ownedCoins.push(coin.key)
-                }
-            })
+            if (e.asset && e.asset.map){
+                e.asset.map((coin) => {
+                    if (coin.key === 'SEED'){
+                        coins.push({coin: coin.key, balance: coin.value})
+                        ownedCoins.push(coin.key)
+                    }
+                })
+            }
+            
 
 
             findCoinBalanceInfoTRX(ownedCoins, coins, userId, shouldNOTCalcDivs);
+        }).catch((o) => {
+            console.log('doTheDirtyONLY TRX ERR', o);
+            return;
         });
     }
 }
