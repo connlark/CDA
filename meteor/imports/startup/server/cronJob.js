@@ -135,7 +135,7 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
                 })
 
             }
-            coins.push({coin: 'TRX', balance: Number(Number(e.balance) + Number(e.frozen[0].frozen_balance))/ 1000000 });
+            coins.push({coin: 'TRX', balance: Number(Number(e.balance) + Number(totalFrozen))/ 1000000 });
 
             e.asset.map((coin) => {
                 if (coin.key === 'SEED'){
