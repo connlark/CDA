@@ -5,6 +5,8 @@ import { BalanceHistory } from '../../api/BalanceHistory/balanceHistory';
 import { getTRXBalances } from '../../../lib/tronscanapi';
 
 const cc = require('cryptocompare');
+cc.setApiKey('7d21c6ad8b54078b27824f30876f7546e2b547a10f98eb08f95f0df5bca3e156')
+
 const Coinex = require('coinex.com');
 import  agent  from './apns'
 
