@@ -18,11 +18,8 @@ const tronWeb = new TronWeb(
 export const getTRXBalances = (address) => {
     return new Promise((resolve, reject) => {
         if (!address) return;
-        //const addrHEX = toHex(address)
-       // console.log('HEX',addrHEX)
 
         getAccount(address).then((o) => {
-            console.log(o);
             if (o && o.balance){
                 resolve(o)
             }
@@ -42,8 +39,5 @@ async function getAccount(address) {
     // meaning that they cannot return the result instantly.
     // These methods therefore return a promise, which you can await.
     const account = await tronWeb.trx.getAccount(address)
-    return account;
-
-    // You can also bind a `then` and `catch` method.
-    
+    return account;    
 }

@@ -155,10 +155,8 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
     cc.priceMulti(['TRX'], 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
-                    console.log('THUS',prices)
                     if ( balObj.coin === 'TRX' ||  balObj.coin === 'SEED'){
                         balObj.USDprice = prices['TRX'].USD;
-                        console.log(prices['TRX'].USD * balObj.balance)
                         balObj.USDvalue = parseFloat(prices['TRX'].USD * balObj.balance).toFixed(4);
                     }
                     else {
