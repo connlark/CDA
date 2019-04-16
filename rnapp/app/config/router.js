@@ -50,9 +50,9 @@ const AppTabs = createMaterialBottomTabNavigator(
           const { routeName } = navigation.state;
           let iconName;
           if (routeName === 'Home') {
-            iconName = "ios-home-outline";
+            iconName = "ios-home";
           } else if (routeName === 'Settings') {
-            iconName = `ios-options${focused ? '' : '-outline'}`;
+            iconName = `ios-options`;
           }
           else if (routeName === 'History') {
             iconName = 'ios-trending-up';
