@@ -6028,10 +6028,10 @@ react-native-awesome-alerts@1.2.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-camera@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-2.4.0.tgz#1f3c6fc2afcc556b4f2b7b6a166f86e4a88ca95d"
-  integrity sha512-BPPcZEqnEyVjn9bwnuu9hrLErAb3OCyL9+mU/uOoejmIf/6GpdJdbGAkpP6kPDiBWo3b1ki34b7Zccv6Y3MFBA==
+react-native-camera@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-2.6.0.tgz#bf97b0fc68aa8732d815e9bbd92e63529f51d598"
+  integrity sha512-g0Hi4yhUg1yBsYbW9aLxVaX+rgl9sKrrDAGF6difiRTvwCUEqlID2DosLCQQPkLSniJHVa8gc+SwCegahU23aA==
   dependencies:
     prop-types "^15.6.2"
 
@@ -6102,10 +6102,10 @@ react-native-gesture-handler@^1.1.0:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-google-signin@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.2.2.tgz#8131b3f0668b3dc96f963835ae821613f022070f"
-  integrity sha512-SqqZihkwO7Zbz7IsFqudEpa1kkoSjbDHsj6xyOZxTyGz/QgGVMkfJzrNNduZd9vJv+OJjdxzrz2dUNuNqTPFzA==
+react-native-google-signin@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.2.3.tgz#700943177a55cd8668a8fb85e370bcf1cb920d1e"
+  integrity sha512-9n1vkxYI2uwt91Jvx2BUqL5xeyNivytMnaR5OWIVujVGj1y2bpn4XCwT7R2C2WzYRrcD8xw9R6Pp5R4Linj1hg==
 
 react-native-grid-component@^1.1.0:
   version "1.1.0"
@@ -6357,10 +6357,10 @@ react-native-textinput-effects@^0.5.1:
   resolved "https://registry.yarnpkg.com/react-native-textinput-effects/-/react-native-textinput-effects-0.5.1.tgz#52b54bb56b58a4b67b5d3fa4ffccba3d288cd8c9"
   integrity sha512-9ywFH1S4WV/IkYcGwFYZrOYx5j84WvbhzWbLO52rN1PxgjI1tfZu8c5Ju8fsA7eLKuXt7YRen4iVTYYahrFq1w==
 
-react-native-ticker@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-ticker/-/react-native-ticker-2.1.1.tgz#4498ad45dc1957cba72618ed5c382e5572b0ac96"
-  integrity sha512-Nx56BGX9jvk30HZDyad/L7t9x4ClwdRq/Z18F6gSt0Xd9MahbHUbzq4NMvm+adqDLAzJDILotjHSqecQsPdq8w==
+react-native-ticker@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-ticker/-/react-native-ticker-2.2.1.tgz#faf4e8984f5b712dbd2eccf3256e185d6a1f38d3"
+  integrity sha512-PCKz2eje7IHZMQZ1/4sSA8GEvs4gSA/0Y+GJIDaaItm3LA25KxYt0wD3NPF8ELjyX/DUCVUR+mjlSUJgSF2m0g==
 
 react-native-typography@^1.4.0:
   version "1.4.0"
@@ -6385,10 +6385,10 @@ react-native-vector-icons@^4.5.0:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native@0.59.4:
-  version "0.59.4"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.4.tgz#c0725e2e8efdea135533794ce95fea2289fe619a"
-  integrity sha512-etnXQp9IZgC8Vj5gsxZEDP4xRjJVNIj5/BSE1WcNAONG6tu6+mDBntx1jxHInwh61WYNgoQJuQGsbN5Na59ZDw==
+react-native@0.59.5:
+  version "0.59.5"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.5.tgz#79500d2885a3dc83216715e1fc6effa878ad6ea9"
+  integrity sha512-8Q/9cS6IMsGNiFhJgzmncbUeuacXQMe5EJl0c63fW30DvjEjeTVCvhM08eGzSpsNlOvL2XDRa4YOiCrwI7S1TA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^1.2.1"
