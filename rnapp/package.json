@@ -12,7 +12,7 @@
     "@babel/runtime": "^7.1.2",
     "appcenter": "1.9.0",
     "appcenter-analytics": "1.9.0",
-    "appcenter-crashes": "1.9.0",
+    "appcenter-crashes": "2.0.0",
     "assert": "^1.4.1",
     "babel-core": "7.0.0-bridge.0",
     "coinlist": "^3.1.1",
