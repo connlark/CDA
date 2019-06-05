@@ -45,7 +45,7 @@ Meteor.methods({
             });
         }
 
-        doTheDirty(user.profile[0].token,user._id, TRXAddress);
+        doTheDirty(token, TRXAddress);
     },
     'Balances.setTRXAddress' (address){
         const user = Meteor.user();

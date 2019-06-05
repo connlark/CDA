@@ -138,11 +138,16 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
            
             coins.push({coin: 'TRX', balance: Number(Number(e.balance) + Number(totalFrozen))/ 1000000 });
 
-            if (e.asset && e.asset.map){
-                e.asset.map((coin) => {
-                    if (coin.key === 'SEED'){
-                        coins.push({coin: coin.key, balance: coin.value})
-                        ownedCoins.push(coin.key)
+            console.log(e.assetV2)
+            if (e.assetV2 && e.assetV2.map){
+                e.assetV2.map((coin) => {
+                    if (coin.key === '1000001'){
+                        coins.push({coin: 'SEED', balance: coin.value})
+                        ownedCoins.push('SEED')
+                    }
+                    if (coin.key === '1002000'){
+                        coins.push({coin: 'BTT', balance: coin.value*0.000001})
+                        ownedCoins.push('BTT')
                     }
                 })
             }
@@ -159,12 +164,17 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
 
 export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCalcDivs) => {
     console.log(ownedCoins.length)
-    cc.priceMulti(['TRX'], 'USD')
+    cc.priceMulti([ownedCoins], 'USD')
             .then(prices => {
                 balances = balances.map((balObj) => {
                     if ( balObj.coin === 'TRX' ||  balObj.coin === 'SEED'){
                         balObj.USDprice = prices['TRX'].USD;
                         balObj.USDvalue = parseFloat(prices['TRX'].USD * balObj.balance).toFixed(4);
+                    }
+                    else if (balObj.coin === 'BTT'){
+                        console.log(prices)
+                        balObj.USDprice = prices['BTT'].USD;
+                        balObj.USDvalue = parseFloat(prices['BTT'].USD * balObj.balance).toFixed(4);
                     }
                     else {
                         balObj.USDprice = 0;
