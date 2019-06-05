@@ -29,7 +29,7 @@ Meteor.methods({
 
     Meteor.defer(() => {
       console.log('APN msg sent successfully!', sendToUserId);
-      /*user.pushToDevices.forEach(device => {
+      user.pushToDevices.forEach(device => {
         const token = device.token;
   
         agent.createMessage()
@@ -44,7 +44,7 @@ Meteor.methods({
             if (err) { throw new Meteor.Error(SEND_APN_MSG, err.message); }
             else { console.log('APN msg sent successfully!', sendToUserId); }
           });
-      });*/
+      });
     });
   },
   'notifications.send.APNMsg.TOALL'() {

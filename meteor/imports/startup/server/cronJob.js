@@ -50,7 +50,7 @@ Meteor.startup(() => {
             name: '💵💵💵💵💵💵💵',
             schedule: function(parser) {
               // parser is a later.parse object
-              return parser.text('every 5 min');
+              return parser.text('every 70 min');
             },
             job: (intendedAt) => {
                 var moment = require('moment');
@@ -138,7 +138,6 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
            
             coins.push({coin: 'TRX', balance: Number(Number(e.balance) + Number(totalFrozen))/ 1000000 });
 
-            console.log(e.assetV2)
             if (e.assetV2 && e.assetV2.map){
                 e.assetV2.map((coin) => {
                     if (coin.key === '1000001'){
@@ -172,7 +171,6 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
                         balObj.USDvalue = parseFloat(prices['TRX'].USD * balObj.balance).toFixed(4);
                     }
                     else if (balObj.coin === 'BTT'){
-                        console.log(prices)
                         balObj.USDprice = prices['BTT'].USD;
                         balObj.USDvalue = parseFloat(prices['BTT'].USD * balObj.balance).toFixed(4);
                     }
@@ -233,7 +231,7 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
                             mergeBalances(userId)
                             
                             if (balHistory && divCalc.coinDeltas.length !== 0){
-                                if (shouldNOTCalcDivs || true) return;
+                                if (shouldNOTCalcDivs) return;
                                 balHistory.history.push({date: new Date, divData: divCalc, divId: divId})
                                 BalanceHistory.update(
                                     {userId: userId},
@@ -246,7 +244,7 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
 
                             }
                             else {
-                                if (shouldNOTCalcDivs || divCalc.coinDeltas.length === 0 || true) return;
+                                if (shouldNOTCalcDivs || divCalc.coinDeltas.length === 0) return;
                                 const history = [];
                                 history.push({date: new Date, divData: divCalc, divId: divId});
                                 BalanceHistory.insert(
