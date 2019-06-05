@@ -24,14 +24,23 @@ Meteor.methods({
           );
         doTheDirty(user.profile[0].token,user._id);
     },
-    'Balances.checkForNewBalance' (token){
+    'Balances.checkForNewBalance' (huh){
         const user = Meteor.user();
         let TRXAddress = null;
+        let token = null;
 
         if (user && user.profile && user.profile.some(e => typeof(e.TRXAddress) !== 'undefined')) {
             user.profile.map((ob) => {
                 if (typeof(ob.TRXAddress) !== 'undefined'){
                     TRXAddress = ob.TRXAddress;
+                }
+            });
+        }
+
+        if (user && user.profile && user.profile.some(e => typeof(e.token) !== 'undefined')) {
+            user.profile.map((ob) => {
+                if (typeof(ob.TRXAddress) !== 'undefined'){
+                    token = ob.token;
                 }
             });
         }

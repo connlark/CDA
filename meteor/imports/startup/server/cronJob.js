@@ -131,12 +131,11 @@ export const doTheDirtyONLYTRX = (userId, TRXAddress, shouldNOTCalcDivs) => {
             let coins = [];
             let ownedCoins = ['TRX'];
             let totalFrozen = 0;
-            if (e.frozen && e.frozen.length > 0){
-                e.frozen.map((obj) => {
-                    totalFrozen+=obj.frozen_balance;
-                })
+            if (e.account_resource && e.account_resource.frozen_balance_for_energy &&  e.account_resource.frozen_balance_for_energy.frozen_balance){
+                totalFrozen = e.account_resource.frozen_balance_for_energy.frozen_balance;
 
             }
+           
             coins.push({coin: 'TRX', balance: Number(Number(e.balance) + Number(totalFrozen))/ 1000000 });
 
             if (e.asset && e.asset.map){
