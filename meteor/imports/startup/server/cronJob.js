@@ -223,7 +223,7 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
                             mergeBalances(userId)
                             
                             if (balHistory && divCalc.coinDeltas.length !== 0){
-                                if (shouldNOTCalcDivs) return;
+                                if (shouldNOTCalcDivs || true) return;
                                 balHistory.history.push({date: new Date, divData: divCalc, divId: divId})
                                 BalanceHistory.update(
                                     {userId: userId},
@@ -236,7 +236,7 @@ export const findCoinBalanceInfoTRX = (ownedCoins, balances, userId, shouldNOTCa
 
                             }
                             else {
-                                if (shouldNOTCalcDivs || divCalc.coinDeltas.length === 0) return;
+                                if (shouldNOTCalcDivs || divCalc.coinDeltas.length === 0 || true) return;
                                 const history = [];
                                 history.push({date: new Date, divData: divCalc, divId: divId});
                                 BalanceHistory.insert(
