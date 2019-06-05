@@ -28,6 +28,7 @@ Meteor.methods({
     //if(user.isMuted) return;
 
     Meteor.defer(() => {
+      console.log('APN msg sent successfully!', sendToUserId);
       /*user.pushToDevices.forEach(device => {
         const token = device.token;
   
