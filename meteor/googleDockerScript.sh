@@ -48,7 +48,7 @@ RUN mkdir -p /usr/app
 COPY . /usr/app
 RUN cd /usr/app/programs/server && npm install --production --unsafe-perm
 RUN cd /usr/app/programs/server && npm install --unsafe-perm --save bcrypt
-RUN cd /usr/app/programs/server && npm install --unsafe-perm --save simpl-schema apnagent cryptocompare coinex.com moment node-fetch
+RUN cd /usr/app/programs/server && npm install --unsafe-perm --save simpl-schema tronweb apnagent cryptocompare coinex.com moment node-fetch
 RUN cd /usr/app/programs/server && npm install --unsafe-perm --save @babel/runtime@latest
 WORKDIR /usr/app
 ENV PORT=3000
