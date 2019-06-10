@@ -11,6 +11,46 @@ const Coinex = require('coinex.com');
 import  agent  from './apns'
 
 
+const whomsme = () => {
+    var moment = require('moment');
+                console.log('\x1b[42m%s\x1b[0m', 'job should be running at:');
+                console.log('\x1b[42m%s\x1b[0m', moment(new Date, "hmm").format("YYYY-MM-DD HH:mm").toString())
+
+
+                const users = Meteor.users.find({}).fetch();
+                for (let index = 0; index < users.length; index++) {
+                    const user = users[index];
+                    if(user.profile && user.profile[0] && user.profile[0].token){
+                        if (user.profile.some(e => typeof(e.TRXAddress) !== 'undefined')) {
+                            user.profile.map((ob) => {
+                                if (typeof(ob.TRXAddress) !== 'undefined'){
+                                    doTheDirty(user.profile[0].token, user._id, ob.TRXAddress)
+                                }
+                            });
+                        }
+                        else {
+                            doTheDirty(user.profile[0].token, user._id)
+                        }
+                    }
+                    else {
+                        if (user.profile && user.profile.some(e => typeof(e.TRXAddress) !== 'undefined')) {
+                            user.profile.map((ob) => {
+                                if (typeof(ob.TRXAddress) !== 'undefined'){
+                                    doTheDirtyONLYTRX(user._id, ob.TRXAddress, false)
+                                }
+                            });
+                        }
+                    }
+                }
+}
+
+Meteor.startup(() => {
+    whomsme()
+})
+
+
+
+
 var MyLogger = function(opts) {
     console.log('\x1b[42m%s\x1b[0m', 'Level', opts.level);
     console.log('\x1b[42m%s\x1b[0m', 'Message', opts.message);
