@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/core": "7.1.2",
-    "@babel/runtime": "^7.1.2",
+    "@babel/runtime": "^7.5.2",
     "appcenter": "1.9.0",
     "appcenter-analytics": "1.9.0",
     "appcenter-crashes": "1.9.0",
