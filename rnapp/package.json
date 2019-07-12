@@ -27,7 +27,7 @@
     "d3-array": "^2.0.3",
     "d3-scale": "^3.0.0",
     "jsc-android": "236355.1.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "lottie-react-native": "^2.6.1",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
