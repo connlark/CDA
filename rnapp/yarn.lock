@@ -852,12 +852,12 @@ appcenter-analytics@1.9.0:
   dependencies:
     appcenter "1.9.0"
 
-appcenter-crashes@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-1.9.0.tgz#f1c14125c4a7c882cfd08e1381b6f78a54ea7386"
-  integrity sha512-FEh0MGOgmu0GVRYyV+dEthvEq/KT70Xltl02OhBU9pBlwfEmcEp9Ume5bjnTFwdWbS+9ogu0o1U7I/N5XHuRQg==
+appcenter-crashes@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-2.2.0.tgz#dddd2e510192ecb6b38ae4d2a633521de33fafda"
+  integrity sha512-pGszIV1634AtzaRmi0W/Db3Tc/hmouvJmcmmGl2buKF6HEks2fW4wiil1IwAILq+cgoCbqsHODCcCebUhvifDQ==
   dependencies:
-    appcenter "1.9.0"
+    appcenter "2.2.0"
 
 appcenter-link-scripts@1.9.0:
   version "1.9.0"
@@ -872,12 +872,31 @@ appcenter-link-scripts@1.9.0:
     which "^1.2.11"
     xcode "^1.0.0"
 
+appcenter-link-scripts@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-2.2.0.tgz#1f348bfcd0e92b5d04268d0cac23c0018428afc1"
+  integrity sha512-CB3GUXLqdnUF37qzm/6P/CY1Tg7sJ3a253rdTnLlnIwJCKWmV2+Hyl4xQw5yPVTzpvee2gc+ZAMsRKzL2ajK0w==
+  dependencies:
+    debug "^2.2.0"
+    glob "^5.0.15"
+    mkdirp "^0.5.1"
+    plist "^3.0.1"
+    which "^1.2.11"
+    xcode "^2.0.0"
+
 appcenter@1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-1.9.0.tgz#00ee98256bf6167c62e1ed2c35a59b448affb963"
   integrity sha512-QyTmKPjM5N2GfqP2ob1htUMWsIVln5ujhXNocr/t/N0u1zJWzaWmcY895AnvH5B7JR1D8pdt57aQKPwTRZeAHA==
   dependencies:
     appcenter-link-scripts "1.9.0"
+
+appcenter@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-2.2.0.tgz#77d2c8d486bda52d1ee43156607437981aba2105"
+  integrity sha512-X8M4ITBh6U79mg+EHlqcjtv1ZojUbpxo9xO+uYCvsy/GO6Oq639mzkJKsRn7O8KrZk/CUmG96H+eY860/Ll+yQ==
+  dependencies:
+    appcenter-link-scripts "2.2.0"
 
 append-transform@^1.0.0:
   version "1.0.0"
@@ -2036,7 +2055,7 @@ compressible@~2.0.13:
 
 compression@^1.7.1:
   version "1.7.2"
-  resolved "http://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
+  resolved "https://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
   integrity sha1-qv+81qr4VLROuygDU9WtFlH1mmk=
   dependencies:
     accepts "~1.3.4"
@@ -5193,7 +5212,7 @@ once@^1.3.0, once@^1.4.0:
 
 onetime@^1.0.0:
   version "1.1.0"
-  resolved "http://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
+  resolved "https://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
   integrity sha1-ofeDj4MUxRbwXs78vEzP4EtO14k=
 
 onetime@^2.0.0:
@@ -5955,7 +5974,7 @@ react-native-safe-area-view@0.11.0:
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
-  resolved "http://registry.npmjs.org/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"
+  resolved "https://registry.npmjs.org/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"
   integrity sha512-SjLdW/Th0WVMhyngH4O6yC21S+O4U4AAG3QxBr7fZ2ftgjXSpKbDHAhEpxBdFwei6HsnsC2h9oYMtPpaW9nfGg==
   dependencies:
     hoist-non-react-statics "^2.3.1"
@@ -6797,6 +6816,15 @@ simple-plist@^0.2.1:
     bplist-parser "0.1.1"
     plist "2.0.1"
 
+simple-plist@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/simple-plist/-/simple-plist-1.0.0.tgz#bed3085633b22f371e111f45d159a1ccf94b81eb"
+  integrity sha512-043L2rO80LVF7zfZ+fqhsEkoJFvW8o59rt/l4ctx1TJWoTx7/jkiS1R5TatD15Z1oYnuLJytzE7gcnnBuIPL2g==
+  dependencies:
+    bplist-creator "0.0.7"
+    bplist-parser "0.1.1"
+    plist "^3.0.1"
+
 simple-swizzle@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
@@ -7493,7 +7521,7 @@ uuid@3.0.1:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
   integrity sha1-ZUS7ot/ajBzxfmKaOjBeK7H+5sE=
 
-uuid@^3.1.0:
+uuid@^3.1.0, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
@@ -7695,6 +7723,14 @@ xcode@^0.9.1:
     pegjs "^0.10.0"
     simple-plist "^0.2.1"
     uuid "3.0.1"
+
+xcode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/xcode/-/xcode-2.0.0.tgz#134f1f94c26fbfe8a9aaa9724bfb2772419da1a2"
+  integrity sha512-5xF6RCjAdDEiEsbbZaS/gBRt3jZ/177otZcpoLCjGN/u1LrfgH7/Sgeeavpr/jELpyDqN2im3AKosl2G2W8hfw==
+  dependencies:
+    simple-plist "^1.0.0"
+    uuid "^3.3.2"
 
 xml-name-validator@^3.0.0:
   version "3.0.0"
