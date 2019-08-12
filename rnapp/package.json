@@ -29,7 +29,7 @@
     "react-native-code-push": "5.4.2",
     "react-native-confetti": "^0.1.0",
     "react-native-device-info": "0.24.0",
-    "react-native-dropdownalert": "^3.7.0",
+    "react-native-dropdownalert": "^4.1.1",
     "react-native-elements": "^0.19.1",
     "react-native-email": "^1.0.2",
     "react-native-grid-component": "^1.1.0",
