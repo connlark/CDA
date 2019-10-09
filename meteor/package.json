@@ -7,7 +7,7 @@
     "deploy": "meteor build ../ --directory --architecture os.linux.x86_64 --server-only;cp app.yaml ../bundle/ && cp Dockerfile ../bundle/;cd ../bundle && gcloud app deploy --verbosity=info -q"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.2",
+    "@babel/runtime": "^7.6.3",
     "apnagent": "^1.1.3",
     "bcrypt": "^3.0.2",
     "coinex.com": "^1.0.3",
