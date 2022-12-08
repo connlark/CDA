@@ -22,7 +22,7 @@
     "e2e-test": "repo-tools test deploy"
   },
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "path": "^0.12.7"
   },
   "devDependencies": {
